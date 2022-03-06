@@ -1,6 +1,7 @@
 # Table of contents
 
 * [porters-handbook](README.md)
+* [FreeBSD Porter's 手册](freebsd-porters-shou-ce.md)
 * [第1章 简介](di-1-zhang-jian-jie.md)
 * [第2章 制作一个新 port](di-2-zhang-zhi-zuo-yi-ge-xin-port.md)
 
@@ -280,7 +281,7 @@
 * [18.3.FreeBSD 12](di-18-zhang-freebsdversion-de-zhi/18.3.-freebsd-12.md)
 * [18.4.FreeBSD 11](di-18-zhang-freebsdversion-de-zhi/18.4.-freebsd-11.md)
 * [18.5.FreeBSD 10](di-18-zhang-freebsdversion-de-zhi/18.5.-freebsd-10.md)
-* [18.6.FreeBSD 9 ](di-18-zhang-freebsdversion-de-zhi/18.6.-freebsd-9.md)
+* [18.6.FreeBSD 9](di-18-zhang-freebsdversion-de-zhi/18.6.-freebsd-9.md)
 * [18.7.FreeBSD 8](di-18-zhang-freebsdversion-de-zhi/18.7.-freebsd-8.md)
 * [18.8.FreeBSD 7](di-18-zhang-freebsdversion-de-zhi/18.8.-freebsd-7.md)
 * [18.9.FreeBSD 6](di-18-zhang-freebsdversion-de-zhi/18.9.-freebsd-6.md)
