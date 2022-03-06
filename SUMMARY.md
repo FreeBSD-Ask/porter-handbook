@@ -1,7 +1,7 @@
 # Table of contents
 
 * [porters-handbook](README.md)
-* [FreeBSD Porter's 手册](freebsd-porters-shou-ce.md)
+* [FreeBSD Porter 手册](freebsd-porter-shou-ce.md)
 * [第1章 简介](di-1-zhang-jian-jie.md)
 * [第2章 制作一个新 port](di-2-zhang-zhi-zuo-yi-ge-xin-port.md)
 
