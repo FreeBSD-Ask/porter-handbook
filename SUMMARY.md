@@ -138,4 +138,59 @@
 * [13.13.使用 BROKEN、 FORBIDDEN 或 IGNORE 阻止用户安装 port](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.13.-shi-yong-broken-forbidden-huo-ignore-zu-zhi-yong-hu-an-zhuang-port.md)
 * [13.14.适用架构考量](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.14.-shi-yong-jia-gou-kao-liang.md)
 * [13.15.使用 DEPRECATED 或 EXPIRATION\_DATE 表示某个 port 将被删除](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.15.-shi-yong-deprecated-huo-expirationdate-biao-shi-mou-ge-port-jiang-bei-shan-chu.md)
-* [Page 1](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/page-1.md)
+* [13.16.避免使用 .error 结构](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.16.-bi-mian-shi-yong-.error-jie-gou.md)
+* [13.17.sysctl 的用法](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.17.sysctl-de-yong-fa.md)
+* [13.18.重新发布的 distfiles](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.18.-zhong-xin-fa-bu-de-distfiles.md)
+* [13.19.使用 POSIX 标准](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.19.-shi-yong-posix-biao-zhun.md)
+* [13.20.杂项](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.20.-za-xiang.md)
+
+***
+
+* [第14章 一个简单的 port](di-14-zhang-yi-ge-jian-dan-de-port.md)
+
+## 第15章 在 Port Makefiles 中变量的顺序
+
+* [15.1.PORTNAME 部分](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.1.portname-bu-fen.md)
+* [15.2.PATCHFILES 部分](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.2.patchfiles-bu-fen.md)
+* [15.3.MAINTAINER 部分](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.3.maintainer-bu-fen.md)
+* [15.4. LICENSE（许可证）部分](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.4.-license-xu-ke-zheng-bu-fen.md)
+* [15.5.一般的 BROKEN/IGNORE/DEPRECATED 消息](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.5.-yi-ban-de-brokenignoredeprecated-xiao-xi.md)
+* [15.6.依赖部分](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.6.-yi-lai-bu-fen.md)
+* [15.7.Flavors](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.7.flavors.md)
+* [15.8.USES 和 USE\_x](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.8.uses-he-usex.md)
+* [15.9. 标准的 bsd.port.mk 变量](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.9.-biao-zhun-de-bsd.port.mk-bian-liang.md)
+* [15.10.Options 和帮助文档](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.10.options-he-bang-zhu-wen-dang.md)
+* [15.11.其余变量](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.11.-qi-yu-bian-liang.md)
+* [15.12.Target](di-15-zhang-zai-port-makefiles-zhong-bian-liang-de-shun-xu/15.12.target.md)
+
+## 第16章 保持同步
+
+* [16.1.FreshPorts](di-16-zhang-bao-chi-tong-bu/16.1.freshports.md)
+* [14.2.代码库的 Web 访问界面](di-16-zhang-bao-chi-tong-bu/14.2.-dai-ma-ku-de-web-fang-wen-jie-mian.md)
+* [14.3.FreeBSD Ports 邮件列表](di-16-zhang-bao-chi-tong-bu/14.3.freebsd-ports-you-jian-lie-biao.md)
+* [16.4. FreeBSD port 构建集群](di-16-zhang-bao-chi-tong-bu/16.4.-freebsd-port-gou-jian-ji-qun.md)
+* [14.5.FreeBSD 的 Ports Distfile 扫描器](di-16-zhang-bao-chi-tong-bu/14.5.freebsd-de-ports-distfile-sao-miao-qi.md)
+* [16.6.FreeBSD 的 port 监控系统](di-16-zhang-bao-chi-tong-bu/16.6.freebsd-de-port-jian-kong-xi-tong.md)
+
+## 第17章 使用 USES 宏
+
+* [17.1.USES 简介](di-17-zhang-shi-yong-uses-hong/17.1.uses-jian-jie.md)
+* [17.2.7z](di-17-zhang-shi-yong-uses-hong/17.2.7z.md)
+* [17.3.ada](di-17-zhang-shi-yong-uses-hong/17.3.ada.md)
+* [17.4.autoreconf](di-17-zhang-shi-yong-uses-hong/17.4.autoreconf.md)
+* [17.5.blaslapack](di-17-zhang-shi-yong-uses-hong/17.5.blaslapack.md)
+* [17.6.bdb](di-17-zhang-shi-yong-uses-hong/17.6.bdb.md)
+* [17.7.bison](di-17-zhang-shi-yong-uses-hong/17.7.bison.md)
+* [17.8.cabal](di-17-zhang-shi-yong-uses-hong/17.8.cabal.md)
+* [17.9.cargo](di-17-zhang-shi-yong-uses-hong/17.9.cargo.md)
+* [17.10.charsetfix](di-17-zhang-shi-yong-uses-hong/17.10.charsetfix.md)
+* [17.11.cmake](di-17-zhang-shi-yong-uses-hong/17.11.cmake.md)
+* [17.12.compiler](di-17-zhang-shi-yong-uses-hong/17.12.compiler.md)
+* [17.13.cpe](di-17-zhang-shi-yong-uses-hong/17.13.cpe.md)
+* [17.14.cran](di-17-zhang-shi-yong-uses-hong/17.14.cran.md)
+* [17.15.desktop-file-utils](di-17-zhang-shi-yong-uses-hong/17.15.desktop-file-utils.md)
+* [17.16.desthack](di-17-zhang-shi-yong-uses-hong/17.16.desthack.md)
+* [17.17.display](di-17-zhang-shi-yong-uses-hong/17.17.display.md)
+* [17.18.dos2unix](di-17-zhang-shi-yong-uses-hong/17.18.dos2unix.md)
+* [17.19.drupal](di-17-zhang-shi-yong-uses-hong/17.19.drupal.md)
+* [17.20.eigen](di-17-zhang-shi-yong-uses-hong/17.20.eigen.md)
