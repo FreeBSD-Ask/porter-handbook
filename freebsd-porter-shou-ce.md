@@ -1,6 +1,6 @@
 # FreeBSD Porter 手册
 
-Copyright © 2000-2021 FreeBSD 文档项目
+版权所有 © 2000-2021 FreeBSD 文档项目
 
 FreeBSD 是 FreeBSD 基金会的注册商标。
 
