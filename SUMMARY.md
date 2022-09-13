@@ -2,17 +2,18 @@
 
 * [FreeBSD Porter 手冊](README.md)
 * [FreeBSD Porter 手册](freebsd-porter-shou-ce.md)
+* [译者说明](yi-zhe-shuo-ming.md)
 * [第1章 简介](di-1-zhang-jian-jie.md)
 * [第2章 制作一个新 port](di-2-zhang-zhi-zuo-yi-ge-xin-port.md)
 
-## 第三章 简单的 port
+## 第3章 简单的 port
 
-* [3.1.编写 Makefile](di-san-zhang-jian-dan-de-port/3.1.-bian-xie-makefile.md)
-* [3.2.编写描述文件](di-san-zhang-jian-dan-de-port/3.2.-bian-xie-miao-shu-wen-jian.md)
-* [3.3.创建校验和文件](di-san-zhang-jian-dan-de-port/3.3.-chuang-jian-xiao-yan-he-wen-jian.md)
-* [3.4.测试 port](di-san-zhang-jian-dan-de-port/3.4.-ce-shi-port.md)
-* [3.5.用 portlint 来检查 port](di-san-zhang-jian-dan-de-port/3.5.-yong-portlint-lai-jian-cha-port.md)
-* [3.6.提交新的 port](di-san-zhang-jian-dan-de-port/3.6.-ti-jiao-xin-de-port.md)
+* [3.1.编写 Makefile](di-3-zhang-jian-dan-de-port/3.1.-bian-xie-makefile.md)
+* [3.2.编写描述文件](di-3-zhang-jian-dan-de-port/3.2.-bian-xie-miao-shu-wen-jian.md)
+* [3.3.创建校验和文件](di-3-zhang-jian-dan-de-port/3.3.-chuang-jian-xiao-yan-he-wen-jian.md)
+* [3.4.测试 port](di-3-zhang-jian-dan-de-port/3.4.-ce-shi-port.md)
+* [3.5.用 portlint 来检查 port](di-3-zhang-jian-dan-de-port/3.5.-yong-portlint-lai-jian-cha-port.md)
+* [3.6.提交新的 port](di-3-zhang-jian-dan-de-port/3.6.-ti-jiao-xin-de-port.md)
 
 ## 第4章 复杂的 Port
 
@@ -77,13 +78,13 @@
 * [6.30.Haskell 库](di-6-zhang-te-shu-qing-kuang/6.30.haskell-ku.md)
 * [6.31.shell 自动完成文件](di-6-zhang-te-shu-qing-kuang/6.31.shell-zi-dong-wan-cheng-wen-jian.md)
 
-## 第七章 Flavors
+## 第7章 Flavors
 
-* [7.1.Flavors 简介](di-qi-zhang-flavors/7.1.-flavors-jian-jie.md)
-* [7.2.使用 FLAVORS](di-qi-zhang-flavors/7.2.-shi-yong-flavors.md)
-* [7.3.USES=php 和 Flavors](di-qi-zhang-flavors/7.3.usesphp-he-flavors.md)
-* [7.4.USES=python 和 Flavors](di-qi-zhang-flavors/7.4.usespython-he-flavors.md)
-* [7.5.USES=lua 和 Flavors](di-qi-zhang-flavors/7.5.useslua-he-flavors.md)
+* [7.1.Flavors 简介](di-7-zhang-flavors/7.1.-flavors-jian-jie.md)
+* [7.2.使用 FLAVORS](di-7-zhang-flavors/7.2.-shi-yong-flavors.md)
+* [7.3.USES=php 和 Flavors](di-7-zhang-flavors/7.3.usesphp-he-flavors.md)
+* [7.4.USES=python 和 Flavors](di-7-zhang-flavors/7.4.usespython-he-flavors.md)
+* [7.5.USES=lua 和 Flavors](di-7-zhang-flavors/7.5.useslua-he-flavors.md)
 
 ## 第8章 高级 pkg-plist 实践
 
