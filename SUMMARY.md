@@ -4,7 +4,7 @@
 * [FreeBSD Porter 手册](freebsd-porter-shou-ce.md)
 * [译者说明](yi-zhe-shuo-ming.md)
 * [第1章 简介](di-1-zhang-jian-jie.md)
-* [第2章 制作一个新 port](di-2-zhang-zhi-zuo-yi-ge-xin-port.md)
+* [第2章 制作新的 port](di-2-zhang-zhi-zuo-xin-de-port.md)
 
 ## 第3章 简单的 port
 
