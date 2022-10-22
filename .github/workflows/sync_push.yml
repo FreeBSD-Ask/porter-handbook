@@ -1,4 +1,4 @@
-name: Push changes to Handbook-Next
+name: Push changes to porter-handbook
 
 on:
   push:
@@ -17,7 +17,6 @@ jobs:
         uses: dmnemec/copy_file_to_another_repo_action@v1.1.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-
         with:
           source_file: "."
           destination_repo: "FreeBSD-Ask/porter-handbook-next"
