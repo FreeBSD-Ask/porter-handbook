@@ -1,4 +1,4 @@
-name: Push changes to porter-handbook
+name: Push changes to porter-handbook-next
 
 on:
   push:
