@@ -2,6 +2,8 @@
 
 ## 翻译指南
 
+实时翻译预览：<https://porters-handbook.bsdcn.org/>
+
 英文手册地址 <https://docs.freebsd.org/en/books/porters-handbook/book/>
 
 基础入门：markdown 语法——https://markdown.com.cn/basic-syntax/ 注意，无需掌握最后三个（图片，转义（所有转义都用``括起来），内嵌 HTLM）。请注意：本项目不支持任何 HTML 语法！请勿使用！所有标题请勿插入 md 语法。
