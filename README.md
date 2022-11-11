@@ -4,11 +4,11 @@
 
 实时翻译预览：[https://porters-handbook.bsdcn.org/](https://porters-handbook.bsdcn.org/)
 
-英文手册地址 [https://docs.freebsd.org/en/books/porters-handbook/book/](https://docs.freebsd.org/en/books/porters-handbook/book/)
+英文手册地址：[https://docs.freebsd.org/en/books/porters-handbook/book/](https://docs.freebsd.org/en/books/porters-handbook/book/)
 
 基础入门：markdown 语法——https://markdown.com.cn/basic-syntax/ 注意，无需掌握最后三个（图片，转义（所有转义都用\`\`括起来），内嵌 HTLM）。请注意：本项目不支持任何 HTML 语法！请勿使用！所有标题请勿插入 md 语法。
 
-本次项目机器翻译采用 deepl。严禁使用 deepl 以外的翻译网站或程序。附 deepl 网站——https://www.deepl.com/zh/translator#zh/en/
+本次项目机器翻译采用 deepl。严禁使用 deepl 以外的翻译网站或程序。附 deepl 网站——https://www.deepl.com/zh/translator#zh/en/ 。**请勿必注意禁止抄袭原有翻译的所有内容，即使看上去和英语原文的意思一模一样。一律使用 deepl，因为原有翻译也存在许多问题。**
 
 所有图片我来操作，你们不要插图，会导致错乱。在需要插图的位置做标记【——————————-此处需要插入图片——————————————-】。并且在提交的时候告知我哪一小节需要插图，请务必主动告知我。
 
