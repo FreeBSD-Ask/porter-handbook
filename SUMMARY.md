@@ -290,4 +290,4 @@
 * [18.11.FreeBSD 4](di-18-zhang-freebsdversion-de-zhi/18.11.-freebsd-4.md)
 * [18.12.FreeBSD 3](di-18-zhang-freebsdversion-de-zhi/18.12.-freebsd-3.md)
 * [18.13.FreeBSD 2.2](di-18-zhang-freebsdversion-de-zhi/18.13.-freebsd-2.2.md)
-* [18.14.FreeBSD 2 以前的 2.2-RELEASE](di-18-zhang-freebsdversion-de-zhi/18.14.-freebsd-2-yi-qian-de-2.2release.md)
+* [18.14.FreeBSD 2.2-RELEASE 之前的 FreeBSD 2](di-18-zhang-freebsdversion-de-zhi/18.14.freebsd-2.2release-zhi-qian-de-freebsd-2.md)
