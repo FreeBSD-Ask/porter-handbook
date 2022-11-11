@@ -2,6 +2,8 @@
 
 ## 翻译指南
 
+翻译人员应该加入 **QQ 群**  ***512905950***。**注意，此群仅讨论翻译相关事宜，其他事项者将被移出。**
+
 实时翻译预览：[https://porters-handbook.bsdcn.org/](https://porters-handbook.bsdcn.org/)
 
 英文手册地址：[https://docs.freebsd.org/en/books/porters-handbook/book/](https://docs.freebsd.org/en/books/porters-handbook/book/)
