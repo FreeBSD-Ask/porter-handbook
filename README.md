@@ -1,4 +1,4 @@
-# FreeBSD 开发者手冊翻译项目
+# FreeBSD Port 开发者手冊翻译项目
 
 ## 翻译指南
 
