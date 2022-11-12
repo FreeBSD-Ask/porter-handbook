@@ -168,11 +168,10 @@
 ## 第16章 保持同步
 
 * [16.1.FreshPorts](di-16-zhang-bao-chi-tong-bu/16.1.freshports.md)
-* [14.2.代码库的 Web 访问界面](di-16-zhang-bao-chi-tong-bu/14.2.-dai-ma-ku-de-web-fang-wen-jie-mian.md)
-* [14.3.FreeBSD Ports 邮件列表](di-16-zhang-bao-chi-tong-bu/14.3.freebsd-ports-you-jian-lie-biao.md)
+* [16.2.代码库的 Web 访问界面](di-16-zhang-bao-chi-tong-bu/16.2.-dai-ma-ku-de-web-fang-wen-jie-mian.md)
+* [16.3.FreeBSD Ports 邮件列表](di-16-zhang-bao-chi-tong-bu/16.3.freebsd-ports-you-jian-lie-biao.md)
 * [16.4.FreeBSD port 构建集群](di-16-zhang-bao-chi-tong-bu/16.4.-freebsd-port-gou-jian-ji-qun.md)
-* [14.5.FreeBSD 的 Ports Distfile 扫描器](di-16-zhang-bao-chi-tong-bu/14.5.freebsd-de-ports-distfile-sao-miao-qi.md)
-* [16.6.FreeBSD 的 port 监控系统](di-16-zhang-bao-chi-tong-bu/16.6.freebsd-de-port-jian-kong-xi-tong.md)
+* [14.5.Portscout：FreeBSD Ports Distfile 扫描器](di-16-zhang-bao-chi-tong-bu/14.5.freebsd-de-ports-distfile-sao-miao-qi.md)
 
 ## 第17章 使用 USES 宏
 
