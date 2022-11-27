@@ -198,7 +198,6 @@
 * [17.21. elfctl](di-17-zhang-shi-yong-uses-hong/17.21.-elfctl.md)
 * [17.22. fakeroot](di-17-zhang-shi-yong-uses-hong/17.22.-fakeroot.md)
 * [17.23. fam](di-17-zhang-shi-yong-uses-hong/17.23.-fam.md)
-* [17.23.firebird](di-17-zhang-shi-yong-uses-hong/17.23.-firebird.md)
 * [17.24. firebird](di-17-zhang-shi-yong-uses-hong/17.24.-firebird.md)
 * [17.25. fonts](di-17-zhang-shi-yong-uses-hong/17.25.-fonts.md)
 * [17.26. fortran](di-17-zhang-shi-yong-uses-hong/17.26.-fortran.md)
