@@ -129,7 +129,7 @@ Github 提交的用户：大标题和章节（如第 X 章，第 X.X 节）请�
 
 扫码关注微信公众号：
 
-![扫码关注微信公众号](.gitbook/assets/weixin.jpg)
+![扫码关注微信公众号](./.gitbook/assets/weixin.jpg)
 
 ### FreeBSD 中文社区 寄言：
 
