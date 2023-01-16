@@ -124,7 +124,6 @@ Github 提交的用户：大标题和章节（如第 X 章，第 X.X 节）请�
 |      QQ 群     |                         787969044                        |
 | Handbook 最新翻译 | [https://handbook.bsdcn.org](https://handbook.bsdcn.org) |
 |  FreeBSD 入门书籍 |     [https://book.bsdcn.org](https://book.bsdcn.org)     |
-|  FreeBSD 中文论坛 |      [https://bbs.bsdcn.org](https://bbs.bsdcn.org)      |
 |     微信公众号     |                         freebsdzh                        |
 
 扫码关注微信公众号：
