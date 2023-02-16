@@ -125,6 +125,7 @@ Github 提交的用户：大标题和章节（如第 X 章，第 X.X 节）请�
 | Handbook 最新翻译 | [https://handbook.bsdcn.org](https://handbook.bsdcn.org) |
 |  FreeBSD 入门书籍 |     [https://book.bsdcn.org](https://book.bsdcn.org)     |
 |     微信公众号     |                         freebsdzh                        |
+|BiliBili【B站】|<https://space.bilibili.com/2120246893>|
 
 扫码关注微信公众号：
 
