@@ -1,4 +1,4 @@
-# FreeBSD Porter 手册
+# FreeBSD Port 开发者手册
 
 版权所有 © 2000-2021 FreeBSD 文档项目
 
