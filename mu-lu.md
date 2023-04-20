@@ -1,6 +1,6 @@
 # 目录
 
-* [FreeBSD 开发者手冊翻译项目](README.md)
+* [FreeBSD 开发者手冊翻译项目](./)
 * [译者说明](yi-zhe-shuo-ming.md)
 * [目录](mu-lu.md)
 * [FreeBSD 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
@@ -33,17 +33,17 @@
 * [5.4.源代码包文件](di-5-zhang-pei-zhi-makefile/5.4.-yuan-dai-ma-bao-wen-jian.md)
 * [5.5.维护者（MAINTAINER）](di-5-zhang-pei-zhi-makefile/5.5.-wei-hu-zhe-maintainer.md)
 * [5.6.简介（COMMENT）](di-5-zhang-pei-zhi-makefile/5.6.-yi-ju-hua-shuo-ming-comment.md)
-* [5.7.许可证](di-5-zhang-pei-zhi-makefile/5.7.-xu-ke-zheng.md)
-* [5.8.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.8.portscout.md)
-* [5.9.依赖关系](di-5-zhang-pei-zhi-makefile/5.9.-yi-lai-guan-xi.md)
-* [5.10.从属 port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.10.-cong-shu-port-he-masterdir.md)
-* [5.11.man 手册](di-5-zhang-pei-zhi-makefile/5.11.man-shou-ce.md)
-* [5.12.Info 文件](di-5-zhang-pei-zhi-makefile/5.12.info-wen-jian.md)
-* [5.13.Makefile 参数](di-5-zhang-pei-zhi-makefile/5.13.-makefile-can-shu.md)
-* [5.14.指定临时工作目录](di-5-zhang-pei-zhi-makefile/5.14.-zhi-ding-lin-shi-gong-zuo-mu-lu.md)
-* [5.15.处理冲突](di-5-zhang-pei-zhi-makefile/5.15.-chu-li-chong-tu.md)
-* [5.16.安装文件](di-5-zhang-pei-zhi-makefile/5.16.-an-zhuang-wen-jian.md)
-* [5.17.使用 BINARY\_ALIAS 来重命名命令，而不是在编译中打补丁](di-5-zhang-pei-zhi-makefile/5.17.-shi-yong-binaryalias-lai-zhong-ming-ming-ming-ling-er-bu-shi-zai-bian-yi-zhong-da-bu-ding.md)
+* [5.7.许可证](di-5-zhang-pei-zhi-makefile/5.7.-xiang-mu-wang-zhan.md)
+* [5.8.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.8.-xu-ke-zheng.md)
+* [5.9.依赖关系](di-5-zhang-pei-zhi-makefile/5.9.portscout.md)
+* [5.10.从属 port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.10.-yi-lai.md)
+* [5.11.man 手册](di-5-zhang-pei-zhi-makefile/5.11.-cong-shu-port-he-masterdir.md)
+* [5.12.Info 文件](di-5-zhang-pei-zhi-makefile/5.12.man-shou-ce.md)
+* [5.13.Makefile 参数](di-5-zhang-pei-zhi-makefile/5.13.info-wen-jian.md)
+* [5.14.指定临时工作目录](di-5-zhang-pei-zhi-makefile/5.14.makefile-can-shu.md)
+* [5.15.处理冲突](di-5-zhang-pei-zhi-makefile/5.15.-te-shu-de-gong-zuo-mu-lu.md)
+* [5.16.安装文件](di-5-zhang-pei-zhi-makefile/5.16.-jie-jue-chong-tu.md)
+* [5.17.使用 BINARY\_ALIAS 来重命名命令，而不是在编译中打补丁](di-5-zhang-pei-zhi-makefile/5.17.-an-zhuang-wen-jian.md)
 
 ## 第6章 特殊情况
 
