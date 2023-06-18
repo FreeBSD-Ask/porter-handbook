@@ -78,7 +78,7 @@
 * [6.28.依赖内核源代码的 Port](di-6-zhang-te-shu-qing-kuang/6.28.-yi-lai-nei-he-yuan-dai-ma-de-port.md)
 * [6.29.Go 库](di-6-zhang-te-shu-qing-kuang/6.29.go-ku.md)
 * [6.30.Haskell 库](di-6-zhang-te-shu-qing-kuang/6.30.haskell-ku.md)
-* [6.31.shell 自动完成文件](di-6-zhang-te-shu-qing-kuang/6.31.shell-zi-dong-wan-cheng-wen-jian.md)
+* [6.31.shell 自动补全文件](di-6-zhang-te-shu-qing-kuang/6.31.shell-zi-dong-bu-quan-wen-jian.md)
 
 ## 第7章 Flavors
 
