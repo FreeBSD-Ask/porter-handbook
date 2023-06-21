@@ -1,5 +1,7 @@
 # FreeBSD port 开发者手冊翻译项目
 
+**郑重声明：本站所有涉及到“FreeBSD”字样或“freebsd”，均使用了来自美国 FreeBSDFoundation 的商标，与他人无关。见 [FreeBSD 商标被抢注一事（未解决）](https://book.bsdcn.org/di-0-zhang-freebsd-zhong-wen-she-qu/di-0.5-jie-freebsd-shang-biao-bei-qiang-zhu-yi-shi-wei-jie-jue.html_)。**
+
 ## 翻译指南
 
 翻译人员应该加入 **QQ 群** _**512905950**_。**注意，此群仅讨论翻译相关事宜，其他事项者将被移出。**
