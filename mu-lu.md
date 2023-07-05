@@ -65,12 +65,12 @@
 * [6.16.Web 程序，Apache 和 PHP](di-6-zhang-te-shu-qing-kuang/6.16.web-cheng-xu-apache-he-php.md)
 * [6.17.使用 Python](di-6-zhang-te-shu-qing-kuang/6.17.-shi-yong-python.md)
 * [6.18.使用 Tcl/Tk](di-6-zhang-te-shu-qing-kuang/6.18.-shi-yong-tcltk.md)
-* [6.19.使用 Ruby](di-6-zhang-te-shu-qing-kuang/6.19.-shi-yong-ruby.md)
-* [6.20.使用 SDL](di-6-zhang-te-shu-qing-kuang/6.20.-shi-yong-sdl.md)
-* [6.21.使用 wxWidgets](di-6-zhang-te-shu-qing-kuang/6.21.-shi-yong-wxwidgets.md)
-* [6.22.使用 Lua](di-6-zhang-te-shu-qing-kuang/6.22.-shi-yong-lua.md)
-* [6.23.使用 iconv](di-6-zhang-te-shu-qing-kuang/6.23.-shi-yong-iconv.md)
-* [6.24.使用 Xfce](di-6-zhang-te-shu-qing-kuang/6.24.-shi-yong-xfce.md)
+* [6.19.使用 Ruby](broken-reference)
+* [6.20.使用 SDL](di-6-zhang-te-shu-qing-kuang/6.19.-shi-yong-sdl.md)
+* [6.21.使用 wxWidgets](di-6-zhang-te-shu-qing-kuang/6.20.-shi-yong-wxwidgets.md)
+* [6.22.使用 Lua](di-6-zhang-te-shu-qing-kuang/6.21.-shi-yong-lua.md)
+* [6.23.使用 iconv](di-6-zhang-te-shu-qing-kuang/6.22.-shi-yong-iconv.md)
+* [6.24.使用 Xfce](di-6-zhang-te-shu-qing-kuang/6.23.-shi-yong-xfce.md)
 * [6.25.使用数据库](di-6-zhang-te-shu-qing-kuang/6.25.-shi-yong-shu-ju-ku.md)
 * [6.26.启动和停止服务 (rc 脚本)](di-6-zhang-te-shu-qing-kuang/6.26.-qi-dong-he-ting-zhi-fu-wu-rc-jiao-ben.md)
 * [6.27.添加用户和用户组](di-6-zhang-te-shu-qing-kuang/6.27.-tian-jia-yong-hu-he-yong-hu-zu.md)
@@ -147,7 +147,7 @@
 * [13.19.使用 POSIX 标准](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.19.-shi-yong-posix-biao-zhun.md)
 * [13.20.杂项](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.20.-za-xiang.md)
 
-***
+
 
 * [第14章 Makefile 示例](di-14-zhang-makefile-shi-li.md)
 
