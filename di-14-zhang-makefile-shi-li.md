@@ -32,7 +32,7 @@ PATCH_DIST_STRIP=	-p1
 
 [维护者；*必须的*!  这个人是自愿的，他负责
  处理 ports 更新、构建故障的人，以及用户可以直接向其提出
- 问题和错误报告。 为了保持 Ports Collection 的质量
+ 问题和错误报告。 为了保持 Ports  的质量
  尽可能高的质量， 我们不接受那些被分配到
  "ports@FreeBSD.org"。]
 MAINTAINER=	asami@FreeBSD.org
