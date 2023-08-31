@@ -2,8 +2,6 @@
 
 * [FreeBSD 开发者手冊翻译项目](./)
 * [译者说明](yi-zhe-shuo-ming.md)
-* [目录](mu-lu.md)
-* [FreeBSD 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
 * [第1章 简介](di-1-zhang-jian-jie.md)
 * [第2章 制作新的 port](di-2-zhang-zhi-zuo-xin-de-port.md)
 
