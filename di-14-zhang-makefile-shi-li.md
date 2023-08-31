@@ -14,13 +14,13 @@
 PORTNAME=	xdvi
 DISTVERSION=	18.2
 CATEGORIES=	print
-[不要忘记尾部的斜线（"/"）！如果没有使用MASTER_SITE_*宏，则需要使用"/"。
+[不要忘记尾部的斜线（“/”）！如果没有使用 MASTER_SITE_* 宏，则需要使用 "/"。
  如果不使用 MASTER_SITE_* 宏的话]
 MASTER_SITES=	${MASTER_SITE_XCONTRIB}
 MASTER_SITE_SUBDIR=	applications
 PKGNAMEPREFIX=	ja-
 DISTNAME=	xdvi-pl18
-[如果源代码不是标准的".tar.gz "形式，则设置此选项。]
+[如果源代码不是标准的“.tar.gz”形式，则设置此选项。]
 EXTRACT_SUFX=	.tar.Z
 
 [分布式补丁的部分 -- 可以是空的]
@@ -32,9 +32,9 @@ PATCH_DIST_STRIP=	-p1
 
 [维护者；*必须的*!  这个人是自愿的，他负责
  处理 ports 更新、构建故障的人，以及用户可以直接向其提出
- 问题和错误报告。 为了保持 Ports  的质量
+ 问题和错误报告。 为了保持 Ports 的质量
  尽可能高的质量， 我们不接受那些被分配到
- "ports@FreeBSD.org"。]
+ “ports@FreeBSD.org” 的 Port。]
 MAINTAINER=	asami@FreeBSD.org
 COMMENT=	DVI Previewer for the X Window System
 WWW=		http://xdvi.sourceforge.net/
@@ -46,18 +46,18 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 [依赖性 -- 可以是空的]
 RUN_DEPENDS=	gs:print/ghostscript
 
-[如果它需要GNU make，而不是/usr/bin/make，来构建...]
+[如果它需要 GNU make，而不是 /usr/bin/make，来构建...]
 USES= gmake
-[如果它是一个X应用程序，需要 "xmkmf -a "来运行...]
+[如果它是一个 X 应用程序，需要“xmkmf -a”来运行...]
 USES= imake
 
-[这一节是为其他标准的bsd.port.mk变量准备的，这些变量不属于]
+[这一节是为其他标准的 bsd.port.mk 变量准备的，这些变量不属于]
  属于上述任何一种情况]
 [如果它在配置、构建、安装时问问题...]
 IS_INTERACTIVE=	yes
-[如果它解压到${DISTNAME}以外的目录...]
+[如果它解压到 ${DISTNAME}以外的目录...]
 WRKSRC=		${WRKDIR}/xdvi-new
-[如果它需要运行由GNU autoconf生成的 "configure "脚本]
+[如果它需要运行由 GNU autoconf 生成的“configure”脚本]
 GNU_CONFIGURE=	yes
 [诸如此类。]
 
