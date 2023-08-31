@@ -55,7 +55,7 @@ USES= imake
  属于上述任何一种情况]
 [如果它在配置、构建、安装时问问题...]
 IS_INTERACTIVE=	yes
-[如果它提取到${DISTNAME}以外的目录...]
+[如果它解压到${DISTNAME}以外的目录...]
 WRKSRC=		${WRKDIR}/xdvi-new
 [如果它需要运行由GNU autoconf生成的 "configure "脚本]
 GNU_CONFIGURE=	yes
