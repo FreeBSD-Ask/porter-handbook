@@ -1,9 +1,15 @@
-# 目录
+# Table of contents
 
-* [FreeBSD 开发者手冊翻译项目](./)
+* [FreeBSD port 开发者手冊翻译项目](README.md)
 * [译者说明](yi-zhe-shuo-ming.md)
-* [第1章 简介](di-1-zhang-jian-jie.md)
-* [第2章 制作新的 port](di-2-zhang-zhi-zuo-xin-de-port.md)
+* [目录](mu-lu.md)
+* [FreeBSD 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
+
+## 第1章 简介
+* [1.1.简介](di-1-zhang-jian-jie.md)
+
+## 第2章 制作新的 port
+* [2.1.制作新的 port](di-2-zhang-zhi-zuo-xin-de-port.md)
 
 ## 第3章 简单的 port
 
@@ -31,17 +37,18 @@
 * [5.4.源代码包文件](di-5-zhang-pei-zhi-makefile/5.4.-yuan-dai-ma-bao-wen-jian.md)
 * [5.5.维护者（MAINTAINER）](di-5-zhang-pei-zhi-makefile/5.5.-wei-hu-zhe-maintainer.md)
 * [5.6.简介（COMMENT）](di-5-zhang-pei-zhi-makefile/5.6.-yi-ju-hua-shuo-ming-comment.md)
-* [5.7.许可证](di-5-zhang-pei-zhi-makefile/5.7.-xiang-mu-wang-zhan.md)
-* [5.8.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.8.-xu-ke-zheng.md)
-* [5.9.依赖关系](di-5-zhang-pei-zhi-makefile/5.9.portscout.md)
-* [5.10.从属 port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.10.-yi-lai.md)
-* [5.11.man 手册](di-5-zhang-pei-zhi-makefile/5.11.-cong-shu-port-he-masterdir.md)
-* [5.12.Info 文件](di-5-zhang-pei-zhi-makefile/5.12.man-shou-ce.md)
-* [5.13.Makefile 参数](di-5-zhang-pei-zhi-makefile/5.13.info-wen-jian.md)
-* [5.14.指定临时工作目录](di-5-zhang-pei-zhi-makefile/5.14.makefile-can-shu.md)
-* [5.15.处理冲突](di-5-zhang-pei-zhi-makefile/5.15.-te-shu-de-gong-zuo-mu-lu.md)
-* [5.16.安装文件](di-5-zhang-pei-zhi-makefile/5.16.-jie-jue-chong-tu.md)
-* [5.17.使用 BINARY\_ALIAS 来重命名命令，而不是在编译中打补丁](di-5-zhang-pei-zhi-makefile/5.17.-an-zhuang-wen-jian.md)
+* [5.7.项目网站](di-5-zhang-pei-zhi-makefile/5.7.-xiang-mu-wang-zhan.md)
+* [5.8.许可证](di-5-zhang-pei-zhi-makefile/5.8.-xu-ke-zheng.md)
+* [5.9.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.9.portscout.md)
+* [5.10.依赖](di-5-zhang-pei-zhi-makefile/5.10.-yi-lai.md)
+* [5.11.从属 port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.11.-cong-shu-port-he-masterdir.md)
+* [5.12.man 手册](di-5-zhang-pei-zhi-makefile/5.12.man-shou-ce.md)
+* [5.13.info 文件](di-5-zhang-pei-zhi-makefile/5.13.info-wen-jian.md)
+* [5.14.Makefile 参数](di-5-zhang-pei-zhi-makefile/5.14.makefile-can-shu.md)
+* [5.15.特殊的工作目录](di-5-zhang-pei-zhi-makefile/5.15.-te-shu-de-gong-zuo-mu-lu.md)
+* [5.16.解决冲突](di-5-zhang-pei-zhi-makefile/5.16.-jie-jue-chong-tu.md)
+* [5.17.安装文件](di-5-zhang-pei-zhi-makefile/5.17.-an-zhuang-wen-jian.md)
+* [5.18. 使用 BINARY\_ALIAS 来重命名命令，而不是在编译中打补丁](di-5-zhang-pei-zhi-makefile/5.18.-shi-yong-binaryalias-lai-zhong-ming-ming-ming-ling-er-bu-shi-zai-bian-yi-zhong-da-bu-ding.md)
 
 ## 第6章 特殊情况
 
@@ -63,19 +70,19 @@
 * [6.16.Web 程序，Apache 和 PHP](di-6-zhang-te-shu-qing-kuang/6.16.web-cheng-xu-apache-he-php.md)
 * [6.17.使用 Python](di-6-zhang-te-shu-qing-kuang/6.17.-shi-yong-python.md)
 * [6.18.使用 Tcl/Tk](di-6-zhang-te-shu-qing-kuang/6.18.-shi-yong-tcltk.md)
-* [6.19.使用 Ruby](broken-reference)
-* [6.20.使用 SDL](di-6-zhang-te-shu-qing-kuang/6.19.-shi-yong-sdl.md)
-* [6.21.使用 wxWidgets](di-6-zhang-te-shu-qing-kuang/6.20.-shi-yong-wxwidgets.md)
-* [6.22.使用 Lua](di-6-zhang-te-shu-qing-kuang/6.21.-shi-yong-lua.md)
-* [6.23.使用 iconv](di-6-zhang-te-shu-qing-kuang/6.22.-shi-yong-iconv.md)
-* [6.24.使用 Xfce](di-6-zhang-te-shu-qing-kuang/6.23.-shi-yong-xfce.md)
+* [6.19.使用 SDL](di-6-zhang-te-shu-qing-kuang/6.19.-shi-yong-sdl.md)
+* [6.20.使用 wxWidgets](di-6-zhang-te-shu-qing-kuang/6.20.-shi-yong-wxwidgets.md)
+* [6.21.使用 Lua](di-6-zhang-te-shu-qing-kuang/6.21.-shi-yong-lua.md)
+* [6.22.使用 iconv](di-6-zhang-te-shu-qing-kuang/6.22.-shi-yong-iconv.md)
+* [6.23.使用 Xfce](di-6-zhang-te-shu-qing-kuang/6.23.-shi-yong-xfce.md)
+* [6.24.使用 Budgie](di-6-zhang-te-shu-qing-kuang/6.24.-shi-yong-budgie.md)
 * [6.25.使用数据库](di-6-zhang-te-shu-qing-kuang/6.25.-shi-yong-shu-ju-ku.md)
 * [6.26.启动和停止服务 (rc 脚本)](di-6-zhang-te-shu-qing-kuang/6.26.-qi-dong-he-ting-zhi-fu-wu-rc-jiao-ben.md)
 * [6.27.添加用户和用户组](di-6-zhang-te-shu-qing-kuang/6.27.-tian-jia-yong-hu-he-yong-hu-zu.md)
 * [6.28.依赖内核源代码的 Port](di-6-zhang-te-shu-qing-kuang/6.28.-yi-lai-nei-he-yuan-dai-ma-de-port.md)
 * [6.29.Go 库](di-6-zhang-te-shu-qing-kuang/6.29.go-ku.md)
 * [6.30.Haskell 库](di-6-zhang-te-shu-qing-kuang/6.30.haskell-ku.md)
-* [6.31.shell 自动完成文件](di-6-zhang-te-shu-qing-kuang/6.31.shell-zi-dong-bu-quan-wen-jian.md)
+* [6.31.shell 自动补全文件](di-6-zhang-te-shu-qing-kuang/6.31.shell-zi-dong-bu-quan-wen-jian.md)
 
 ## 第7章 Flavors
 
@@ -145,7 +152,7 @@
 * [13.19.使用 POSIX 标准](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.19.-shi-yong-posix-biao-zhun.md)
 * [13.20.杂项](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.20.-za-xiang.md)
 
-
+***
 
 * [第14章 Makefile 示例](di-14-zhang-makefile-shi-li.md)
 
