@@ -4,7 +4,7 @@
 
 所示的格式是推荐的变量排序、章节之间的空行等的格式。这种格式的设计是为了使最重要的信息容易被找到。我们推荐使用 [portlint](https://docs.freebsd.org/en/books/porters-handbook/quick-porting/index.html#porting-portlint) 来检查 **Makefile**。
 
-```shell-sessionl
+```makefile
 [部分来描述 ports 本身和主站点 - PORTNAME
  和 PORTVERSION 或 DISTVERSION* 变量总是放在前面。
  后面是 CATEGORIES， 然后是 MASTER_SITES， 后面可以是
