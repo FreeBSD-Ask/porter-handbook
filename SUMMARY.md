@@ -27,7 +27,7 @@
 
 ## 第4章 复杂的 Port
 
-* [4.1.他是怎么运作的](di-4-zhang-fu-za-de-port/4.1.-ta-shi-zen-mo-yun-zuo-de.md)
+* [4.1.Port 是如何运行的](di-4-zhang-fu-za-de-port/4.1.-ta-shi-zen-mo-yun-zuo-de.md)
 * [4.2.获取源代码](di-4-zhang-fu-za-de-port/4.2.-huo-qu-yuan-dai-ma.md)
 * [4.3.修改 port](di-4-zhang-fu-za-de-port/4.3.-xiu-gai-port.md)
 * [4.4.打补丁](di-4-zhang-fu-za-de-port/4.4.-da-bu-ding.md)
