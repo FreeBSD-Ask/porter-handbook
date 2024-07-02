@@ -36,7 +36,7 @@
 
 ## 第5章 配置 Makefile
 
-* [5.1.作者发布的代码](di-5-zhang-pei-zhi-makefile/5.1.-zuo-zhe-fa-bu-de-dai-ma.md)
+* [5.1.原始来源](di-5-zhang-pei-zhi-makefile/5.1.-zuo-zhe-fa-bu-de-dai-ma.md)
 * [5.2.命名](di-5-zhang-pei-zhi-makefile/5.2.-ming-ming.md)
 * [5.3.归类](di-5-zhang-pei-zhi-makefile/5.3.-gui-lei.md)
 * [5.4.源代码包文件](di-5-zhang-pei-zhi-makefile/5.4.-yuan-dai-ma-bao-wen-jian.md)
