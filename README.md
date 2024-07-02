@@ -11,7 +11,3 @@
 >> 具体使用方法见该项目的 README.
 
 
-### 黑名单与社区失信名单
-
-见 <http://chinafreebsd.org/>。
-
