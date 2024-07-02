@@ -41,7 +41,7 @@
 * [5.3.归类](di-5-zhang-pei-zhi-makefile/5.3.-gui-lei.md)
 * [5.4.源代码包文件](di-5-zhang-pei-zhi-makefile/5.4.-yuan-dai-ma-bao-wen-jian.md)
 * [5.5.维护者（MAINTAINER）](di-5-zhang-pei-zhi-makefile/5.5.-wei-hu-zhe-maintainer.md)
-* [5.6.简介（COMMENT）](di-5-zhang-pei-zhi-makefile/5.6.-yi-ju-hua-shuo-ming-comment.md)
+* [5.6.一句话说明（COMMENT）](di-5-zhang-pei-zhi-makefile/5.6.-yi-ju-hua-shuo-ming-comment.md)
 * [5.7.项目网站](di-5-zhang-pei-zhi-makefile/5.7.-xiang-mu-wang-zhan.md)
 * [5.8.许可证](di-5-zhang-pei-zhi-makefile/5.8.-xu-ke-zheng.md)
 * [5.9.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.9.portscout.md)
