@@ -6,7 +6,6 @@
 
 ## FreeBSD Port 开发者手册
 
-* [目录](mu-lu.md)
 * [FreeBSD Port 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
 
 ## 第1章 简介
