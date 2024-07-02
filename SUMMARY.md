@@ -1,14 +1,20 @@
 # Table of contents
 
 * [FreeBSD port 开发者手冊翻译项目](README.md)
+* [编辑日志](bian-ji-ri-zhi.md)
 * [译者说明](yi-zhe-shuo-ming.md)
+
+## FreeBSD Port 开发者手册
+
 * [目录](mu-lu.md)
-* [FreeBSD 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
+* [FreeBSD Port 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
 
 ## 第1章 简介
+
 * [1.1.简介](di-1-zhang-jian-jie.md)
 
 ## 第2章 制作新的 port
+
 * [2.1.制作新的 port](di-2-zhang-zhi-zuo-xin-de-port.md)
 
 ## 第3章 简单的 port
