@@ -119,13 +119,9 @@
 
 * [第15章 在 Port Makefile 中变量的顺序](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/di-15-zhang.md)
 
-## 第16章 保持同步
+## 第16章 保持更新
 
-* [16.1.FreshPorts](di-16-zhang-bao-chi-tong-bu/16.1.freshports.md)
-* [16.2.代码库的 Web 访问界面](di-16-zhang-bao-chi-tong-bu/16.2.-dai-ma-ku-de-web-fang-wen-jie-mian.md)
-* [16.3.FreeBSD Ports 邮件列表](di-16-zhang-bao-chi-tong-bu/16.3.freebsd-ports-you-jian-lie-biao.md)
-* [16.4.FreeBSD port 构建集群](di-16-zhang-bao-chi-tong-bu/16.4.-freebsd-port-gou-jian-ji-qun.md)
-* [16.5.Portscout：FreeBSD Ports Distfile 扫描器](di-16-zhang-bao-chi-tong-bu/16.5.portscoutfreebsd-ports-distfile-sao-miao-qi.md)
+* [第16章 保持更新](di-16-zhang-bao-chi-tong-bu/di-16-zhang.md)
 
 ## 第17章 使用 USES 宏
 
