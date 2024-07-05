@@ -111,25 +111,13 @@
 
 * [第13章 该做什么和不该做什么](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/di-13-zhang.md)
 
-
 ## 第14章 一个简单的 port
 
 * [第14章 一个简单的 port](di-14-zhang-makefile-shi-li.md)
 
 ## 第15章 在 Port Makefile 中变量的顺序
 
-* [15.1.PORTNAME 部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.1.portname-bu-fen.md)
-* [15.2.PATCHFILES 部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.2.patchfiles-bu-fen.md)
-* [15.3.MAINTAINER 部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.3.maintainer-bu-fen.md)
-* [15.4.LICENSE（许可证）部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.4.-license-xu-ke-zheng-bu-fen.md)
-* [15.5.一般的 BROKEN/IGNORE/DEPRECATED 消息](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.5.-yi-ban-de-brokenignoredeprecated-xiao-xi.md)
-* [15.6.依赖部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.6.-yi-lai-bu-fen.md)
-* [15.7.Flavors](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.7.flavors.md)
-* [15.8.USES 和 USE\_x](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.8.uses-he-usex.md)
-* [15.9.标准的 bsd.port.mk 变量](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.9.-biao-zhun-de-bsd.port.mk-bian-liang.md)
-* [15.10.Options 和帮助文档](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.10.options-he-bang-zhu-wen-dang.md)
-* [15.11.其余变量](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.11.-qi-yu-bian-liang.md)
-* [15.12.Target](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.12.target.md)
+* [第15章 在 Port Makefile 中变量的顺序](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/di-15-zhang.md)
 
 ## 第16章 保持同步
 
