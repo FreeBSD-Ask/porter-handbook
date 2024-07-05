@@ -109,28 +109,10 @@
 
 ## 第13章 该做什么和不该做什么
 
-* [13.1.简介](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.1.-jian-jie.md)
-* [13.2.WRKDIR（联编时使用的临时目录）](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.2.wrkdir-lian-bian-shi-shi-yong-de-lin-shi-mu-lu.md)
-* [13.3.WRKDIRPREFIX（用于联编的临时目录的父目录名)](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.3.wrkdirprefix-yong-yu-lian-bian-de-lin-shi-mu-lu-de-fu-mu-lu-ming.md)
-* [13.4.区分不同的操作系统， 以及其版本](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.4.-qu-fen-bu-tong-de-cao-zuo-xi-tong-yi-ji-qi-ban-ben.md)
-* [13.5.在 bsd.port.mk 之后写一些内容](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.5.-zai-bsd.port.mk-zhi-hou-xie-yi-xie-nei-rong.md)
-* [13.6.在 wrapper 脚本中使用 exec 语句](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.6.-zai-wrapper-jiao-ben-zhong-shi-yong-exec-yu-ju.md)
-* [13.7.理性行事](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.7.-li-xing-hang-shi.md)
-* [13.8.遵循 CC 和 CXX 设置](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.8.-zun-xun-cc-he-cxx-she-zhi.md)
-* [13.9.遵循 CFLAGS](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.9.-zun-xun-cflags.md)
-* [13.10.冗长的编译日志](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.10.-rong-chang-de-bian-yi-ri-zhi.md)
-* [13.11.反馈](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.11.-fan-kui.md)
-* [13.12.README.html](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.12.readme.html.md)
-* [13.13.使用 BROKEN、 FORBIDDEN 或 IGNORE 阻止用户安装 port](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.13.-shi-yong-broken-forbidden-huo-ignore-zu-zhi-yong-hu-an-zhuang-port.md)
-* [13.14.适用架构考量](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.14.-shi-yong-jia-gou-kao-liang.md)
-* [13.15.使用 DEPRECATED 或 EXPIRATION\_DATE 表示某个 port 将被删除](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.15.-shi-yong-deprecated-huo-expirationdate-biao-shi-mou-ge-port-jiang-bei-shan-chu.md)
-* [13.16.避免使用 .error 结构](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.16.-bi-mian-shi-yong-.error-jie-gou.md)
-* [13.17.sysctl 的用法](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.17.sysctl-de-yong-fa.md)
-* [13.18.重新发布的 distfiles](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.18.-zhong-xin-fa-bu-de-distfiles.md)
-* [13.19.使用 POSIX 标准](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.19.-shi-yong-posix-biao-zhun.md)
-* [13.20.杂项](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.20.-za-xiang.md)
+* [第13章 该做什么和不该做什么](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/di-13-zhang.md)
 
-***
+
+## 第14章 Makefile 示例
 
 * [第14章 Makefile 示例](di-14-zhang-makefile-shi-li.md)
 
