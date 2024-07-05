@@ -72,8 +72,8 @@
 
 * [8.1.根据 make 变量对 pkg-plist 进行修改](di-8-zhang-gao-ji-pkgplist-shi-jian/8.1.-gen-ju-make-bian-liang-dui-pkgplist-jin-hang-xiu-gai.md)
 * [8.2.空目录](di-8-zhang-gao-ji-pkgplist-shi-jian/8.2.-kong-mu-lu.md)
-* [8.4.动态与静态软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.4.-dong-tai-yu-jing-tai-ruan-jian-bao-lie-biao.md)
 * [8.3.配置文件](di-8-zhang-gao-ji-pkgplist-shi-jian/8.3.-pei-zhi-wen-jian.md)
+* [8.4.动态与静态软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.4.-dong-tai-yu-jing-tai-ruan-jian-bao-lie-biao.md)
 * [8.5.自动创建软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.5.-zi-dong-chuang-jian-ruan-jian-bao-lie-biao.md)
 * [8.6.用关键词扩展软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.6.-yong-guan-jian-ci-kuo-zhan-ruan-jian-bao-lie-biao.md)
 
