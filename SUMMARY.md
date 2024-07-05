@@ -105,7 +105,7 @@
 
 * [12.1.安全为何如此重要](di-12-zhang-an-quan/12.1.-wei-he-an-quan-ru-ci-zhong-yao.md)
 * [12.2.修复安全漏洞](di-12-zhang-an-quan/12.2.-xiu-fu-an-quan-lou-dong.md)
-* [12.3.让社区了解情况](di-12-zhang-an-quan/12.3.-rang-she-qu-le-jie-qing-kuang.md)
+* [12.3.向社区通报情况](di-12-zhang-an-quan/12.3.-rang-she-qu-le-jie-qing-kuang.md)
 
 ## 第13章 该做什么和不该做什么
 
