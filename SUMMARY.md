@@ -112,9 +112,9 @@
 * [第13章 该做什么和不该做什么](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/di-13-zhang.md)
 
 
-## 第14章 Makefile 示例
+## 第14章 一个简单的 port
 
-* [第14章 Makefile 示例](di-14-zhang-makefile-shi-li.md)
+* [第14章 一个简单的 port](di-14-zhang-makefile-shi-li.md)
 
 ## 第15章 在 Port Makefile 中变量的顺序
 
