@@ -79,9 +79,9 @@
 
 ## 第9章 pkg-\*
 
-* [9.1.pkg-message (安装二进制包时显示的消息文件)](di-9-zhang-pkg/9.1.pkgmessage-an-zhuang-er-jin-zhi-bao-shi-xian-shi-de-xiao-xi-wen-jian.md)
-* [9.2.pkg-install、pkg-pre-install 和 pkg-post-install (安装二进制包时执行的脚本文件)](di-9-zhang-pkg/9.2.-pkginstall-an-zhuang-er-jin-zhi-bao-shi-zhi-hang-de-jiao-ben-wen-jian.md)
-* [9.3.pkg-deinstall、pkg-pre-deinstall 和 pkg-post-deinstall(卸载时执行的脚本文件)](di-9-zhang-pkg/9.3.pkgdeinstall-xie-zai-shi-zhi-hang-de-jiao-ben-wen-jian.md)
+* [9.1.pkg-message（安装二进制包时显示的消息文件）](di-9-zhang-pkg/9.1.pkgmessage-an-zhuang-er-jin-zhi-bao-shi-xian-shi-de-xiao-xi-wen-jian.md)
+* [9.2.pkg-install、pkg-pre-install 和 pkg-post-install（安装二进制包时执行的脚本文件）](di-9-zhang-pkg/9.2.-pkginstall-an-zhuang-er-jin-zhi-bao-shi-zhi-hang-de-jiao-ben-wen-jian.md)
+* [9.3.pkg-deinstall、pkg-pre-deinstall 和 pkg-post-deinstall（卸载时执行的脚本文件）](di-9-zhang-pkg/9.3.pkgdeinstall-xie-zai-shi-zhi-hang-de-jiao-ben-wen-jian.md)
 * [9.4.修改 pkg-\* 文件的名字](di-9-zhang-pkg/9.4.-xiu-gai-pkg-wen-jian-de-ming-zi.md)
 * [9.5.使用 SUB\_FILES 和 SUB\_LIST](di-9-zhang-pkg/9.5.-shi-yong-subfiles-he-sublist.md)
 
