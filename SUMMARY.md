@@ -88,11 +88,13 @@
 ## 第10章 测试 port
 
 * [10.1.运行 make describe](di-10-zhang-ce-shi-port/10.1.-yun-hang-make-describe.md)
-* [10.2.Portclippy / Portfmt](di-10-zhang-ce-shi-port/10.2.portclippy-portfmt.md)
-* [10.3.Portlint](di-10-zhang-ce-shi-port/10.3.portlint.md)
-* [10.4.Porttools](di-10-zhang-ce-shi-port/10.4.porttools.md)
-* [10.5.PREFIX 和 DESTDIR](di-10-zhang-ce-shi-port/10.5.prefix-he-destdir.md)
-* [10.6.Poudriere](di-10-zhang-ce-shi-port/10.6.poudriere.md)
+* [10.2.运行 make test](di-10-zhang-ce-shi-port/10.2-yun-hang-make-test.md)
+* [10.3.Portclippy / Portfmt](di-10-zhang-ce-shi-port/10.3.portclippy-portfmt.md)
+* [10.4.Portlint](di-10-zhang-ce-shi-port/10.4.portlint.md)
+* [10.5.Porttools](di-10-zhang-ce-shi-port/10.5.porttools.md)
+* [10.6.PREFIX 和 DESTDIR](di-10-zhang-ce-shi-port/10.6.prefix-he-destdir.md)
+* [10.7.Poudriere](di-10-zhang-ce-shi-port/10.7.poudriere.md)
+* [10.8.调试 port](di-10-zhang-ce-shi-port/10.8.tiao-shi-port.md)
 
 ## 第11章 升级 port
 
