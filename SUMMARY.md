@@ -1,14 +1,19 @@
 # Table of contents
 
 * [FreeBSD port 开发者手冊翻译项目](README.md)
+* [编辑日志](bian-ji-ri-zhi.md)
 * [译者说明](yi-zhe-shuo-ming.md)
-* [目录](mu-lu.md)
-* [FreeBSD 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
+
+## FreeBSD Port 开发者手册
+
+* [FreeBSD Port 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
 
 ## 第1章 简介
+
 * [1.1.简介](di-1-zhang-jian-jie.md)
 
 ## 第2章 制作新的 port
+
 * [2.1.制作新的 port](di-2-zhang-zhi-zuo-xin-de-port.md)
 
 ## 第3章 简单的 port
@@ -22,7 +27,7 @@
 
 ## 第4章 复杂的 Port
 
-* [4.1.他是怎么运作的](di-4-zhang-fu-za-de-port/4.1.-ta-shi-zen-mo-yun-zuo-de.md)
+* [4.1.Port 是如何运行的](di-4-zhang-fu-za-de-port/4.1.-ta-shi-zen-mo-yun-zuo-de.md)
 * [4.2.获取源代码](di-4-zhang-fu-za-de-port/4.2.-huo-qu-yuan-dai-ma.md)
 * [4.3.修改 port](di-4-zhang-fu-za-de-port/4.3.-xiu-gai-port.md)
 * [4.4.打补丁](di-4-zhang-fu-za-de-port/4.4.-da-bu-ding.md)
@@ -31,12 +36,12 @@
 
 ## 第5章 配置 Makefile
 
-* [5.1.作者发布的代码](di-5-zhang-pei-zhi-makefile/5.1.-zuo-zhe-fa-bu-de-dai-ma.md)
+* [5.1.原始来源](di-5-zhang-pei-zhi-makefile/5.1.-zuo-zhe-fa-bu-de-dai-ma.md)
 * [5.2.命名](di-5-zhang-pei-zhi-makefile/5.2.-ming-ming.md)
 * [5.3.归类](di-5-zhang-pei-zhi-makefile/5.3.-gui-lei.md)
 * [5.4.源代码包文件](di-5-zhang-pei-zhi-makefile/5.4.-yuan-dai-ma-bao-wen-jian.md)
 * [5.5.维护者（MAINTAINER）](di-5-zhang-pei-zhi-makefile/5.5.-wei-hu-zhe-maintainer.md)
-* [5.6.简介（COMMENT）](di-5-zhang-pei-zhi-makefile/5.6.-yi-ju-hua-shuo-ming-comment.md)
+* [5.6.一句话说明（COMMENT）](di-5-zhang-pei-zhi-makefile/5.6.-yi-ju-hua-shuo-ming-comment.md)
 * [5.7.项目网站](di-5-zhang-pei-zhi-makefile/5.7.-xiang-mu-wang-zhan.md)
 * [5.8.许可证](di-5-zhang-pei-zhi-makefile/5.8.-xu-ke-zheng.md)
 * [5.9.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.9.portscout.md)
@@ -52,37 +57,8 @@
 
 ## 第6章 特殊情况
 
-* [6.1.Staging](di-6-zhang-te-shu-qing-kuang/6.1.staging.md)
-* [6.2.捆绑库](di-6-zhang-te-shu-qing-kuang/6.2.-kun-bang-ku.md)
-* [6.3.共享库](di-6-zhang-te-shu-qing-kuang/6.3.-gong-xiang-ku.md)
-* [6.4.有分发限制或法律问题的 port](di-6-zhang-te-shu-qing-kuang/6.4.-you-fen-fa-xian-zhi-huo-fa-lv-wen-ti-de-port.md)
-* [6.5.编译机制](di-6-zhang-te-shu-qing-kuang/6.5.-bian-yi-ji-zhi.md)
-* [6.6.使用 GNU 自动化工具](di-6-zhang-te-shu-qing-kuang/6.6.-shi-yong-gnu-zi-dong-hua-gong-ju.md)
-* [6.7.使用 GNU gettext](di-6-zhang-te-shu-qing-kuang/6.7.-shi-yong-gnu-gettext.md)
-* [6.8.使用 Perl](di-6-zhang-te-shu-qing-kuang/6.8.-shi-yong-perl.md)
-* [6.9.使用 X11](di-6-zhang-te-shu-qing-kuang/6.9.-shi-yong-x11.md)
-* [6.10.使用 GNOME](di-6-zhang-te-shu-qing-kuang/6.10.-shi-yong-gnome.md)
-* [6.11.GNOME 组件](di-6-zhang-te-shu-qing-kuang/6.11.gnome-zu-jian.md)
-* [6.12.使用 Qt](di-6-zhang-te-shu-qing-kuang/6.12.-shi-yong-qt.md)
-* [6.13.使用 KDE](di-6-zhang-te-shu-qing-kuang/6.13.-shi-yong-kde.md)
-* [6.14.使用 LXQt](di-6-zhang-te-shu-qing-kuang/6.14.-shi-yong-lxqt.md)
-* [6.15.使用 Java](di-6-zhang-te-shu-qing-kuang/6.15.-shi-yong-java.md)
-* [6.16.Web 程序，Apache 和 PHP](di-6-zhang-te-shu-qing-kuang/6.16.web-cheng-xu-apache-he-php.md)
-* [6.17.使用 Python](di-6-zhang-te-shu-qing-kuang/6.17.-shi-yong-python.md)
-* [6.18.使用 Tcl/Tk](di-6-zhang-te-shu-qing-kuang/6.18.-shi-yong-tcltk.md)
-* [6.19.使用 SDL](di-6-zhang-te-shu-qing-kuang/6.19.-shi-yong-sdl.md)
-* [6.20.使用 wxWidgets](di-6-zhang-te-shu-qing-kuang/6.20.-shi-yong-wxwidgets.md)
-* [6.21.使用 Lua](di-6-zhang-te-shu-qing-kuang/6.21.-shi-yong-lua.md)
-* [6.22.使用 iconv](di-6-zhang-te-shu-qing-kuang/6.22.-shi-yong-iconv.md)
-* [6.23.使用 Xfce](di-6-zhang-te-shu-qing-kuang/6.23.-shi-yong-xfce.md)
-* [6.24.使用 Budgie](di-6-zhang-te-shu-qing-kuang/6.24.-shi-yong-budgie.md)
-* [6.25.使用数据库](di-6-zhang-te-shu-qing-kuang/6.25.-shi-yong-shu-ju-ku.md)
-* [6.26.启动和停止服务 (rc 脚本)](di-6-zhang-te-shu-qing-kuang/6.26.-qi-dong-he-ting-zhi-fu-wu-rc-jiao-ben.md)
-* [6.27.添加用户和用户组](di-6-zhang-te-shu-qing-kuang/6.27.-tian-jia-yong-hu-he-yong-hu-zu.md)
-* [6.28.依赖内核源代码的 Port](di-6-zhang-te-shu-qing-kuang/6.28.-yi-lai-nei-he-yuan-dai-ma-de-port.md)
-* [6.29.Go 库](di-6-zhang-te-shu-qing-kuang/6.29.go-ku.md)
-* [6.30.Haskell 库](di-6-zhang-te-shu-qing-kuang/6.30.haskell-ku.md)
-* [6.31.shell 自动补全文件](di-6-zhang-te-shu-qing-kuang/6.31.shell-zi-dong-bu-quan-wen-jian.md)
+* [第6章 特殊情况](di-6-zhang-te-shu-qing-kuang/di-liu-zhang.md)
+
 
 ## 第7章 Flavors
 
@@ -96,27 +72,29 @@
 
 * [8.1.根据 make 变量对 pkg-plist 进行修改](di-8-zhang-gao-ji-pkgplist-shi-jian/8.1.-gen-ju-make-bian-liang-dui-pkgplist-jin-hang-xiu-gai.md)
 * [8.2.空目录](di-8-zhang-gao-ji-pkgplist-shi-jian/8.2.-kong-mu-lu.md)
-* [8.4.动态与静态软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.4.-dong-tai-yu-jing-tai-ruan-jian-bao-lie-biao.md)
 * [8.3.配置文件](di-8-zhang-gao-ji-pkgplist-shi-jian/8.3.-pei-zhi-wen-jian.md)
+* [8.4.动态与静态软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.4.-dong-tai-yu-jing-tai-ruan-jian-bao-lie-biao.md)
 * [8.5.自动创建软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.5.-zi-dong-chuang-jian-ruan-jian-bao-lie-biao.md)
 * [8.6.用关键词扩展软件包列表](di-8-zhang-gao-ji-pkgplist-shi-jian/8.6.-yong-guan-jian-ci-kuo-zhan-ruan-jian-bao-lie-biao.md)
 
 ## 第9章 pkg-\*
 
-* [9.1.pkg-message (安装二进制包时显示的消息文件)](di-9-zhang-pkg/9.1.pkgmessage-an-zhuang-er-jin-zhi-bao-shi-xian-shi-de-xiao-xi-wen-jian.md)
-* [9.2.pkg-install (安装二进制包时执行的脚本文件)](di-9-zhang-pkg/9.2.-pkginstall-an-zhuang-er-jin-zhi-bao-shi-zhi-hang-de-jiao-ben-wen-jian.md)
-* [9.3.pkg-deinstall (卸载时执行的脚本文件)](di-9-zhang-pkg/9.3.pkgdeinstall-xie-zai-shi-zhi-hang-de-jiao-ben-wen-jian.md)
+* [9.1.pkg-message（安装二进制包时显示的消息文件）](di-9-zhang-pkg/9.1.pkgmessage-an-zhuang-er-jin-zhi-bao-shi-xian-shi-de-xiao-xi-wen-jian.md)
+* [9.2.pkg-install、pkg-pre-install 和 pkg-post-install（安装二进制包时执行的脚本文件）](di-9-zhang-pkg/9.2.-pkginstall-an-zhuang-er-jin-zhi-bao-shi-zhi-hang-de-jiao-ben-wen-jian.md)
+* [9.3.pkg-deinstall、pkg-pre-deinstall 和 pkg-post-deinstall（卸载时执行的脚本文件）](di-9-zhang-pkg/9.3.pkgdeinstall-xie-zai-shi-zhi-hang-de-jiao-ben-wen-jian.md)
 * [9.4.修改 pkg-\* 文件的名字](di-9-zhang-pkg/9.4.-xiu-gai-pkg-wen-jian-de-ming-zi.md)
 * [9.5.使用 SUB\_FILES 和 SUB\_LIST](di-9-zhang-pkg/9.5.-shi-yong-subfiles-he-sublist.md)
 
 ## 第10章 测试 port
 
 * [10.1.运行 make describe](di-10-zhang-ce-shi-port/10.1.-yun-hang-make-describe.md)
-* [10.2.Portclippy / Portfmt](di-10-zhang-ce-shi-port/10.2.portclippy-portfmt.md)
-* [10.3.Portlint](di-10-zhang-ce-shi-port/10.3.portlint.md)
-* [10.4.Porttools](di-10-zhang-ce-shi-port/10.4.porttools.md)
-* [10.5.PREFIX 和 DESTDIR](di-10-zhang-ce-shi-port/10.5.prefix-he-destdir.md)
-* [10.6.Poudriere](di-10-zhang-ce-shi-port/10.6.poudriere.md)
+* [10.2.运行 make test](di-10-zhang-ce-shi-port/10.2-yun-hang-make-test.md)
+* [10.3.Portclippy / Portfmt](di-10-zhang-ce-shi-port/10.3.portclippy-portfmt.md)
+* [10.4.Portlint](di-10-zhang-ce-shi-port/10.4.portlint.md)
+* [10.5.Port 工具](di-10-zhang-ce-shi-port/10.5.porttools.md)
+* [10.6.PREFIX 和 DESTDIR](di-10-zhang-ce-shi-port/10.6.prefix-he-destdir.md)
+* [10.7.Poudriere](di-10-zhang-ce-shi-port/10.7.poudriere.md)
+* [10.8.调试 port](di-10-zhang-ce-shi-port/10.8.tiao-shi-port.md)
 
 ## 第11章 升级 port
 
@@ -125,181 +103,33 @@
 
 ## 第12章 安全
 
-* [12.1.为何安全如此重要](di-12-zhang-an-quan/12.1.-wei-he-an-quan-ru-ci-zhong-yao.md)
+* [12.1.安全为何如此重要](di-12-zhang-an-quan/12.1.-wei-he-an-quan-ru-ci-zhong-yao.md)
 * [12.2.修复安全漏洞](di-12-zhang-an-quan/12.2.-xiu-fu-an-quan-lou-dong.md)
-* [12.3.让社区了解情况](di-12-zhang-an-quan/12.3.-rang-she-qu-le-jie-qing-kuang.md)
+* [12.3.向社区通报情况](di-12-zhang-an-quan/12.3.-rang-she-qu-le-jie-qing-kuang.md)
 
 ## 第13章 该做什么和不该做什么
 
-* [13.1.简介](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.1.-jian-jie.md)
-* [13.2.WRKDIR（联编时使用的临时目录）](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.2.wrkdir-lian-bian-shi-shi-yong-de-lin-shi-mu-lu.md)
-* [13.3.WRKDIRPREFIX（用于联编的临时目录的父目录名)](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.3.wrkdirprefix-yong-yu-lian-bian-de-lin-shi-mu-lu-de-fu-mu-lu-ming.md)
-* [13.4.区分不同的操作系统， 以及其版本](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.4.-qu-fen-bu-tong-de-cao-zuo-xi-tong-yi-ji-qi-ban-ben.md)
-* [13.5.在 bsd.port.mk 之后写一些内容](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.5.-zai-bsd.port.mk-zhi-hou-xie-yi-xie-nei-rong.md)
-* [13.6.在 wrapper 脚本中使用 exec 语句](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.6.-zai-wrapper-jiao-ben-zhong-shi-yong-exec-yu-ju.md)
-* [13.7.理性行事](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.7.-li-xing-hang-shi.md)
-* [13.8.遵循 CC 和 CXX 设置](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.8.-zun-xun-cc-he-cxx-she-zhi.md)
-* [13.9.遵循 CFLAGS](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.9.-zun-xun-cflags.md)
-* [13.10.冗长的编译日志](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.10.-rong-chang-de-bian-yi-ri-zhi.md)
-* [13.11.反馈](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.11.-fan-kui.md)
-* [13.12.README.html](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.12.readme.html.md)
-* [13.13.使用 BROKEN、 FORBIDDEN 或 IGNORE 阻止用户安装 port](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.13.-shi-yong-broken-forbidden-huo-ignore-zu-zhi-yong-hu-an-zhuang-port.md)
-* [13.14.适用架构考量](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.14.-shi-yong-jia-gou-kao-liang.md)
-* [13.15.使用 DEPRECATED 或 EXPIRATION\_DATE 表示某个 port 将被删除](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.15.-shi-yong-deprecated-huo-expirationdate-biao-shi-mou-ge-port-jiang-bei-shan-chu.md)
-* [13.16.避免使用 .error 结构](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.16.-bi-mian-shi-yong-.error-jie-gou.md)
-* [13.17.sysctl 的用法](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.17.sysctl-de-yong-fa.md)
-* [13.18.重新发布的 distfiles](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.18.-zhong-xin-fa-bu-de-distfiles.md)
-* [13.19.使用 POSIX 标准](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.19.-shi-yong-posix-biao-zhun.md)
-* [13.20.杂项](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/13.20.-za-xiang.md)
+* [第13章 该做什么和不该做什么](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/di-13-zhang.md)
 
-***
+## 第14章 一个简单的 port
 
-* [第14章 Makefile 示例](di-14-zhang-makefile-shi-li.md)
+* [第14章 一个简单的 port](di-14-zhang-makefile-shi-li.md)
 
 ## 第15章 在 Port Makefile 中变量的顺序
 
-* [15.1.PORTNAME 部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.1.portname-bu-fen.md)
-* [15.2.PATCHFILES 部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.2.patchfiles-bu-fen.md)
-* [15.3.MAINTAINER 部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.3.maintainer-bu-fen.md)
-* [15.4.LICENSE（许可证）部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.4.-license-xu-ke-zheng-bu-fen.md)
-* [15.5.一般的 BROKEN/IGNORE/DEPRECATED 消息](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.5.-yi-ban-de-brokenignoredeprecated-xiao-xi.md)
-* [15.6.依赖部分](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.6.-yi-lai-bu-fen.md)
-* [15.7.Flavors](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.7.flavors.md)
-* [15.8.USES 和 USE\_x](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.8.uses-he-usex.md)
-* [15.9.标准的 bsd.port.mk 变量](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.9.-biao-zhun-de-bsd.port.mk-bian-liang.md)
-* [15.10.Options 和帮助文档](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.10.options-he-bang-zhu-wen-dang.md)
-* [15.11.其余变量](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.11.-qi-yu-bian-liang.md)
-* [15.12.Target](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/15.12.target.md)
+* [第15章 在 Port Makefile 中变量的顺序](di-15-zhang-zai-port-makefile-zhong-bian-liang-de-shun-xu/di-15-zhang.md)
 
-## 第16章 保持同步
+## 第16章 保持更新
 
-* [16.1.FreshPorts](di-16-zhang-bao-chi-tong-bu/16.1.freshports.md)
-* [16.2.代码库的 Web 访问界面](di-16-zhang-bao-chi-tong-bu/16.2.-dai-ma-ku-de-web-fang-wen-jie-mian.md)
-* [16.3.FreeBSD Ports 邮件列表](di-16-zhang-bao-chi-tong-bu/16.3.freebsd-ports-you-jian-lie-biao.md)
-* [16.4.FreeBSD port 构建集群](di-16-zhang-bao-chi-tong-bu/16.4.-freebsd-port-gou-jian-ji-qun.md)
-* [16.5.Portscout：FreeBSD Ports Distfile 扫描器](di-16-zhang-bao-chi-tong-bu/16.5.portscoutfreebsd-ports-distfile-sao-miao-qi.md)
+* [第16章 保持更新](di-16-zhang-bao-chi-tong-bu/di-16-zhang.md)
 
 ## 第17章 使用 USES 宏
 
-* [17.1.USES 简介](di-17-zhang-shi-yong-uses-hong/17.1.uses-jian-jie.md)
-* [17.2.7z](di-17-zhang-shi-yong-uses-hong/17.2.7z.md)
-* [17.3.ada](di-17-zhang-shi-yong-uses-hong/17.3.ada.md)
-* [17.4.autoreconf](di-17-zhang-shi-yong-uses-hong/17.4.autoreconf.md)
-* [17.5.blaslapack](di-17-zhang-shi-yong-uses-hong/17.5.blaslapack.md)
-* [17.6.bdb](di-17-zhang-shi-yong-uses-hong/17.6.bdb.md)
-* [17.7.bison](di-17-zhang-shi-yong-uses-hong/17.7.bison.md)
-* [17.8.cabal](di-17-zhang-shi-yong-uses-hong/17.8.cabal.md)
-* [17.9.cargo](di-17-zhang-shi-yong-uses-hong/17.9.cargo.md)
-* [17.10.charsetfix](di-17-zhang-shi-yong-uses-hong/17.10.charsetfix.md)
-* [17.11.cmake](di-17-zhang-shi-yong-uses-hong/17.11.cmake.md)
-* [17.12.compiler](di-17-zhang-shi-yong-uses-hong/17.12.compiler.md)
-* [17.13.cpe](di-17-zhang-shi-yong-uses-hong/17.13.cpe.md)
-* [17.14.cran](di-17-zhang-shi-yong-uses-hong/17.14.cran.md)
-* [17.15.desktop-file-utils](di-17-zhang-shi-yong-uses-hong/17.15.desktop-file-utils.md)
-* [17.16.desthack](di-17-zhang-shi-yong-uses-hong/17.16.desthack.md)
-* [17.17.display](di-17-zhang-shi-yong-uses-hong/17.17.display.md)
-* [17.18.dos2unix](di-17-zhang-shi-yong-uses-hong/17.18.dos2unix.md)
-* [17.19.drupal](di-17-zhang-shi-yong-uses-hong/17.19.drupal.md)
-* [17.20.eigen](di-17-zhang-shi-yong-uses-hong/17.20.eigen.md)
-* [17.21. elfctl](di-17-zhang-shi-yong-uses-hong/17.21.-elfctl.md)
-* [17.22. fakeroot](di-17-zhang-shi-yong-uses-hong/17.22.-fakeroot.md)
-* [17.23. fam](di-17-zhang-shi-yong-uses-hong/17.23.-fam.md)
-* [17.24. firebird](di-17-zhang-shi-yong-uses-hong/17.24.-firebird.md)
-* [17.25. fonts](di-17-zhang-shi-yong-uses-hong/17.25.-fonts.md)
-* [17.26. fortran](di-17-zhang-shi-yong-uses-hong/17.26.-fortran.md)
-* [17.27. fuse](di-17-zhang-shi-yong-uses-hong/17.27.-fuse.md)
-* [17.28. gem](di-17-zhang-shi-yong-uses-hong/17.28.-gem.md)
-* [17.29. gettext](di-17-zhang-shi-yong-uses-hong/17.29.-gettext.md)
-* [17.30. gettext-runtime](di-17-zhang-shi-yong-uses-hong/17.30.-gettext-runtime.md)
-* [17.31. gettext-tools](di-17-zhang-shi-yong-uses-hong/17.31.-gettext-tools.md)
-* [17.32. ghostscript](di-17-zhang-shi-yong-uses-hong/17.32.-ghostscript.md)
-* [17.33. gl](di-17-zhang-shi-yong-uses-hong/17.33.-gl.md)
-* [17.34. gmake](di-17-zhang-shi-yong-uses-hong/17.34.-gmake.md)
-* [17.35. gnome](di-17-zhang-shi-yong-uses-hong/17.35.-gnome.md)
-* [17.36. go](di-17-zhang-shi-yong-uses-hong/17.36.-go.md)
-* [17.37. gperf](di-17-zhang-shi-yong-uses-hong/17.37.-gperf.md)
-* [17.38. grantlee](di-17-zhang-shi-yong-uses-hong/17.38.-grantlee.md)
-* [17.39. groff](di-17-zhang-shi-yong-uses-hong/17.39.-groff.md)
-* [17.40. gssapi](di-17-zhang-shi-yong-uses-hong/17.40.-gssapi.md)
-* [17.41. gstreamer](di-17-zhang-shi-yong-uses-hong/17.41.-gstreamer.md)
-* [17.42. horde](di-17-zhang-shi-yong-uses-hong/17.42.-horde.md)
-* [17.43. iconv](di-17-zhang-shi-yong-uses-hong/17.43.-iconv.md)
-* [17.44. imake](di-17-zhang-shi-yong-uses-hong/17.44.-imake.md)
-* [17.45. kde](di-17-zhang-shi-yong-uses-hong/17.45.-kde.md)
-* [17.46. kmod](di-17-zhang-shi-yong-uses-hong/17.46.-kmod.md)
-* [17.47. lha](di-17-zhang-shi-yong-uses-hong/17.47.-lha.md)
-* [17.48. libarchive](di-17-zhang-shi-yong-uses-hong/17.48.-libarchive.md)
-* [17.49. libedit](di-17-zhang-shi-yong-uses-hong/17.49.-libedit.md)
-* [17.50. libtool](di-17-zhang-shi-yong-uses-hong/17.50.-libtool.md)
-* [17.51. linux](di-17-zhang-shi-yong-uses-hong/17.51.-linux.md)
-* [17.52. localbase](di-17-zhang-shi-yong-uses-hong/17.52.-localbase.md)
-* [17.53. lua](di-17-zhang-shi-yong-uses-hong/17.53.-lua.md)
-* [17.54. luajit](di-17-zhang-shi-yong-uses-hong/17.54.-luajit.md)
-* [17.55. lxqt](di-17-zhang-shi-yong-uses-hong/17.55.-lxqt.md)
-* [17.56. magick](di-17-zhang-shi-yong-uses-hong/17.56.-magick.md)
-* [17.57. makeinfo](di-17-zhang-shi-yong-uses-hong/17.57.-makeinfo.md)
-* [17.58. makeself](di-17-zhang-shi-yong-uses-hong/17.58.-makeself.md)
-* [17.59. mate](di-17-zhang-shi-yong-uses-hong/17.59.-mate.md)
-* [17.60. meson](di-17-zhang-shi-yong-uses-hong/17.60.-meson.md)
-* [17.61. metaport](di-17-zhang-shi-yong-uses-hong/17.61.-metaport.md)
-* [17.62. minizip](di-17-zhang-shi-yong-uses-hong/17.62.-minizip.md)
-* [17.63. mysql](di-17-zhang-shi-yong-uses-hong/17.63.-mysql.md)
-* [17.64. mono](di-17-zhang-shi-yong-uses-hong/17.64.-mono.md)
-* [17.65. motif](di-17-zhang-shi-yong-uses-hong/17.65.-motif.md)
-* [17.66. ncurses](di-17-zhang-shi-yong-uses-hong/17.66.-ncurses.md)
-* [17.67. ninja](di-17-zhang-shi-yong-uses-hong/17.67.-ninja.md)
-* [17.68. nodejs](di-17-zhang-shi-yong-uses-hong/17.68.-nodejs.md)
-* [17.69. objc](di-17-zhang-shi-yong-uses-hong/17.69.-objc.md)
-* [17.70. openal](di-17-zhang-shi-yong-uses-hong/17.70.-openal.md)
-* [17.71. pathfix](di-17-zhang-shi-yong-uses-hong/17.71.-pathfix.md)
-* [17.72. pear](di-17-zhang-shi-yong-uses-hong/17.72.-pear.md)
-* [17.73. perl5](di-17-zhang-shi-yong-uses-hong/17.73.-perl5.md)
-* [17.74. pgsql](di-17-zhang-shi-yong-uses-hong/17.74.-pgsql.md)
-* [17.75. php](di-17-zhang-shi-yong-uses-hong/17.75.-php.md)
-* [17.76. pkgconfig](di-17-zhang-shi-yong-uses-hong/17.76.-pkgconfig.md)
-* [17.77. pure](di-17-zhang-shi-yong-uses-hong/17.77.-pure.md)
-* [17.78. pyqt](di-17-zhang-shi-yong-uses-hong/17.78.-pyqt.md)
-* [17.79. pytest](di-17-zhang-shi-yong-uses-hong/17.79.-pytest.md)
-* [17.80. python](di-17-zhang-shi-yong-uses-hong/17.80.-python.md)
-* [17.81. qmail](di-17-zhang-shi-yong-uses-hong/17.81.-qmail.md)
-* [17.82. qmake](di-17-zhang-shi-yong-uses-hong/17.82.-qmake.md)
-* [17.83. qt](di-17-zhang-shi-yong-uses-hong/17.83.-qt.md)
-* [17.84. qt-dist](di-17-zhang-shi-yong-uses-hong/17.84.-qt-dist.md)
-* [17.85. readline](di-17-zhang-shi-yong-uses-hong/17.85.-readline.md)
-* [17.86. samba](di-17-zhang-shi-yong-uses-hong/17.86.-samba.md)
-* [17.87. scons](di-17-zhang-shi-yong-uses-hong/17.87.-scons.md)
-* [17.88. shared-mime-info](di-17-zhang-shi-yong-uses-hong/17.88.-shared-mime-info.md)
-* [17.89. shebangfix](di-17-zhang-shi-yong-uses-hong/17.89.-shebangfix.md)
-* [17.90. sqlite](di-17-zhang-shi-yong-uses-hong/17.90.-sqlite.md)
-* [17.91. ssl](di-17-zhang-shi-yong-uses-hong/17.91.-ssl.md)
-* [17.92. tar](di-17-zhang-shi-yong-uses-hong/17.92.-tar.md)
-* [17.93. tcl](di-17-zhang-shi-yong-uses-hong/17.93.-tcl.md)
-* [17.94. terminfo](di-17-zhang-shi-yong-uses-hong/17.94.-terminfo.md)
-* [17.95. tk](di-17-zhang-shi-yong-uses-hong/17.95.-tk.md)
-* [17.96. uidfix](di-17-zhang-shi-yong-uses-hong/17.96.-uidfix.md)
-* [17.97. uniquefiles](di-17-zhang-shi-yong-uses-hong/17.97.-uniquefiles.md)
-* [17.98. vala](di-17-zhang-shi-yong-uses-hong/17.98.-vala.md)
-* [17.99. varnish](di-17-zhang-shi-yong-uses-hong/17.99.-varnish.md)
-* [17.100. webplugin](di-17-zhang-shi-yong-uses-hong/17.100.-webplugin.md)
-* [17.101. xfce](di-17-zhang-shi-yong-uses-hong/17.101.-xfce.md)
-* [17.102. xorg](di-17-zhang-shi-yong-uses-hong/17.102.-xorg.md)
-* [17.103. xorg-cat](di-17-zhang-shi-yong-uses-hong/17.103.-xorg-cat.md)
-* [17.104. zip](di-17-zhang-shi-yong-uses-hong/17.104.-zip.md)
+* [第17章 使用 USES 宏](di-17-zhang-shi-yong-uses-hong/di-17-zhang.md)
+
 
 ## 第18章 \_\_FreeBSD\_version 的值
 
-* [18.1.FreeBSD 14](di-18-zhang-freebsdversion-de-zhi/18.1.-freebsd-14.md)
-* [18.2.FreeBSD 13](di-18-zhang-freebsdversion-de-zhi/18.2.-freebsd-13.md)
-* [18.3.FreeBSD 12](di-18-zhang-freebsdversion-de-zhi/18.3.-freebsd-12.md)
-* [18.4.FreeBSD 11](di-18-zhang-freebsdversion-de-zhi/18.4.-freebsd-11.md)
-* [18.5.FreeBSD 10](di-18-zhang-freebsdversion-de-zhi/18.5.-freebsd-10.md)
-* [18.6.FreeBSD 9](di-18-zhang-freebsdversion-de-zhi/18.6.-freebsd-9.md)
-* [18.7.FreeBSD 8](di-18-zhang-freebsdversion-de-zhi/18.7.-freebsd-8.md)
-* [18.8.FreeBSD 7](di-18-zhang-freebsdversion-de-zhi/18.8.-freebsd-7.md)
-* [18.9.FreeBSD 6](di-18-zhang-freebsdversion-de-zhi/18.9.-freebsd-6.md)
-* [18.10.FreeBSD 5](di-18-zhang-freebsdversion-de-zhi/18.10.-freebsd-5.md)
-* [18.11.FreeBSD 4](di-18-zhang-freebsdversion-de-zhi/18.11.-freebsd-4.md)
-* [18.12.FreeBSD 3](di-18-zhang-freebsdversion-de-zhi/18.12.-freebsd-3.md)
-* [18.13.FreeBSD 2.2](di-18-zhang-freebsdversion-de-zhi/18.13.-freebsd-2.2.md)
-* [18.14.FreeBSD 2.2-RELEASE 之前的 FreeBSD 2](di-18-zhang-freebsdversion-de-zhi/18.14.freebsd-2.2release-zhi-qian-de-freebsd-2.md)
+* [第18章 \_\_FreeBSD\_version 的值](di-18-zhang-freebsdversion-de-zhi/18.md)
+
 

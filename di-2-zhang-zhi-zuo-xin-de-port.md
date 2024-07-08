@@ -1,14 +1,10 @@
 # 第 2 章 制作新的 port
 
-有兴趣制作新的 port，或升级现有的 port？这很好!
+对制作新port或升级现有ports感兴趣吗？太棒了！
 
-下面是为 FreeBSD 创建新 port 的一些指南。要升级现有的 port，请先阅读本章，然后再阅读[升级 port](https://docs.freebsd.org/en/books/porters-handbook/upgrading/index.html#preamble)。
+接下来是创建一个适用于 FreeBSD 的新port的几条指南。要升级现有的port，请阅读本文，然后阅读升级Port。
 
-这份文档有时不够详细，请参考 **/usr/ports/Mk/bsd.port.mk**，所有 port 的 **Makefile** 都包含他。即使那些不是每天都在钻研 **Makefile** 的人也能从其中获得很多知识。此外，具体的问题可以发送到 [FreeBSD ports 邮件列表](https://lists.freebsd.org/subscription/freebsd-ports)。
+当本文档不够详细时，请参考/usr/ports/Mk/bsd.port.mk，这个文件被所有port Makefile 包含。即使不是每天都在修改 Makefile，也可以从中获取很多知识。此外，具体问题可以发送到 FreeBSD ports邮件列表。
 
-> **注意**
->
-> 本文档仅涵盖了 **/usr/ports/Mk/bsd.port.mk** 中的一部分变量（_VAR_)）的说明，这些变量说明大部分出现在该文件的开头。需要注意的是，该文件没有使用标准的 tab 缩进设置：Emacs 和 Vim 编辑器在加载文件的时候能够进行识别设置。文件加载后，[vi(1)](https://www.freebsd.org/cgi/man.cgi?query=vi&sektion=1&format=html) 和 [ex(1)](https://www.freebsd.org/cgi/man.cgi?query=ex&sektion=1&format=html) 可以通过输入 `:set tabstop=4` 命令选项来设置正确的 tab 缩进值。
-
-想找一些容易上手的东西吗？看看[请求的 port 列表](https://wiki.freebsd.org/WantedPorts)，看看你是否可以在其中一个（或多个）上帮忙。
-
+这篇文档中提到的变量只是可以被覆盖的一小部分（ <em>VAR</em> ）。大多数（如果不是所有的话）都在/usr/ports/Mk/bsd.port.mk 的开头进行了文档化；其余的可能也应该如此。请注意，该文件使用非标准的制表符设置：Emacs 和 Vim 在加载文件时将会识别该设置。vi(1)和 ex(1)在加载文件后可以通过键入 :set tabstop=4 来设置使用正确的值。
+看看有什么简单的开始吧？看看所请求的ports列表，看看你是否可以处理其中的一个（或多个）。

@@ -1,12 +1,13 @@
 # FreeBSD Port 开发者手册
 
-版权所有 © 2000-2021 FreeBSD 文档项目
+版权所有 © 2000-2023 FreeBSD 文档项目
+
+商标
 
 FreeBSD 是 FreeBSD 基金会的注册商标。
 
-Sun, Sun Microsystems, Java, Java Virtual Machine, JDK, JRE, JSP, JVM, Netra, OpenJDK, Solaris, StarOffice, SunOS 和 VirtualBox 是 Sun Microsystems, Inc 在美国和其他国家的商标或注册商标。
+Sun、Sun 微系统、Java、Java 虚拟机、JDK、JRE、JSP、JVM、Netra、OpenJDK、Solaris、StarOffice、SunOS 和 VirtualBox 是 Sun 微系统公司在美国和其他国家的商标或注册商标。
 
 UNIX 是 The Open Group 在美国和其他国家的注册商标。
 
-制造商和销售商用于区分其产品的许多名称被称为商标。在本文件中出现的这些名称，如果 FreeBSD 项目收到到了这些商标所有者的要求， 就会在这些名称后面加上“™”或“®”符号。
-
+制造商和销售商用来区分其产品的许多名称被视为商标。如果这些名称出现在本文档中，并且 FreeBSD 项目意识到了商标声明，则这些名称后面将跟随“™”或“®”符号。
