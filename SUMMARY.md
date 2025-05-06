@@ -1,6 +1,6 @@
 # Table of contents
 
-* [FreeBSD port 开发者手册翻译项目](README.md)
+* [FreeBSD Port 开发者手册翻译项目](README.md)
 * [编辑日志](bian-ji-ri-zhi.md)
 * [译者说明](yi-zhe-shuo-ming.md)
 
