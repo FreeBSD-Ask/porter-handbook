@@ -98,7 +98,7 @@ BDB_VER 检测到的 Berkeley DB 版本。例如，如果使用 USES=bdb:48+ 并
 
 CABAL_REVISION 存储在 Hackage 上的 Haskell 软件包可能有修订版本。将此旋钮设置为整数以拉取已修订的软件包描述。
 
-USE_CABAL 如果软件使用 Haskell 依赖项，请在此变量中列出它们。每个项目应该在 Hackage 上并且列在 packagename-<em>0.1.2</em> 形式中。依赖项也可以有修订版本，修订版本在 _ 符号之后指定。支持依赖项列表的自动生成，请参阅使用 cabal 构建 Haskell 应用程序。
+USE_CABAL 如果软件使用 Haskell 依赖项，请在此变量中列出它们。每个项目应该在 Hackage 上并且列在 packagename-0.1.2 形式中。依赖项也可以有修订版本，修订版本在 _ 符号之后指定。支持依赖项列表的自动生成，请参阅使用 cabal 构建 Haskell 应用程序。
 
 CABAL_FLAGS 传递到配置和构建阶段中 cabal-install 的标志列表。这些标志完全按原样传递。通常使用此变量来启用或禁用在.cabal 文件中声明的标志。传递 foo 以启用 foo 标志，并传递 -foo 以禁用它。
 
@@ -267,8 +267,8 @@ featurelist 的格式在 elfctl(1) 中描述。文件路径相对于 ${BUILD_WRK
 * REBAR_PROFILE ：Rebar 配置文件
 * REBAR_TARGETS ：Rebar 目标列表（通常是编译，也可能是生成可执行文件）
 * ERL_BUILD_NAME ：rebar3 构建名称
-* ERL_BUILD_DEPS ：按类别/端口名称格式列出的 BUILD_DEPENDS 列表
-* ERL_RUN_DEPS ：按类别/端口名称格式列出的 RUN_DEPENDS 列表
+* ERL_BUILD_DEPS ：按类别/ Port 名称格式列出的 BUILD_DEPENDS 列表
+* ERL_RUN_DEPS ：按类别/ Port 名称格式列出的 RUN_DEPENDS 列表
 * ERL_DOCS ：文档文件和目录列表
 
 ## 17.25. `fakeroot`
@@ -652,7 +652,7 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 
 ## 17.45. `guile`
 
-可能的参数：（无）， <em>X.Y</em> ， flavors ， build ， run ， alias ， conflicts
+可能的参数：（无）， X.Y ， flavors ， build ， run ， alias ， conflicts
 
 增加对 Guile 的依赖。默认情况下，这是对适当 libguile*.so 的库依赖，除非被 build 和/或 run 选项覆盖。 alias 选项适当地配置 BINARY_ALIAS （请参阅使用  BINARY_ALIAS ）。
 
@@ -824,7 +824,7 @@ Ports Linux 兼容框架。指定 c6 以依赖于 CentOS 6 包。指定 c7 以�
 
 ## 17.57. `llvm`
 
-可能的参数：(无)， <em>XY</em> ，最小值= <em>XY</em> ，最大值= <em>XY</em> ，构建，运行，库
+可能的参数：(无)， XY ，最小值= XY ，最大值= XY ，构建，运行，库
 
 添加对 LLVM 的依赖。默认情况下，这是构建依赖，除非被 run 或 lib 选项覆盖。默认版本是设置在 LLVM_DEFAULT 中的版本。也可以指定特定版本。最小和最大版本可以分别用 min 和 max 参数指定。ports框架将以下变量导出到port：
 
@@ -856,7 +856,7 @@ Ports Linux 兼容框架。指定 c6 以依赖于 CentOS 6 包。指定 c7 以�
 
 ## 17.59. `lua`
 
-可能的参数有：(无)， <em>XY</em> ， <em>XY</em>+ ， -<em>XY</em> ， <em>XY</em>-<em>ZA</em> ， module ， flavors ， build ， run ， env
+可能的参数有：(无)， XY ， XY+ ， -XY ， XY-ZA ， module ， flavors ， build ， run ， env
 
 添加对 Lua 的依赖。默认情况下这是一个库依赖，除非通过 build 和/或 run 选项覆盖。 env 选项阻止添加任何依赖，同时仍然定义所有通常的变量。
 
@@ -868,7 +868,7 @@ Ports Linux 兼容框架。指定 c6 以依赖于 CentOS 6 包。指定 c7 以�
 
 ## 17.60. `luajit`
 
-可能的参数：(无), <em>X</em>
+可能的参数：(无), X
 
 添加对 luajit 运行时的依赖。可以使用特定版本 X。可能的版本是 luajit ， luajit-devel ， luajit-openresty
 
@@ -890,7 +890,7 @@ LUAJIT_LUAVER 选择的 luajit 规范版本（luajit 为 2.0，否则为 2.1）
 
 ## 17.62. `magick`
 
-可能的参数：（无）， <em>X</em> ， build ， nox11 ， run ， test
+可能的参数：（无）， X ， build ， nox11 ， run ， test
 
 添加对 ImageMagick 的库依赖。可以使用特定版本 X。可能的版本为 6 和 7 （默认）。 nox11 表示需要 port 的 -nox11 版本。 build 、 run 和 test 添加到 ImageMagick 的构建、运行时和测试依赖。
 
@@ -950,7 +950,7 @@ USE_MATE=	menus:build intlhack
 
 可能的参数：(无)
 
-设置以下变量，以便更轻松地创建元端口： MASTER_SITES ， DISTFILES ， EXTRACT_ONLY ， NO_BUILD ， NO_INSTALL ， NO_MTREE ， NO_ARCH 。
+设置以下变量，以便更轻松地创建元 Port ： MASTER_SITES ， DISTFILES ， EXTRACT_ONLY ， NO_BUILD ， NO_INSTALL ， NO_MTREE ， NO_ARCH 。
 
 ## 17.68. `minizip`
 
@@ -960,7 +960,7 @@ USE_MATE=	menus:build intlhack
 
 ## 17.69. `mysql`
 
-可能的参数：（无）， <em>version</em> ， client （默认）， server ， embedded
+可能的参数：（无）， version ， client （默认）， server ， embedded
 
 如果没有给出版本号，则尝试查找当前安装的版本。回退到默认版本，MySQL-5.6。可能的版本是 55 ， 55m ， 55p ， 56 ， 56p ， 56w ， 57 ， 57p ， 80 ， 100m ， 101m 和 102m 。 m 和 p 后缀用于 MySQL 的 MariaDB 和 Percona 变体。 server 和 embedded 添加了对 MySQL 服务器的构建和运行时依赖。使用 server 或 embedded 时，还添加 client 以添加对 libmysqlclient.so 的依赖。port可以设置 IGNORE_WITH_MYSQL ，如果某些版本不受支持。
 
@@ -972,7 +972,7 @@ USE_MATE=	menus:build intlhack
 
 通过设置适当的依赖关系，向 Mono（目前仅支持 C#）框架添加依赖。
 
-当port使用 nuget 软件包时，请指定 nuget 。 NUGET_DEPENDS 需要以 <em>name</em>=<em>version</em> 格式设置 nuget 软件包的名称和版本。可以使用 <em>name</em>=<em>version</em>:_origin_ 添加可选的软件包来源。
+当port使用 nuget 软件包时，请指定 nuget 。 NUGET_DEPENDS 需要以 name=version 格式设置 nuget 软件包的名称和版本。可以使用 name=version:_origin_ 添加可选的软件包来源。
 
 助手目标 buildnuget 将根据提供的 packages.config 输出 NUGET_DEPENDS 的内容。
 
@@ -1054,11 +1054,11 @@ USE_PERL5 默认为 build run 。在使用 configure 、 modbuild 或 modbuildti
 
 ## 17.82. `pgsql`
 
-可能的参数：(无)， <em>X.Y</em> ， <em>X.Y</em>+ ， <em>X.Y</em>- ， <em>X.Y</em>-<em>Z.A</em>
+可能的参数：(无)， X.Y ， X.Y+ ， X.Y- ， X.Y-Z.A
 
 提供对 PostgreSQL 的支持。Port 维护者可以设置所需的版本。可以指定最小和最大版本或范围；例如， 9.0- ， 8.4+ ， 8.4-9.2.
 
-默认情况下，添加的依赖将是客户端，但如果 port 需要额外的组件，则可以使用 WANT_PGSQL=<em>component[:target]</em> ；例如， WANT_PGSQL=server:configure pltcl plperl 。可用的组件包括：
+默认情况下，添加的依赖将是客户端，但如果 port 需要额外的组件，则可以使用 WANT_PGSQL=component[:target] ；例如， WANT_PGSQL=server:configure pltcl plperl 。可用的组件包括：
 
 * `client`
 * `contrib`
@@ -1147,7 +1147,7 @@ PHP 或 Zend 扩展的名称。默认值是 ${PORTNAME} 。
 
 加载扩展的优先级。它是 00 和 99 之间的一个数字。
 
-对于不依赖任何扩展的扩展，优先级会自动设置为 20 ，对于依赖另一个扩展的扩展，优先级会自动设置为 30 。有些扩展可能需要在所有其他扩展之前加载，例如 www/php56-opcache。有些可能需要在具有 30 优先级的扩展之后加载。在这种情况下，在port的 Makefile 中添加 PHP_MOD_PRIO=<em>XX</em> 。例如：
+对于不依赖任何扩展的扩展，优先级会自动设置为 20 ，对于依赖另一个扩展的扩展，优先级会自动设置为 30 。有些扩展可能需要在所有其他扩展之前加载，例如 www/php56-opcache。有些可能需要在具有 30 优先级的扩展之后加载。在这种情况下，在port的 Makefile 中添加 PHP_MOD_PRIO=XX 。例如：
 
 ```
 USES=		php:ext
@@ -1257,7 +1257,7 @@ PYTEST_ENABLE_ALL_TESTS 启用通常被 PYTEST_IGNORED_TESTS 和 PYTEST_BROKEN_T
 
 ## 17.88. `python`
 
-可能的参数: (无), <em>X.Y</em> , <em>X.Y+</em> , <em>-X.Y</em> , <em>X.Y-Z.A</em> , patch , build , run , test
+可能的参数: (无), X.Y , X.Y+ , -X.Y , X.Y-Z.A , patch , build , run , test
 
 使用 Python。可以指定支持的版本或版本范围。如果 Python 仅在构建时、运行时或用于测试时需要，可以将其设置为构建、运行或测试依赖项，使用 build , run , 或 test 。如果在修补阶段也需要 Python，请使用 patch 。有关详细信息，请参阅使用 Python。
 
@@ -1406,13 +1406,13 @@ SAMBALIBS Samba 共享库所在的目录。
 
 `_interp__CMD`
 
-FreeBSD 上命令解释器的路径。默认值为 ${LOCALBASE}/bin/<em>interp</em> 。
+FreeBSD 上命令解释器的路径。默认值为 ${LOCALBASE}/bin/interp 。
 
 `_interp__OLD_CMD`
 
 解释器的错误调用列表。这些通常是过时的路径，或者是在其他操作系统上使用的在 FreeBSD 上不正确的路径。它们将在 _interp__CMD 中被正确的路径替换。
 
-|  | 这些将永远是 <em>interp__OLD_CMD</em> 的一部分 "/usr/bin/env _interp  " /bin/<em>interp</em><span> </span>/usr/bin/<em>interp</em><span> </span>/usr/local/bin/<em>interp</em> 。 |
+|  | 这些将永远是 interp__OLD_CMD 的一部分 "/usr/bin/env _interp  " /bin/interp<span> </span>/usr/bin/interp<span> </span>/usr/local/bin/interp 。 |
 | -- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 |  | _interp__OLD_CMD 包含多个值。任何带有空格的条目必须用引号括起来。添加解释器到 USES\=shebangfix 时，要指定所有路径。 |
@@ -1434,7 +1434,7 @@ SHEBANG_LANG=	lua
 
 示例 11. 在添加解释器到 USES=shebangfix 时指定所有路径
 
-如果它尚未定义，并且对于 _interp<em>OLD_CMD</em> 和 _interp 没有默认值，Ksh 条目可以定义为：
+如果它尚未定义，并且对于 _interpOLD_CMD 和 _interp 没有默认值，Ksh 条目可以定义为：
 
 ```
 SHEBANG_LANG=	ksh

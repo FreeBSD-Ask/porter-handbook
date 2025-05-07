@@ -24,7 +24,7 @@ PATCHFILES=	xdvi-18.patch1.gz xdvi-18.patch2.gz
 [如果分发的补丁不是相对于 ${WRKSRC} 制作的，可能需要调整此项]
 PATCH_DIST_STRIP=	-p1
 
-[维护者；*必须的*！这是自愿处理端口更新、构建中断和用户提出问题与错误报告的人。为了保持 Ports Collection 的质量，我们不接受新端口被分配给 "ports@FreeBSD.org"。]
+[维护者；*必须的*！这是自愿处理 Port 更新、构建中断和用户提出问题与错误报告的人。为了保持 Ports Collection 的质量，我们不接受新 Port 被分配给 "ports@FreeBSD.org"。]
 MAINTAINER=	asami@FreeBSD.org
 COMMENT=	DVI Previewer for the X Window System
 WWW=		http://xdvi.sourceforge.net/
