@@ -1290,7 +1290,7 @@ Qt 框架导出了一些可以供 Port 使用的变量，下面列出了一些�
 
 每个 Qt 工具和库的依赖必须在 `USE_QT` 中指定。每个组件可以加上 `_build` 或 `_run` 后缀，后缀表示该组件的依赖是在构建时还是运行时。如果没有后缀，表示该组件在构建时和运行时都会依赖。通常，库组件没有后缀，工具组件通常带有 `_build` 后缀，而插件组件带有 `_run` 后缀。常用的组件如下所示（所有可用组件列在 `_USE_QT_ALL` 中，该变量由 **/usr/ports/Mk/Uses/qt.mk** 中的 `_USE_QT_COMMON` 和 `_USE_QT[56]_ONLY` 生成）：
 
-#### 表 13. 可用的 Qt 库组件
+**表 13. 可用的 Qt 库组件**
 
 | 名称                 | 说明                                      |
 | ------------------ | --------------------------------------- |
@@ -1387,7 +1387,7 @@ Qt 框架导出了一些可以供 Port 使用的变量，下面列出了一些�
 | -------------- | ------------------------- |
 | `imageformats` | 支持 TGA、TIFF 和 MNG 图像格式的插件 |
 
-#### 示例 21. 选择 Qt 5 组件
+**示例 21. 选择 Qt 5 组件**
 
 在这个示例中，移植的应用程序使用 Qt 5 图形用户界面库、Qt 5 核心库、所有 Qt 5 代码生成工具以及 Qt 5 的 Makefile 生成器。由于 `gui` 库已经暗示了对核心库的依赖，因此不需要单独指定 `core`。Qt 5 代码生成工具 `moc`、`uic` 和 `rcc`，以及 Makefile 生成器 `qmake` 只在构建时需要，因此它们被指定为带有 `_build` 后缀：
 
@@ -1436,7 +1436,7 @@ PLIST_SUB+=	QT_INCDIR=${QT_INCDIR_REL} \
 
 某些配置脚本不支持上述参数。要禁止修改 `CONFIGURE_ENV` 和 `CONFIGURE_ARGS`，请设置 `USES= qmake:no_env`。
 
-#### 示例 22. `USES= qmake` 示例
+**示例 22. `USES= qmake` 示例**
 
 这个示例展示了如何在 Qt 5 port 中使用 `qmake`：
 
@@ -2332,7 +2332,7 @@ USES=		lua
 .include <bsd.port.mk>
 ```
 
-**示例 32. 简单 Lua 模块的 Makefile**
+** 32. 简单 Lua 模块的 Makefile**
 
 ```sh
 PORTNAME=	sample
@@ -2365,7 +2365,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 
 使用 Guile 的 Port 应该定义 `USES=guile:<em>arg,arg…</em>`，并根据以下参数选择适当的值：
 
-#### 表 39. 使用 Guile 的 Ports 定义的参数
+**表 39. 使用 Guile 的 Ports 定义的参数**
 
 | 名称             | 说明                                                                          |
 | -------------- | --------------------------------------------------------------------------- |
@@ -2412,7 +2412,7 @@ PKGNAMESUFFIX=	-${FLAVOR}
 
 如果 Guile 扩展 Port 安装 `.so` 文件，则通常必须将其放置在与 Guile 版本相关的 `extensions` 目录中。通常不应使用 `USE_LDCONFIG`。
 
-任何由风味 Port 安装的其他文件也必须位于版本特定的目录中，或使用版本特定的文件名。对于文档和示例，`GUILE_DOCS_DIR` 和 `GUILE_EXAMPLES_DIR` 指定了适合的位置，在这些位置 Port 应创建子目录，详见下文。
+任何由风味 Port 安装的其他文件也必须位于版本特定的目录中，或使用版本特定的文件名。对于文档和，`GUILE_DOCS_DIR` 和 `GUILE_EXAMPLES_DIR` 指定了适合的位置，在这些位置 Port 应创建子目录，详见下文。
 
 ### 6.23.5. 已定义的变量
 
@@ -2420,7 +2420,7 @@ PKGNAMESUFFIX=	-${FLAVOR}
 
 **表 40. 使用 Guile 的 Port 所定义的变量**
 
-| 名称                                  | 示例值                                        | 说明                                               |
+| 名称                                  | 值                                        | 说明                                               |
 | ----------------------------------- | ------------------------------------------ | ------------------------------------------------ |
 | `GUILE_VER`                         | `3.0`                                      | 正在使用的 Guile 版本。                                  |
 | `GUILE_SFX`                         | `3`                                        | 用于某些名称的短后缀。仅在小心使用时使用；可能不是唯一的，或将来可能会改变。           |
@@ -2441,13 +2441,13 @@ PKGNAMESUFFIX=	-${FLAVOR}
 
 **表 41. 使用 Guile 的 Port 定义的路径替代**
 
-| 名称                  | 示例值                         | 说明                          |
+| 名称                  | 值                         | 说明                          |
 | ------------------- | --------------------------- | --------------------------- |
 | `GUILE_GLOBAL_SITE` | `share/guile/site`          | 所有 Guile 版本共享的站点目录；通常不建议使用。 |
 | `GUILE_SITE`        | `share/guile/3.0/site`      | 选定的 Guile 版本的站点目录。          |
 | `GUILE_SITE_CCACHE` | `lib/guile/3.0/site-ccache` | 编译字节码文件的目录。                 |
 | `GUILE_DOCS`        | `share/doc/guile30`         | 版本特定文档的父目录。                 |
-| `GUILE_EXAMPLES`    | `share/examples/guile30`    | 版本特定示例的父目录。                 |
+| `GUILE_EXAMPLES`    | `share/examples/guile30`    | 版本特定的父目录。                 |
 
 ## 6.24. 使用 `iconv`
 
@@ -2465,16 +2465,16 @@ FreeBSD 操作系统自带了本地的 `iconv`。
 | `ICONV_CONFIGURE_ARG`  | 为配置脚本预构建的配置参数                    | `--with-libiconv-prefix=${LOCALBASE}`    | （空）                |
 | `ICONV_CONFIGURE_BASE` | 为配置脚本预构建的配置参数                    | `--with-libiconv=${LOCALBASE}`           | （空）                |
 
-这两个示例自动为使用 [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 或本地 `iconv` 的系统填充正确的变量值：
+这两个自动为使用 [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 或本地 `iconv` 的系统填充正确的变量值：
 
-**示例 34. 简单的 `iconv` 使用**
+** 34. 简单的 `iconv` 使用**
 
 ```sh
 USES=		iconv
 LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
 ```
 
-**示例 35. 使用 `iconv` 配置**
+** 35. 使用 `iconv` 配置**
 
 ```sh
 USES=		iconv
@@ -2485,7 +2485,7 @@ CONFIGURE_ARGS+=${ICONV_CONFIGURE_ARG}
 
 有时，程序的 **Makefile** 或配置脚本中会硬编码 `ld` 参数或搜索路径。可以通过以下方法解决此问题：
 
-**示例 36. 修复硬编码的 `-liconv`**
+** 36. 修复硬编码的 `-liconv`**
 
 ```sh
 USES=		iconv
@@ -2496,7 +2496,7 @@ post-patch:
 
 在某些情况下，可能需要根据是否存在本地 `iconv` 来设置备用值或执行操作。必须在测试 `ICONV_LIB` 的值之前包含 **bsd.port.pre.mk**：
 
-**示例 37. 检查本地 `iconv` 可用性**
+** 37. 检查本地 `iconv` 可用性**
 
 ```sh
 USES=		iconv
@@ -2531,7 +2531,7 @@ post-patch:
 | thunar  | [x11-fm/thunar](https://cgit.freebsd.org/ports/tree/x11-fm/thunar/)                       |
 | xfconf  | [x11/xfce4-conf](https://cgit.freebsd.org/ports/tree/x11/xfce4-conf/)                     |
 
-**示例 38. `USES=xfce` 示例**
+** 38. `USES=xfce` 示例**
 
 ```sh
 USES=		xfce
@@ -2593,7 +2593,7 @@ USE_BUDGIE=	libbudgie
 
 使用以下 `USES` 宏之一来添加数据库依赖项，具体参考 [Database `USES` Macros](https://docs.freebsd.org/en/books/porters-handbook/special/#using-databases-uses)。
 
-#### 数据库 `USES` 宏
+**数据库 `USES` 宏**
 
 **表 42 数据库宏**
 
