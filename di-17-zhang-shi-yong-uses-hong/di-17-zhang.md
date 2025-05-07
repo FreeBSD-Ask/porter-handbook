@@ -1283,7 +1283,7 @@ PYTEST_ENABLE_ALL_TESTS 启用通常被 PYTEST_IGNORED_TESTS 和 PYTEST_BROKEN_T
 
 ## 17.92. `qt-dist`
 
-可能的参数：（无）或 5 和（无）或 6 和（无）或其中之一 3d ， 5compat ， base ， charts ， connectivity ， datavis3d ， declarative ， doc languageserver ， gamepad ， graphicaleffects ， imageformats ， locat ion ， lottie ， multimedia ， networkauth ， positioning ， quick3d ， quickcontrols2 ， quickcontrols ， quicktimeline ， remoteobjects ， script ， scxml  ， sensors ， serialbus ， serialport ， shadertools ， speech ， svg ， tools ， translations ， virtualkeyboard ， wayland ， webchannel ， webengine ， webglplugin ， websockets ， webview ， x11extras ， xmlpatterns 。
+可能的参数：（无）或 5 和（无）或 6 和（无）或其中之一 3d ， 5compat ， base ， charts ， connectivity ， datavis3d ， declarative ， doc languageserver ， gamepad ， graphicaleffects ， imageformats ， locat ion ， lottie ， multimedia ， networkauth ， positioning ， quick3d ， quickcontrols2 ， quickcontrols ， quicktimeline ， remoteobjects ， script ， scxml  ， sensors ， serialbus ， serialPort， shadertools ， speech ， svg ， tools ， translations ， virtualkeyboard ， wayland ， webchannel ， webengine ， webglplugin ， websockets ， webview ， x11extras ， xmlpatterns 。
 
 提供构建 Qt 5 和 Qt 6 组件的支持。 它会处理配置适当环境的设置port构建。
 

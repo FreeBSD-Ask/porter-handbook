@@ -109,7 +109,7 @@ lrwxr-xr-x  1 nobody  nobody    181 Aug  3 11:27 foo@ -> ../../../var/cache/foo
 
 ### 6.3.2. 如何处理捆绑的库
 
-尽可能使用未捆绑版本的库，通过向 Port 添加 `LIB_DEPENDS` 来指定依赖。如果这种 Port 还不存在，考虑创建一个新的 Port 。
+尽可能使用未捆绑版本的库，通过向 Port 添加 `LIB_DEPENDS` 来指定依赖。如果这种 Port 还不存在，考虑创建一个新的 Port。
 
 仅在上游有良好的安全记录并且使用未捆绑版本会导致过于复杂的补丁时，才使用捆绑库。
 
@@ -248,7 +248,7 @@ FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行
 
 ### 6.6.4. 使用 `cmake`
 
-对于使用 CMake 的 Port ，定义 `USES= cmake`。
+对于使用 CMake 的 Port，定义 `USES= cmake`。
 
 | 变量                  | 含义                                                                                                                                                                  |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -311,7 +311,7 @@ env = Environment(**ARGUMENTS)
 
 ### 6.6.6. 使用 `cargo` 构建 Rust 应用程序
 
-对于使用 Cargo 的 Port ，定义 `USES=cargo`。
+对于使用 Cargo 的 Port，定义 `USES=cargo`。
 
 **表 4. 用户可以为 `cargo` 构建定义的变量**
 
@@ -433,7 +433,7 @@ rust/crates/atty-0.2.9.tar.gz                 100% of 5898  B   81 MBps 00m00s
 
 该 Port 现在已准备好进行测试构建，并可以像正常情况一样进行进一步的调整，例如创建 plist、编写说明、添加许可信息、选项等。
 
-如果你没有在像 poudriere 这样的干净环境中测试 Port ，记得在任何测试之前运行 `make clean`。
+如果你没有在像 poudriere 这样的干净环境中测试 Port，记得在任何测试之前运行 `make clean`。
 
 **示例 5. 启用额外的应用程序功能**
 
@@ -488,7 +488,7 @@ byteorder-1.2.2     Unlicense/MIT
 
 ### 6.6.7. 使用 `meson`
 
-对于使用 Meson 的 Port ，请定义 `USES=meson`。
+对于使用 Meson 的 Port，请定义 `USES=meson`。
 
 **表格 5. 使用 `meson` 的 Port 变量**
 
@@ -508,7 +508,7 @@ MESON_ARGS=	-Dfoo=enabled
 
 ### 6.6.8. 构建 Go 应用程序
 
-对于使用 Go 的 Port ，定义 `USES=go`。请参考 [`go`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-go) 获取可以设置的变量列表，以控制构建过程。
+对于使用 Go 的 Port，定义 `USES=go`。请参考 [`go`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-go) 获取可以设置的变量列表，以控制构建过程。
 
 **示例 9. 创建一个基于 Go 模块的应用程序 Port**
 
@@ -627,7 +627,7 @@ daviddengcn-go-colortext-186a3d44e920_GH0.tar.        4534  B 1098 kBps    00s
 
 现在， Port 已准备好进行测试构建，并可进行进一步调整，如创建 plist、编写说明、添加许可证信息、选项等，像平常一样进行。
 
-如果你没有在像 poudriere 这样的干净环境中测试 Port ，请记得在任何测试之前运行 `make clean`。
+如果你没有在像 poudriere 这样的干净环境中测试 Port，请记得在任何测试之前运行 `make clean`。
 
 **示例 10. 设置输出二进制名称或安装路径**
 
@@ -719,7 +719,7 @@ QuickCheck-2.12.6.1/QuickCheck-2.12.6.1.tar.gz          65 kB  361 kBps    00s
 
 现在， Port 已准备好进行测试构建，并且可以根据需要进一步调整，例如创建 plist、编写说明、添加许可证信息、选项等。
 
-如果你没有在像 poudriere 这样的干净环境中测试 Port ，请记得在任何测试前运行 `make clean`。
+如果你没有在像 poudriere 这样的干净环境中测试 Port，请记得在任何测试前运行 `make clean`。
 
 某些 Haskell  Port 会将各种数据文件安装到 `share/${PORTNAME}` 下。对于此类情况， Port 侧需要进行特殊处理。 Port 应定义 `CABAL_WRAPPER_SCRIPTS` 变量，列出将使用数据文件的每个可执行文件。此外，在少数情况下，被移植的程序使用其他 Haskell 包的数据文件，此时 `FOO_DATADIR_VARS` 变量会派上用场。
 
@@ -810,7 +810,7 @@ GH_TUPLE=	input-output-hk:cardano-base:0f3a867493059e650cda69e20a5cbf1ace289a57:
 GH_TUPLE+=	bitcoin-core:secp256k1:ac83be33d0956faf6b7f61a60ab524ef7d6a473a:secp
 ```
 
-对于具有 VCS 依赖项的 Haskell  Port ，目前还需要以下修复：
+对于具有 VCS 依赖项的 Haskell  Port，目前还需要以下修复：
 
 ```
 BINARY_ALIAS=	git=true
@@ -842,7 +842,7 @@ GNU_CONFIGURE=	yes
 
 ### 6.8.2. 可选用法
 
-一些软件产品允许禁用 NLS。例如，通过向 `configure` 传递 `--disable-nls`。在这种情况下， Port 必须根据 `NLS` 选项的状态有条件地使用 `gettext`。对于低到中等复杂度的 Port ，可以使用以下惯用法：
+一些软件产品允许禁用 NLS。例如，通过向 `configure` 传递 `--disable-nls`。在这种情况下， Port 必须根据 `NLS` 选项的状态有条件地使用 `gettext`。对于低到中等复杂度的 Port，可以使用以下惯用法：
 
 ```
 GNU_CONFIGURE=		yes
@@ -924,7 +924,7 @@ PLIST_SUB+=		NLS="@comment "
 p5-IO-Tee>=0.64:devel/p5-IO-Tee
 ```
 
-对于安装手册页的 Perl  Port ，可以在 **pkg-plist** 中使用宏 `PERL5_MAN3` 和 `PERL5_MAN1`。例如，
+对于安装手册页的 Perl  Port，可以在 **pkg-plist** 中使用宏 `PERL5_MAN3` 和 `PERL5_MAN1`。例如，
 
 ```makefile
 lib/perl5/5.14/man/man1/event.1.gz
@@ -1207,7 +1207,7 @@ INSTALLS_OMF=yes
 | --------------- | ----------------------------------------------------------------- |
 | `gnomeprefix`   | 为 `configure` 提供一些默认的路径。                                          |
 | `intlhack`      | 与 intltool 相同，但进行了修补，以确保使用 **share/locale/**。仅在 `intltool` 不足时使用。 |
-| `referencehack` | 该宏用于帮助将 API 或参考文档拆分为自己的 Port 。                                        |
+| `referencehack` | 该宏用于帮助将 API 或参考文档拆分为自己的 Port。                                        |
 
 ## 6.14. GNOME 旧版组件
 
@@ -1264,7 +1264,7 @@ INSTALLS_OMF=yes
 
 >**注意**
 >
->有关 Qt 本身的一些 Port ，请参阅 [`qt-dist`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-qt-dist)。 
+>有关 Qt 本身的一些 Port，请参阅 [`qt-dist`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-qt-dist)。 
 
 ### 6.13.1. 需要 Qt 的 Port 
 
@@ -1774,15 +1774,15 @@ do-install:
 	cd ${WRKDIR}/${PORTDIRNAME} && ${COPYTREE_SHARE} \* ${WEBAPPDIR}/${PORTDIRNAME}
 ```
 
-无论 Port 是库还是应用程序，额外的文档都会安装在与其他 Port 相同的位置。`javadoc` 工具已知会根据所使用的 JDK 版本生成不同的文件集。因此，对于不强制使用特定 JDK 的 Port ，指定打包清单（**pkg-plist**）是一个复杂的任务。这也是为什么强烈建议移植者使用 `PORTDOCS` 的原因之一。此外，即使可以预测由 `javadoc` 生成的文件集，生成的 **pkg-plist** 的大小也支持使用 `PORTDOCS`。
+无论 Port 是库还是应用程序，额外的文档都会安装在与其他 Port 相同的位置。`javadoc` 工具已知会根据所使用的 JDK 版本生成不同的文件集。因此，对于不强制使用特定 JDK 的 Port，指定打包清单（**pkg-plist**）是一个复杂的任务。这也是为什么强烈建议移植者使用 `PORTDOCS` 的原因之一。此外，即使可以预测由 `javadoc` 生成的文件集，生成的 **pkg-plist** 的大小也支持使用 `PORTDOCS`。
 
-`DATADIR` 的默认值是 **\${PREFIX}/share/\${PORTNAME}**。对于 Java  Port ，最好将 `DATADIR` 重写为 **\${JAVASHAREDIR}/\${PORTNAME}**。确实，`DATADIR` 会自动添加到 `PLIST_SUB` 中（文档参见 [基于 Make 变量修改 pkg-plist](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-sub)），因此可以在 **pkg-plist** 中直接使用 `%%DATADIR%%`。
+`DATADIR` 的默认值是 **\${PREFIX}/share/\${PORTNAME}**。对于 Java  Port，最好将 `DATADIR` 重写为 **\${JAVASHAREDIR}/\${PORTNAME}**。确实，`DATADIR` 会自动添加到 `PLIST_SUB` 中（文档参见 [基于 Make 变量修改 pkg-plist](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-sub)），因此可以在 **pkg-plist** 中直接使用 `%%DATADIR%%`。
 
-至于从源代码构建 Java  Port 还是直接从二进制分发安装，目前没有明确的政策。然而，来自 [FreeBSD Java 项目](https://www.freebsd.org/java/) 的成员鼓励移植者在任务简单时从源代码构建他们的 Port 。
+至于从源代码构建 Java  Port 还是直接从二进制分发安装，目前没有明确的政策。然而，来自 [FreeBSD Java 项目](https://www.freebsd.org/java/) 的成员鼓励移植者在任务简单时从源代码构建他们的 Port。
 
 本节介绍的所有功能都在 **bsd.java.mk** 中实现。如果 Port 需要更复杂的 Java 支持，请首先查看 [bsd.java.mk Git 日志](https://cgit.freebsd.org/ports/tree/Mk/bsd.java.mk)，因为通常需要一些时间才能记录最新功能。然后，如果缺少的支持对许多其他 Java  Port 有益，请随时在 freebsd-java 上讨论。
 
-尽管存在一个 `java` 类别用于 PR，但它指的是来自 FreeBSD Java 项目的 JDK 移植工作。因此，除非问题与 JDK 实现或 **bsd.java.mk** 相关，否则应像处理其他 Port 一样，在 `ports` 类别中提交 Java  Port 。
+尽管存在一个 `java` 类别用于 PR，但它指的是来自 FreeBSD Java 项目的 JDK 移植工作。因此，除非问题与 JDK 实现或 **bsd.java.mk** 相关，否则应像处理其他 Port 一样，在 `ports` 类别中提交 Java  Port。
 
 类似地，对于 Java  Port 的 `CATEGORIES`，有一个定义明确的政策，详情请见 [分类](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-categories)。
 
@@ -1909,7 +1909,7 @@ PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `USE_PYTHON=distutils`    | 使用 Python distutils 进行配置、编译和安装。当 Port 带有 **setup.py** 时，必需设置此选项。这会覆盖 `do-build` 和 `do-install` 目标，并且如果没有定义 `GNU_CONFIGURE`，也可能会覆盖 `do-configure`。此外，它还暗示 `USE_PYTHON=flavors`。         |
 | `USE_PYTHON=autoplist`    | 自动创建包装清单。此选项还需要设置 `USE_PYTHON=distutils`。                                                                                                                                          |
-| `USE_PYTHON=concurrent`   | 该 Port 将使用独特的前缀，通常是 `PYTHON_PKGNAMEPREFIX`，用于某些目录，如 `EXAMPLESDIR` 和 `DOCSDIR`，并且将为二进制文件和脚本添加一个后缀，即 `PYTHON_VER` 中的 Python 版本号。这样可以同时安装多个 Python 版本的 Port ，避免冲突文件的安装。                       |
+| `USE_PYTHON=concurrent`   | 该 Port 将使用独特的前缀，通常是 `PYTHON_PKGNAMEPREFIX`，用于某些目录，如 `EXAMPLESDIR` 和 `DOCSDIR`，并且将为二进制文件和脚本添加一个后缀，即 `PYTHON_VER` 中的 Python 版本号。这样可以同时安装多个 Python 版本的 Port，避免冲突文件的安装。                       |
 | `USE_PYTHON=flavors`      | 该 Port 不使用 distutils，但仍然支持多个 Python 版本。`FLAVORS` 将被设置为支持的 Python 版本。有关更多信息，请参见 [使用 Python 和 Flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-python)。 |
 | `USE_PYTHON=optsuffix`    | 如果当前 Python 版本不是默认版本，则该 Port 将获得 `PKGNAMESUFFIX=${PYTHON_PKGNAMESUFFIX}`。仅在使用 flavors 时有用。                                                                                             |
 | `PYTHON_PKGNAMEPREFIX`    | 用作 `PKGNAMEPREFIX` 来区分不同 Python 版本的包。例如：`py27-`。                                                                                                                                   |
@@ -2357,7 +2357,7 @@ DOCSDIR=	${LUA_DOCSDIR}
 
 ### 6.23.1. 介绍
 
-Guile 库和相应的解释器有多个版本，它们之间存在冲突（以相同的名称安装文件）。在 Ports 树中，通过使用版本号后缀将每个版本安装为不同的名称来解决这个问题。在大多数情况下，应用程序应该通过提供的配置变量检测正确的版本，并使用 `pkg-config` 来确定名称和相关路径。然而，一些应用程序（尤其是那些使用自己配置规则的应用程序，如 `cmake` 或 `meson`）将始终尝试使用最新版本。在这种情况下，要么修补 Port ，要么声明构建冲突（见下文的 `conflicts` 选项），以确保在非 poudriere 构建时生成正确的依赖项。
+Guile 库和相应的解释器有多个版本，它们之间存在冲突（以相同的名称安装文件）。在 Ports 树中，通过使用版本号后缀将每个版本安装为不同的名称来解决这个问题。在大多数情况下，应用程序应该通过提供的配置变量检测正确的版本，并使用 `pkg-config` 来确定名称和相关路径。然而，一些应用程序（尤其是那些使用自己配置规则的应用程序，如 `cmake` 或 `meson`）将始终尝试使用最新版本。在这种情况下，要么修补 Port，要么声明构建冲突（见下文的 `conflicts` 选项），以确保在非 poudriere 构建时生成正确的依赖项。
 
 使用 Guile 的应用程序通常应该仅为一个版本构建，最好是 `DEFAULT_VERSIONS` 中指定的版本，或者如果不支持该版本，则为它们支持的最新版本。然而，Guile 或 Scheme 库，或 Guile 的扩展模块，会为它们支持的每个 Guile 版本分别构建一个风味，并且这些模块的依赖关系应该使用 `@${GUILE_FLAVOR}` 后缀来指定 Port 来源。
 
@@ -2392,13 +2392,13 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 * 如果使用了 `alias` 选项，则所需 Guile 版本的二进制文件是别名文件；
 * 如果没有使用 `alias` 选项，则所需 Guile 版本的工具路径（如 `guild`、`guile-config` 等）将作为变量 `GUILD`、`GUILE_CONFIG` 等被添加到 `CONFIGURE_ENV` 和 `MAKE_ENV` 中。
 
-对于某些 Port ，可能需要通过其他方式指定版本，例如通过 `CONFIGURE_ARGS` 或 `MESON_ARGS`，具体取决于 Port 。
+对于某些 Port，可能需要通过其他方式指定版本，例如通过 `CONFIGURE_ARGS` 或 `MESON_ARGS`，具体取决于 Port。
 
-如果这些方法都无法在存在其他版本的情况下使 Port 选择指定的 Guile 版本，最好是修补 Port 以实现此目的。如果不可行，则应指定 `conflicts` 选项，以防止在错误版本被检测到的情况下构建 Port 。
+如果这些方法都无法在存在其他版本的情况下使 Port 选择指定的 Guile 版本，最好是修补 Port 以实现此目的。如果不可行，则应指定 `conflicts` 选项，以防止在错误版本被检测到的情况下构建 Port。
 
 ### 6.23.4. 版本风味
 
-安装 Guile 扩展或库的 Port ，或为 Guile 预编译的 Scheme 库，应为每个支持的 Guile 版本构建一个单独的风味。通过添加 `flavors` 选项来实现此目的。
+安装 Guile 扩展或库的 Port，或为 Guile 预编译的 Scheme 库，应为每个支持的 Guile 版本构建一个单独的风味。通过添加 `flavors` 选项来实现此目的。
 
 由于每个风味必须具有不同的包名称，因此这些 Port 必须设置 `PKGNAMESUFFIX`，通常为：
 
@@ -2406,7 +2406,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 PKGNAMESUFFIX=	-${FLAVOR}
 ```
 
-这些 Port 必须将 Scheme 文件安装到 `GUILE_SITE_DIR`，而不是 `GUILE_GLOBAL_SITE_DIR`，即使这些文件不是版本特定的。这通常需要修补 Port 。
+这些 Port 必须将 Scheme 文件安装到 `GUILE_SITE_DIR`，而不是 `GUILE_GLOBAL_SITE_DIR`，即使这些文件不是版本特定的。这通常需要修补 Port。
 
 此外，如果此类 Port 安装 `.pc` 文件，则必须将其放置在 `GUILE_PKGCONFIG_PATH` 中，而不是放入全局 `pkgconfig` 目录。这允许依赖的 Port 为正在使用的特定 Guile 版本找到正确的配置。
 
@@ -2433,7 +2433,7 @@ PKGNAMESUFFIX=	-${FLAVOR}
 | `GUILD_CMDPATH`                     | `${LOCALBASE}/bin/guild-3.0`               | Guild 工具的完整路径。                                   |
 | `GUILE_*_CMD`<br/>`GUILE_*_CMDPATH` |                                            | 类似于 `GUILE_CMD` 和 `GUILE_CMDPATH`，但适用于其他工具二进制文件。 |
 | `GUILE_PKGCONFIG_PATH`              | `${LOCALBASE}/libdata/pkgconfig/guile/3.0` | 使用 `flavors` 的 Port 应将 `.pc` 文件安装到此位置。               |
-| `GUILE_INFO_PATH`                   | `share/info/guile3`                        | 对于使用 `flavors` 选项的 Port ，`INFO_PATH` 的合适值。           |
+| `GUILE_INFO_PATH`                   | `share/info/guile3`                        | 对于使用 `flavors` 选项的 Port，`INFO_PATH` 的合适值。           |
 
 ### 6.23.6. 路径替代
 
@@ -2645,7 +2645,7 @@ USES=	sqlite:3
 
 **rc.d** 脚本用于在系统启动时启动服务，并为管理员提供一种标准的方式来停止、启动和重新启动服务。 Port 集成到系统 **rc.d** 框架中。有关其用法的详细信息，可以参见 [rc.d Handbook 章节](https://docs.freebsd.org/en/books/handbook/#configtuning-rcd)。有关可用命令的详细解释，请参见 [rc(8)](https://man.freebsd.org/cgi/man.cgi?query=rc&sektion=8&format=html) 和 [rc.subr(8)](https://man.freebsd.org/cgi/man.cgi?query=rc.subr&sektion=8&format=html)。此外，还有一篇关于 **rc.d** 脚本实践方面的 [文章](https://docs.freebsd.org/en/articles/rc-scripting/)。
 
-假设有一个名为 *doorman* 的虚拟 Port ，需要启动 *doormand* 守护进程。在 **Makefile** 中添加以下内容：
+假设有一个名为 *doorman* 的虚拟 Port，需要启动 *doormand* 守护进程。在 **Makefile** 中添加以下内容：
 
 ```makefile
 USE_RC_SUBR=	doormand

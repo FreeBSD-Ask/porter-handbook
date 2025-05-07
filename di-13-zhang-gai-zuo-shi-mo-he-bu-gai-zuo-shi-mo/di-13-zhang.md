@@ -258,7 +258,7 @@ cd ${SRCDIR}; make targets
   ```
 
   自定义 IGNORE 消息可使用 ONLY_FOR_ARCHS_REASON 和 NOT_FOR_ARCHS_REASON 进行设置。使用 ONLY_FOR_ARCHS_REASON_ARCH 和 NOT_FOR_ARCHS_REASON_ARCH 可以实现按体系结构的条目。
-* 如果port获取 i386 二进制文件并安装它们，则设置 IA32_BINARY_PORT 。如果设置了此变量，则 IA32 版本的库必须存在/usr/lib32，并且内核必须支持 IA32 兼容性。如果这两个依赖关系中的一个未满足，则 IGNORE 将被自动设置。
+* 如果port获取 i386 二进制文件并安装它们，则设置 IA32_BINARY_Port。如果设置了此变量，则 IA32 版本的库必须存在/usr/lib32，并且内核必须支持 IA32 兼容性。如果这两个依赖关系中的一个未满足，则 IGNORE 将被自动设置。
 
 ### 13.14.4. 集群特定考虑事项
 
