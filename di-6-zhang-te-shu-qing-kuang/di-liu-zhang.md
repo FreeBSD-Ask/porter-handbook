@@ -1,6 +1,6 @@
 # 第6章 特殊情况
 
-### 6.1. 拆分长文件
+## 6.1. 拆分长文件
 
 有时，Port 的 **Makefile** 可能会非常长。例如，Rust  Port 的 `CARGO_CRATES` 列表可能很长，或者 **Makefile** 中可能包含根据架构不同而变化的代码。在这种情况下，将原始的 **Makefile** 拆分成多个文件可能会很方便。**bsd.port.mk** 会自动包含一些类型的 **Makefile** 到主 Port **Makefile** 中。
 
@@ -15,7 +15,7 @@
 
 通常的做法是，如果包装列表在不同架构之间变化很大，或者依赖于所选的 flavor，那么将 Port 的包装列表拆分成多个文件。在这种情况下，每个架构的 **pkg-plist** 文件命名遵循 **pkg-plist.\${ARCH}** 或 **pkg-plist.\${FLAVOR}** 的模式。如果存在多个 **pkg-plist** 文件，框架不会自动创建包装列表。Port 作者需要选择适当的 **pkg-plist** 文件并将其分配给 `PLIST` 变量。关于如何处理这个问题的示例可以在 [audio/logitechmediaserver](https://cgit.freebsd.org/ports/tree/audio/logitechmediaserver/) 和 [deskutils/libportal](https://cgit.freebsd.org/ports/tree/deskutils/libportal/) 中找到。
 
-### 6.2. Staging
+## 6.2. Staging
 
 **bsd.port.mk** 要求 Port 使用 "阶段目录"。这意味着 Port 必须将文件安装到一个单独的目录，而不是直接安装到常规的目标目录（例如，`PREFIX`）。然后从这个阶段目录构建包，并将包安装到系统中。在许多情况下，这不需要 root 权限，从而使得可以作为非特权用户构建包。通过 staging，Port 被构建并安装到阶段目录 `STAGEDIR` 中。然后从该目录创建包，并安装到系统中。自动化工具称这一概念为 `DESTDIR`，但在 FreeBSD 中，`DESTDIR` 有不同的含义（见 [`PREFIX` 和 `DESTDIR`](https://docs.freebsd.org/en/books/porters-handbook/testing/#porting-prefix)）。
 
