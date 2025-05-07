@@ -19,8 +19,10 @@
 
 **bsd.port.mk** 要求 Port 使用 "阶段目录"。这意味着 Port 必须将文件安装到一个单独的目录，而不是直接安装到常规的目标目录（例如，`PREFIX`）。然后从这个阶段目录构建包，并将包安装到系统中。在许多情况下，这不需要 root 权限，从而使得可以作为非特权用户构建包。通过 staging，Port 被构建并安装到阶段目录 `STAGEDIR` 中。然后从该目录创建包，并安装到系统中。自动化工具称这一概念为 `DESTDIR`，但在 FreeBSD 中，`DESTDIR` 有不同的含义（见 [`PREFIX` 和 `DESTDIR`](https://docs.freebsd.org/en/books/porters-handbook/testing/#porting-prefix)）。
 
-|   | 没有任何 Port *真正* 需要 root 权限。通过使用 [`USES=uidfix`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uidfix) 大多数情况下可以避免。如果 Port 仍然运行像 [chown(8)](https://man.freebsd.org/cgi/man.cgi?query=chown&sektion=8&format=html)、[chgrp(1)](https://man.freebsd.org/cgi/man.cgi?query=chgrp&sektion=1&format=html)，或者通过 [install(1)](https://man.freebsd.org/cgi/man.cgi?query=install&sektion=1&format=html) 强制设置文件的所有者或组，则应使用 [`USES=fakeroot`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-fakeroot) 来伪造这些调用。此时可能需要对 Port 的 **Makefiles** 进行一些补丁。 |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**重要**
+>
+>  没有任何 Port *真正* 需要 root 权限。通过使用 [`USES=uidfix`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uidfix) 大多数情况下可以避免。如果 Port 仍然运行像 [chown(8)](https://man.freebsd.org/cgi/man.cgi?query=chown&sektion=8&format=html)、[chgrp(1)](https://man.freebsd.org/cgi/man.cgi?query=chgrp&sektion=1&format=html)，或者通过 [install(1)](https://man.freebsd.org/cgi/man.cgi?query=install&sektion=1&format=html) 强制设置文件的所有者或组，则应使用 [`USES=fakeroot`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-fakeroot) 来伪造这些调用。此时可能需要对 Port 的 **Makefiles** 进行一些补丁。 
+
 
 元 Port（即不安装文件，而是依赖于其他 Port 的 Port）必须避免不必要地将 [mtree(8)](https://man.freebsd.org/cgi/man.cgi?query=mtree&sektion=8&format=html) 提取到阶段目录。因为这是包的基本目录布局，这些空目录会被视为孤立的。为了防止 [mtree(8)](https://man.freebsd.org/cgi/man.cgi?query=mtree&sektion=8&format=html) 提取，可以添加这一行：
 
@@ -28,13 +30,16 @@
 NO_MTREE=	yes
 ```
 
-|   | 元 Port 应该使用 [`USES=metaport`](https://docs.freebsd.org/en/books/porters-handbook/special/#uses-metaport)。它为不获取、构建或安装任何东西的 Port 设置默认值。 |
-| - | ------------------------------------------------------------------------------------------------------------------------------------- |
+>**技巧**
+>
+>  元 Port 应该使用 [`USES=metaport`](https://docs.freebsd.org/en/books/porters-handbook/special/#uses-metaport)。它为不获取、构建或安装任何东西的 Port 设置默认值。
+
 
 Staging 通过在 `pre-install`、`do-install` 和 `post-install` 目标中使用 `STAGEDIR` 前缀来启用（参见本书中的示例）。通常，这包括 `PREFIX`、`ETCDIR`、`DATADIR`、`EXAMPLESDIR`、`DOCSDIR` 等。目录应该作为 `post-install` 目标的一部分创建。尽量避免使用绝对路径。
 
-|   | 安装内核模块的 Port 必须默认在其目标路径前添加 `STAGEDIR`，例如 **/boot/modules**。 |
-| - | ----------------------------------------------------------- |
+>**技巧**
+>
+> 安装内核模块的 Port 必须默认在其目标路径前添加 `STAGEDIR`，例如 **/boot/modules**。
 
 ### 6.2.1. 处理符号链接
 
@@ -44,7 +49,7 @@ Staging 通过在 `pre-install`、`do-install` 和 `post-install` 目标中使�
 
 `${RLN}` 使用 [install(1)](https://man.freebsd.org/cgi/man.cgi?query=install&sektion=1&format=html) 的相对符号链接功能，使得创建者不必手动计算相对路径。
 
-```
+```sh
 ${RLN} ${STAGEDIR}${PREFIX}/lib/libfoo.so.42 ${STAGEDIR}${PREFIX}/lib/libfoo.so
 ${RLN} ${STAGEDIR}${PREFIX}/libexec/foo/bar ${STAGEDIR}${PREFIX}/bin/bar
 ${RLN} ${STAGEDIR}/var/cache/foo ${STAGEDIR}${PREFIX}/share/foo
@@ -52,7 +57,7 @@ ${RLN} ${STAGEDIR}/var/cache/foo ${STAGEDIR}${PREFIX}/share/foo
 
 将生成：
 
-```
+```sh
 % ls -lF ${STAGEDIR}${PREFIX}/lib
 lrwxr-xr-x  1 nobody  nobody    181 Aug  3 11:27 libfoo.so@ -> libfoo.so.42
 -rwxr-xr-x  1 nobody  nobody     15 Aug  3 11:24 libfoo.so.42*
@@ -82,7 +87,7 @@ lrwxr-xr-x  1 nobody  nobody    181 Aug  3 11:27 foo@ -> ../../../var/cache/foo
 
 **分叉**
 
-一旦库被捆绑，作者更容易对上游库进行分叉。虽然从表面上看，这样做更方便，但这意味着代码与上游分叉，使得解决安全问题或其他问题变得更加困难。原因之一是补丁变得更难以应用。
+库被捆绑后，作者更容易对上游库进行分叉。虽然从表面上看，这样做更方便，但这意味着代码与上游分叉，使得解决安全问题或其他问题变得更加困难。原因之一是补丁变得更难以应用。
 
 分叉的另一个问题是，由于代码与上游分叉，bug 需要重复解决，而不是集中在一个地方解决。这违背了开源软件的初衷。
 
@@ -108,20 +113,22 @@ lrwxr-xr-x  1 nobody  nobody    181 Aug  3 11:27 foo@ -> ../../../var/cache/foo
 
 仅在上游有良好的安全记录并且使用未捆绑版本会导致过于复杂的补丁时，才使用捆绑库。
 
-|   | 在一些非常特殊的情况下，例如仿真器（如 Wine）， Port 必须捆绑库，因为这些库属于不同架构，或者它们已被修改以适应软件的需求。在这种情况下，这些库不应该暴露给其他 Port 进行链接。可以在 Port 的 **Makefile** 中添加 `BUNDLE_LIBS=yes`。这将告诉 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 不计算提供的库。在将此添加到 Port 之前，请始终向 Ports 管理团队 <[portmgr@FreeBSD.org](mailto:portmgr@FreeBSD.org)> 询问。 |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**重要**
+>
+> 在一些非常特殊的情况下，例如仿真器（如 Wine）， Port 必须捆绑库，因为这些库属于不同架构，或者它们已被修改以适应软件的需求。在这种情况下，这些库不应该暴露给其他 Port 进行链接。可以在 Port 的 **Makefile** 中添加 `BUNDLE_LIBS=yes`。这将告诉 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 不计算提供的库。在将此添加到 Port 之前，请始终向 Ports 管理团队 <[portmgr@FreeBSD.org](mailto:portmgr@FreeBSD.org)> 询问。 
+
 
 ## 6.4. 共享库
 
 如果 Port 安装一个或多个共享库，定义 `USE_LDCONFIG` make 变量，指示 **bsd.port.mk** 在 `post-install` 目标阶段运行 `${LDCONFIG} -m`，该命令将在新库安装的目录（通常是 **PREFIX/lib**）上运行，以将其注册到共享库缓存中。定义此变量时，它还会在 **pkg-plist** 中添加适当的 `@exec /sbin/ldconfig -m` 和 `@unexec /sbin/ldconfig -R`，以便用户安装软件包后能立即使用共享库，并且卸载时不会让系统仍然认为库存在。
 
-```
+```sh
 USE_LDCONFIG=	yes
 ```
 
 可以通过将 `USE_LDCONFIG` 设置为共享库安装目录的列表，来覆盖默认目录。例如，如果 Port 将共享库安装到 **PREFIX/lib/foo** 和 **PREFIX/lib/bar**，则在 **Makefile** 中使用以下设置：
 
-```
+```sh
 USE_LDCONFIG=	${PREFIX}/lib/foo ${PREFIX}/lib/bar
 ```
 
@@ -137,10 +144,12 @@ USE_LDCONFIG=	${PREFIX}/lib/foo ${PREFIX}/lib/bar
 
 许可证各不相同，其中一些对应用程序如何打包、是否可以盈利性销售等方面有一定限制。
 
-|   |  Port 维护者有责任阅读软件的许可条款，并确保 FreeBSD 项目不会因通过 FTP/HTTP 或 CD-ROM 再分发源代码或已编译的二进制文件而违反相关条款。如果有疑问，请联系 [FreeBSD ports 邮件列表](https://lists.freebsd.org/subscription/freebsd-ports)。 |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**重要**
+>
+> Port 维护者有责任阅读软件的许可条款，并确保 FreeBSD 项目不会因通过 FTP/HTTP 或 CD-ROM 再分发源代码或已编译的二进制文件而违反相关条款。如果有疑问，请联系 [FreeBSD ports 邮件列表](https://lists.freebsd.org/subscription/freebsd-ports)。
 
-在这种情况下，可以设置下节中描述的变量。
+
+在这种情况下，可以设置下节中说明的变量。
 
 ### 6.5.1. `NO_PACKAGE`
 
@@ -150,7 +159,7 @@ USE_LDCONFIG=	${PREFIX}/lib/foo ${PREFIX}/lib/bar
 
 如果二进制包没有普遍的用途，并且必须始终从源代码编译应用程序，请使用 `NO_PACKAGE`。例如，如果应用程序在编译时硬编码了与站点特定的配置信息，请设置 `NO_PACKAGE`。
 
-设置 `NO_PACKAGE` 为描述为什么不能生成包的字符串。
+设置 `NO_PACKAGE` 为说明为什么不能生成包的字符串。
 
 ### 6.5.2. `NO_CDROM`
 
@@ -158,7 +167,7 @@ USE_LDCONFIG=	${PREFIX}/lib/foo ${PREFIX}/lib/bar
 
 如果同时设置了 `NO_PACKAGE` 和 `NO_CDROM`，则只有 Port 的 `DISTFILES` 可用，并且仅通过 FTP/HTTP 分发。
 
-设置 `NO_CDROM` 为描述为什么不能在 CD-ROM 上重新分发该 Port 的字符串。例如，如果该 Port 的许可证仅允许“非商业”使用，可以使用此设置。
+设置 `NO_CDROM` 为说明为什么不能在 CD-ROM 上重新分发该 Port 的字符串。例如，如果该 Port 的许可证仅允许“非商业”使用，可以使用此设置。
 
 ### 6.5.3. `NOFETCHFILES`
 
@@ -172,7 +181,7 @@ USE_LDCONFIG=	${PREFIX}/lib/foo ${PREFIX}/lib/bar
 
 不要与 `RESTRICTED` 一起设置 `NO_CDROM` 或 `NO_PACKAGE`，因为后者变量已经包含了前者的含义。
 
-将 `RESTRICTED` 设置为描述为何该 Port 不能再分发的字符串。通常，这表示该 Port 包含专有软件，用户需要手动下载 `DISTFILES`，可能需要在注册软件或同意接受最终用户许可协议（EULA）的条款后进行下载。
+将 `RESTRICTED` 设置为说明为何该 Port 不能再分发的字符串。通常，这表示该 Port 包含专有软件，用户需要手动下载 `DISTFILES`，可能需要在注册软件或同意接受最终用户许可协议（EULA）的条款后进行下载。
 
 ### 6.5.5. `RESTRICTED_FILES`
 
@@ -190,7 +199,7 @@ USE_LDCONFIG=	${PREFIX}/lib/foo ${PREFIX}/lib/bar
 
 声明“此 Port 的 distfiles 必须手动获取”的首选方式如下：
 
-```
+```sh
 .if !exists(${DISTDIR}/${DISTNAME}${EXTRACT_SUFX})
 IGNORE=	may not be redistributed because of licensing reasons. Please visit some-website to accept their license and download ${DISTFILES} into ${DISTDIR}
 .endif
@@ -200,16 +209,18 @@ IGNORE=	may not be redistributed because of licensing reasons. Please visit some
 
 请注意，此段落必须在包含 **bsd.port.pre.mk** 后添加。
 
-### 6.6. 构建机制
+## 6.6. 构建机制
 
-#### 6.6.1. 并行构建 Port 
+### 6.6.1. 并行构建 Port 
 
 FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行构建，这使得 SMP 系统可以利用所有可用的 CPU 功率，从而加快 Port 构建的速度和效果。
 
 这是通过将 `-jX` 标志传递给在供应商代码上运行的 [make(1)](https://man.freebsd.org/cgi/man.cgi?query=make&sektion=1&format=html) 来实现的。这是 Port 的默认构建行为。不幸的是，并非所有 Port 都能很好地处理并行构建，因此可能需要显式禁用此功能，方法是添加 `MAKE_JOBS_UNSAFE=yes` 变量。当一个 Port 因竞争条件而导致间歇性构建失败时，就需要使用这个变量。
 
-|   | 设置 `MAKE_JOBS_UNSAFE` 时，必须非常重要地在 **Makefile** 中进行说明，或者至少在提交信息中说明 *为什么* 启用时 Port 无法构建。否则，在以后提交更新时，几乎不可能修复问题或测试问题是否已经解决。 |
-| - | ------------------------------------------------------------------------------------------------------------------ |
+>**重要**
+>
+>设置 `MAKE_JOBS_UNSAFE` 时，必须非常重要地在 **Makefile** 中进行说明，或者至少在提交信息中说明 *为什么* 启用时 Port 无法构建。否则，在以后提交更新时，几乎不可能修复问题或测试问题是否已经解决。
+
 
 #### 6.6.2. `make`、`gmake` 和 `imake`
 
@@ -223,7 +234,7 @@ FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行
 
 如果 Port 的源 **Makefile** 具有不同于 `all` 的主要构建目标，请相应地设置 `ALL_TARGET`。同样，`install` 和 `INSTALL_TARGET` 也应该如此。
 
-#### 6.6.3. `configure` 脚本
+### 6.6.3. `configure` 脚本
 
 如果 Port 使用 `configure` 脚本从 **Makefile.in** 生成 **Makefile**，请设置 `GNU_CONFIGURE=yes`。要为 `configure` 脚本提供额外的参数（默认参数为 `--prefix=${PREFIX} --infodir=${PREFIX}/${INFO_PATH} --mandir=${PREFIX}/man --build=${CONFIGURE_TARGET}`），请在 `CONFIGURE_ARGS` 中设置这些额外的参数。可以使用 `CONFIGURE_ENV` 传递额外的环境变量。
 
@@ -235,7 +246,7 @@ FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行
 | `CONFIGURE_ENV`    | 为 `configure` 脚本运行设置的额外环境变量。                              |
 | `CONFIGURE_TARGET` | 重写默认的配置目标。默认值为 `${MACHINE_ARCH}-portbld-freebsd${OSREL}`。 |
 
-#### 6.6.4. 使用 `cmake`
+### 6.6.4. 使用 `cmake`
 
 对于使用 CMake 的 Port ，定义 `USES= cmake`。
 
@@ -248,7 +259,7 @@ FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行
 | `CMAKE_SOURCE_PATH` | 源目录的路径。默认值为 `${WRKSRC}`。                                                                                                                                            |
 | `CONFIGURE_ENV`     | 为 `cmake` 二进制文件设置的额外环境变量。                                                                                                                                           |
 
-表 3. 用户可以为 `cmake` 构建定义的变量
+**表 3. 用户可以为 `cmake` 构建定义的变量**
 
 | 变量              | 说明                                                 |
 | --------------- | -------------------------------------------------- |
@@ -258,32 +269,33 @@ CMake 支持以下构建配置：`Debug`、`Release`、`RelWithDebInfo` 和 `Min
 
 大多数基于 CMake 的项目支持源外构建方法。 Port 的源外构建是默认设置。可以通过使用 `:insource` 后缀请求源内构建。在源外构建中，`CONFIGURE_WRKSRC`、`BUILD_WRKSRC` 和 `INSTALL_WRKSRC` 会被设置为 `${WRKDIR}/.build`，并且该目录将用于存放在配置和构建阶段生成的所有文件，保持源代码目录完好。
 
-示例 2. `USES= cmake` 示例
+**示例 2. `USES= cmake` 示例**
 
 该片段演示了如何在 Port 中使用 CMake。通常不需要设置 `CMAKE_SOURCE_PATH`，但当源代码不在顶层目录中，或者 Port 只打算构建项目的一部分时，可以设置该值。
 
-```
+```sh
 USES=			cmake
 CMAKE_SOURCE_PATH=	${WRKSRC}/subproject
 ```
 
-示例 3. `CMAKE_ON` 和 `CMAKE_OFF`
+**示例 3. `CMAKE_ON` 和 `CMAKE_OFF`**
 
 当向 `CMAKE_ARGS` 添加布尔值时，使用 `CMAKE_ON` 和 `CMAKE_OFF` 变量更为简便。例如：
 
-```
+```sh
 CMAKE_ON=	VAR1 VAR2
 CMAKE_OFF=	VAR3
 ```
 
 等同于：
 
-```
+```sh
 CMAKE_ARGS=	-DVAR1:BOOL=TRUE -DVAR2:BOOL=TRUE -DVAR3:BOOL=FALSE
 ```
 
-|   | 这仅适用于 `CMAKE_ARGS` 的默认值关闭。 [`OPT_CMAKE_BOOL` 和 `OPT_CMAKE_BOOL_OFF`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#options-cmake_bool) 中描述的辅助工具使用相同的语义，但适用于可选值。 |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**重要**
+>
+> 这仅适用于 `CMAKE_ARGS` 的默认值关闭。 [`OPT_CMAKE_BOOL` 和 `OPT_CMAKE_BOOL_OFF`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#options-cmake_bool) 中说明的辅助工具使用相同的语义，但适用于可选值。
 
 ### 6.6.5. 使用 `scons`
 
@@ -301,7 +313,7 @@ env = Environment(**ARGUMENTS)
 
 对于使用 Cargo 的 Port ，定义 `USES=cargo`。
 
-表 4. 用户可以为 `cargo` 构建定义的变量
+**表 4. 用户可以为 `cargo` 构建定义的变量**
 
 | 变量                   | 默认值                      | 说明                                                                                                                                                                                                                                                                |
 | -------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -328,11 +340,11 @@ env = Environment(**ARGUMENTS)
 | `CARGO_USE_GITHUB`   | `no`                     | 启用通过 `GH_TUPLE` 从 GitHub 获取锁定到特定 Git 提交的 crates。这将尝试修补 `WRKDIR` 下的所有 **Cargo.toml**，以便指向离线源，而不是在构建期间从 Git 仓库获取它们。                                                                                                                                                 |
 | `CARGO_USE_GITLAB`   | `no`                     | 与 `CARGO_USE_GITHUB` 相同，但适用于 GitLab 实例和 `GL_TUPLE`。                                                                                                                                                                                                               |
 
-### 示例 4. 创建一个简单的 Rust 应用程序 Port
+**示例 4. 创建一个简单的 Rust 应用程序 Port**
 
 创建一个基于 Cargo 的 Port 是一个三阶段的过程。首先，我们需要提供一个 Port 模板来获取应用程序分发文件：
 
-```
+```sh
 PORTNAME=	tokei
 DISTVERSIONPREFIX=	v
 DISTVERSION=	7.0.2
@@ -351,7 +363,7 @@ GH_ACCOUNT=	Aaronepower
 
 生成初始的 **distinfo**：
 
-```
+```sh
 % make makesum
 => Aaronepower-tokei-v7.0.2_GH0.tar.gz doesn't seem to exist in /usr/ports/distfiles/.
 => Attempting to fetch https://codeload.github.com/Aaronepower/tokei/tar.gz/v7.0.2?dummy=/Aaronepower-tokei-v7.0.2_GH0.tar.gz
@@ -361,7 +373,7 @@ Aaronepower-tokei-v7.0.2_GH0.tar.gz                     45 kB  239 kBps 00m00s
 
 现在，分发文件已经准备好使用，我们可以继续从捆绑的 **Cargo.lock** 中提取 crate 依赖：
 
-```
+```sh
 % make cargo-crates
 CARGO_CRATES=   aho-corasick-0.6.4 \
                 ansi_term-0.11.0 \
@@ -374,7 +386,7 @@ CARGO_CRATES=   aho-corasick-0.6.4 \
 
 此命令的输出需要直接粘贴到 Makefile 中：
 
-```
+```sh
 PORTNAME=	tokei
 DISTVERSIONPREFIX=	v
 DISTVERSION=	7.0.2
@@ -401,7 +413,7 @@ CARGO_CRATES=   aho-corasick-0.6.4 \
 
 需要重新生成 **distinfo** 以包含所有的 crate 分发文件：
 
-```
+```sh
 % make makesum
 => rust/crates/aho-corasick-0.6.4.tar.gz doesn't seem to exist in /usr/ports/distfiles/.
 => Attempting to fetch https://crates.io/api/v1/crates/aho-corasick/0.6.4/download?dummy=/rust/crates/aho-corasick-0.6.4.tar.gz
@@ -419,25 +431,25 @@ rust/crates/atty-0.2.9.tar.gz                 100% of 5898  B   81 MBps 00m00s
 [...]
 ```
 
-该 Port 现在已准备好进行测试构建，并可以像正常情况一样进行进一步的调整，例如创建 plist、编写描述、添加许可信息、选项等。
+该 Port 现在已准备好进行测试构建，并可以像正常情况一样进行进一步的调整，例如创建 plist、编写说明、添加许可信息、选项等。
 
 如果你没有在像 poudriere 这样的干净环境中测试 Port ，记得在任何测试之前运行 `make clean`。
 
-### 示例 5. 启用额外的应用程序功能
+**示例 5. 启用额外的应用程序功能**
 
 一些应用程序在其 **Cargo.toml** 中定义了额外的功能。可以通过在 Port 中设置 `CARGO_FEATURES` 来编译它们。
 
 在这里，我们启用 Tokei 的 `json` 和 `yaml` 功能：
 
-```
+```sh
 CARGO_FEATURES=	json yaml
 ```
 
-### 示例 6. 将应用程序功能编码为 Port 选项
+**示例 6. 将应用程序功能编码为 Port 选项**
 
 **Cargo.toml** 中的一个 `[features]` 部分可能如下所示：
 
-```
+```sh
 [features]
 pulseaudio_backend = ["librespot-playback/pulseaudio-backend"]
 portaudio_backend = ["librespot-playback/portaudio-backend"]
@@ -446,7 +458,7 @@ default = ["pulseaudio_backend"]
 
 `pulseaudio_backend` 是一个默认功能，除非我们显式地通过将 `--no-default-features` 添加到 `CARGO_FEATURES` 来关闭它。这里，我们将 `portaudio_backend` 和 `pulseaudio_backend` 功能转化为 Port 选项：
 
-```
+```sh
 CARGO_FEATURES=	--no-default-features
 
 OPTIONS_DEFINE=	PORTAUDIO PULSEAUDIO
@@ -455,11 +467,11 @@ PORTAUDIO_VARS=		CARGO_FEATURES+=portaudio_backend
 PULSEAUDIO_VARS=	CARGO_FEATURES+=pulseaudio_backend
 ```
 
-### 示例 7. 列出 Crate 许可证
+**示例 7. 列出 Crate 许可证**
 
 每个 Crate 都有自己的许可证。在为 Port 添加 `LICENSE` 块时，了解它们非常重要（参见 [许可证](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses)）。辅助目标 `cargo-crates-licenses` 将尝试列出 `CARGO_CRATES` 中定义的所有 Crate 的许可证。
 
-```
+```sh
 % make cargo-crates-licenses
 aho-corasick-0.6.4  Unlicense/MIT
 ansi_term-0.11.0    MIT
@@ -470,25 +482,26 @@ byteorder-1.2.2     Unlicense/MIT
 [...]
 ```
 
-|   | `make cargo-crates-licenses` 输出的许可证名称是 SPDX 2.1 许可证表达式，可能与 Ports 框架中定义的许可证名称不匹配。需要将它们翻译为 [预定义许可证列表](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license-list) 中的名称。 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**注意**
+>
+>  `make cargo-crates-licenses` 输出的许可证名称是 SPDX 2.1 许可证表达式，可能与 Ports 框架中定义的许可证名称不匹配。需要将它们翻译为 [预定义许可证列表](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license-list) 中的名称。 
 
 ### 6.6.7. 使用 `meson`
 
 对于使用 Meson 的 Port ，请定义 `USES=meson`。
 
-表格 5. 使用 `meson` 的 Port 变量
+**表格 5. 使用 `meson` 的 Port 变量**
 
-| 变量                | 描述                                 |
+| 变量                | 说明                                 |
 | ----------------- | ---------------------------------- |
 | `MESON_ARGS`      | 要传递给 `meson` 二进制文件的 Port 特定 Meson 标志。  |
 | `MESON_BUILD_DIR` | 相对于 `WRKSRC` 的构建目录路径。默认是 `_build`。 |
 
-### 示例 8. `USES=meson` 示例
+**示例 8. `USES=meson` 示例**
 
 此代码片段演示了在 Port 中使用 Meson。
 
-```
+```sh
 USES=		meson
 MESON_ARGS=	-Dfoo=enabled
 ```
@@ -497,11 +510,11 @@ MESON_ARGS=	-Dfoo=enabled
 
 对于使用 Go 的 Port ，定义 `USES=go`。请参考 [`go`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-go) 获取可以设置的变量列表，以控制构建过程。
 
-### 示例 9. 创建一个基于 Go 模块的应用程序 Port 
+**示例 9. 创建一个基于 Go 模块的应用程序 Port**
 
 在大多数情况下，将 `GO_MODULE` 变量设置为 `go.mod` 中 `module` 指令指定的值就足够了：
 
-```
+```sh
 PORTNAME=       hey
 DISTVERSIONPREFIX=	v
 DISTVERSION=    0.1.4
@@ -522,11 +535,11 @@ PLIST_FILES=    bin/hey
 .include <bsd.port.mk>
 ```
 
-如果“简易”方法不适用，或者需要对依赖项进行更多控制，可以按照下面描述的完整 Port 过程。
+如果“简易”方法不适用，或者需要对依赖项进行更多控制，可以按照下面说明的完整 Port 过程。
 
 创建基于 Go 的 Port 是一个五阶段的过程。首先，我们需要提供一个 Port 模板来获取应用程序分发文件：
 
-```
+```sh
 PORTNAME=	ghq
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.12.5
@@ -545,7 +558,7 @@ GH_ACCOUNT=	motemen
 
 生成初步的 **distinfo** 文件：
 
-```
+```sh
 % make makesum
 ===>  License MIT accepted by the user
 => motemen-ghq-v0.12.5_GH0.tar.gz doesn't seem to exist in /usr/ports/distfiles/.
@@ -556,7 +569,7 @@ motemen-ghq-v0.12.5_GH0.tar.gz                          32 kB  177 kBps    00s
 
 现在，分发文件已经准备好使用，我们可以提取所需的 Go 模块依赖项。此步骤需要安装 [ports-mgmt/modules2tuple](https://cgit.freebsd.org/ports/tree/ports-mgmt/modules2tuple/)：
 
-```
+```sh
 % make gomod-vendor
 [...]
 GH_TUPLE=	\
@@ -572,7 +585,7 @@ GH_TUPLE=	\
 
 该命令的输出需要直接粘贴到 Makefile 中：
 
-```
+```sh
 PORTNAME=	ghq
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.12.5
@@ -599,7 +612,7 @@ GH_TUPLE=	Songmu:gitconfig:v0.0.2:songmu_gitconfig/vendor/github.com/Songmu/gitc
 
 **distinfo** 需要重新生成，以包含所有分发文件：
 
-```
+```sh
 % make makesum
 => Songmu-gitconfig-v0.0.2_GH0.tar.gz doesn't seem to exist in /usr/ports/distfiles/.
 => Attempting to fetch https://codeload.github.com/Songmu/gitconfig/tar.gz/v0.0.2?dummy=/Songmu-gitconfig-v0.0.2_GH0.tar.gz
@@ -612,7 +625,7 @@ daviddengcn-go-colortext-186a3d44e920_GH0.tar.        4534  B 1098 kBps    00s
 [...]
 ```
 
-现在， Port 已准备好进行测试构建，并可进行进一步调整，如创建 plist、编写描述、添加许可证信息、选项等，像平常一样进行。
+现在， Port 已准备好进行测试构建，并可进行进一步调整，如创建 plist、编写说明、添加许可证信息、选项等，像平常一样进行。
 
 如果你没有在像 poudriere 这样的干净环境中测试 Port ，请记得在任何测试之前运行 `make clean`。
 
@@ -620,13 +633,13 @@ daviddengcn-go-colortext-186a3d44e920_GH0.tar.        4534  B 1098 kBps    00s
 
 有些 Port 需要将生成的二进制文件安装到不同的名称或路径下，而不是默认的 `${PREFIX}/bin`。可以通过使用 `GO_TARGET` 元组语法来实现，例如：
 
-```
+```sh
 GO_TARGET=  ./cmd/ipfs:ipfs-go
 ```
 
 这将把 `ipfs` 二进制文件安装为 `${PREFIX}/bin/ipfs-go`，而
 
-```
+```sh
 GO_TARGET=  ./dnscrypt-proxy:${PREFIX}/sbin/dnscrypt-proxy
 ```
 
@@ -636,7 +649,7 @@ GO_TARGET=  ./dnscrypt-proxy:${PREFIX}/sbin/dnscrypt-proxy
 
 对于使用 Cabal 的 Ports，构建系统定义了 `USES=cabal`。参阅 [`cabal`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-cabal) 获取可以设置的变量列表，以控制构建过程。
 
-#### 示例 11. 创建一个 Hackage 托管的 Haskell 应用程序的 Port
+**示例 11. 创建一个 Hackage 托管的 Haskell 应用程序的 Port**
 
 在准备一个 Haskell Cabal Port 时，必须先安装 [devel/hs-cabal-install](https://cgit.freebsd.org/ports/tree/devel/hs-cabal-install/) 和 [ports-mgmt/hs-cabal2tuple](https://cgit.freebsd.org/ports/tree/ports-mgmt/hs-cabal2tuple/) 程序。首先，我们需要定义一些常见的 Port 变量，以便 cabal-install 获取包的分发文件：
 
@@ -666,7 +679,7 @@ Downloaded   ShellCheck-0.6.0
 Unpacking to ShellCheck-0.6.0/
 ```
 
-现在，我们已经在 `${WRKSRC}` 下得到了 ShellCheck.cabal 包描述文件，可以使用 `cabal-configure` 生成构建计划：
+现在，我们已经在 `${WRKSRC}` 下得到了 ShellCheck.cabal 包说明文件，可以使用 `cabal-configure` 生成构建计划：
 
 ```sh
 % make cabal-configure
@@ -704,17 +717,17 @@ QuickCheck-2.12.6.1/QuickCheck-2.12.6.1.tar.gz          65 kB  361 kBps    00s
 [...]
 ```
 
-现在， Port 已准备好进行测试构建，并且可以根据需要进一步调整，例如创建 plist、编写描述、添加许可证信息、选项等。
+现在， Port 已准备好进行测试构建，并且可以根据需要进一步调整，例如创建 plist、编写说明、添加许可证信息、选项等。
 
 如果您没有在像 poudriere 这样的干净环境中测试 Port ，请记得在任何测试前运行 `make clean`。
 
 某些 Haskell  Port 会将各种数据文件安装到 `share/${PORTNAME}` 下。对于此类情况， Port 侧需要进行特殊处理。 Port 应定义 `CABAL_WRAPPER_SCRIPTS` 变量，列出将使用数据文件的每个可执行文件。此外，在少数情况下，被移植的程序使用其他 Haskell 包的数据文件，此时 `FOO_DATADIR_VARS` 变量会派上用场。
 
-### 示例 12. 处理 Haskell Port 中的数据文件
+**示例 12. 处理 Haskell Port 中的数据文件**
 
 `devel/hs-profiteur` 是一个 Haskell 应用程序，它生成一个包含内容的单页 HTML。
 
-```
+```sh
 PORTNAME=	profiteur
 
 [...]
@@ -730,7 +743,7 @@ USE_CABAL=	OneTuple-0.3.1_2 \
 
 它将 HTML 模板安装到 `share/profiteur` 下，因此我们需要添加 `CABAL_WRAPPER_SCRIPTS` 选项：
 
-```
+```sh
 [...]
 
 USE_CABAL=	OneTuple-0.3.1_2 \
@@ -745,7 +758,7 @@ CABAL_WRAPPER_SCRIPTS=		${CABAL_EXECUTABLES}
 
 该程序还尝试访问 `jquery.js` 文件，这是 `js-jquery-3.3.1` Haskell 包的一部分。为了能够找到该文件，我们需要使包装脚本也在 `share/profiteur` 中查找 `js-jquery` 数据文件。我们使用 `profiteur_DATADIR_VARS` 来实现这一点：
 
-```
+```sh
 [...]
 
 CABAL_WRAPPER_SCRIPTS=		${CABAL_EXECUTABLES}
@@ -760,11 +773,11 @@ profiteur_DATADIR_VARS=		js-jquery
 
 另一个在移植复杂的 Haskell 程序时可能遇到的特殊情况是 `cabal.project` 文件中存在 VCS 依赖项。
 
-### 示例 13. 移植具有 VCS 依赖项的 Haskell 应用程序
+**示例 13. 移植具有 VCS 依赖项的 Haskell 应用程序**
 
 `net-p2p/cardano-node` 是一个非常复杂的软件。在它的 `cabal.project` 中，有很多类似这样的块：
 
-```
+```ini
 [...]
 source-repository-package
   type: git
@@ -845,7 +858,7 @@ NLS_CONFIGURE_ENABLE=	nls
 
 或者使用较旧的选项方法：
 
-```
+```sh
 GNU_CONFIGURE=		yes
 
 OPTIONS_DEFINE=		NLS
@@ -865,7 +878,7 @@ PLIST_SUB+=		NLS="@comment "
 
 接下来需要做的工作是安排使消息目录文件条件地包含在打包列表中。**Makefile** 部分的这个任务已经由惯用法提供。它在 [高级 **pkg-plist** 实践](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-sub) 部分中进行了说明。简而言之，**pkg-plist** 中每个出现的 `%%NLS%%` 将在 NLS 被禁用时替换为 "`@comment `"，或者在 NLS 启用时替换为空字符串。因此，如果 NLS 关闭，以 `%%NLS%%` 为前缀的行将在最终的打包列表中变成注释；否则，前缀将直接被省略。然后，在 **pkg-plist** 中每个消息目录文件路径之前插入 `%%NLS%%`。例如：
 
-```
+```sh
 %%NLS%%share/locale/fr/LC_MESSAGES/foobar.mo
 %%NLS%%share/locale/no/LC_MESSAGES/foobar.mo
 ```
@@ -884,7 +897,7 @@ PLIST_SUB+=		NLS="@comment "
 
 当 Port 需要 Perl 支持时，必须设置 `USES=perl5`，并根据 [perl5 USES 说明](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-perl5) 使用可选的 `USE_PERL5`。
 
-#### 表 6. 使用 Perl 的 Port 只读变量
+**表 6. 使用 Perl 的 Port 只读变量**
 
 | 只读变量           | 说明                                                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -895,74 +908,80 @@ PLIST_SUB+=		NLS="@comment "
 | `PERL_PORT`    | 已安装的 Perl  Port 的名称（例如，`perl5`）。                                                                                                                                                   |
 | `SITE_PERL`    | 存放特定于站点的 Perl 包的目录名称。此值会被添加到 `PLIST_SUB` 中。                                                                                                                                    |
 
-|   | 没有官方网站的 Perl 模块 Port 必须在 **Makefile** 的 WWW 行中链接到 `cpan.org`。推荐的 URL 形式是 `https://search.cpan.org/dist/Module-Name/`（包括尾部斜杠）。 |
-| - | ------------------------------------------------------------------------------------------------------------------------- |
+>**注意**
+>
+> 没有官方网站的 Perl 模块 Port 必须在 **Makefile** 的 WWW 行中链接到 `cpan.org`。推荐的 URL 形式是 `https://search.cpan.org/dist/Module-Name/`（包括尾部斜杠）。
 
-|   | 不要在依赖声明中使用 `${SITE_PERL}`。这样做假设已经包含了 **perl5.mk**，但并非总是如此。如果 Port 的文件在升级过程中被移动，依赖于该 Port 的其他 Port 可能会有错误的依赖关系。正确声明 Perl 模块依赖关系的方法如下所示。 |
-| - | -------------------------------------------------------------------------------------------------------------------------- |
 
-### 示例 14. Perl 依赖示例
+>**注意**
+>
+> 不要在依赖声明中使用 `${SITE_PERL}`。这样做假设已经包含了 **perl5.mk**，但并非总是如此。如果 Port 的文件在升级过程中被移动，依赖于该 Port 的其他 Port 可能会有错误的依赖关系。正确声明 Perl 模块依赖关系的方法如下所示。 
 
-```
+
+**示例 14. Perl 依赖示例**
+
+```sh
 p5-IO-Tee>=0.64:devel/p5-IO-Tee
 ```
 
 对于安装手册页的 Perl  Port ，可以在 **pkg-plist** 中使用宏 `PERL5_MAN3` 和 `PERL5_MAN1`。例如，
 
-```
+```sh
 lib/perl5/5.14/man/man1/event.1.gz
 lib/perl5/5.14/man/man3/AnyEvent::I3.3.gz
 ```
 
 可以替换为
 
-```
+```sh
 %%PERL5_MAN1%%/event.1.gz
 %%PERL5_MAN3%%/AnyEvent::I3.3.gz
 ```
 
-|   | 对于其他部分（`2` 和 `4` 到 `9`）没有 `PERL5_MAN_x_` 宏，因为这些文件会安装到常规目录中。 |
-| - | ----------------------------------------------------------- |
+>**注意**
+>
+> 对于其他部分（`2` 和 `4` 到 `9`）没有 `PERL5_MAN_x_` 宏，因为这些文件会安装到常规目录中。
 
-### 示例 15. 仅在构建时需要 Perl 的 Port 
+
+**示例 15. 仅在构建时需要 Perl 的 Port**
 
 由于默认的 USE\_PERL5 值为 `build` 和 `run`，应设置为：
 
-```
+```sh
 USES=		perl5
 USE_PERL5=	build
 ```
 
-### 示例 16. 还需要 Perl 进行补丁处理的 Port 
+**示例 16. 还需要 Perl 进行补丁处理的 Port** 
 
 有时，使用 [sed(1)](https://man.freebsd.org/cgi/man.cgi?query=sed&sektion=1&format=html) 进行补丁处理不足以满足要求。当使用 [perl(1)](https://man.freebsd.org/cgi/man.cgi?query=perl&sektion=1&format=html) 更加简便时，使用：
 
-```
+```sh
 USES=		perl5
 USE_PERL5=	patch build run
 ```
 
-### 示例 17. 需要 `ExtUtils::MakeMaker` 来构建的 Perl 模块
+**示例 17. 需要 `ExtUtils::MakeMaker` 来构建的 Perl 模块**
 
 大多数 Perl 模块带有 **Makefile.PL** 配置脚本。在这种情况下，设置：
 
-```
+```sh
 USES=		perl5
 USE_PERL5=	configure
 ```
 
-### 示例 18. 需要 `Module::Build` 来构建的 Perl 模块
+**示例 18. 需要 `Module::Build` 来构建的 Perl 模块**
 
 当 Perl 模块带有 **Build.PL** 配置脚本时，它可能需要 `Module::Build`，此时设置：
 
-```
+```sh
 USES=		perl5
 USE_PERL5=	modbuild
 ```
 
 如果它需要的是 `Module::Build::Tiny`，设置：
 
-```
+```sh
 USES=		perl5
 USE_PERL5=	modbuildtiny
 ```
@@ -975,9 +994,9 @@ USE_PERL5=	modbuildtiny
 
 Mesa 项目旨在提供免费的 OpenGL 实现。要指定对该项目的不同组件的依赖，使用 `USES= gl` 和 `USE_GL`。有关可用组件的完整列表，请参见 [`gl`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-gl)。为了兼容性，`yes` 的值会映射为 `glu`。
 
-### 示例 19. `USE_XORG` 示例
+**示例 19. `USE_XORG` 示例**
 
-```
+```sh
 USES=		gl xorg
 USE_GL=		glu
 USE_XORG=	xrender xft xkbfile xt xaw
@@ -988,9 +1007,9 @@ USE_XORG=	xrender xft xkbfile xt xaw
 | `USES= imake` | 该 Port 使用 `imake`。                                |
 | `XMKMF`       | 如果 `xmkmf` 不在 `PATH` 中，设置为其路径。默认为 `xmkmf -a`。 |
 
-### 示例 20. 使用 X11 相关变量
+**示例 20. 使用 X11 相关变量**
 
-```
+```sh
 # 使用一些 X11 库
 USES=		xorg
 USE_XORG=	x11 xpm
@@ -1017,7 +1036,7 @@ USE_XORG=	x11 xpm
 
 某些应用程序需要一个工作的 X11 显示器来成功编译。这对于没有图形界面的机器来说是一个问题。当使用此变量时，构建基础设施将启动虚拟帧缓冲 X 服务器。然后，工作 `DISPLAY` 会传递给构建过程。有关可能的参数，请参见 [`USES=display`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-display)。
 
-```
+```sh
 USES=	display
 ```
 
@@ -1037,15 +1056,15 @@ USES=	display
 
 可以通过使用 `DESKTOP_ENTRIES` 来轻松为应用程序创建桌面条目。一个名为 **name.desktop** 的文件将自动创建、安装，并添加到 **pkg-plist** 中。语法如下：
 
-```
+```sh
 DESKTOP_ENTRIES=	"NAME" "COMMENT" "ICON" "COMMAND" "CATEGORY" StartupNotify
 ```
 
 可用的类别列表可以在 [Freedesktop 网站](https://standards.freedesktop.org/menu-spec/latest/apa.html) 上找到。`StartupNotify` 表示该应用程序是否支持启动通知。启动通知通常是一个图形指示器，如出现在鼠标指针、菜单或面板上的时钟，表示程序正在启动。兼容启动通知的程序在启动后会清除指示器，而不兼容的程序则永远不会清除该指示器（可能会让用户困惑和恼火），因此必须将 `StartupNotify` 设置为 `false`，以便根本不显示该指示器。
 
-示例：
+**示例：**
 
-```
+```sh
 DESKTOP_ENTRIES=	"ToME" "基于 JRR Tolkien 作品的 Roguelike 游戏" \
 			"${DATADIR}/xtra/graf/tome-128.png" \
 			"tome -v -g" "Application;Game;RolePlaying;" \
@@ -1064,7 +1083,7 @@ DESKTOP_ENTRIES=	"ToME" "基于 JRR Tolkien 作品的 Roguelike 游戏" \
 
 将此变量添加到 Port 中，允许使用在 **bsd.gnome.mk** 中定义的宏和组件。**bsd.gnome.mk** 中的代码会添加所需的构建时、运行时或库依赖项，或者处理特殊文件。在 FreeBSD 中，GNOME 应用程序使用 `USE_GNOME` 基础设施。包括所有所需的组件，作为以空格分隔的列表。`USE_GNOME` 组件分为以下几个虚拟列表：基本组件、GNOME 3 组件和遗留组件。如果 Port 只需要 GTK3 库，这是定义它的最简便方式：
 
-```
+```sh
 USE_GNOME=	gtk30
 ```
 
@@ -1072,7 +1091,7 @@ USE_GNOME=	gtk30
 
 以下是一个使用了本文件中概述的许多技术的 GNOME  Port 的 **Makefile** 示例。请将其作为创建新 Port 的指南。
 
-```
+```sh
 PORTNAME=	regexxer
 DISTVERSION=	0.10
 CATEGORIES=	devel textproc gnome
@@ -1091,8 +1110,9 @@ GLIB_SCHEMAS=	org.regexxer.gschema.xml
 .include <bsd.port.mk>
 ```
 
-|   | `USE_GNOME` 宏没有任何参数时不会向 Port 添加任何依赖项。`USE_GNOME` 不能在 **bsd.port.pre.mk** 之后设置。 |
-| - | -------------------------------------------------------------------------- |
+>**注意**
+>
+>  `USE_GNOME` 宏没有任何参数时不会向 Port 添加任何依赖项。`USE_GNOME` 不能在 **bsd.port.pre.mk** 之后设置。
 
 ### 6.11.3. 变量
 
@@ -1107,8 +1127,9 @@ glib 模式文件以 XML 格式编写，并以 **gschema.xml** 扩展名结尾�
 GLIB_SCHEMAS=foo.gschema.xml
 ```
 
-|   | 不要将 glib 模式文件添加到 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。 |
-| - | ---------------------------------------------------------------------------- |
+>**注意**
+>
+>  不要将 glib 模式文件添加到 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。
 
 `GCONF_SCHEMAS`
 列出所有 gconf 模式文件。该宏会将模式文件添加到 Port 的 **pkg-plist** 中，并在安装和卸载时处理这些文件的注册。
@@ -1119,13 +1140,15 @@ GConf 是 GNOME 应用程序用于存储设置的基于 XML 的数据库。这�
 GCONF_SCHEMAS=my_app.schemas my_app2.schemas my_app3.schemas
 ```
 
-|   | GConf 模式文件应该列在 `GCONF_SCHEMAS` 宏中，而不是 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。 |
-| - | ------------------------------------------------------------------------------------------------- |
+>**注意**
+>
+> GConf 模式文件应该列在 `GCONF_SCHEMAS` 宏中，而不是 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。 
+
 
 `INSTALLS_OMF`
 开源元数据框架（OMF）文件通常由 GNOME 2 应用程序使用。这些文件包含应用程序帮助文件的信息，并需要通过 ScrollKeeper/rarian 进行特殊处理。为了在从软件包安装 GNOME 应用程序时正确注册 OMF 文件，请确保 `omf` 文件列在 `pkg-plist` 中，并且 Port 的 **Makefile** 中定义了 `INSTALLS_OMF`：
 
-```
+```sh
 INSTALLS_OMF=yes
 ```
 
@@ -1133,9 +1156,9 @@ INSTALLS_OMF=yes
 
 ## 6.12. GNOME 组件
 
-要获得更多有关 GNOME  Port 的帮助，可以参考一些 [现有的 Port ](https://ports.freebsd.org/) 示例。如果需要更多帮助，访问 [FreeBSD GNOME 页面](https://www.freebsd.org/gnome/) 查找联系信息。这些组件分为当前正在使用的 GNOME 组件和旧版组件。如果组件支持参数，它们将列在描述中的括号中。第一个参数为默认值。如果组件默认添加到构建和运行依赖项中，则会显示“Both”。
+要获得更多有关 GNOME  Port 的帮助，可以参考一些 [现有的 Port ](https://ports.freebsd.org/) 示例。如果需要更多帮助，访问 [FreeBSD GNOME 页面](https://www.freebsd.org/gnome/) 查找联系信息。这些组件分为当前正在使用的 GNOME 组件和旧版组件。如果组件支持参数，它们将列在说明中的括号中。第一个参数为默认值。如果组件默认添加到构建和运行依赖项中，则会显示“Both”。
 
-| 组件                      | 相关程序                            | 描述                                                                                                       |
+| 组件                      | 相关程序                            | 说明                                                                                                       |
 | ----------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `atk`                   | accessibility/atk               | 辅助工具包 (ATK)                                                                                              |
 | `atkmm`                 | accessibility/atkmm             | atk 的 C++ 绑定                                                                                             |
@@ -1180,7 +1203,7 @@ INSTALLS_OMF=yes
 
 ## 6.13. GNOME 宏组件
 
-| 组件              | 描述                                                                |
+| 组件              | 说明                                                                |
 | --------------- | ----------------------------------------------------------------- |
 | `gnomeprefix`   | 为 `configure` 提供一些默认的路径。                                          |
 | `intlhack`      | 与 intltool 相同，但进行了修补，以确保使用 **share/locale/**。仅在 `intltool` 不足时使用。 |
@@ -1188,7 +1211,7 @@ INSTALLS_OMF=yes
 
 ## 6.14. GNOME 旧版组件
 
-| 组件                   | 相关程序                            | 描述                             |
+| 组件                   | 相关程序                            | 说明                             |
 | -------------------- | ------------------------------- | ------------------------------ |
 | `atspi`              | accessibility/at-spi            | 辅助技术服务提供者接口                    |
 | `esound`             | audio/esound                    | Enlightenment 声音包              |
@@ -1233,24 +1256,25 @@ INSTALLS_OMF=yes
 
 **表11 废弃组件：请勿使用**
 
-| 组件              | 描述                                    |
+| 组件              | 说明                                    |
 | --------------- | ------------------------------------- |
 | `pangox-compat` | `pangox-compat` 已被废弃，并从 pango 包中分离出来。 |
 
 ## 6.13. 使用 Qt
 
-|   | 有关 Qt 本身的一些 Port ，请参阅 [`qt-dist`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-qt-dist)。 |
-| - | ----------------------------------------------------------------------------------------------------- |
+>**注意**
+>
+>有关 Qt 本身的一些 Port ，请参阅 [`qt-dist`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-qt-dist)。 
 
 ### 6.13.1. 需要 Qt 的 Port 
 
-Ports 集合提供了对 Qt 5 和 Qt 6 的支持，分别通过 `USES+=qt:5` 和 `USES+=qt:6`。将 `USE_QT` 设置为所需的 Qt 组件（库、工具、插件）列表。
+Ports 提供了对 Qt 5 和 Qt 6 的支持，分别通过 `USES+=qt:5` 和 `USES+=qt:6`。将 `USE_QT` 设置为所需的 Qt 组件（库、工具、插件）列表。
 
 Qt 框架导出了一些可以供 Port 使用的变量，下面列出了一些：
 
 **表12. 使用 Qt 的 Port 提供的变量**
 
-| 变量             | 描述                  |
+| 变量             | 说明                  |
 | -------------- | ------------------- |
 | `QMAKE`        | `qmake` 可执行文件的完整路径。 |
 | `LRELEASE`     | `lrelease` 工具的完整路径。 |
@@ -1268,7 +1292,7 @@ Qt 框架导出了一些可以供 Port 使用的变量，下面列出了一些�
 
 #### 表 13. 可用的 Qt 库组件
 
-| 名称                 | 描述                                      |
+| 名称                 | 说明                                      |
 | ------------------ | --------------------------------------- |
 | `3d`               | Qt3D 模块                                 |
 | `5compat`          | Qt 5 兼容模块，用于 Qt 6                       |
@@ -1349,17 +1373,17 @@ Qt 框架导出了一些可以供 Port 使用的变量，下面列出了一些�
 | `xml`              | Qt SAX 和 DOM 实现                         |
 | `xmlpatterns`      | Qt 对 XPath、XQuery、XSLT 和 XML Schema 的支持 |
 
-#### 表 14. 可用的 Qt 工具组件
+**表 14. 可用的 Qt 工具组件**
 
-| 名称              | 描述                              |
+| 名称              | 说明                              |
 | --------------- | ------------------------------- |
 | `buildtools`    | 构建工具（`moc`，`rcc`），几乎每个 Qt 应用都需要 |
 | `linguisttools` | 本地化工具：`lrelease`，`lupdate`      |
 | `qmake`         | Makefile 生成工具/构建工具              |
 
-#### 表 15. 可用的 Qt 插件组件
+**表 15. 可用的 Qt 插件组件**
 
-| 名称             | 描述                        |
+| 名称             | 说明                        |
 | -------------- | ------------------------- |
 | `imageformats` | 支持 TGA、TIFF 和 MNG 图像格式的插件 |
 
@@ -1367,7 +1391,7 @@ Qt 框架导出了一些可以供 Port 使用的变量，下面列出了一些�
 
 在这个示例中，移植的应用程序使用 Qt 5 图形用户界面库、Qt 5 核心库、所有 Qt 5 代码生成工具以及 Qt 5 的 Makefile 生成器。由于 `gui` 库已经暗示了对核心库的依赖，因此不需要单独指定 `core`。Qt 5 代码生成工具 `moc`、`uic` 和 `rcc`，以及 Makefile 生成器 `qmake` 只在构建时需要，因此它们被指定为带有 `_build` 后缀：
 
-```
+```sh
 USES=	qt:5
 USE_QT=	gui buildtools_build qmake_build
 ```
@@ -1376,18 +1400,18 @@ USE_QT=	gui buildtools_build qmake_build
 
 如果应用程序提供了 qmake 项目文件（**\*.pro**），则定义 `USES= qmake` 和 `USE_QT`。`USES= qmake` 已经隐含了对 `qmake` 的构建依赖，因此可以省略 `USE_QT` 中的 qmake 组件。类似于 [CMake](https://docs.freebsd.org/en/books/porters-handbook/special/#using-cmake)，qmake 支持源代码外构建，可以通过指定 `outsource` 参数来启用（参见 [`USES= qmake` 示例](https://docs.freebsd.org/en/books/porters-handbook/special/#using-qmake-example)）。另请参见 [`USES qmake` 的可能参数](https://docs.freebsd.org/en/books/porters-handbook/special/#using-qmake-arguments)。
 
-#### 表 16. `USES= qmake` 的可能参数
+**表 16. `USES= qmake` 的可能参数**
 
-| 变量             | 描述                                                                                                            |
+| 变量             | 说明                                                                                                            |
 | -------------- | ------------------------------------------------------------------------------------------------------------- |
 | `no_configure` | 不添加配置目标。这由 `HAS_CONFIGURE=yes` 和 `GNU_CONFIGURE=yes` 隐含。当构建仅需要通过 `USES= qmake` 设置环境，但其他时候自行运行 `qmake` 时需要此参数。 |
 | `no_env`       | 禁止修改配置和构建环境。仅当 `qmake` 用于配置软件且构建无法理解 `USES= qmake` 设置的环境时才需要。                                                 |
 | `norecursive`  | 不向 `qmake` 传递 `-recursive` 参数。                                                                                |
 | `outsource`    | 执行源代码外构建。                                                                                                     |
 
-#### 表 17. 使用 `qmake` 的 Ports 变量
+**表 17. 使用 `qmake` 的 Ports 变量**
 
-| 变量                  | 描述                                                        |
+| 变量                  | 说明                                                        |
 | ------------------- | --------------------------------------------------------- |
 | `QMAKE_ARGS`        | 传递给 `qmake` 二进制文件的 Port 特定 `qmake` 标志。                        |
 | `QMAKE_ENV`         | 设置给 `qmake` 二进制文件的环境变量。默认值为 `${CONFIGURE_ENV}`。           |
@@ -1395,7 +1419,7 @@ USE_QT=	gui buildtools_build qmake_build
 
 使用 `USES= qmake` 时，将应用以下设置：
 
-```
+```sh
 CONFIGURE_ARGS+=	--with-qt-includes=${QT_INCDIR} \
 			--with-qt-libraries=${QT_LIBDIR} \
 			--with-extra-libs=${LOCALBASE}/lib \
@@ -1416,7 +1440,7 @@ PLIST_SUB+=	QT_INCDIR=${QT_INCDIR_REL} \
 
 这个示例展示了如何在 Qt 5 port 中使用 `qmake`：
 
-```
+```sh
 USES=	qmake:outsource qt:5
 USE_QT=	buildtools_build
 ```
@@ -1425,7 +1449,7 @@ Qt 应用程序通常是跨平台编写的，很多时候 X11/Unix 并不是它�
 
 * *缺少附加的包含路径*。许多应用程序都支持系统托盘图标，但却没有在 X11 目录中查找包含文件和/或库。为了通过命令行将目录添加到 `qmake` 的包含和库搜索路径中，可以使用：
 
-  ```
+  ```sh
   QMAKE_ARGS+=	INCLUDEPATH+=${LOCALBASE}/include \
   		LIBS+=-L${LOCALBASE}/lib
   ```
@@ -1437,9 +1461,9 @@ Qt 应用程序通常是跨平台编写的，很多时候 X11/Unix 并不是它�
 
 如果应用程序依赖于 KDE，请设置 `USES+=kde:5` 并将 `USE_KDE` 设置为所需组件的列表。可以使用 `_build` 和 `_run` 后缀来强制指定组件的依赖类型（例如，`baseapps_run`）。如果没有设置后缀，则会使用默认的依赖类型。要强制两种类型的依赖，可以分别添加该组件的两次（例如，`ecm_build ecm_run`）。可用的组件列出在以下位置（最新的组件也列在 **/usr/ports/Mk/Uses/kde.mk**）：
 
-#### 表 18. 可用的 KDE 组件
+**表 18. 可用的 KDE 组件**
 
-| 名称                     | 描述                                  |
+| 名称                     | 说明                                  |
 | ---------------------- | ----------------------------------- |
 | `activities`           | KF5 运行时和库，用于在不同活动中组织工作              |
 | `activities-stats`     | KF5 活动统计                            |
@@ -1624,30 +1648,30 @@ Qt 应用程序通常是跨平台编写的，很多时候 X11/Unix 并不是它�
 | `xmlgui`                      | KF5 用户可配置的主窗口                  |
 | `xmlrpcclient`                | KF5 与 XMLRPC 服务的交互             |
 
-### 示例 23. `USE_KDE` 示例
+**示例 23. `USE_KDE` 示例**
 
 这是一个简单的 KDE Port 示例。`USES= cmake` 指示 Port 使用 CMake，CMake 是一个被 KDE 项目广泛使用的配置工具（详细用法请参见 [使用 `cmake`](https://docs.freebsd.org/en/books/porters-handbook/special/#using-cmake)）。`USE_KDE` 会引入对 KDE 库的依赖。所需的 KDE 组件和其他依赖项可以通过配置日志来确定。`USE_KDE` 并不意味着 `USE_QT`。如果 Port 需要一些 Qt 组件，请在 `USE_QT` 中指定它们。
 
-```
+```sh
 USES=		cmake kde:5 qt:5
 USE_KDE=	ecm
 USE_QT=		core buildtools_build qmake_build
 ```
 
-### 6.15. 使用 LXQt
+## 6.15. 使用 LXQt
 
 依赖 LXQt 的应用程序应设置 `USES+= lxqt` 并将 `USE_LXQT` 设置为所需组件的列表，如下表所示。
 
-#### 表 19. 可用的 LXQt 组件
+**表 19. 可用的 LXQt 组件**
 
-| 名称           | 描述                            |
+| 名称           | 说明                            |
 | ------------ | ----------------------------- |
 | `buildtools` | 用于额外 CMake 模块的辅助工具            |
 | `libfmqt`    | Libfm Qt 绑定                   |
 | `lxqt`       | LXQt 核心库                      |
 | `qtxdg`      | freedesktop.org XDG 规范的 Qt 实现 |
 
-### 示例 24. `USE_LXQT` 示例
+**示例 24. `USE_LXQT` 示例**
 
 这是一个简单的示例，`USE_LXQT` 会添加 LXQt 库的依赖。所需的 LXQt 组件和其他依赖项可以通过配置日志来确定。
 
@@ -1657,15 +1681,15 @@ USE_QT=		core dbus widgets buildtools_build qmake_build
 USE_LXQT=	buildtools libfmqt
 ```
 
-### 6.16. 使用 Java
+## 6.16. 使用 Java
 
-#### 6.16.1. 变量定义
+### 6.16.1. 变量定义
 
 如果 Port 需要 Java™ 开发工具包（JDK™）来构建、运行或甚至提取 distfile，则需要定义 `USE_JAVA`。
 
-Ports 集合中有多个 JDK，来自不同的供应商，并且有多个版本。如果 Port 必须使用特定版本，请使用 `JAVA_VERSION` 变量指定它。当前版本是 [java/openjdk18](https://cgit.freebsd.org/ports/tree/java/openjdk18/)，同时还提供有 [java/openjdk17](https://cgit.freebsd.org/ports/tree/java/openjdk17/)、[java/openjdk16](https://cgit.freebsd.org/ports/tree/java/openjdk16/)、[java/openjdk15](https://cgit.freebsd.org/ports/tree/java/openjdk15/)、[java/openjdk14](https://cgit.freebsd.org/ports/tree/java/openjdk14/)、[java/openjdk13](https://cgit.freebsd.org/ports/tree/java/openjdk13/)、[java/openjdk12](https://cgit.freebsd.org/ports/tree/java/openjdk12/)、[java/openjdk11](https://cgit.freebsd.org/ports/tree/java/openjdk11/)、[java/openjdk8](https://cgit.freebsd.org/ports/tree/java/openjdk8/) 和 [java/openjdk7](https://cgit.freebsd.org/ports/tree/java/openjdk7/) 可用。
+Ports 中有多个 JDK，来自不同的供应商，并且有多个版本。如果 Port 必须使用特定版本，请使用 `JAVA_VERSION` 变量指定它。当前版本是 [java/openjdk18](https://cgit.freebsd.org/ports/tree/java/openjdk18/)，同时还提供有 [java/openjdk17](https://cgit.freebsd.org/ports/tree/java/openjdk17/)、[java/openjdk16](https://cgit.freebsd.org/ports/tree/java/openjdk16/)、[java/openjdk15](https://cgit.freebsd.org/ports/tree/java/openjdk15/)、[java/openjdk14](https://cgit.freebsd.org/ports/tree/java/openjdk14/)、[java/openjdk13](https://cgit.freebsd.org/ports/tree/java/openjdk13/)、[java/openjdk12](https://cgit.freebsd.org/ports/tree/java/openjdk12/)、[java/openjdk11](https://cgit.freebsd.org/ports/tree/java/openjdk11/)、[java/openjdk8](https://cgit.freebsd.org/ports/tree/java/openjdk8/) 和 [java/openjdk7](https://cgit.freebsd.org/ports/tree/java/openjdk7/) 可用。
 
-#### 表 20. 使用 Java 的 Ports 可以设置的变量
+**表 20. 使用 Java 的 Ports 可以设置的变量**
 
 | 变量             | 含义                                                                                     |
 | -------------- | -------------------------------------------------------------------------------------- |
@@ -1679,7 +1703,7 @@ Ports 集合中有多个 JDK，来自不同的供应商，并且有多个版本�
 
 下面是设置 `USE_JAVA` 后， Port 将接收到的所有设置列表。
 
-#### 表 21. 使用 Java 的 Ports 提供的变量
+**表 21. 使用 Java 的 Ports 提供的变量**
 
 | 变量                             | 值                                                                                                |
 | ------------------------------ | ------------------------------------------------------------------------------------------------ |
@@ -1687,8 +1711,8 @@ Ports 集合中有多个 JDK，来自不同的供应商，并且有多个版本�
 | `JAVA_PORT_VERSION`            | JDK  Port 的完整版本（例如，`1.6.0`）。只需要该版本号的前两位数字，使用 `${JAVA_PORT_VERSION:C/^([0-9])\.([0-9])(.*)$/\1.\2/}`。 |
 | `JAVA_PORT_OS`                 | JDK  Port 使用的操作系统（例如，`'native'`）。                                                                    |
 | `JAVA_PORT_VENDOR`             | JDK  Port 的供应商（例如，`'openjdk'`）。                                                                      |
-| `JAVA_PORT_OS_DESCRIPTION`     | JDK  Port 使用的操作系统描述（例如，`'Native'`）。                                                                  |
-| `JAVA_PORT_VENDOR_DESCRIPTION` | JDK  Port 供应商的描述（例如，`'OpenJDK BSD Porting Team'`）。                                                   |
+| `JAVA_PORT_OS_DESCRIPTION`     | JDK  Port 使用的操作系统说明（例如，`'Native'`）。                                                                  |
+| `JAVA_PORT_VENDOR_DESCRIPTION` | JDK  Port 供应商的说明（例如，`'OpenJDK BSD Porting Team'`）。                                                   |
 | `JAVA_HOME`                    | JDK 安装目录的路径（例如，**'/usr/local/openjdk6'**）。                                                       |
 | `JAVAC`                        | 要使用的 Java 编译器路径（例如，**'/usr/local/openjdk6/bin/javac'**）。                                         |
 | `JAR`                          | 要使用的 `jar` 工具的路径（例如，**'/usr/local/openjdk6/bin/jar'** 或 **'/usr/local/bin/fastjar'**）。           |
@@ -1710,7 +1734,7 @@ Ports 集合中有多个 JDK，来自不同的供应商，并且有多个版本�
 
 此外，定义了这些常量，以便所有 Java  Port 可以一致地安装：
 
-#### 表 22. 为使用 Java 的 Ports 定义的常量
+**表 22. 为使用 Java 的 Ports 定义的常量**
 
 | 常量             | 值                                                            |
 | -------------- | ------------------------------------------------------------ |
@@ -1728,7 +1752,7 @@ Ports 集合中有多个 JDK，来自不同的供应商，并且有多个版本�
 
 在移植 Java 库时， Port 需要将 JAR 文件安装到 **\${JAVAJARDIR}**，并将其他所有内容安装到 **\${JAVASHAREDIR}/\${PORTNAME}** 目录下（文档除外，见下文）。为了减小打包文件的大小，应在 **Makefile** 中直接引用 JAR 文件。可以使用如下语句（其中 **myport.jar** 是 Port 安装的 JAR 文件名称）：
 
-```
+```sh
 PLIST_FILES+=	${JAVAJARDIR}/myport.jar
 ```
 
@@ -1736,7 +1760,7 @@ PLIST_FILES+=	${JAVAJARDIR}/myport.jar
 
 当移植需要应用服务器（如 [www/tomcat7](https://cgit.freebsd.org/ports/tree/www/tomcat7/)）来运行服务的 Java™ 应用程序时，供应商通常会分发一个 **.war** 文件。**.war** 是 Web 应用程序存档文件，在应用程序调用时会被解压。避免将 **.war** 添加到 **pkg-plist** 中，这不是最佳实践。应用服务器会展开 war 存档，但如果 Port 被移除，它不会正确清理该存档。更好的做法是先解压存档文件，再安装文件，最后将这些文件添加到 **pkg-plist** 中。
 
-```
+```sh
 TOMCATDIR=	${LOCALBASE}/apache-tomcat-7.0
 WEBAPPDIR=	myapplication
 
@@ -1782,8 +1806,10 @@ Web 应用程序必须安装到 **PREFIX/www/appname** 目录下。这个路径�
 
 Web 服务器进程的用户和组信息可以通过 `WWWOWN` 和 `WWWGRP` 获取，以便在需要更改某些文件的所有权时使用。两者的默认值为 `www`。如果 Port 需要不同的值，可以使用 `WWWOWN?= myuser` 和 `WWWGRP?= mygroup`。这允许用户轻松地覆盖这些值。
 
-|   | 谨慎使用 `WWWOWN` 和 `WWWGRP`。请记住，Web 服务器可以写入的每个文件都是一个潜在的安全风险。 |
-| - | --------------------------------------------------------- |
+>**重要**
+>
+>谨慎使用 `WWWOWN` 和 `WWWGRP`。请记住，Web 服务器可以写入的每个文件都是一个潜在的安全风险。
+
 
 除非 Web 应用程序明确需要 Apache，否则不要依赖 Apache。请尊重用户可能希望在 Apache 以外的 Web 服务器上运行 Web 应用程序。
 
@@ -1797,9 +1823,9 @@ PHP Web 应用程序通过 `USES=php` 声明对 PHP 的依赖。更多信息请�
 
 在 Port 的 **Makefile** 中添加 `USES=pear`。该框架将把相关文件安装到正确的位置，并在安装时自动生成 plist。
 
-示例 25. PEAR 类的 Makefile 示例
+**示例 25. PEAR 类的 Makefile 示例**
 
-```
+```sh
 PORTNAME=       Date
 DISTVERSION=	1.4.3
 CATEGORIES=	devel www pear
@@ -1813,14 +1839,19 @@ USES=	pear
 .include <bsd.port.mk>
 ```
 
-|   | PEAR 模块将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。 |
-| - | --------------------------------------------------------------------------------------------------------------------- |
+>**技巧**
+>
+>PEAR 模块将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。 
 
-|   | 如果使用非默认的 `PEAR_CHANNEL`，则构建时和运行时的依赖项将自动添加。 |
-| - | ------------------------------------------ |
 
-|   | PEAR 模块不需要定义 `PKGNAMESUFFIX`，该值会自动使用 `PEAR_PKGNAMEPREFIX` 填充。如果 Port 需要添加 `PKGNAMEPREFIX`，则必须同时使用 `PEAR_PKGNAMEPREFIX` 来区分不同的 flavor。 |
-| - | --------------------------------------------------------------------------------------------------------------------------------- |
+>**注意**
+>
+> 如果使用非默认的 `PEAR_CHANNEL`，则构建时和运行时的依赖项将自动添加。
+
+
+>**重要**
+>
+>PEAR 模块不需要定义 `PKGNAMESUFFIX`，该值会自动使用 `PEAR_PKGNAMEPREFIX` 填充。如果 Port 需要添加 `PKGNAMEPREFIX`，则必须同时使用 `PEAR_PKGNAMEPREFIX` 来区分不同的 flavor。
 
 #### 6.17.4.1. Horde 模块
 
@@ -1830,9 +1861,9 @@ USES=	pear
 
 `USE_HORDE_BUILD` 和 `USE_HORDE_RUN` 变量可以用于添加构建时和运行时对其他 Horde 模块的依赖。有关可用模块的完整列表，请参见 **Mk/Uses/horde.mk**。
 
-示例 26. Horde 模块的 Makefile 示例
+**示例 26. Horde 模块的 Makefile 示例**
 
-```
+```sh
 PORTNAME=	Horde_Core
 DISTVERSION=	2.14.0
 CATEGORIES=	devel www pear
@@ -1858,20 +1889,21 @@ SOCKETS_USE=	PHP=sockets
 .include <bsd.port.mk>
 ```
 
-|   | 由于 Horde 模块也是 PEAR 模块，它们将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。 |
-| - | -------------------------------------------------------------------------------------------------------------------------------------- |
+>**技巧**
+>
+> 由于 Horde 模块也是 PEAR 模块，它们将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。 
 
 ### 6.18. 使用 Python
 
-Ports Collection 支持多个 Python 版本的并行安装。 Port 必须根据用户可设置的 `PYTHON_VERSION` 使用正确的 `python` 解释器。最重要的是，这意味着将脚本中的 `python` 可执行文件路径替换为 `PYTHON_CMD` 的值。
+Ports 支持多个 Python 版本的并行安装。 Port 必须根据用户可设置的 `PYTHON_VERSION` 使用正确的 `python` 解释器。最重要的是，这意味着将脚本中的 `python` 可执行文件路径替换为 `PYTHON_CMD` 的值。
 
 将文件安装到 `PYTHON_SITELIBDIR` 下的 Port 必须使用 `pyXY-` 包名前缀，这样它们的包名就包含了 Python 的版本号。
 
-```
+```sh
 PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 ```
 
-#### 表 25. 使用 Python 的 Port 最有用的变量
+**表 25. 使用 Python 的 Port 最有用的变量**
 
 | `USES=python`             | 该 Port 需要 Python。可以通过类似 `3.10+` 的值指定最小要求的版本。也可以通过使用短横线分隔两个版本号来指定版本范围，如 `USES=python:3.8-3.9`。请注意，`USES=python` *不* 包含 Python 2.7，需明确要求使用 `USES=python:2.7+`。                           |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1885,9 +1917,9 @@ PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 | `PYTHONPREFIX_SITELIBDIR` | `PYTHON_SITELIBDIR` 的 PREFIX 清理版本。始终在 **pkg-plist** 中使用 `%%PYTHON_SITELIBDIR%%`。`%%PYTHON_SITELIBDIR%%` 的默认值为 `lib/python%%PYTHON_VERSION%%/site-packages`。                        |
 | `PYTHON_CMD`              | Python 解释器命令行，包括版本号。                                                                                                                                                               |
 
-#### 表 26. Python 模块依赖帮助程序
+**表 26. Python 模块依赖帮助程序**
 
-| `PYNUMERIC`      | 数值扩展的依赖项。                                                                                             |
+| `PYNUMERIC`      | 数值扩展的依赖项                                                                                           |
 | ---------------- | ----------------------------------------------------------------------------------------------------- |
 | `PYNUMPY`        | 新的数值扩展 numpy 的依赖项。（`PYNUMERIC` 已被上游供应商废弃）。                                                            |
 | `PYXML`          | XML 扩展的依赖项（对于 Python 2.0 及更高版本，因其也在基础发行版中，故不需要）。                                                      |
@@ -1899,12 +1931,13 @@ PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
 
 完整的可用变量列表可以在 **/usr/ports/Mk/Uses/python.mk** 中找到。
 
-|   | 所有使用 [Python flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-python) 的 Python  Port 的依赖项（无论是使用 `USE_PYTHON=distutils` 还是 `USE_PYTHON=flavors`）都必须使用 `@${PY_FLAVOR}` 将 Python flavor 添加到它们的 origin 中。请参见 [简单的 Python 模块 Makefile](https://docs.freebsd.org/en/books/porters-handbook/special/#python-Makefile)。 |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**重要**
+>
+>所有使用 [Python flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-python) 的 Python  Port 的依赖项（无论是使用 `USE_PYTHON=distutils` 还是 `USE_PYTHON=flavors`）都必须使用 `@${PY_FLAVOR}` 将 Python flavor 添加到它们的 origin 中。请参见 [简单的 Python 模块 Makefile](https://docs.freebsd.org/en/books/porters-handbook/special/#python-Makefile)。
 
-#### 示例 27. 简单 Python 模块的 Makefile
+**示例 27. 简单 Python 模块的 Makefile**
 
-```
+```sh
 PORTNAME=	sample
 DISTVERSION=	1.2.3
 CATEGORIES=	devel
@@ -1923,7 +1956,7 @@ USE_PYTHON=	autoplist distutils
 
 一些 Python 应用程序声称支持 `DESTDIR`（这是 staging 所需的），但实际上它是破损的（例如，Mailman 版本 2.1.16 之前的版本）。可以通过重新编译脚本来解决此问题。可以在 `post-build` 目标中实现这一点。例如，假设 Python 脚本应该安装到 `PYTHONPREFIX_SITELIBDIR`，则可以应用以下解决方案：
 
-```
+```sh
 (cd ${STAGEDIR}${PREFIX} \
   && ${PYTHON_CMD} ${PYTHON_LIBDIR}/compileall.py \
    -d ${PREFIX} -f ${PYTHONPREFIX_SITELIBDIR:S;${PREFIX}/;;})
@@ -1933,9 +1966,9 @@ USE_PYTHON=	autoplist distutils
 
 ## 6.19. 使用 Tcl/Tk
 
-Ports Collection 支持多个 Tcl/Tk 版本的并行安装。Ports 应该至少支持默认的 Tcl/Tk 版本和更高版本，可以通过 `USES=tcl` 来指定。也可以通过附加版本号 `:_xx_` 来指定所需的 `tcl` 版本，例如 `USES=tcl:85`。
+Ports 支持多个 Tcl/Tk 版本的并行安装。Ports 应该至少支持默认的 Tcl/Tk 版本和更高版本，可以通过 `USES=tcl` 来指定。也可以通过附加版本号 `:_xx_` 来指定所需的 `tcl` 版本，例如 `USES=tcl:85`。
 
-### 表 27. 使用 Tcl/Tk 的 Ports 最有用的只读变量
+**表 27. 使用 Tcl/Tk 的 Ports 最有用的只读变量**
 
 | `TCL_VER`              | 选择的 Tcl 版本号（主版本.次版本） |
 | ---------------------- | -------------------- |
@@ -1949,7 +1982,7 @@ Ports Collection 支持多个 Tcl/Tk 版本的并行安装。Ports 应该至少�
 | `TK_LIBDIR`            | Tk 库文件的路径            |
 | `TK_INCLUDEDIR`        | Tk C 头文件的路径          |
 
-有关这些变量的完整描述，请参阅 [`USES=tcl`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-tcl) 和 [`USES=tk`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-tk) 以及 [Using `USES` Macros](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses)。这些变量的完整列表可在 **/usr/ports/Mk/Uses/tcl.mk** 中找到。
+有关这些变量的完整说明，请参阅 [`USES=tcl`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-tcl) 和 [`USES=tk`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-tk) 以及 [Using `USES` Macros](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses)。这些变量的完整列表可在 **/usr/ports/Mk/Uses/tcl.mk** 中找到。
 
 ## 6.20. 使用 SDL
 
@@ -1979,7 +2012,7 @@ SDL 2.0 版本的这些库被识别：
 
 因此，如果一个 port 依赖于 [net/sdl\_net](https://cgit.freebsd.org/ports/tree/net/sdl_net/) 和 [audio/sdl\_mixer](https://cgit.freebsd.org/ports/tree/audio/sdl_mixer/)，其语法为：
 
-```
+```sh
 USE_SDL=	net mixer
 ```
 
@@ -1999,7 +2032,7 @@ USE_SDL=	net mixer
 
 ## 6.21. 使用 wxWidgets
 
-本节描述了 wxWidgets 库在 Ports 树中的状态以及与 Ports 系统的集成。
+本节介绍了 wxWidgets 库在 Ports 树中的状态以及与 Ports 系统的集成。
 
 ### 6.21.1. 介绍
 
@@ -2011,16 +2044,16 @@ wxWidgets 库有多个版本，它们之间存在冲突（安装的文件同名�
 
 为了让 port 使用特定版本的 wxWidgets，提供了两个可供定义的变量（如果只定义了其中一个，另一个将设置为默认值）：
 
-#### 表 28. 选择 wxWidgets 版本的变量
+**表 28. 选择 wxWidgets 版本的变量**
 
-| 变量           | 描述          | 默认值    |
+| 变量           | 说明          | 默认值    |
 | ------------ | ----------- | ------ |
 | `USE_WX`     |  Port 可以使用的版本列表 | 所有可用版本 |
 | `USE_WX_NOT` |  Port 不能使用的版本列表 | 无      |
 
 可用的 wxWidgets 版本及其在树中的对应 Port 如下：
 
-#### 表 29. 可用的 wxWidgets 版本
+**表 29. 可用的 wxWidgets 版本**
 
 | 版本    |  Port                                                                                 |
 | ----- | --------------------------------------------------------------------------------- |
@@ -2029,9 +2062,9 @@ wxWidgets 库有多个版本，它们之间存在冲突（安装的文件同名�
 
 [选择 wxWidgets 版本的变量](https://docs.freebsd.org/en/books/porters-handbook/special/#wx-ver-sel-table)可以设置为这些组合之一，多个版本之间用空格分隔：
 
-#### 表 30. wxWidgets 版本规范
+**表 30. wxWidgets 版本规范**
 
-| 描述          | 示例        |
+| 说明          | 示例        |
 | ----------- | --------- |
 | 单一版本        | `2.8`     |
 | 升序范围        | `2.8+`    |
@@ -2040,7 +2073,7 @@ wxWidgets 库有多个版本，它们之间存在冲突（安装的文件同名�
 
 还有一些变量用于从可用版本中选择首选版本。它们可以设置为一个版本列表，列表中的第一个版本将具有更高的优先级。
 
-#### 表 31. 选择首选 wxWidgets 版本的变量
+**表 31. 选择首选 wxWidgets 版本的变量**
 
 | 名称            | 适用对象 |
 | ------------- | ---- |
@@ -2051,9 +2084,9 @@ wxWidgets 库有多个版本，它们之间存在冲突（安装的文件同名�
 
 还有一些应用程序，尽管不是 wxWidgets 库，但与它们相关。这些应用程序可以在 `WX_COMPS` 中指定。可用的组件如下：
 
-#### 表 32. 可用的 wxWidgets 组件
+**表 32. 可用的 wxWidgets 组件**
 
-| 名称        | 描述                  | 版本限制      |
+| 名称        | 说明                  | 版本限制      |
 | --------- | ------------------- | --------- |
 | `wx`      | 主库                  | 无         |
 | `contrib` | 贡献的库                | 无         |
@@ -2061,9 +2094,9 @@ wxWidgets 库有多个版本，它们之间存在冲突（安装的文件同名�
 
 每个组件的依赖类型可以通过添加后缀来选择，后缀与组件名称之间用分号分隔。如果没有指定后缀，则会使用默认类型（请参见 [默认 wxWidgets 依赖类型](https://docs.freebsd.org/en/books/porters-handbook/special/#wx-def-dep-types)）。可用的依赖类型如下：
 
-#### 表 33. 可用的 wxWidgets 依赖类型
+**表 33. 可用的 wxWidgets 依赖类型**
 
-| 名称      | 描述                          |
+| 名称      | 说明                          |
 | ------- | --------------------------- |
 | `build` | 组件用于构建，相当于 `BUILD_DEPENDS`  |
 | `run`   | 组件用于运行，相当于 `RUN_DEPENDS`    |
@@ -2071,7 +2104,7 @@ wxWidgets 库有多个版本，它们之间存在冲突（安装的文件同名�
 
 组件的默认依赖类型在下表中列出：
 
-#### 表 34. 默认 wxWidgets 依赖类型
+**表 34. 默认 wxWidgets 依赖类型**
 
 | 组件        | 依赖类型  |
 | --------- | ----- |
@@ -2081,11 +2114,11 @@ wxWidgets 库有多个版本，它们之间存在冲突（安装的文件同名�
 | `mozilla` | `lib` |
 | `svg`     | `lib` |
 
-#### 示例 28. 选择 wxWidgets 组件
+**示例 28. 选择 wxWidgets 组件**
 
 以下片段对应一个使用 wxWidgets 版本 `2.4` 及其贡献库的 port：
 
-```
+```sh
 USE_WX=		2.8
 WX_COMPS=	wx contrib
 ```
@@ -2094,11 +2127,11 @@ WX_COMPS=	wx contrib
 
 要检测已安装的版本，可以定义 `WANT_WX`。如果没有设置为特定版本，则组件将带有版本后缀。检测后，`HAVE_WX` 将会被填充。
 
-#### 示例 29. 检测已安装的 wxWidgets 版本和组件
+**示例 29. 检测已安装的 wxWidgets 版本和组件**
 
 此片段可以用于一个使用 wxWidgets 的 port，如果它已安装，或者选择了某个选项。
 
-```
+```sh
 WANT_WX=	yes
 
 .include <bsd.port.pre.mk>
@@ -2111,7 +2144,7 @@ CONFIGURE_ARGS+=	--enable-wx
 
 此片段可以用于一个启用 wxPython 支持的 port，如果 wxWidgets 已安装或者选中了相关选项，此外还包括版本 `2.8`。
 
-```
+```sh
 USE_WX=		2.8
 WX_COMPS=	wx
 WANT_WX=	2.8
@@ -2128,9 +2161,9 @@ CONFIGURE_ARGS+=	--enable-wxpython
 
 这些变量可以在 port 中使用（在定义了 [选择 wxWidgets 版本的变量](https://docs.freebsd.org/en/books/porters-handbook/special/#wx-ver-sel-table) 后）。
 
-#### 表 35. 为使用 wxWidgets 的 Ports 定义的变量
+**表 35. 为使用 wxWidgets 的 Ports 定义的变量**
 
-| 名称           | 描述                                     |
+| 名称           | 说明                                     |
 | ------------ | -------------------------------------- |
 | `WX_CONFIG`  | wxWidgets 的 `wx-config` 脚本的路径（具有不同的名称） |
 | `WXRC_CMD`   | wxWidgets 的 `wxrc` 程序的路径（具有不同的名称）      |
@@ -2140,14 +2173,15 @@ CONFIGURE_ARGS+=	--enable-wxpython
 
 定义 `WX_PREMK` 以便在包含 **bsd.port.pre.mk** 后可以使用这些变量。
 
-|   | 当定义了 `WX_PREMK`，则版本、依赖、组件和定义的变量在修改 wxWidgets port 变量 *后* 包含 **bsd.port.pre.mk** 时不会发生变化。 |
-| - | ---------------------------------------------------------------------------------------- |
+>**重要**
+>
+>当定义了 `WX_PREMK`，则版本、依赖、组件和定义的变量在修改 wxWidgets port 变量 *后* 包含 **bsd.port.pre.mk** 时不会发生变化。
 
-#### 示例 30. 在命令中使用 wxWidgets 变量
+**示例 30. 在命令中使用 wxWidgets 变量**
 
 此片段展示了如何通过运行 `wx-config` 脚本来获取完整的版本字符串，将其分配给变量并传递给程序，使用 `WX_PREMK`。
 
-```
+```sh
 USE_WX=		2.8
 WX_PREMK=	yes
 
@@ -2160,14 +2194,16 @@ PLIST_SUB+=	VERSION="${VER_STR}"
 .endif
 ```
 
-|   | 当 wxWidgets 变量位于目标中时，无需使用 `WX_PREMK`，可以安全地在命令中使用这些变量。 |
-| - | ----------------------------------------------------- |
+>**注意**
+>
+>当 wxWidgets 变量位于目标中时，无需使用 `WX_PREMK`，可以安全地在命令中使用这些变量。
+
 
 ### 6.21.7. 额外的 `configure` 参数
 
 一些 GNU `configure` 脚本仅通过设置 `WX_CONFIG` 环境变量无法找到 wxWidgets，可能需要额外的参数。可以使用 `WX_CONF_ARGS` 提供这些参数。
 
-#### 表 36. `WX_CONF_ARGS` 的合法值
+**表 36. `WX_CONF_ARGS` 的合法值**
 
 | 可能的值       | 结果参数                                                     |
 | ---------- | -------------------------------------------------------- |
@@ -2176,7 +2212,7 @@ PLIST_SUB+=	VERSION="${VER_STR}"
 
 ## 6.22. 使用 Lua
 
-本节描述了 Lua 库在 Ports 树中的状态及其与 Ports 系统的集成。
+本节介绍了 Lua 库在 Ports 树中的状态及其与 Ports 系统的集成。
 
 ### 6.22.1. 引言
 
@@ -2190,20 +2226,21 @@ Lua 库和对应的解释器有多个版本，它们之间存在冲突（安装�
 
 使用 Lua 的 Port 应该有以下形式的行：
 
-```
+```sh
 USES=	lua
 ```
 
 如果需要特定版本的 Lua 或版本范围，可以按 `XY`（可以多次使用）、`XY+`、`-XY` 或 `XY-ZA` 的格式指定。如果 `DEFAULT_VERSIONS` 设置的默认 Lua 版本位于请求的范围内，则将使用它，否则将使用默认版本最接近请求的版本。例如：
 
-```
+```sh
 USES=	lua:52-53
 ```
 
 请注意，版本选择不会尝试基于已安装的 Lua 版本进行调整。
 
-|   | 使用 `XY+` 格式的版本指定应该谨慎，Lua 的 API 在每个版本中都会有所变化，配置工具如 CMake 或 Autoconf 在未来的 Lua 版本上通常无法正常工作，直到它们被更新为支持这些版本。 |
-| - | ------------------------------------------------------------------------------------------------------- |
+>**注意**
+>
+>使用 `XY+` 格式的版本指定应该谨慎，Lua 的 API 在每个版本中都会有所变化，配置工具如 CMake 或 Autoconf 在未来的 Lua 版本上通常无法正常工作，直到它们被更新为支持这些版本。 
 
 ### 6.22.3. 配置和编译器标志
 
@@ -2217,7 +2254,7 @@ USES=	lua:52-53
 
 一个安装 Lua 模块的 Port（而不是仅仅使用 Lua 的应用程序）应该为每个支持的 Lua 版本构建一个单独的风味。这可以通过添加 `module` 参数来完成：
 
-```
+```sh
 USES=	lua:module
 ```
 
@@ -2225,7 +2262,7 @@ USES=	lua:module
 
 由于每个风味必须有不同的包名，因此提供了变量 `LUA_PKGNAMEPREFIX`，该变量将被设置为适当的值；其预期用法为：
 
-```
+```sh
 PKGNAMEPREFIX=	${LUA_PKGNAMEPREFIX}
 ```
 
@@ -2233,11 +2270,11 @@ PKGNAMEPREFIX=	${LUA_PKGNAMEPREFIX}
 
 一个希望为每个 Lua 版本构建单独包的 Port（而不是 Lua 模块）应该使用 `flavors` 参数：
 
-```
+```sh
 USES=	lua:flavors
 ```
 
-这与上述描述的 `module` 参数的工作方式相同，但不假设包应该作为 Lua 模块来记录（因此默认情况下不定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`）。不过，Port 可以选择定义 `LUA_DOCSUBDIR` 作为合适的子目录名称（通常是 Port 的 `PORTNAME`，只要它不与任何模块的 `PORTNAME` 冲突），在这种情况下，框架将定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`。
+这与上述说明的 `module` 参数的工作方式相同，但不假设包应该作为 Lua 模块来记录（因此默认情况下不定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`）。不过，Port 可以选择定义 `LUA_DOCSUBDIR` 作为合适的子目录名称（通常是 Port 的 `PORTNAME`，只要它不与任何模块的 `PORTNAME` 冲突），在这种情况下，框架将定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`。
 
 与模块 Port 一样，风味 Port 应避免安装可能在版本之间冲突的文件。通常通过将 `LUA_VER_STR` 作为程序名称的后缀来完成此操作（例如使用 [`uniquefiles`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uniquefiles)），并在其他文件或子目录中使用 `LUA_VER` 或 `LUA_VER_STR`，这些文件或子目录位于 `LUA_MODLIBDIR` 和 `LUA_MODSHAREDIR` 之外。
 
@@ -2245,9 +2282,9 @@ USES=	lua:flavors
 
 在 Port 中可以使用以下变量。
 
-#### 表 37. 使用 Lua 的 Port 中定义的变量
+**表 37. 使用 Lua 的 Port 中定义的变量**
 
-| 名称                   | 描述                               |
+| 名称                   | 说明                               |
 | -------------------- | -------------------------------- |
 | `LUA_VER`            | 将使用的 Lua 版本（例如，`5.4`）            |
 | `LUA_VER_STR`        | 不带点的 Lua 版本（例如，`54`）             |
@@ -2266,20 +2303,20 @@ USES=	lua:flavors
 
 对于指定了 `module` 参数的 Port，还有以下附加变量：
 
-#### 表 38. Lua 模块 Port 中定义的变量
+**表 38. Lua 模块 Port 中定义的变量**
 
-| 名称                | 描述             |
+| 名称                | 说明             |
 | ----------------- | -------------- |
 | `LUA_DOCSDIR`     | 模块文档应安装到的目录。   |
 | `LUA_EXAMPLESDIR` | 模块示例文件应安装到的目录。 |
 
 ### 6.22.6. 示例
 
-#### 示例 31. 使用 Lua 的应用程序 Makefile
+**示例 31. 使用 Lua 的应用程序 Makefile**
 
 此示例展示了如何引用运行时所需的 Lua 模块。请注意，引用必须指定一个风味。
 
-```
+```sh
 PORTNAME=	sample
 DISTVERSION=	1.2.3
 CATEGORIES=	whatever
@@ -2295,9 +2332,9 @@ USES=		lua
 .include <bsd.port.mk>
 ```
 
-#### 示例 32. 简单 Lua 模块的 Makefile
+**示例 32. 简单 Lua 模块的 Makefile**
 
-```
+```sh
 PORTNAME=	sample
 DISTVERSION=	1.2.3
 CATEGORIES=	whatever
@@ -2316,7 +2353,7 @@ DOCSDIR=	${LUA_DOCSDIR}
 
 ## 6.23. 使用 Guile
 
-本节描述了 Guile 在 Ports 树中的状态以及它与 Ports 系统的集成。
+本节介绍了 Guile 在 Ports 树中的状态以及它与 Ports 系统的集成。
 
 ### 6.23.1. 介绍
 
@@ -2330,7 +2367,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 
 #### 表 39. 使用 Guile 的 Ports 定义的参数
 
-| 名称             | 描述                                                                          |
+| 名称             | 说明                                                                          |
 | -------------- | --------------------------------------------------------------------------- |
 | `<em>X.Y</em>` | 声明与 Guile 版本 `X.Y` 的兼容性。目前可用的版本为 `1.8`（已废弃）、`2.2` 和 `3.0`。可以指定多个版本。         |
 | `flavors`      | 为每个指定的 Guile 版本创建一个风味。由 `DEFAULT_VERSIONS` 指定的版本将成为默认风味。风味名称的格式为 `guileXY`。 |
@@ -2365,7 +2402,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 
 由于每个风味必须具有不同的包名称，因此这些 Port 必须设置 `PKGNAMESUFFIX`，通常为：
 
-```
+```sh
 PKGNAMESUFFIX=	-${FLAVOR}
 ```
 
@@ -2381,9 +2418,9 @@ PKGNAMESUFFIX=	-${FLAVOR}
 
 这些变量在 Port 中可用。
 
-#### 表 40. 使用 Guile 的 Port 所定义的变量
+**表 40. 使用 Guile 的 Port 所定义的变量**
 
-| 名称                                  | 示例值                                        | 描述                                               |
+| 名称                                  | 示例值                                        | 说明                                               |
 | ----------------------------------- | ------------------------------------------ | ------------------------------------------------ |
 | `GUILE_VER`                         | `3.0`                                      | 正在使用的 Guile 版本。                                  |
 | `GUILE_SFX`                         | `3`                                        | 用于某些名称的短后缀。仅在小心使用时使用；可能不是唯一的，或将来可能会改变。           |
@@ -2402,9 +2439,9 @@ PKGNAMESUFFIX=	-${FLAVOR}
 
 以下内容定义了作为变量和 `PLIST_SUB` 条目的路径替代。变量形式以 `_DIR` 作为后缀，并且是完整路径（以 `GUILE_PREFIX` 为前缀）。
 
-#### 表 41. 使用 Guile 的 Port 定义的路径替代
+**表 41. 使用 Guile 的 Port 定义的路径替代**
 
-| 名称                  | 示例值                         | 描述                          |
+| 名称                  | 示例值                         | 说明                          |
 | ------------------- | --------------------------- | --------------------------- |
 | `GUILE_GLOBAL_SITE` | `share/guile/site`          | 所有 Guile 版本共享的站点目录；通常不建议使用。 |
 | `GUILE_SITE`        | `share/guile/3.0/site`      | 选定的 Guile 版本的站点目录。          |
@@ -2412,7 +2449,7 @@ PKGNAMESUFFIX=	-${FLAVOR}
 | `GUILE_DOCS`        | `share/doc/guile30`         | 版本特定文档的父目录。                 |
 | `GUILE_EXAMPLES`    | `share/examples/guile30`    | 版本特定示例的父目录。                 |
 
-### 6.24. 使用 `iconv`
+## 6.24. 使用 `iconv`
 
 FreeBSD 操作系统自带了本地的 `iconv`。
 
@@ -2430,16 +2467,16 @@ FreeBSD 操作系统自带了本地的 `iconv`。
 
 这两个示例自动为使用 [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 或本地 `iconv` 的系统填充正确的变量值：
 
-#### 示例 34. 简单的 `iconv` 使用
+**示例 34. 简单的 `iconv` 使用**
 
-```
+```sh
 USES=		iconv
 LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
 ```
 
-#### 示例 35. 使用 `iconv` 配置
+**示例 35. 使用 `iconv` 配置**
 
-```
+```sh
 USES=		iconv
 CONFIGURE_ARGS+=${ICONV_CONFIGURE_ARG}
 ```
@@ -2448,9 +2485,9 @@ CONFIGURE_ARGS+=${ICONV_CONFIGURE_ARG}
 
 有时，程序的 **Makefile** 或配置脚本中会硬编码 `ld` 参数或搜索路径。可以通过以下方法解决此问题：
 
-#### 示例 36. 修复硬编码的 `-liconv`
+**示例 36. 修复硬编码的 `-liconv`**
 
-```
+```sh
 USES=		iconv
 
 post-patch:
@@ -2459,9 +2496,9 @@ post-patch:
 
 在某些情况下，可能需要根据是否存在本地 `iconv` 来设置备用值或执行操作。必须在测试 `ICONV_LIB` 的值之前包含 **bsd.port.pre.mk**：
 
-#### 示例 37. 检查本地 `iconv` 可用性
+**示例 37. 检查本地 `iconv` 可用性**
 
-```
+```sh
 USES=		iconv
 
 .include <bsd.port.pre.mk>
@@ -2481,9 +2518,9 @@ post-patch:
 
 特定的 Xfce 库和应用程序依赖项通过赋值给 `USE_XFCE` 来设置。它们定义在 **/usr/ports/Mk/Uses/xfce.mk** 文件中。可用的值如下：
 
-#### `USE_XFCE` 的值
+**`USE_XFCE` 的值**
 
-| 值       | 相关 Port                                                                                       |
+|       |                                                                                      |
 | ------- | ----------------------------------------------------------------------------------------- |
 | garcon  | [sysutils/garcon](https://cgit.freebsd.org/ports/tree/sysutils/garcon/)                   |
 | libexo  | [x11/libexo](https://cgit.freebsd.org/ports/tree/x11/libexo/)                             |
@@ -2494,32 +2531,32 @@ post-patch:
 | thunar  | [x11-fm/thunar](https://cgit.freebsd.org/ports/tree/x11-fm/thunar/)                       |
 | xfconf  | [x11/xfce4-conf](https://cgit.freebsd.org/ports/tree/x11/xfce4-conf/)                     |
 
-#### 示例 38. `USES=xfce` 示例
+**示例 38. `USES=xfce` 示例**
 
-```
+```sh
 USES=		xfce
 USE_XFCE=	libmenu
 ```
 
-#### 示例 39. 使用 Xfce 的 GTK2 小部件
+**示例 39. 使用 Xfce 的 GTK2 小部件**
 
 在此示例中， Port 化的应用程序使用 GTK2 特定的小部件 [x11/libxfce4menu](https://cgit.freebsd.org/ports/tree/x11/libxfce4menu/) 和 [x11/xfce4-conf](https://cgit.freebsd.org/ports/tree/x11/xfce4-conf/)。
 
-```
+```sh
 USES=		xfce:gtk2
 USE_XFCE=	libmenu xfconf
 ```
 
 Xfce 组件通过这种方式包含时，会自动包括它们所需的任何依赖项。现在不再需要列出整个依赖列表。如果 Port 仅需要 [x11-wm/xfce4-panel](https://cgit.freebsd.org/ports/tree/x11-wm/xfce4-panel/)，只需使用以下配置：
 
-```
+```sh
 USES=		xfce
 USE_XFCE=	panel
 ```
 
 不需要像这样列出 [x11-wm/xfce4-panel](https://cgit.freebsd.org/ports/tree/x11-wm/xfce4-panel/) 所需的组件：
 
-```
+```sh
 USES=		xfce
 USE_XFCE=	libexo libmenu libutil panel
 ```
@@ -2530,9 +2567,8 @@ USE_XFCE=	libexo libmenu libutil panel
 
 依赖于 Budgie 桌面的应用程序或库应设置 `USES=budgie` 并将 `USE_BUDGIE` 设置为所需组件的列表。
 
-#### `USE_BUDGIE` 组件
 
-| 名称            | 描述                      |
+| 名称            | 说明                      |
 | ------------- | ----------------------- |
 | `libbudgie`   | 桌面核心（库）                 |
 | `libmagpie`   | Budgie 的 X11 窗口管理器和合成器库 |
@@ -2541,14 +2577,14 @@ USE_XFCE=	libexo libmenu libutil panel
 
 所有应用程序小部件通过 **org.budgie\_desktop.Raven** 服务进行通信。默认的依赖项是 lib 和运行时，可以通过 `:build` 或 `:run` 来更改。例如：
 
-```
+```sh
 USES=		budgie
 USE_BUDGIE=	screensaver:build
 ```
 
-#### 示例 40. `USE_BUDGIE` 示例
+**示例 40. `USE_BUDGIE` 示例**
 
-```
+```sh
 USES=		budgie gettext gnome meson pkgconfig
 USE_BUDGIE=	libbudgie
 ```
@@ -2559,6 +2595,8 @@ USE_BUDGIE=	libbudgie
 
 #### 数据库 `USES` 宏
 
+**表 42 数据库宏**
+
 | 数据库                     | `USES` 宏                                                                         |
 | ----------------------- | -------------------------------------------------------------------------------- |
 | Berkeley DB             | [`bdb`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-bdb)       |
@@ -2566,50 +2604,50 @@ USE_BUDGIE=	libbudgie
 | PostgreSQL              | [`pgsql`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-pgsql)   |
 | SQLite                  | [`sqlite`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-sqlite) |
 
-#### 示例 41. 使用 Berkeley DB 6
+**示例 41. 使用 Berkeley DB 6**
 
-```
+```sh
 USES=	bdb:6
 ```
 
 详见 [`bdb`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-bdb)。
 
-#### 示例 42. 使用 MySQL
+**示例 42. 使用 MySQL**
 
 当 Port 需要 MySQL 客户端库时，添加：
 
-```
+```sh
 USES=	mysql
 ```
 
 详见 [`mysql`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-mysql)。
 
-#### 示例 43. 使用 PostgreSQL
+**示例 43. 使用 PostgreSQL**
 
 当 Port 需要 PostgreSQL 9.6 或更高版本的服务器时，添加：
 
-```
+```sh
 USES=		pgsql:9.6+
 WANT_PGSQL=	server
 ```
 
 详见 [`pgsql`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-pgsql)。
 
-#### 示例 44. 使用 SQLite 3
+**示例 44. 使用 SQLite 3**
 
-```
+```sh
 USES=	sqlite:3
 ```
 
 详见 [`sqlite`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-sqlite)。
 
-### 6.28. 启动和停止服务（`rc` 脚本）
+## 6.28. 启动和停止服务（`rc` 脚本）
 
 **rc.d** 脚本用于在系统启动时启动服务，并为管理员提供一种标准的方式来停止、启动和重新启动服务。 Port 集成到系统 **rc.d** 框架中。有关其用法的详细信息，可以参见 [rc.d Handbook 章节](https://docs.freebsd.org/en/books/handbook/#configtuning-rcd)。有关可用命令的详细解释，请参见 [rc(8)](https://man.freebsd.org/cgi/man.cgi?query=rc&sektion=8&format=html) 和 [rc.subr(8)](https://man.freebsd.org/cgi/man.cgi?query=rc.subr&sektion=8&format=html)。此外，还有一篇关于 **rc.d** 脚本实践方面的 [文章](https://docs.freebsd.org/en/articles/rc-scripting/)。
 
 假设有一个名为 *doorman* 的虚拟 Port ，需要启动 *doormand* 守护进程。在 **Makefile** 中添加以下内容：
 
-```
+```sh
 USE_RC_SUBR=	doormand
 ```
 
@@ -2617,3 +2655,144 @@ USE_RC_SUBR=	doormand
 
 自 FreeBSD 6.1-RELEASE 以来，本地的 **rc.d** 脚本（包括 Port 安装的）已包含在基础系统的 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 中。
 
+这是一个简单的 **rc.d** 脚本示例，用于启动 *doormand* 守护进程：
+
+```sh
+#!/bin/sh
+
+# PROVIDE: doormand
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# 添加以下行到 /etc/rc.conf.local 或 /etc/rc.conf 来启用此服务：
+#
+# doormand_enable (bool): 默认为 NO。 设置为 YES 启用 doormand。
+# doormand_config (path): 默认为 %%PREFIX%%/etc/doormand/doormand.cf
+
+. /etc/rc.subr
+
+name=doormand
+rcvar=doormand_enable
+
+load_rc_config $name
+
+: ${doormand_enable:="NO"}
+: ${doormand_config="%%PREFIX%%/etc/doormand/doormand.cf"}
+
+command=%%PREFIX%%/sbin/${name}
+pidfile=/var/run/${name}.pid
+
+command_args="-p $pidfile -f $doormand_config"
+
+run_rc_command "$1"
+```
+
+除非有非常充分的理由需要更早启动服务，或者服务以特定用户（非 root）身份运行，所有 Port 脚本必须使用：
+
+```sh
+REQUIRE: LOGIN
+```
+
+如果启动脚本启动了必须在系统关闭时停止的守护进程，以下设置将触发服务在系统关闭时停止：
+
+```sh
+KEYWORD: shutdown
+```
+
+如果脚本启动的不是持久化服务，则不需要此设置。
+
+对于可选的配置元素，最好使用 `=` 风格的默认变量赋值，而不是 `:=` 风格，因为前者仅在变量未设置时设置默认值，而后者则会在变量未设置 *或* 为空时设置默认值。例如，用户可能在 **rc.conf.local** 中包含如下内容：
+
+```sh
+doormand_flags=""
+```
+
+使用 `:=` 的变量替换会不适当地覆盖用户的意图。`_enable` 变量是不可选的，必须使用 `:` 来设置默认值。
+
+>**警告**
+>
+> Port  *不能* 在安装和卸载时启动和停止其服务。不要滥用 [@preexec 命令、@postexec 命令、@preunexec 命令、@postunexec 命令](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-keywords-base-exec) 中说明的 **plist** 关键字，通过运行修改当前运行系统的命令，包括启动或停止服务。 
+
+
+### 6.28.1. 提交前检查清单
+
+在提交一个包含 **rc.d** 脚本的 Port 之前，尤其是提交之前，请查阅以下检查清单，以确保它已经准备好。
+
+[devel/rclint](https://cgit.freebsd.org/ports/tree/devel/rclint/) Port 可以检查其中的大部分内容，但它不能替代适当的代码审查。
+
+1. 如果这是一个新文件，它是否具有 **.sh** 扩展名？如果是的话，必须将其更改为 **file.in**，因为 **rc.d** 文件不能以该扩展名结尾。
+2. 文件名（去掉 **.in** 后），`PROVIDE` 行和 `$` *name* 是否匹配？文件名与 `PROVIDE` 匹配可以使调试变得更容易，特别是对于 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 问题。匹配文件名和 `$` *name* 可以更容易地弄清楚哪些变量在 **rc.conf\[.local]** 中是相关的。这也是所有新脚本的政策，包括基础系统中的脚本。
+3. `REQUIRE` 行是否设置为 `LOGIN`？这是运行为非 root 用户的脚本的强制要求。如果它以 root 身份运行，是否有充分的理由让它在 `LOGIN` 之前运行？如果没有，它必须在后面运行，以便本地脚本可以大致分组到 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 中大多数基础服务已启动后的位置。
+4. 脚本是否启动了一个持久性服务？如果是的话，必须添加 `KEYWORD: shutdown`。
+5. 确保没有 `KEYWORD: FreeBSD`。多年来这已经不必要也不可取了。这也是新脚本可能是从旧脚本复制/粘贴的一个迹象，因此审查时必须格外小心。
+6. 如果脚本使用像 `perl`、`python` 或 `ruby` 这样的解释性语言，请确保 `command_interpreter` 设置得当，例如，对于 Perl，添加 `PERL=${PERL}` 到 `SUB_LIST` 并使用 `%%PERL%%`。否则，
+
+   ```sh
+   # service name stop
+   ```
+
+   可能无法正确工作。请参阅 [service(8)](https://man.freebsd.org/cgi/man.cgi?query=service&sektion=8&format=html) 获取更多信息。
+7. 所有 **/usr/local** 的出现是否都已被替换为 `%%PREFIX%%`？
+8. 默认变量赋值是否出现在 `load_rc_config` 之后？
+9. 是否有默认的空字符串赋值？它们应该被删除，但请再次确认该选项是否在文件顶部的注释中有所记录。
+10. 脚本中设置的变量是否被实际使用？
+11. 默认的 **name**\`\_flags\` 中列出的选项是否确实是必须的？如果是，它们必须在 `command_args` 中。`-d` 是这里的一个警告标志（请原谅这个双关语），因为它通常是“守护进程化”过程的选项，因此实际上是必须的。
+12. **\_name\_\_flags** 绝不能出现在 `command_args` 中（反之亦然，尽管这种错误较少见）。
+13. 脚本是否无条件执行任何代码？这是不被推荐的。通常这些事情必须通过 `start_precmd` 进行处理。
+14. 所有布尔测试必须使用 `checkyesno` 函数。不要手动编写 `[Yy][Ee][Ss]` 等测试。
+15. 如果有一个循环（例如，等待某些东西启动），是否有一个计数器来终止该循环？如果出现错误，我们不希望引导过程永远卡住。
+16. 脚本是否创建了需要特定权限的文件或目录，例如需要由运行该进程的用户拥有的 **pid**？与传统的 [touch(1)](https://man.freebsd.org/cgi/man.cgi?query=touch&sektion=1&format=html)/[chown(8)](https://man.freebsd.org/cgi/man.cgi?query=chown&sektion=8&format=html)/[chmod(1)](https://man.freebsd.org/cgi/man.cgi?query=chmod&sektion=1&format=html) 例程不同，考虑使用 [install(1)](https://man.freebsd.org/cgi/man.cgi?query=install&sektion=1&format=html) 并提供适当的命令行参数，一步完成整个过程。
+
+## 6.29. 添加用户和组
+
+一些 Ports 需要特定的用户帐户，通常是运行该用户的守护进程。对于这些 Ports，请从 50 到 999 中选择一个 *唯一* 的 UID，并在 **ports/UIDs**（用于用户）和 **ports/GIDs**（用于组）中注册它。用户和组的唯一标识符应当相同。
+
+当需要为 Port 创建新用户或组时，请包括这两个文件的补丁。
+
+然后在 **Makefile** 中使用 `USERS` 和 `GROUPS`，用户将在安装该 Port 时自动创建。
+
+```sh
+USERS=	pulse
+GROUPS=	pulse pulse-access pulse-rt
+```
+
+当前保留的 UID 和 GID 列表可以在 **ports/UIDs** 和 **ports/GIDs** 中找到。
+
+## 6.30. 依赖内核源代码的 Ports
+
+一些 Ports（例如内核加载模块）需要内核源代码文件，以便能够编译。正确的判断用户是否已安装这些文件的方法如下：
+
+```sh
+USES=	kmod
+```
+
+除了这个检查，`kmod` 特性会处理这些 Ports 需要考虑的大部分事项。
+
+## 6.31. Go 库
+
+Ports 不得打包或安装 Go 库或源代码。Go Ports 必须在正常的获取阶段获取所需的依赖项，并且只应安装用户所需要的程序和内容，而不是 Go 开发人员需要的内容。
+
+Ports 应该（按优先顺序）：
+
+* 使用与包源一起提供的供应依赖项。
+* 获取上游指定的依赖版本（如果使用 go.mod、vendor.json 或类似文件）。
+* 作为最后的手段（如果没有包含依赖或未明确指定版本）获取上游开发/发布时可用的依赖版本。
+
+## 6.32. Haskell 库
+
+与 Go 语言一样，Ports 不得打包或安装 Haskell 库。Haskell Ports 必须静态链接它们的依赖，并在获取阶段获取所有的分发文件。
+
+## 6.33. Shell 完成文件
+
+许多现代 shell（包括 bash、fish、tcsh 和 zsh）都支持参数和/或选项的 Tab 补全。这种支持通常来自完成文件，这些文件包含如何为某个命令工作进行 Tab 补全的定义。Ports 有时会附带自己的完成文件，或者 Port 维护者可能已经自己创建了它们。
+
+如果有可用的完成文件，应该始终安装它们。没有必要为此创建选项。如果使用了选项，则始终在 `OPTIONS_DEFAULT` 中启用它。
+
+**表 43. 完整的 shell 完成文件名**
+
+| `bash` | **\${PREFIX}/etc/bash\_completion.d** 或 **\${PREFIX}/share/bash-completion/completions** | （这些文件夹中的任何唯一文件名） |
+| ------ | ---------------------------------------------------------------------------------------- | ---------------- |
+| `fish` | **\${PREFIX}/share/fish/completions/\${PORTNAME}.fish**                                  |                  |
+| `zsh`  | **\${PREFIX}/share/zsh/site-functions/\_\${PORTNAME}**                                   |                  |
+
+不要注册对 shell 本身的任何依赖。
