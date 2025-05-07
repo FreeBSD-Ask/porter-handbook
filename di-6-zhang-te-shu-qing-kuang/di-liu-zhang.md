@@ -222,7 +222,7 @@ FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行
 >设置 `MAKE_JOBS_UNSAFE` 时，必须非常重要地在 **Makefile** 中进行说明，或者至少在提交信息中说明 *为什么* 启用时 Port 无法构建。否则，在以后提交更新时，几乎不可能修复问题或测试问题是否已经解决。
 
 
-#### 6.6.2. `make`、`gmake` 和 `imake`
+### 6.6.2. `make`、`gmake` 和 `imake`
 
 存在几种不同的 `make` 实现。移植的软件通常需要特定的实现，例如 GNU `make`，在 FreeBSD 中称为 `gmake`。
 
@@ -629,7 +629,7 @@ daviddengcn-go-colortext-186a3d44e920_GH0.tar.        4534  B 1098 kBps    00s
 
 如果你没有在像 poudriere 这样的干净环境中测试 Port ，请记得在任何测试之前运行 `make clean`。
 
-### 示例 10. 设置输出二进制名称或安装路径
+**示例 10. 设置输出二进制名称或安装路径**
 
 有些 Port 需要将生成的二进制文件安装到不同的名称或路径下，而不是默认的 `${PREFIX}/bin`。可以通过使用 `GO_TARGET` 元组语法来实现，例如：
 
