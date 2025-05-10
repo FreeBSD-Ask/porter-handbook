@@ -2250,9 +2250,9 @@ USES=	lua:52-53
 * 向 `CFLAGS`、`LDFLAGS` 和 `LIBS` 分别添加 `-I${LUA_INCDIR}`、`-L${LUA_LIBDIR}` 和 `-llua-${LUA_VER}`；
 * 修补软件的配置或构建文件，以选择正确的版本。
 
-### 6.22.4. 版本风味
+### 6.22.4. 版本  flavors 
 
-一个安装 Lua 模块的 Port（而不是仅仅使用 Lua 的应用程序）应该为每个支持的 Lua 版本构建一个单独的风味。这可以通过添加 `module` 参数来完成：
+一个安装 Lua 模块的 Port（而不是仅仅使用 Lua 的应用程序）应该为每个支持的 Lua 版本构建一个单独的  flavors 。这可以通过添加 `module` 参数来完成：
 
 ```makefile
 USES=	lua:module
@@ -2260,7 +2260,7 @@ USES=	lua:module
 
 也可以指定版本号或版本范围；使用逗号分隔多个参数。
 
-由于每个风味必须有不同的包名，因此提供了变量 `LUA_PKGNAMEPREFIX`，该变量将被设置为适当的值；其预期用法为：
+由于每个  flavors 必须有不同的包名，因此提供了变量 `LUA_PKGNAMEPREFIX`，该变量将被设置为适当的值；其预期用法为：
 
 ```makefile
 PKGNAMEPREFIX=	${LUA_PKGNAMEPREFIX}
@@ -2276,7 +2276,7 @@ USES=	lua:flavors
 
 这与上述说明的 `module` 参数的工作方式相同，但不假设包应该作为 Lua 模块来记录（因此默认情况下不定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`）。不过，Port 可以选择定义 `LUA_DOCSUBDIR` 作为合适的子目录名称（通常是 Port 的 `PORTNAME`，只要它不与任何模块的 `PORTNAME` 冲突），在这种情况下，框架将定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`。
 
-与模块 Port 一样，风味 Port 应避免安装可能在版本之间冲突的文件。通常通过将 `LUA_VER_STR` 作为程序名称的后缀来完成此操作（例如使用 [`uniquefiles`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uniquefiles)），并在其他文件或子目录中使用 `LUA_VER` 或 `LUA_VER_STR`，这些文件或子目录位于 `LUA_MODLIBDIR` 和 `LUA_MODSHAREDIR` 之外。
+与模块 Port 一样，  flavors  Port 应避免安装可能在版本之间冲突的文件。通常通过将 `LUA_VER_STR` 作为程序名称的后缀来完成此操作（例如使用 [`uniquefiles`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uniquefiles)），并在其他文件或子目录中使用 `LUA_VER` 或 `LUA_VER_STR`，这些文件或子目录位于 `LUA_MODLIBDIR` 和 `LUA_MODSHAREDIR` 之外。
 
 ### 6.22.5. 定义的变量
 
@@ -2288,7 +2288,7 @@ USES=	lua:flavors
 | -------------------- | -------------------------------- |
 | `LUA_VER`            | 将使用的 Lua 版本（例如，`5.4`）            |
 | `LUA_VER_STR`        | 不带点的 Lua 版本（例如，`54`）             |
-| `LUA_FLAVOR`         | 对应所选 Lua 版本的风味名称，用于指定依赖          |
+| `LUA_FLAVOR`         | 对应所选 Lua 版本的  flavors 名称，用于指定依赖          |
 | `LUA_BASE`           | 用于定位已安装的 Lua（和组件）的前缀             |
 | `LUA_PREFIX`         | 该 Port 将安装 Lua（和组件）的位置前缀         |
 | `LUA_INCDIR`         | 安装 Lua 头文件的目录                    |
@@ -2314,7 +2314,7 @@ USES=	lua:flavors
 
 **示例 31. 使用 Lua 的应用程序 Makefile**
 
-此示例展示了如何引用运行时所需的 Lua 模块。请注意，引用必须指定一个风味。
+此示例展示了如何引用运行时所需的 Lua 模块。请注意，引用必须指定一个  flavors 。
 
 ```makefile
 PORTNAME=	sample
@@ -2359,7 +2359,7 @@ DOCSDIR=	${LUA_DOCSDIR}
 
 Guile 库和相应的解释器有多个版本，它们之间存在冲突（以相同的名称安装文件）。在 Ports 树中，通过使用版本号后缀将每个版本安装为不同的名称来解决这个问题。在大多数情况下，应用程序应该通过提供的配置变量检测正确的版本，并使用 `pkg-config` 来确定名称和相关路径。然而，一些应用程序（尤其是那些使用自己配置规则的应用程序，如 `cmake` 或 `meson`）将始终尝试使用最新版本。在这种情况下，要么修补 Port，要么声明构建冲突（见下文的 `conflicts` 选项），以确保在非 poudriere 构建时生成正确的依赖项。
 
-使用 Guile 的应用程序通常应该仅为一个版本构建，最好是 `DEFAULT_VERSIONS` 中指定的版本，或者如果不支持该版本，则为它们支持的最新版本。然而，Guile 或 Scheme 库，或 Guile 的扩展模块，会为它们支持的每个 Guile 版本分别构建一个风味，并且这些模块的依赖关系应该使用 `@${GUILE_FLAVOR}` 后缀来指定 Port 来源。
+使用 Guile 的应用程序通常应该仅为一个版本构建，最好是 `DEFAULT_VERSIONS` 中指定的版本，或者如果不支持该版本，则为它们支持的最新版本。然而，Guile 或 Scheme 库，或 Guile 的扩展模块，会为它们支持的每个 Guile 版本分别构建一个  flavors ，并且这些模块的依赖关系应该使用 `@${GUILE_FLAVOR}` 后缀来指定 Port 来源。
 
 ### 6.23.2. 版本选择
 
@@ -2370,7 +2370,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 | 名称             | 说明                                                                          |
 | -------------- | --------------------------------------------------------------------------- |
 | `X.Y` | 声明与 Guile 版本 `X.Y` 的兼容性。目前可用的版本为 `1.8`（已废弃）、`2.2` 和 `3.0`。可以指定多个版本。         |
-| `flavors`      | 为每个指定的 Guile 版本创建一个风味。由 `DEFAULT_VERSIONS` 指定的版本将成为默认风味。风味名称的格式为 `guileXY`。 |
+| `flavors`      | 为每个指定的 Guile 版本创建一个  flavors 。由 `DEFAULT_VERSIONS` 指定的版本将成为默认  flavors 。  flavors 名称的格式为 `guileXY`。 |
 | `build`        | 仅将 Guile 解释器添加为构建依赖项，而不是库依赖项。可以同时指定 `build` 和 `run`。                        |
 | `run`          | 仅将 Guile 解释器添加为运行时依赖项，而不是库依赖项。可以同时指定 `build` 和 `run`。                       |
 | `alias`        | 为解释器和工具添加 `BINARY_ALIAS` 值。                                                 |
@@ -2396,11 +2396,11 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 
 如果这些方法都无法在存在其他版本的情况下使 Port 选择指定的 Guile 版本，最好是修补 Port 以实现此目的。如果不可行，则应指定 `conflicts` 选项，以防止在错误版本被检测到的情况下构建 Port。
 
-### 6.23.4. 版本风味
+### 6.23.4. 版本  flavors 
 
-安装 Guile 扩展或库的 Port，或为 Guile 预编译的 Scheme 库，应为每个支持的 Guile 版本构建一个单独的风味。通过添加 `flavors` 选项来实现此目的。
+安装 Guile 扩展或库的 Port，或为 Guile 预编译的 Scheme 库，应为每个支持的 Guile 版本构建一个单独的  flavors 。通过添加 `flavors` 选项来实现此目的。
 
-由于每个风味必须具有不同的包名称，因此这些 Port 必须设置 `PKGNAMESUFFIX`，通常为：
+由于每个  flavors 必须具有不同的包名称，因此这些 Port 必须设置 `PKGNAMESUFFIX`，通常为：
 
 ```makefile
 PKGNAMESUFFIX=	-${FLAVOR}
@@ -2412,7 +2412,7 @@ PKGNAMESUFFIX=	-${FLAVOR}
 
 如果 Guile 扩展 Port 安装 `.so` 文件，则通常必须将其放置在与 Guile 版本相关的 `extensions` 目录中。通常不应使用 `USE_LDCONFIG`。
 
-任何由风味 Port 安装的其他文件也必须位于版本特定的目录中，或使用版本特定的文件名。对于文档和，`GUILE_DOCS_DIR` 和 `GUILE_EXAMPLES_DIR` 指定了适合的位置，在这些位置 Port 应创建子目录，详见下文。
+任何由  flavors  Port 安装的其他文件也必须位于版本特定的目录中，或使用版本特定的文件名。对于文档和，`GUILE_DOCS_DIR` 和 `GUILE_EXAMPLES_DIR` 指定了适合的位置，在这些位置 Port 应创建子目录，详见下文。
 
 ### 6.23.5. 已定义的变量
 
@@ -2424,7 +2424,7 @@ PKGNAMESUFFIX=	-${FLAVOR}
 | ----------------------------------- | ------------------------------------------ | ------------------------------------------------ |
 | `GUILE_VER`                         | `3.0`                                      | 正在使用的 Guile 版本。                                  |
 | `GUILE_SFX`                         | `3`                                        | 用于某些名称的短后缀。仅在小心使用时使用；可能不是唯一的，或将来可能会改变。           |
-| `GUILE_FLAVOR`                      | `guile30`                                  | 与所选版本对应的风味名称。                                    |
+| `GUILE_FLAVOR`                      | `guile30`                                  | 与所选版本对应的  flavors 名称。                                    |
 | `GUILE_PORT`                        | `lang/guile3`                              | 指定的 Guile 版本的 Port 来源。                               |
 | `GUILE_PREFIX`                      | `${PREFIX}`                                | 用于安装的目录前缀。                                       |
 | `GUILE_CMD`                         | `guile-3.0`                                | 带有版本后缀的 Guile 解释器名称。                             |
@@ -2653,7 +2653,7 @@ USE_RC_SUBR=	doormand
 
 可以列出多个脚本，它们将被安装。脚本必须放在 **files** 子目录中，并且文件名必须添加 `.in` 后缀。标准的 `SUB_LIST` 展开将会应用到这个文件上。强烈建议使用 `%%PREFIX%%` 和 `%%LOCALBASE%%` 展开。有关 `SUB_LIST` 的更多信息，请参见 [相关章节](https://docs.freebsd.org/en/books/porters-handbook/pkg-files/#using-sub-files)。
 
-自 FreeBSD 6.1-RELEASE 以来，本地的 **rc.d** 脚本（包括 Port 安装的）已包含在基础系统的 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 中。
+自 FreeBSD 6.1-RELEASE 以来，本地的 **rc.d** 脚本（包括 Port 安装的）已包含在基本系统的 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 中。
 
 这是一个简单的 **rc.d** 脚本示例，用于启动 *doormand* 守护进程：
 
@@ -2721,7 +2721,7 @@ doormand_flags=""
 [devel/rclint](https://cgit.freebsd.org/ports/tree/devel/rclint/) Port 可以检查其中的大部分内容，但它不能替代适当的代码审查。
 
 1. 如果这是一个新文件，它是否具有 **.sh** 扩展名？如果是的话，必须将其更改为 **file.in**，因为 **rc.d** 文件不能以该扩展名结尾。
-2. 文件名（去掉 **.in** 后），`PROVIDE` 行和 `$` *name* 是否匹配？文件名与 `PROVIDE` 匹配可以使调试变得更容易，特别是对于 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 问题。匹配文件名和 `$` *name* 可以更容易地弄清楚哪些变量在 **rc.conf\[.local]** 中是相关的。这也是所有新脚本的政策，包括基础系统中的脚本。
+2. 文件名（去掉 **.in** 后），`PROVIDE` 行和 `$` *name* 是否匹配？文件名与 `PROVIDE` 匹配可以使调试变得更容易，特别是对于 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 问题。匹配文件名和 `$` *name* 可以更容易地弄清楚哪些变量在 **rc.conf\[.local]** 中是相关的。这也是所有新脚本的政策，包括基本系统中的脚本。
 3. `REQUIRE` 行是否设置为 `LOGIN`？这是运行为非 root 用户的脚本的强制要求。如果它以 root 身份运行，是否有充分的理由让它在 `LOGIN` 之前运行？如果没有，它必须在后面运行，以便本地脚本可以大致分组到 [rcorder(8)](https://man.freebsd.org/cgi/man.cgi?query=rcorder&sektion=8&format=html) 中大多数基础服务已启动后的位置。
 4. 脚本是否启动了一个持久性服务？如果是的话，必须添加 `KEYWORD: shutdown`。
 5. 确保没有 `KEYWORD: FreeBSD`。多年来这已经不必要也不可取了。这也是新脚本可能是从旧脚本复制/粘贴的一个迹象，因此审查时必须格外小心。

@@ -34,7 +34,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 可能的参数：（无），`p7zip`，`partial`
 
-使用 [7z(1)](https://man.freebsd.org/cgi/man.cgi?query=7z&sektion=1&format=html) 代替 [bsdtar(1)](https://man.freebsd.org/cgi/man.cgi?query=bsdtar&sektion=1&format=html) 提取文件，并将 `EXTRACT_SUFX` 设置为 `.7z`。如果基础系统中的 `7z` 无法提取文件，`p7zip` 选项会强制依赖于来自 [archivers/p7zip](https://cgit.freebsd.org/ports/tree/archivers/p7zip/) 的 `7z`。如果使用 `partial` 选项，则 `EXTRACT_SUFX` 不会改变，这对于主分发文件没有 **.7z** 扩展名时非常有用。
+使用 [7z(1)](https://man.freebsd.org/cgi/man.cgi?query=7z&sektion=1&format=html) 代替 [bsdtar(1)](https://man.freebsd.org/cgi/man.cgi?query=bsdtar&sektion=1&format=html) 提取文件，并将 `EXTRACT_SUFX` 设置为 `.7z`。如果基本系统中的 `7z` 无法提取文件，`p7zip` 选项会强制依赖于来自 [archivers/p7zip](https://cgit.freebsd.org/ports/tree/archivers/p7zip/) 的 `7z`。如果使用 `partial` 选项，则 `EXTRACT_SUFX` 不会改变，这对于主分发文件没有 **.7z** 扩展名时非常有用。
 
 ## 17.3. `ada`
 
@@ -746,7 +746,7 @@ USE_GNOME=	gnomemenus3:build intlhack
 
 可能的参数：（无）
 
-如果 `gperf` 不在基础系统中，添加对 [devel/gperf](https://cgit.freebsd.org/ports/tree/devel/gperf/) 的构建时依赖。
+如果 `gperf` 不在基本系统中，添加对 [devel/gperf](https://cgit.freebsd.org/ports/tree/devel/gperf/) 的构建时依赖。
 
 ## 17.50. `grantlee`
 
@@ -758,13 +758,13 @@ USE_GNOME=	gnomemenus3:build intlhack
 
 可能的参数：`build`，`run`，`both`
 
-如果基础系统中没有 `groff`，则注册对 [textproc/groff](https://cgit.freebsd.org/ports/tree/textproc/groff/) 的依赖。
+如果基本系统中没有 `groff`，则注册对 [textproc/groff](https://cgit.freebsd.org/ports/tree/textproc/groff/) 的依赖。
 
 ## 17.52. `gssapi`
 
 可能的参数：（无），`base`（默认），`heimdal`，`mit`，`flags`，`bootstrap`
 
-处理 GSS-API 消费者所需的依赖项。仅提供 Kerberos 机制的库。默认情况下，或设置为 `base`，使用基础系统中的 GSS-API 库。也可以设置为 `heimdal` 来使用 [security/heimdal](https://cgit.freebsd.org/ports/tree/security/heimdal/)，或设置为 `mit` 来使用 [security/krb5](https://cgit.freebsd.org/ports/tree/security/krb5/)。
+处理 GSS-API 消费者所需的依赖项。仅提供 Kerberos 机制的库。默认情况下，或设置为 `base`，使用基本系统中的 GSS-API 库。也可以设置为 `heimdal` 来使用 [security/heimdal](https://cgit.freebsd.org/ports/tree/security/heimdal/)，或设置为 `mit` 来使用 [security/krb5](https://cgit.freebsd.org/ports/tree/security/krb5/)。
 
 当本地 Kerberos 安装不在 `LOCALBASE` 中时，请设置 `HEIMDAL_HOME`（用于 `heimdal`）或 `KRB5_HOME`（用于 `krb5`）到 Kerberos 安装的位置。
 
@@ -921,7 +921,7 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 
 可能的参数：（无），`lib`，`build`，`patch`，`translit`，`wchar_t`
 
-使用 `iconv` 函数，来自 Port  [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 的构建时和运行时依赖，或者来自基础系统的 `iconv`。默认情况下，如果没有指定参数或指定了 `lib` 参数，则表示使用 `iconv` 作为构建时和运行时依赖。`build` 表示仅作为构建时依赖，`patch` 表示仅作为补丁时依赖。如果 Port 使用 `WCHAR_T` 或 `//TRANSLIT` iconv 扩展，请添加相关参数以确保使用正确的 iconv。更多信息请参见 [使用 `iconv`](https://docs.freebsd.org/en/books/porters-handbook/special/#using-iconv)。
+使用 `iconv` 函数，来自 Port  [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 的构建时和运行时依赖，或者来自基本系统的 `iconv`。默认情况下，如果没有指定参数或指定了 `lib` 参数，则表示使用 `iconv` 作为构建时和运行时依赖。`build` 表示仅作为构建时依赖，`patch` 表示仅作为补丁时依赖。如果 Port 使用 `WCHAR_T` 或 `//TRANSLIT` iconv 扩展，请添加相关参数以确保使用正确的 iconv。更多信息请参见 [使用 `iconv`](https://docs.freebsd.org/en/books/porters-handbook/special/#using-iconv)。
 
 ## 17.57. `imake`
 
@@ -1208,7 +1208,7 @@ Linux 兼容性框架 Port。指定 `c6` 以依赖于 CentOS 6 包。指定 `c7`
 
 可能的参数： (无), `ldflags`
 
-确保使用来自 `LOCALBASE` 的库，而不是来自基础系统的库。指定 `ldflags` 可以将 `-L${LOCALBASE}/lib` 添加到 `LDFLAGS`，而不是 `LIBS`。依赖于基础系统中也存在的库的 Ports 应该使用此选项。它也被其他一些 `USES` 内部使用。
+确保使用来自 `LOCALBASE` 的库，而不是来自基本系统的库。指定 `ldflags` 可以将 `-L${LOCALBASE}/lib` 添加到 `LDFLAGS`，而不是 `LIBS`。依赖于基本系统中也存在的库的 Ports 应该使用此选项。它也被其他一些 `USES` 内部使用。
 
 ## 17.72. `lua`
 
@@ -1254,7 +1254,7 @@ Linux 兼容性框架 Port。指定 `c6` 以依赖于 CentOS 6 包。指定 `c7`
 
 可能的参数： (无)
 
-如果基础系统中没有 `makeinfo`，则添加一个构建时依赖。
+如果基本系统中没有 `makeinfo`，则添加一个构建时依赖。
 
 ## 17.77. `makeself`
 
@@ -1404,7 +1404,7 @@ Ports 框架提供以下变量，Port 可以读取：
 
 可能的参数： (无)
 
-如果基础系统不支持，则添加 Objective C 依赖（编译器、运行时库）。
+如果基本系统不支持，则添加 Objective C 依赖（编译器、运行时库）。
 
 ## 17.92. `ocaml`
 
@@ -1424,7 +1424,7 @@ Ports 框架提供以下变量，Port 可以读取：
 
 如果提供 `findplist` 参数，则会自动添加 `findlib` 目标目录的内容。
 
-如果提供 `ldconfig` 参数，则会自动处理 OCaml 的 **ld.conf** 文件。当使用 `dune` 时，Dune 可能会将 stublibs 安装到 site-lib 包目录或在 `DUNE_LIBDIR` site-lib 目录下的单一目录中。如果您的 port 安装了共享库到 OCaml 目录，请设置此项。
+如果提供 `ldconfig` 参数，则会自动处理 OCaml 的 **ld.conf** 文件。当使用 `dune` 时，Dune 可能会将 stublibs 安装到 site-lib 包目录或在 `DUNE_LIBDIR` site-lib 目录下的单一目录中。如果你的 port 安装了共享库到 OCaml 目录，请设置此项。
 
 如果提供 `run` 参数，则将 `ocamlc` 添加到 `RUN_DEPENDS`。
 
