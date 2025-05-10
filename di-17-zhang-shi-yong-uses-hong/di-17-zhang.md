@@ -237,7 +237,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 为 Common Lisp  Port 提供支持。
 
-框架提供以下变量， Port 可以设置：
+框架提供以下变量，Port 可以设置：
 
 `ASDF_MODULES`：当设置 `FASL_TARGET`（默认为 `PORTNAME`）时，要构建的 `ASDF` 模块列表。
 
@@ -253,7 +253,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 `USE_SBCL`：依赖 [lang/sbcl](https://cgit.freebsd.org/ports/tree/lang/sbcl/)；当 `FASL_TARGET=SBCL` 时，隐式依赖。
 
-框架提供以下变量， Port 可以读取：
+框架提供以下变量，Port 可以读取：
 
 `ASDF_PATHNAME`：CL 源代码路径。
 
@@ -720,7 +720,7 @@ USE_GNOME=	gnomemenus3:build intlhack
 
 可能的参数：（无），`N.NN`，`N.NN-devel`，`modules`，`no_targets`，`run`
 
-设置用于构建 Go 软件的默认值和目标。添加对 Go 编译器 Port 的构建依赖， Port 维护者可以设置所需的版本。默认情况下，构建是在 GOPATH 模式下执行的。如果 Go 软件使用模块，可以通过 `modules` 参数启用模块感知模式。`no_targets` 将设置构建环境（如 `GO_ENV`、`GO_BUILDFLAGS`），但跳过创建提取和构建目标。`run` 还将添加对 Go 编译器 Port 的运行时依赖。
+设置用于构建 Go 软件的默认值和目标。添加对 Go 编译器 Port 的构建依赖，Port 维护者可以设置所需的版本。默认情况下，构建是在 GOPATH 模式下执行的。如果 Go 软件使用模块，可以通过 `modules` 参数启用模块感知模式。`no_targets` 将设置构建环境（如 `GO_ENV`、`GO_BUILDFLAGS`），但跳过创建提取和构建目标。`run` 还将添加对 Go 编译器 Port 的运行时依赖。
 
 构建过程由多个变量控制：
 
