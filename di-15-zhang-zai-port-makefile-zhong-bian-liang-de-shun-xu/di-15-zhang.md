@@ -1,27 +1,31 @@
 # 第15章 在 Port Makefile 中变量的顺序
 
-Makefile 的第一个部分必须按相同顺序进行。这个标准使得每个人都可以很容易地阅读任何port，而不必按随机顺序搜索变量。
+**Makefile** 的开头各段必须始终按固定顺序排列。这个标准让任何人都能轻松阅读任意一个 Port，而无需在混乱顺序中查找变量。
 
-|  | 这里描述的部分和变量在一个普通的port中是必需的。在一个从属port中，许多部分和变量可以被跳过。 |
-| -- | ---------------------------------------------------------------------------------------------- |
+>**注意**
+>
+>此处所述的各段和变量在一个普通 Port 中是强制性的。在一个从属 Port 中，许多段和变量可以省略。 
 
-|  | 每个后续区块必须与前一个区块用一个空行分隔。<br /><br />在下面的区块中，只设置port所需的变量。按照这里显示的顺序定义这些变量。 |
-| -- | ------------------------------------------------------------------------------------------------------------------------ |
+>**重要**
+>
+>每个以下代码块之间必须以一个空行分隔。
+>
+>在每个代码块中，仅设置该 Port 所必需的变量。请按照下列顺序定义这些变量。 
 
-## 15.1. PORTNAME 区块
+## 15.1. `PORTNAME` 段
 
-这个区块是最重要的。它定义了port名称、版本、分发文件位置和类别。变量必须按照这个顺序：
+这是最重要的一段。它定义了 Port 的名称、版本、源代码分发文件的位置和分类。变量必须按如下顺序排列：
 
 * [`PORTNAME`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-portname)
-* [`PORTVERSION`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-versions)[[1](https://docs.freebsd.org/en/books/porters-handbook/order/#portversion-footnote)]
+  \* [`PORTVERSION`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-versions)\[[1](https://docs.freebsd.org/en/books/porters-handbook/order/#portversion-footnote)]
 * [`DISTVERSIONPREFIX`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-versions)
-* [`DISTVERSION`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-versions)[[1](https://docs.freebsd.org/en/books/porters-handbook/order/#portversion-footnote)]
+  \* [`DISTVERSION`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-versions)\[[1](https://docs.freebsd.org/en/books/porters-handbook/order/#portversion-footnote)]
 * [`DISTVERSIONSUFFIX`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-versions)
 * [`PORTREVISION`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-portrevision)
 * [`PORTEPOCH`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-portepoch)
 * [`CATEGORIES`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-categories)
 * [`MASTER_SITES`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-master_sites)
-* MASTER_SITE_SUBDIR (弃用)
+* [`MASTER_SITE_SUBDIR`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-master_sites-shorthand)（已弃用）
 * [`PKGNAMEPREFIX`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#porting-pkgnameprefix-suffix)
 * [`PKGNAMESUFFIX`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#porting-pkgnameprefix-suffix)
 * [`DISTNAME`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-distname)
@@ -30,43 +34,45 @@ Makefile 的第一个部分必须按相同顺序进行。这个标准使得每�
 * [`DIST_SUBDIR`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-dist_subdir)
 * [`EXTRACT_ONLY`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-extract_only)
 
-|  | 只能使用 PORTVERSION 和 DISTVERSION 中的一个。 |
-| -- | ------------------------------------------------ |
+>**重要**
+>
+>`PORTVERSION` 和 `DISTVERSION` 只能择一而用。 
 
-## 15.2. PATCHFILES 区块
 
-这个区块是可选的。变量有:
+## 15.2. `PATCHFILES` 段
+
+此段为可选项。变量如下：
 
 * [`PATCH_SITES`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#porting-patchfiles)
 * [`PATCHFILES`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#porting-patchfiles)
 * [`PATCH_DIST_STRIP`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#porting-patchfiles)
 
-## 15.3. MAINTAINER 区块
+## 15.3. `MAINTAINER` 段
 
-此块是强制性的。变量包括：
+此段为强制项。变量如下：
 
 * [`MAINTAINER`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-maintainer)
 * [`COMMENT`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-comment)
 * [`WWW`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-www)
 
-## 15.4. LICENSE 块
+## 15.4. `LICENSE` 段
 
-此块是可选的，尽管强烈推荐。变量包括：
+这一段是可选的，但强烈建议使用。变量包括：
 
 * [`LICENSE`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license)
 * [`LICENSE_COMB`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license_comb)
-* LICENSE_GROUPS 或 LICENSE_GROUPS_NAME
-* LICENSE_NAME 或 LICENSE_NAME_NAME
-* LICENSE_TEXT 或 LICENSE_TEXT_NAME
-* LICENSE_FILE 或 LICENSE_FILE_NAME
-* LICENSE_PERMS 或 LICENSE_PERMS_NAME_
-* LICENSE_DISTFILES 或 LICENSE_DISTFILES_NAME
+* [`LICENSE_GROUPS`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license_groups) 或 `LICENSE_GROUPS_NAME`
+* [`LICENSE_NAME`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license_name) 或 `LICENSE_NAME_NAME`
+* [`LICENSE_TEXT`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license_text) 或 `LICENSE_TEXT_NAME`
+* [`LICENSE_FILE`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license_file) 或 `LICENSE_FILE_NAME`
+* [`LICENSE_PERMS`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license_perms) 或 `LICENSE_PERMS_NAME_`
+* [`LICENSE_DISTFILES`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license_distfiles) 或 `LICENSE_DISTFILES_NAME`
 
-If there are multiple licenses, sort the different LICENSE_VAR_NAME variables by license name.
+如果存在多个许可证，需按许可证名称对各个 `LICENSE_VAR_NAME` 变量进行排序。
 
-## 15.5. Generic `BROKEN`/`IGNORE`/`DEPRECATED` Messages
+## 15.5. 通用 `BROKEN` / `IGNORE` / `DEPRECATED` 信息段
 
-This block is optional. The variables are:
+这一段是可选的。变量包括：
 
 * [`DEPRECATED`](https://docs.freebsd.org/en/books/porters-handbook/porting-dads/#dads-deprecated)
 * [`EXPIRATION_DATE`](https://docs.freebsd.org/en/books/porters-handbook/porting-dads/#dads-deprecated)
@@ -80,12 +86,15 @@ This block is optional. The variables are:
 * [`NOT_FOR_ARCHS`](https://docs.freebsd.org/en/books/porters-handbook/porting-dads/#dads-noinstall)
 * [`NOT_FOR_ARCHS_REASON*`](https://docs.freebsd.org/en/books/porters-handbook/porting-dads/#dads-noinstall)
 
-|  | BROKEN_* 和 IGNORE_* 可以是任意通用变量，例如， IGNORE_amd64 ， BROKEN_FreeBSD_10 等。除了依赖于 USES 的变量，将其放在 USES 和 USE_x 中。例如，只有当设置 php 时， IGNORE_WITH_PHP 才有效，只有当设置 ssl 时， BROKEN_SSL 才有效。<br /><br />如果port在满足某些条件时标记为 BROKEN，并且只能在包含 bsd.port.options.mk 或 bsd.port.pre.mk 后才能测试这些条件，则应稍后设置这些变量，即其余变量。 |
-| -- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**重要**
+>
+> `BROKEN_*` 和 `IGNORE_*` 可以是任意通用变量，例如 `IGNORE_amd64`、`BROKEN_FreeBSD_10` 等。除了依赖于 [`USES`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses) 的变量以外，后者应放在 [`USES` 和 `USE_x`](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-uses) 中。例如，`IGNORE_WITH_PHP` 仅在设置了 [`php`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-php) 时才生效，`BROKEN_SSL` 仅在设置了 [`ssl`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-ssl) 时才生效。
+>
+>如果 Port 仅在满足某些条件时才应标记为 `BROKEN`，并且这些条件只能在包含 **bsd.port.options.mk** 或 **bsd.port.pre.mk** 之后才能判断，那么应在 [其余变量段](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-rest) 中设置这些变量。 
 
-## 15.6. 依赖项块
+## 15.6. 依赖关系段
 
-这个区块是可选的。变量为：
+这一段是可选的。变量包括：
 
 * [`FETCH_DEPENDS`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-fetch_depends)
 * [`EXTRACT_DEPENDS`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-extract_depends)
@@ -97,33 +106,33 @@ This block is optional. The variables are:
 
 ## 15.7. Flavors
 
-这个区块是可选的。
+这一段是可选的。
 
-从定义 FLAVORS 开始这一部分。继续使用可能的 Flavors 助手。查看更多信息，请参阅 FLAVORS 。
+以定义 `FLAVORS` 开始此段，然后继续定义可用的 Flavors 助手。请参阅 [使用 FLAVORS](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-using) 了解更多信息。
 
-构造设置变量，不能使用 .if ${FLAVOR:U} == foo 作为助手的应放在各自的下面部分。
+对于不能通过助手设置的变量，应使用 `.if ${FLAVOR:U} == foo` 结构，并将其置于各自所属的段落中。
 
-## 15.8. USES 和 USE_x
+## 15.8. `USES` 和 `USE_x`
 
-从定义 USES 开始，然后可能是 USE_x
+以定义 `USES` 开始本段，然后继续定义可能的 `USE_x`。
 
-将相关变量放在一起。例如，如果使用 USE_GITHUB ，请紧接着放 GH_* 变量。
+请将相关变量紧密排列。例如使用 [`USE_GITHUB`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-master_sites-github) 时，务必将所有 `GH_*` 变量紧跟其后。
 
 ## 15.9. 标准 bsd.port.mk 变量
 
-此部分块是 bsd.port.mk 中可以定义的变量，这些变量不属于任何先前的部分块。
+这一段用于定义可以在 **bsd.port.mk** 中使用、但不属于前述各段的变量。
 
-顺序并不重要，但尽量将类似的变量放在一起。例如，uid 和 gid 变量 USERS 和 GROUPS 。配置变量 CONFIGURE_* 和 *_CONFIGURE 。文件和目录列表 PORTDOCS 和 PORTEXAMPLES 。
+虽然变量的顺序并不重要，但请尽量将相似的变量归类在一起。例如，用户和用户组变量 `USERS` 和 `GROUPS`；配置变量 `CONFIGURE_*` 与 `*_CONFIGURE`；文件与目录列表变量如 `PORTDOCS` 与 `PORTEXAMPLES`。
 
-## 15.10. 选项和辅助工具
+## 15.10. Options 与 Helpers
 
-如果port使用选项框架，请先定义 OPTIONS_DEFINE 和 OPTIONS_DEFAULT ，然后先定义其他 OPTIONS_* 变量，然后是 *_DESC 描述，最后是选项助手。尝试按字母顺序对所有这些进行排序。
+如果该 Port 使用了 [选项框架](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-options)，请先定义 `OPTIONS_DEFINE` 和 `OPTIONS_DEFAULT`，然后是其它 `OPTIONS_*` 变量，再之后是 `*_DESC` 描述，最后是选项 helpers。尽量将上述所有内容按字母顺序排列。
 
-示例 1。选项变量顺序示例
+**示例 1：Options 变量排序示例**
 
-FOO 和 BAR 选项没有标准描述，因此需要编写一个。其他选项已在 Mk/bsd.options.desc.mk 中有描述，因此不需要编写。 DOCS 和 EXAMPLES 使用目标助手安装它们的文件，尽管它们属于目标，但为了完整起见，这里显示它们，因此其他变量和目标可以在它们之前插入。
+`FOO` 和 `BAR` 选项没有标准描述，因此需要编写。其他选项已经在 **Mk/bsd.options.desc.mk** 中定义好了描述，无需重复编写。`DOCS` 和 `EXAMPLES` 使用目标 helpers 来安装它们的文件，在此处也给出以示完整，尽管它们应归属 [目标段](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-targets)，因此其前可插入其他变量和目标。
 
-```
+```makefile
 OPTIONS_DEFINE=	DOCS EXAMPLES FOO BAR
 OPTIONS_DEFAULT=	FOO
 OPTIONS_RADIO=	SSL
@@ -149,11 +158,11 @@ post-install-EXAMPLES-on:
 
 ## 15.11. 其余变量
 
-然后是前面未提及的其余变量。
+然后定义所有未在上述各段中提及的其它变量。
 
 ## 15.12. 目标
 
-在定义所有变量之后，可以定义可选的 make(1) 目标。在不同阶段运行时，保持 pre-<strong></strong> ** 在 post- ** 之前，并按照相同顺序。
+在所有变量定义之后，可以定义可选的 [make(1)](https://man.freebsd.org/cgi/man.cgi?query=make&sektion=1&format=html) 目标。请确保 `pre-<strong></strong>`\*\* 排在 `post-`\*\* 之前，并按照不同阶段的执行顺序排列：
 
 * `fetch`
 * `extract`
@@ -163,16 +172,22 @@ post-install-EXAMPLES-on:
 * `install`
 * `test`
 
-```
-post-install:
-	# install generic bits
+>**技巧**
+>
+>使用选项 helpers 时，保持它们按字母顺序排序，但确保 `-on` 排在 `-off` 之前。若同时使用主目标，则主目标应排在可选目标之前：
+>
+>```markfile
+>post-install:
+>	# 安装通用部分
+>
+>post-install-DOCS-on:
+>	# 安装文档
+>
+>post-install-X11-on:
+>	# 安装与 X11 相关的部分
+>
+>post-install-X11-off:
+>	# 安装在 X11 禁用时应存在的部分
+>```
 
-post-install-DOCS-on:
-	# Install documentation
 
-post-install-X11-on:
-	# Install X11 related bits
-
-post-install-X11-off:
-	# Install bits that should be there if X11 is disabled
-```
