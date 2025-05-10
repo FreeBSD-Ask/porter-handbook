@@ -57,7 +57,7 @@
 
 ## 第 6 章 特殊情况
 
-* [第6章 特殊情况](di-6-zhang-te-shu-qing-kuang/di-liu-zhang.md)
+* [第 6 章 特殊情况](di-6-zhang-te-shu-qing-kuang/di-liu-zhang.md)
 
 
 ## 第 7 章 Flavors
