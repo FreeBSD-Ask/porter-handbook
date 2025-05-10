@@ -1,0 +1,41 @@
+name: "🔗 检查 Markdown 图片引用"
+
+on:
+  push:
+    paths:
+      - '.gitbook/assets/**'
+  workflow_dispatch:
+
+jobs:
+  check-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run image check script
+        id: image-check
+        run: |
+          pip install regex
+          python .github/scripts/check_images.py
+
+          # 判断报告是否存在且不为空
+          if [ -s image-report.md ]; then
+            echo "report_exists=1" >> $GITHUB_OUTPUT
+          else
+            echo "report_exists=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Issue
+        if: steps.image-check.outputs.report_exists == '1'
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "图片检查报告"
+          content-filepath: ./image-report.md
+          labels: report, automation
