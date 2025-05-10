@@ -5,7 +5,7 @@
 所示的格式是推荐的变量排序方式，部分之间的空行等。这种格式设计的目的是使最重要的信息容易找到。我们推荐使用 [portlint](https://docs.freebsd.org/en/books/porters-handbook/quick-porting/#porting-portlint) 来检查 **Makefile**。
 
 
-```makefile
+```sh
 [描述 Port 本身和主站的部分 - PORTNAME 和 PORTVERSION 或 DISTVERSION* 变量总是放在第一位，接着是 CATEGORIES，然后是 MASTER_SITES，后面可以跟 MASTER_SITE_SUBDIR。如果需要，PKGNAMEPREFIX 和 PKGNAMESUFFIX 会排在后面。然后是 DISTNAME，EXTRACT_SUFX 和/或 DISTFILES，然后根据需要是 EXTRACT_ONLY。]
 PORTNAME=	xdvi
 DISTVERSION=	18.2
