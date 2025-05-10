@@ -227,11 +227,11 @@ IGNORE=	unsupported on recent versions
 
 这样，`make describe` 的输出如下所示：
 
-```makefile
+```sh
 ===>  foobar-0.1 is marked as broken: fails to link with base -lcrypto.
 ```
 
-```makefile
+```sh
 ===>  foobar-0.1 is unsupported on recent versions.
 ```
 
@@ -243,7 +243,7 @@ FreeBSD 支持的处理器架构远不止常见的 x86 架构。一些 Port 仅�
 
 要查看支持的架构列表，请执行以下命令：
 
-```makefile
+```sh
 cd ${SRCDIR}; make targets
 ```
 
