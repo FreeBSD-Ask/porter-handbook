@@ -347,7 +347,7 @@ FreeBSD Ports 通常期望软件遵循 POSIX 标准。有些软件和构建系�
 
 如果确实需要依赖非标准行为，请将其正确封装为通用 API，并在配置阶段检测该行为，若不满足则中止。
 
-请通过查阅 [man 页面](https://man.freebsd.org/cgi/man.cgi) 的 “STANDARDS” 部分来确认所使用的函数是否为 POSIX 接口。
+请通过查阅 [man 页面](https://man.freebsd.org/cgi/man.cgi) 的“STANDARDS”部分来确认所使用的函数是否为 POSIX 接口。
 
 不要假设 **/bin/sh** 是 bash。应确保传递给 [system(3)](https://man.freebsd.org/cgi/man.cgi?query=system&sektion=3&format=html) 的命令行可以在 POSIX 兼容的 shell 下正常执行。
 

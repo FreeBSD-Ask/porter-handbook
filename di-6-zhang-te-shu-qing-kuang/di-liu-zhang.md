@@ -1,4 +1,4 @@
-# 第6章 特殊情况
+# 第 6 章 特殊情况
 
 ## 6.1. 拆分长文件
 
@@ -115,7 +115,7 @@ lrwxr-xr-x  1 nobody  nobody    181 Aug  3 11:27 foo@ -> ../../../var/cache/foo
 
 >**重要**
 >
-> 在一些非常特殊的情况下，例如仿真器（如 Wine）， Port 必须捆绑库，因为这些库属于不同架构，或者它们已被修改以适应软件的需求。在这种情况下，这些库不应该暴露给其他 Port 进行链接。可以在 Port 的 **Makefile** 中添加 `BUNDLE_LIBS=yes`。这将告诉 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 不计算提供的库。在将此添加到 Port 之前，请始终向 Ports 管理团队 <[portmgr@FreeBSD.org](mailto:portmgr@FreeBSD.org)> 询问。 
+> 在一些非常特殊的情况下，例如仿真器（如 Wine），Port 必须捆绑库，因为这些库属于不同架构，或者它们已被修改以适应软件的需求。在这种情况下，这些库不应该暴露给其他 Port 进行链接。可以在 Port 的 **Makefile** 中添加 `BUNDLE_LIBS=yes`。这将告诉 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 不计算提供的库。在将此添加到 Port 之前，请始终向 Ports 管理团队 <[portmgr@FreeBSD.org](mailto:portmgr@FreeBSD.org)> 询问。 
 
 
 ## 6.4. 共享库
@@ -155,7 +155,7 @@ USE_LDCONFIG=	${PREFIX}/lib/foo ${PREFIX}/lib/bar
 
 此变量表示我们不能生成应用程序的二进制包。例如，许可协议可能禁止二进制再分发，或者可能禁止从修补过的源代码创建的包的分发。
 
-然而， Port 的 `DISTFILES` 可以自由地在 FTP/HTTP 上镜像。它们也可以分发到 CD-ROM（或类似媒体），除非同时设置了 `NO_CDROM`。
+然而，Port 的 `DISTFILES` 可以自由地在 FTP/HTTP 上镜像。它们也可以分发到 CD-ROM（或类似媒体），除非同时设置了 `NO_CDROM`。
 
 如果二进制包没有普遍的用途，并且必须始终从源代码编译应用程序，请使用 `NO_PACKAGE`。例如，如果应用程序在编译时硬编码了与站点特定的配置信息，请设置 `NO_PACKAGE`。
 
@@ -267,7 +267,7 @@ FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行
 
 CMake 支持以下构建配置：`Debug`、`Release`、`RelWithDebInfo` 和 `MinSizeRel`。`Debug` 和 `Release` 配置会遵循系统 `*FLAGS`，`RelWithDebInfo` 和 `MinSizeRel` 会分别将 `CFLAGS` 设置为 `-O2 -g` 和 `-Os -DNDEBUG`。`CMAKE_BUILD_TYPE` 的小写值会导出到 `PLIST_SUB`，并且如果 Port 安装 **\*.cmake** 依赖于构建类型（参见 [devel/kf5-kcrash](https://cgit.freebsd.org/ports/tree/devel/kf5-kcrash/) 示例），必须使用该值。请注意，一些项目可能会定义自己的构建配置和/或通过在 **CMakeLists.txt** 中设置 `CMAKE_BUILD_TYPE` 强制特定的构建类型。为了让这样的项目的 Port 尊重 `CFLAGS` 和 `WITH_DEBUG`，必须删除这些文件中的 `CMAKE_BUILD_TYPE` 定义。
 
-大多数基于 CMake 的项目支持源外构建方法。 Port 的源外构建是默认设置。可以通过使用 `:insource` 后缀请求源内构建。在源外构建中，`CONFIGURE_WRKSRC`、`BUILD_WRKSRC` 和 `INSTALL_WRKSRC` 会被设置为 `${WRKDIR}/.build`，并且该目录将用于存放在配置和构建阶段生成的所有文件，保持源代码目录完好。
+大多数基于 CMake 的项目支持源外构建方法。Port 的源外构建是默认设置。可以通过使用 `:insource` 后缀请求源内构建。在源外构建中，`CONFIGURE_WRKSRC`、`BUILD_WRKSRC` 和 `INSTALL_WRKSRC` 会被设置为 `${WRKDIR}/.build`，并且该目录将用于存放在配置和构建阶段生成的所有文件，保持源代码目录完好。
 
 **示例 2. `USES= cmake` 示例**
 
@@ -317,7 +317,7 @@ env = Environment(**ARGUMENTS)
 
 | 变量                   | 默认值                      | 说明                                                                                                                                                                                                                                                                |
 | -------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CARGO_CRATES`       |                          |  Port 依赖的 crate 列表。每个条目需要具有 `cratename-semver` 的格式，例如 `libc-0.2.40`。 Port 维护者可以通过 `make cargo-crates` 从 **Cargo.lock** 生成此列表。手动更新 crate 版本是可能的，但要注意传递依赖。如果 `make cargo-crates` 生成的列表很大，建议将其放在顶层 Port 目录中的 `Makefile.crates` 文件中。如果存在，该文件会自动被 Ports 框架引入。这有助于保持主 Port  Makefile 的可管理大小。 |
+| `CARGO_CRATES`       |                          |  Port 依赖的 crate 列表。每个条目需要具有 `cratename-semver` 的格式，例如 `libc-0.2.40`。Port 维护者可以通过 `make cargo-crates` 从 **Cargo.lock** 生成此列表。手动更新 crate 版本是可能的，但要注意传递依赖。如果 `make cargo-crates` 生成的列表很大，建议将其放在顶层 Port 目录中的 `Makefile.crates` 文件中。如果存在，该文件会自动被 Ports 框架引入。这有助于保持主 Port  Makefile 的可管理大小。 |
 | `CARGO_FEATURES`     |                          | 要构建的应用程序功能列表（以空格分隔）。要停用所有默认功能，请将特殊标记 `--no-default-features` 添加到 `CARGO_FEATURES`。不需要手动将其传递给 `CARGO_BUILD_ARGS`、`CARGO_INSTALL_ARGS` 和 `CARGO_TEST_ARGS`。                                                                                                         |
 | `CARGO_CARGOTOML`    | `${WRKSRC}/Cargo.toml`   | 使用的 **Cargo.toml** 的路径。                                                                                                                                                                                                                                           |
 | `CARGO_CARGOLOCK`    | `${WRKSRC}/Cargo.lock`   | 用于 `make cargo-crates` 的 **Cargo.lock** 的路径。必要时，可以指定多个锁定文件。                                                                                                                                                                                                       |
@@ -625,7 +625,7 @@ daviddengcn-go-colortext-186a3d44e920_GH0.tar.        4534  B 1098 kBps    00s
 [...]
 ```
 
-现在， Port 已准备好进行测试构建，并可进行进一步调整，如创建 plist、编写说明、添加许可证信息、选项等，像平常一样进行。
+现在，Port 已准备好进行测试构建，并可进行进一步调整，如创建 plist、编写说明、添加许可证信息、选项等，像平常一样进行。
 
 如果你没有在像 poudriere 这样的干净环境中测试 Port，请记得在任何测试之前运行 `make clean`。
 
@@ -717,11 +717,11 @@ QuickCheck-2.12.6.1/QuickCheck-2.12.6.1.tar.gz          65 kB  361 kBps    00s
 [...]
 ```
 
-现在， Port 已准备好进行测试构建，并且可以根据需要进一步调整，例如创建 plist、编写说明、添加许可证信息、选项等。
+现在，Port 已准备好进行测试构建，并且可以根据需要进一步调整，例如创建 plist、编写说明、添加许可证信息、选项等。
 
 如果你没有在像 poudriere 这样的干净环境中测试 Port，请记得在任何测试前运行 `make clean`。
 
-某些 Haskell  Port 会将各种数据文件安装到 `share/${PORTNAME}` 下。对于此类情况， Port 侧需要进行特殊处理。 Port 应定义 `CABAL_WRAPPER_SCRIPTS` 变量，列出将使用数据文件的每个可执行文件。此外，在少数情况下，被移植的程序使用其他 Haskell 包的数据文件，此时 `FOO_DATADIR_VARS` 变量会派上用场。
+某些 Haskell  Port 会将各种数据文件安装到 `share/${PORTNAME}` 下。对于此类情况，Port 侧需要进行特殊处理。Port 应定义 `CABAL_WRAPPER_SCRIPTS` 变量，列出将使用数据文件的每个可执行文件。此外，在少数情况下，被移植的程序使用其他 Haskell 包的数据文件，此时 `FOO_DATADIR_VARS` 变量会派上用场。
 
 **示例 12. 处理 Haskell Port 中的数据文件**
 
@@ -800,7 +800,7 @@ GH_TUPLE=		input-output-hk:cardano-base:0f3a867493059e650cda69e20a5cbf1ace289a57
 		[...]
 ```
 
-将 `make-use-cabal` 生成的 `GH_TUPLE` 条目与其他条目分开可能会更有用，这样可以方便地更新 Port ：
+将 `make-use-cabal` 生成的 `GH_TUPLE` 条目与其他条目分开可能会更有用，这样可以方便地更新 Port：
 
 ```
 GH_TUPLE=	input-output-hk:cardano-base:0f3a867493059e650cda69e20a5cbf1ace289a57:cardano_base/dist-newstyle/src/cardano-b_-c8db9876882556ed \
@@ -842,7 +842,7 @@ GNU_CONFIGURE=	yes
 
 ### 6.8.2. 可选用法
 
-一些软件产品允许禁用 NLS。例如，通过向 `configure` 传递 `--disable-nls`。在这种情况下， Port 必须根据 `NLS` 选项的状态有条件地使用 `gettext`。对于低到中等复杂度的 Port，可以使用以下惯用法：
+一些软件产品允许禁用 NLS。例如，通过向 `configure` 传递 `--disable-nls`。在这种情况下，Port 必须根据 `NLS` 选项的状态有条件地使用 `gettext`。对于低到中等复杂度的 Port，可以使用以下惯用法：
 
 ```
 GNU_CONFIGURE=		yes
@@ -1254,7 +1254,7 @@ INSTALLS_OMF=yes
 | `pygtksourceview`    | x11-toolkits/py-gtksourceview   | GtkSourceView 2 的 Python 绑定    |
 | `vte`                | x11-toolkits/vte                | 带有改进的可访问性和国际化支持的终端组件           |
 
-**表11 废弃组件：请勿使用**
+**表 11 废弃组件：请勿使用**
 
 | 组件              | 说明                                    |
 | --------------- | ------------------------------------- |
@@ -1272,7 +1272,7 @@ Ports 提供了对 Qt 5 和 Qt 6 的支持，分别通过 `USES+=qt:5` 和 `USES
 
 Qt 框架导出了一些可以供 Port 使用的变量，下面列出了一些：
 
-**表12. 使用 Qt 的 Port 提供的变量**
+**表 12. 使用 Qt 的 Port 提供的变量**
 
 | 变量             | 说明                  |
 | -------------- | ------------------- |
@@ -1701,7 +1701,7 @@ Ports 中有多个 JDK，来自不同的供应商，并且有多个版本。如�
 | `JAVA_RUN`     | 设置后，将选定的 JDK  Port 添加到运行时依赖项中。                                                             |
 | `JAVA_EXTRACT` | 设置后，将选定的 JDK  Port 添加到提取依赖项中。                                                              |
 
-下面是设置 `USE_JAVA` 后， Port 将接收到的所有设置列表。
+下面是设置 `USE_JAVA` 后，Port 将接收到的所有设置列表。
 
 **表 21. 使用 Java 的 Ports 提供的变量**
 
@@ -1750,13 +1750,13 @@ Ports 中有多个 JDK，来自不同的供应商，并且有多个版本。如�
 
 ### 6.16.3. 最佳实践
 
-在移植 Java 库时， Port 需要将 JAR 文件安装到 **\${JAVAJARDIR}**，并将其他所有内容安装到 **\${JAVASHAREDIR}/\${PORTNAME}** 目录下（文档除外，见下文）。为了减小打包文件的大小，应在 **Makefile** 中直接引用 JAR 文件。可以使用如下语句（其中 **myport.jar** 是 Port 安装的 JAR 文件名称）：
+在移植 Java 库时，Port 需要将 JAR 文件安装到 **\${JAVAJARDIR}**，并将其他所有内容安装到 **\${JAVASHAREDIR}/\${PORTNAME}** 目录下（文档除外，见下文）。为了减小打包文件的大小，应在 **Makefile** 中直接引用 JAR 文件。可以使用如下语句（其中 **myport.jar** 是 Port 安装的 JAR 文件名称）：
 
 ```makefile
 PLIST_FILES+=	${JAVAJARDIR}/myport.jar
 ```
 
-在移植 Java 应用程序时， Port 通常会将所有内容安装到单一目录下（包括其 JAR 依赖项）。在这种情况下，强烈推荐使用 **\${JAVASHAREDIR}/\${PORTNAME}**。具体是否将额外的 JAR 依赖项安装到此目录下，还是使用已经安装的 JAR（来自 **\${JAVAJARDIR}**），由移植者决定。
+在移植 Java 应用程序时，Port 通常会将所有内容安装到单一目录下（包括其 JAR 依赖项）。在这种情况下，强烈推荐使用 **\${JAVASHAREDIR}/\${PORTNAME}**。具体是否将额外的 JAR 依赖项安装到此目录下，还是使用已经安装的 JAR（来自 **\${JAVAJARDIR}**），由移植者决定。
 
 当移植需要应用服务器（如 [www/tomcat7](https://cgit.freebsd.org/ports/tree/www/tomcat7/)）来运行服务的 Java™ 应用程序时，供应商通常会分发一个 **.war** 文件。**.war** 是 Web 应用程序存档文件，在应用程序调用时会被解压。避免将 **.war** 添加到 **pkg-plist** 中，这不是最佳实践。应用服务器会展开 war 存档，但如果 Port 被移除，它不会正确清理该存档。更好的做法是先解压存档文件，再安装文件，最后将这些文件添加到 **pkg-plist** 中。
 
@@ -1895,7 +1895,7 @@ SOCKETS_USE=	PHP=sockets
 
 ### 6.18. 使用 Python
 
-Ports 支持多个 Python 版本的并行安装。 Port 必须根据用户可设置的 `PYTHON_VERSION` 使用正确的 `python` 解释器。最重要的是，这意味着将脚本中的 `python` 可执行文件路径替换为 `PYTHON_CMD` 的值。
+Ports 支持多个 Python 版本的并行安装。Port 必须根据用户可设置的 `PYTHON_VERSION` 使用正确的 `python` 解释器。最重要的是，这意味着将脚本中的 `python` 可执行文件路径替换为 `PYTHON_CMD` 的值。
 
 将文件安装到 `PYTHON_SITELIBDIR` 下的 Port 必须使用 `pyXY-` 包名前缀，这样它们的包名就包含了 Python 的版本号。
 
@@ -1970,14 +1970,14 @@ Ports 支持多个 Tcl/Tk 版本的并行安装。Ports 应该至少支持默认
 
 **表 27. 使用 Tcl/Tk 的 Ports 最有用的只读变量**
 
-| `TCL_VER`              | 选择的 Tcl 版本号（主版本.次版本） |
+| `TCL_VER`              | 选择的 Tcl 版本号（主版本。次版本） |
 | ---------------------- | -------------------- |
 | `TCLSH`                | Tcl 解释器的完整路径         |
 | `TCL_LIBDIR`           | Tcl 库文件的路径           |
 | `TCL_INCLUDEDIR`       | Tcl C 头文件的路径         |
 | `TCL_PKG_LIB_PREFIX`   | 库前缀，按 TIP595 标准      |
 | `TCL_PKG_STUB_POSTFIX` | Stub 库后缀             |
-| `TK_VER`               | 选择的 Tk 版本号（主版本.次版本）  |
+| `TK_VER`               | 选择的 Tk 版本号（主版本。次版本）  |
 | `WISH`                 | Tk 解释器的完整路径          |
 | `TK_LIBDIR`            | Tk 库文件的路径            |
 | `TK_INCLUDEDIR`        | Tk C 头文件的路径          |
@@ -2252,7 +2252,7 @@ USES=	lua:52-53
 
 ### 6.22.4. 版本  flavors 
 
-一个安装 Lua 模块的 Port（而不是仅仅使用 Lua 的应用程序）应该为每个支持的 Lua 版本构建一个单独的  flavors 。这可以通过添加 `module` 参数来完成：
+一个安装 Lua 模块的 Port（而不是仅仅使用 Lua 的应用程序）应该为每个支持的 Lua 版本构建一个单独的  flavors。这可以通过添加 `module` 参数来完成：
 
 ```makefile
 USES=	lua:module
@@ -2276,7 +2276,7 @@ USES=	lua:flavors
 
 这与上述说明的 `module` 参数的工作方式相同，但不假设包应该作为 Lua 模块来记录（因此默认情况下不定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`）。不过，Port 可以选择定义 `LUA_DOCSUBDIR` 作为合适的子目录名称（通常是 Port 的 `PORTNAME`，只要它不与任何模块的 `PORTNAME` 冲突），在这种情况下，框架将定义 `LUA_DOCSDIR` 和 `LUA_EXAMPLESDIR`。
 
-与模块 Port 一样，  flavors  Port 应避免安装可能在版本之间冲突的文件。通常通过将 `LUA_VER_STR` 作为程序名称的后缀来完成此操作（例如使用 [`uniquefiles`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uniquefiles)），并在其他文件或子目录中使用 `LUA_VER` 或 `LUA_VER_STR`，这些文件或子目录位于 `LUA_MODLIBDIR` 和 `LUA_MODSHAREDIR` 之外。
+与模块 Port 一样，flavors  Port 应避免安装可能在版本之间冲突的文件。通常通过将 `LUA_VER_STR` 作为程序名称的后缀来完成此操作（例如使用 [`uniquefiles`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uniquefiles)），并在其他文件或子目录中使用 `LUA_VER` 或 `LUA_VER_STR`，这些文件或子目录位于 `LUA_MODLIBDIR` 和 `LUA_MODSHAREDIR` 之外。
 
 ### 6.22.5. 定义的变量
 
@@ -2314,7 +2314,7 @@ USES=	lua:flavors
 
 **示例 31. 使用 Lua 的应用程序 Makefile**
 
-此示例展示了如何引用运行时所需的 Lua 模块。请注意，引用必须指定一个  flavors 。
+此示例展示了如何引用运行时所需的 Lua 模块。请注意，引用必须指定一个  flavors。
 
 ```makefile
 PORTNAME=	sample
@@ -2359,7 +2359,7 @@ DOCSDIR=	${LUA_DOCSDIR}
 
 Guile 库和相应的解释器有多个版本，它们之间存在冲突（以相同的名称安装文件）。在 Ports 树中，通过使用版本号后缀将每个版本安装为不同的名称来解决这个问题。在大多数情况下，应用程序应该通过提供的配置变量检测正确的版本，并使用 `pkg-config` 来确定名称和相关路径。然而，一些应用程序（尤其是那些使用自己配置规则的应用程序，如 `cmake` 或 `meson`）将始终尝试使用最新版本。在这种情况下，要么修补 Port，要么声明构建冲突（见下文的 `conflicts` 选项），以确保在非 poudriere 构建时生成正确的依赖项。
 
-使用 Guile 的应用程序通常应该仅为一个版本构建，最好是 `DEFAULT_VERSIONS` 中指定的版本，或者如果不支持该版本，则为它们支持的最新版本。然而，Guile 或 Scheme 库，或 Guile 的扩展模块，会为它们支持的每个 Guile 版本分别构建一个  flavors ，并且这些模块的依赖关系应该使用 `@${GUILE_FLAVOR}` 后缀来指定 Port 来源。
+使用 Guile 的应用程序通常应该仅为一个版本构建，最好是 `DEFAULT_VERSIONS` 中指定的版本，或者如果不支持该版本，则为它们支持的最新版本。然而，Guile 或 Scheme 库，或 Guile 的扩展模块，会为它们支持的每个 Guile 版本分别构建一个  flavors，并且这些模块的依赖关系应该使用 `@${GUILE_FLAVOR}` 后缀来指定 Port 来源。
 
 ### 6.23.2. 版本选择
 
@@ -2370,7 +2370,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 | 名称             | 说明                                                                          |
 | -------------- | --------------------------------------------------------------------------- |
 | `X.Y` | 声明与 Guile 版本 `X.Y` 的兼容性。目前可用的版本为 `1.8`（已废弃）、`2.2` 和 `3.0`。可以指定多个版本。         |
-| `flavors`      | 为每个指定的 Guile 版本创建一个  flavors 。由 `DEFAULT_VERSIONS` 指定的版本将成为默认  flavors 。  flavors 名称的格式为 `guileXY`。 |
+| `flavors`      | 为每个指定的 Guile 版本创建一个  flavors。由 `DEFAULT_VERSIONS` 指定的版本将成为默认  flavors。flavors 名称的格式为 `guileXY`。 |
 | `build`        | 仅将 Guile 解释器添加为构建依赖项，而不是库依赖项。可以同时指定 `build` 和 `run`。                        |
 | `run`          | 仅将 Guile 解释器添加为运行时依赖项，而不是库依赖项。可以同时指定 `build` 和 `run`。                       |
 | `alias`        | 为解释器和工具添加 `BINARY_ALIAS` 值。                                                 |
@@ -2398,7 +2398,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 
 ### 6.23.4. 版本  flavors 
 
-安装 Guile 扩展或库的 Port，或为 Guile 预编译的 Scheme 库，应为每个支持的 Guile 版本构建一个单独的  flavors 。通过添加 `flavors` 选项来实现此目的。
+安装 Guile 扩展或库的 Port，或为 Guile 预编译的 Scheme 库，应为每个支持的 Guile 版本构建一个单独的  flavors。通过添加 `flavors` 选项来实现此目的。
 
 由于每个  flavors 必须具有不同的包名称，因此这些 Port 必须设置 `PKGNAMESUFFIX`，通常为：
 
@@ -2540,7 +2540,7 @@ USE_XFCE=	libmenu
 
 **示例 39. 使用 Xfce 的 GTK2 小部件**
 
-在此示例中， Port 化的应用程序使用 GTK2 特定的小部件 [x11/libxfce4menu](https://cgit.freebsd.org/ports/tree/x11/libxfce4menu/) 和 [x11/xfce4-conf](https://cgit.freebsd.org/ports/tree/x11/xfce4-conf/)。
+在此示例中，Port 化的应用程序使用 GTK2 特定的小部件 [x11/libxfce4menu](https://cgit.freebsd.org/ports/tree/x11/libxfce4menu/) 和 [x11/xfce4-conf](https://cgit.freebsd.org/ports/tree/x11/xfce4-conf/)。
 
 ```makefile
 USES=		xfce:gtk2
@@ -2643,7 +2643,7 @@ USES=	sqlite:3
 
 ## 6.28. 启动和停止服务（`rc` 脚本）
 
-**rc.d** 脚本用于在系统启动时启动服务，并为管理员提供一种标准的方式来停止、启动和重新启动服务。 Port 集成到系统 **rc.d** 框架中。有关其用法的详细信息，可以参见 [rc.d Handbook 章节](https://docs.freebsd.org/en/books/handbook/#configtuning-rcd)。有关可用命令的详细解释，请参见 [rc(8)](https://man.freebsd.org/cgi/man.cgi?query=rc&sektion=8&format=html) 和 [rc.subr(8)](https://man.freebsd.org/cgi/man.cgi?query=rc.subr&sektion=8&format=html)。此外，还有一篇关于 **rc.d** 脚本实践方面的 [文章](https://docs.freebsd.org/en/articles/rc-scripting/)。
+**rc.d** 脚本用于在系统启动时启动服务，并为管理员提供一种标准的方式来停止、启动和重新启动服务。Port 集成到系统 **rc.d** 框架中。有关其用法的详细信息，可以参见 [rc.d Handbook 章节](https://docs.freebsd.org/en/books/handbook/#configtuning-rcd)。有关可用命令的详细解释，请参见 [rc(8)](https://man.freebsd.org/cgi/man.cgi?query=rc&sektion=8&format=html) 和 [rc.subr(8)](https://man.freebsd.org/cgi/man.cgi?query=rc.subr&sektion=8&format=html)。此外，还有一篇关于 **rc.d** 脚本实践方面的 [文章](https://docs.freebsd.org/en/articles/rc-scripting/)。
 
 假设有一个名为 *doorman* 的虚拟 Port，需要启动 *doormand* 守护进程。在 **Makefile** 中添加以下内容：
 
