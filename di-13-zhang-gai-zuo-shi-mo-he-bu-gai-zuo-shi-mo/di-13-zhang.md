@@ -2,342 +2,364 @@
 
 ## 13.1. 介绍
 
-这里列出了一些常见的注意事项和禁忌，这些在移植过程中经常遇到。将port与此列表进行对比，但也请检查 PR 数据库中他人提交的ports。按照“Bug Reports and General Commentary”中的描述提交任何关于ports的评论。检查 PR 数据库中的ports，这将使我们更快地提交它们，并证明你知道自己在做什么。
+以下是移植过程中常见的一些注意事项和禁忌。请对照本清单检查 Port，同时也请查看其他人提交到 [PR 数据库](https://bugs.freebsd.org/search/) 中的 Ports。根据 [Bug Reports and General Commentary](https://docs.freebsd.org/en/articles/contributing/#CONTRIB-GENERAL) 中的说明提交对 Ports 的任何意见。检查 PR 数据库中的 Ports 不仅可以加快我们提交的速度，还可以证明你熟悉相关操作。
 
 ## 13.2. `WRKDIR`
 
-不要向 WRKDIR 外的文件写入任何内容。 WRKDIR 是port构建过程中唯一保证可写的地方（参见从 CDROM 安装ports来了解从只读树构建ports的示例）。pkg-*文件可以通过重新定义变量而不是覆盖文件来修改。
+不要向 `WRKDIR` 之外的文件写入任何内容。`WRKDIR` 是构建 Port 过程中唯一保证可写的地方（参见 [从光盘安装 Ports](https://docs.freebsd.org/en/books/handbook/#PORTS-CD) 中只读树构建 Ports 的示例）。**pkg-\*** 文件可以通过 [重新定义变量](https://docs.freebsd.org/en/books/porters-handbook/pkg-files/#pkg-names) 的方式修改，而不是直接覆盖文件。
 
 ## 13.3. `WRKDIRPREFIX`
 
-确保port遵循 WRKDIRPREFIX 。大多数ports不必担心这一点。特别是，当引用另一个port的 WRKDIR 时，注意正确的位置是${WRKDIRPREFIX}${PORTSDIR}/subdir/name/work，而不是${PORTSDIR}/subdir/name/work 或${.CURDIR}/../../subdir/name/work 或其他类似的地方。
+确保 Port 支持 `WRKDIRPREFIX`。大多数 Ports 不需要关心这一点。尤其是在引用其他 Port 的 `WRKDIR` 时，应注意正确的位置是 **\${WRKDIRPREFIX}\${PORTSDIR}/subdir/name/work**，而不是 **\${PORTSDIR}/subdir/name/work** 或 **\${.CURDIR}/../../subdir/name/work** 或类似路径。
 
-## 13.4. 区分操作系统和操作系统版本
+## 13.4. 区分操作系统及其版本
 
-一些代码需要根据运行在哪个版本的 FreeBSD Unix 进行修改或条件编译。 区分 FreeBSD 版本的首选方法是在 sys/param.h 中定义的 __FreeBSD_version 和 **FreeBSD** 宏。如果没有包含此文件，请在.c 文件的适当位置添加代码，
+某些代码需要根据所运行的 FreeBSD Unix 版本进行修改或条件编译。区分 FreeBSD 版本的推荐方式是使用定义在 [sys/param.h](https://cgit.freebsd.org/src/tree/sys/sys/param.h) 中的 `__FreeBSD_version` 和 `__FreeBSD__` 宏。如果未包含该文件，请在对应的 **.c** 文件中添加如下代码：
 
-```
+```c
 #include <sys/param.h>
 ```
 
-到适当位置在.c 文件中。
+`__FreeBSD__` 在所有版本的 FreeBSD 中都定义为其主版本号。例如，在 FreeBSD 9.x 中，`__FreeBSD__` 被定义为 `9`。
 
-**FreeBSD** 定义在所有版本的 FreeBSD 中作为它们的主要版本号。例如，在 FreeBSD 9.x 中， **FreeBSD** 被定义为 9 。
-
-```
+```c
 #if __FreeBSD__ >= 9
 #  if __FreeBSD_version >= 901000
-	 /* 9.1+ release specific code here */
+	 /* 9.1+ 版本特有的代码 */
 #  endif
 #endif
 ```
 
-__FreeBSD_version 值的完整列表可在 _ _FreeBSD_version Values 中获得。
+`__FreeBSD_version` 的完整值列表可参考 [\_\_FreeBSD\_version 值](https://docs.freebsd.org/en/books/porters-handbook/versions/#versions)。
 
-## 13.5. 写在 bsd.port.mk 之后
+## 13.5. 在 bsd.port.mk 之后写内容
 
-不要在 .include <bsd.port.mk> 行之后写任何内容。通常可以通过在 Makefile 的中间某处包含 bsd.port.pre.mk 来避免这种情况，然后在最后加上 bsd.port.post.mk。
+不要在 `.include <bsd.port.mk>` 这一行之后写任何内容。通常可以通过在 **Makefile** 中部引入 **bsd.port.pre.mk**，在末尾引入 **bsd.port.post.mk** 来避免这种情况。
 
-|  | 只包含 bsd.port.pre.mk/bsd.port.post.mk 对或者只包含 bsd.port.mk；不要混合使用这两种方式。 |
-| -- | -------------------------------------------------------------------------------------------- |
+>**重要**
+>
+>要么只使用 **bsd.port.mk**，要么使用 **bsd.port.pre.mk**/**bsd.port.post.mk** 配对；请不要混用这两种方式。 
 
-bsd.port.pre.mk 只定义了一些变量，可以在 Makefile 中的测试中使用，bsd.port.post.mk 定义了其余部分。
 
-这里是在 bsd.port.pre.mk 中定义的一些重要变量（这不是完整列表，请阅读 bsd.port.mk 获取完整列表）。
+**bsd.port.pre.mk** 只定义了一些变量，可以在 **Makefile** 中进行判断使用，而 **bsd.port.post.mk** 定义其余变量。
 
-| 变量 | 描述                                                        |
-| ------ | ------------------------------------------------------------- |
-| `ARCH`     | 由 uname -m 返回的架构（例如， i386 ）                      |
-| `OPSYS`     | 操作系统类型，由 uname -s 返回（例如， FreeBSD ）           |
-| `OSREL`     | 操作系统的发行版本（例如， 2.1.5 或 2.2.7 ）                |
-| `OSVERSION`     | 操作系统的数字版本；与 \_\_FreeBSD\_version 相同。 |
-| `LOCALBASE`     | “本地”树的基础（例如， /usr/local ）                      |
-| `PREFIX`     | port 安装自身的位置（请参阅更多关于 PREFIX 的信息）。       |
+下面是一些 **bsd.port.pre.mk** 定义的重要变量（不是完整列表，完整内容请参考 **bsd.port.mk**）：
 
-|  | 当需要 MASTERDIR 时，始终在包含 bsd.port.pre.mk 之前定义它。 |
-| -- | -------------------------------------------------------------- |
+| 变量名         | 描述                                                                                                             |
+| ----------- | -------------------------------------------------------------------------------------------------------------- |
+| `ARCH`      | 架构类型，`uname -m` 返回的结果（例如，`i386`）                                                                               |
+| `OPSYS`     | 操作系统类型，`uname -s` 返回的结果（例如，`FreeBSD`）                                                                          |
+| `OSREL`     | 操作系统的发布版本（例如，`2.1.5` 或 `2.2.7`）                                                                                |
+| `OSVERSION` | 操作系统的数字版本；与 [`__FreeBSD_version`](https://docs.freebsd.org/en/books/porters-handbook/versions/#versions) 相同    |
+| `LOCALBASE` | “本地”目录的根目录（例如，`/usr/local`）                                                                                    |
+| `PREFIX`    | Port 安装的位置（详见 [关于 `PREFIX` 的更多信息](https://docs.freebsd.org/en/books/porters-handbook/testing/#porting-prefix)） |
 
-这里是一些可以在 bsd.port.pre.mk 之后添加的示例：
+>**注意**
+>
+> 如果需要使用 `MASTERDIR`，务必在包含 **bsd.port.pre.mk** 之前定义它。 
 
-```
-# no need to compile lang/perl5 if perl5 is already in system
+以下是一些可以在 **bsd.port.pre.mk** 之后添加的示例：
+
+```c
+# 如果系统中已有 perl5，就无需编译 lang/perl5
 .if ${OSVERSION} > 300003
 BROKEN=	perl is in system
 .endif
 ```
 
-在 BROKEN= 之后始终使用制表符而不是空格。
+`BROKEN=` 后请始终使用 tab 而不是空格。
 
-## 13.6. 在包装脚本中使用 exec 语句
+## 13.6. 在封装脚本中使用 `exec` 语句
 
-如果port安装了一个shell脚本，其目的是启动另一个程序，并且如果启动该程序是脚本执行的最后一个操作，请确保使用 exec 语句启动该程序，例如：
+如果 Port 安装了一个 shell 脚本，而该脚本的目的是启动另一个程序，并且启动该程序是脚本执行的最后一步，那么请务必使用 `exec` 语句来启动该程序，例如：
 
-```
+```sh
 #!/bin/sh
 exec %%LOCALBASE%%/bin/java -jar %%DATADIR%%/foo.jar "$@"
 ```
 
-exec 语句将shell进程替换为指定的程序。如果省略 exec ，则在程序执行时shell进程仍保留在内存中，并且会不必要地消耗系统资源。
+`exec` 语句会将当前 shell 进程替换为指定程序。如果省略 `exec`，则 shell 进程在程序运行期间仍会驻留在内存中，造成系统资源的无谓浪费。
 
-## 13.7. 合理地做事
+## 13.7. 理性地处理问题
 
-Makefile 应该以简单和合理的方式做事。让它变得更短或更易读总是更好的。例如，使用 make .if 结构代替 shell if 结构，如果重新定义 EXTRACT* 足够的话不重新定义 do-extract ，并使用 GNU_CONFIGURE 而不是 CONFIGURE_ARGS += --prefix=${PREFIX} 。
+**Makefile** 应该以简单合理的方式完成任务。使其更简洁或更易读总是更好的做法。示例包括使用 make 的 `.if` 结构代替 shell 的 `if` 结构；如果只需重定义 `EXTRACT*` 就足够了，就不要重定义 `do-extract`；使用 `GNU_CONFIGURE` 而不是 `CONFIGURE_ARGS += --prefix=${PREFIX}`。
 
-如果需要大量新代码来做某事，可能已经在 bsd.port.mk 中有其实现。虽然难以阅读，但似乎有许多看似困难的问题，而 bsd.port.mk 已经提供了一个简便的解决方案。
+如果为了实现某个功能需要添加大量新代码，很可能在 **bsd.port.mk** 中已经有相关实现。虽然 **bsd.port.mk** 难以阅读，但它为许多看似复杂的问题提供了简洁的解决方案。
 
-## 13.8. 尊重 CC 和 CXX
+## 13.8. 遵守 `CC` 和 `CXX`
 
-port必须尊重 CC 和 CXX 。我们的意思是port不能绝对设置这些变量的值，覆盖现有的值；相反，它可以向现有值添加所需的值。这样可以全局设置影响所有ports的构建选项。
+Port 必须遵守 `CC` 和 `CXX`。这意味着不能直接覆盖这两个变量的值，而应在已有值的基础上追加所需内容。这样做可以确保影响所有 Ports 的构建选项能被全局设置。
 
-如果port不尊重这些变量，请将 NO_PACKAGE=ignores either cc or cxx 添加到 Makefile 中。
+如果 Port 没有遵守这些变量，请在 **Makefile** 中添加 `NO_PACKAGE=ignores either cc or cxx`。
 
-这是一个尊重 CC 和 CXX 的 Makefile 示例。请注意 ?= ：
+以下是一个遵守 `CC` 和 `CXX` 的 **Makefile** 示例。注意 `?=` 的使用：
 
-```
+```makefile
 CC?= gcc
 ```
 
-```
+```makefile
 CXX?= g++
 ```
 
-这是一个既不尊重 CC 也不尊重 CXX 的示例：
+以下是不遵守的示例：
 
-```
+```makefile
 CC= gcc
 ```
 
-```
+```makefile
 CXX= g++
 ```
 
-在 FreeBSD 系统上，可以在 /etc/make.conf 中定义 CC 和 CXX 。第一个示例在未在 /etc/make.conf 中先前设置值时定义一个值，保留任何系统范围的定义。第二个示例会覆盖之前定义的任何内容。
+在 FreeBSD 系统中，`CC` 和 `CXX` 可以在 **/etc/make.conf** 中定义。第一个示例仅在变量未被预先定义时赋值，保留了系统范围的定义；而第二个示例则会覆盖已有定义。
 
-## 赞赏 CFLAGS 安全
+## 13.9. 遵守 `CFLAGS`
 
-必须尊重 CFLAGS 。我们的意思是，port 不得绝对设置此变量的值，覆盖现有值。相反，它可以向现有值追加所需的任何值。这样可以全局设置影响所有 ports 的构建选项。
+Port 必须遵守 `CFLAGS`。这意味着不能直接覆盖该变量的值，而应在已有值的基础上追加所需内容。这样可以使影响所有 Ports 的构建选项可以全局设置。
 
-如果没有，请将 NO_PACKAGE=ignores cflags 添加到 Makefile。
+如果未遵守，请在 **Makefile** 中添加 `NO_PACKAGE=ignores cflags`。
 
-这里是尊重 CFLAGS 的一个示例的 Makefile。请注意 += ：
+以下是一个遵守 `CFLAGS` 的 **Makefile** 示例。注意 `+=` 的使用：
 
-```
+```makefile
 CFLAGS+= -Wall -Werror
 ```
 
-这是一个不尊重 CFLAGS 的示例：
+以下是不遵守的示例：
 
-```
+```makefile
 CFLAGS= -Wall -Werror
 ```
 
-CFLAGS 在 FreeBSD 系统中在 /etc/make.conf 中被定义。第一个示例将附加额外的标志到 CFLAGS ，保留任何系统范围的定义。第二个示例将覆盖先前定义的任何内容。
+`CFLAGS` 在 FreeBSD 系统中定义于 **/etc/make.conf**。第一个示例将额外参数附加到已有的 `CFLAGS` 上，保留系统级定义；而第二个示例会覆盖原有定义。
 
-从第三方 Makefile 中删除优化标志。该系统 CFLAGS 包含全局系统优化标志。未修改的 Makefile 示例：
+请从第三方 **Makefile** 中移除优化标志。系统的 `CFLAGS` 已包含系统范围的优化选项。以下是未修改的 **Makefile** 中的示例：
 
-```
+```makefile
 CFLAGS= -O3 -funroll-loops -DHAVE_SOUND
 ```
 
-使用系统优化标志，Makefile 将类似于此示例：
+使用系统优化标志后的 **Makefile** 应类似如下：
 
-```
+```makefile
 CFLAGS+= -DHAVE_SOUND
 ```
 
-## 13.10. 详细构建日志
+## 13.10. 显示详细构建日志
 
-使 port 构建系统在构建阶段显示所有执行的命令。完整的构建日志对调试 port 问题至关重要。
+请确保 Port 的构建系统在构建阶段显示所有执行的命令。完整的构建日志对于调试 Port 问题至关重要。
 
-非信息性构建日志示例（不好）：
+不具可读性的构建日志示例（错误）：
 
-```
-  CC     source1.o
+```sh
+CC     source1.o
   CC     source2.o
   CCLD   someprogram
 ```
 
-冗长的构建日志示例（好）：
+详细的构建日志示例（正确）：
 
-```
+```sh
 cc -O2 -pipe -I/usr/local/include -c -o source1.o source1.c
 cc -O2 -pipe -I/usr/local/include -c -o source2.o source2.c
 cc -o someprogram source1.o source2.o -L/usr/local/lib -lsomelib
 ```
 
-一些构建系统，如 CMake、ninja 和 GNU configure，已经为ports框架设置了详细日志记录。在其他情况下，ports可能需要单独的调整。
+某些构建系统（如 CMake、ninja 和 GNU configure）在 Ports 框架中已经配置为显示详细日志。其他情况下，Port 可能需要单独调整。
 
 ## 13.11. 反馈
 
-请向上游维护者发送适用的更改和补丁，以便包含在下一个版本的代码发布中。这样做将使更新到下一个版本变得更加容易。
+请将相关的更改和补丁提交给上游维护者，以便在下一版本中包含这些更改。这样有助于简化后续版本的更新过程。
 
 ## 13.12. README.html
 
-README.html 不属于port的一部分，而是由 make readme 生成的。在补丁或提交中不要包括此文件。
+**README.html** 并不是 Port 的一部分，而是通过执行 `make readme` 生成的。请勿将此文件包含在补丁或提交中。
 
-|  | 如果 make readme 失败，请确保port未修改 ECHO_MSG 的默认值。 |
-| -- | ------------------------------------------------------------- |
+>**注意**
+>
+>如果 `make readme` 失败，请确认 Port 未修改 `ECHO_MSG` 的默认值。 
+  
 
-## 13.13. 用 Port， BROKEN 或 FORBIDDEN 或 IGNORE 标记Port 为不可安装
+## 13.13. 使用 `BROKEN`、`FORBIDDEN` 或 `IGNORE` 标记不可安装的 Port
 
-在某些情况下，必须阻止用户安装port。 可以在port的 Makefile 中使用几个变量，告诉用户port无法安装。 这些 make 变量的值将是向用户显示port拒绝安装自身的原因。 请使用正确的 make 变量。 每个变量都传达着截然不同的含义，既对用户，也对依赖于 Makefiles 的自动化系统，如ports构建集群和 FreshPorts。
+在某些情况下，必须阻止用户安装某个 Port。可以在 Port 的 **Makefile** 中使用几个变量来告诉用户该 Port 无法安装。这些 make 变量的值将作为 Port 拒绝安装的原因显示给用户。请使用正确的 make 变量。每个变量在语义上有明显不同，不仅对用户如此，对依赖 **Makefile** 的自动化系统（如 [Ports 构建集群](https://docs.freebsd.org/en/books/porters-handbook/keeping-up/#build-cluster) 和 [FreshPorts](https://docs.freebsd.org/en/books/porters-handbook/keeping-up/#freshports)）也是如此。
 
-### 13.13.1. 变量
+### 13.13.1. 各变量说明
 
-* BROKEN 保留给目前无法正确编译、安装、卸载或运行的 ports。用于被认为是暂时性问题的 ports。如果指示，构建集群仍将尝试构建它们，以查看潜在问题是否已解决。（但是，通常情况下，集群运行时不会这样做。）
-  例如，当 port:
+* `BROKEN`：用于目前无法编译、安装、卸载或正常运行的 Port。适用于预计问题是暂时性的情形。
+  如果设置，构建集群在收到指示的情况下仍可能尝试构建以查看问题是否已经解决。（但通常构建集群不会这样做。）
 
-  * 无法编译时使用 {{0}}
-  * 在配置或安装过程中失败
-  * 在${PREFIX}之外安装文件
-  * 在卸载时未完全清理所有文件（但是，允许且希望port保留用户修改的文件）
-  * 在应该正常运行的系统上存在运行时问题。
-* FORBIDDEN 用于包含安全漏洞或引起对 FreeBSD 系统安全性产生严重关注的ports（例如，一个声誉不佳的不安全程序或提供易受攻击服务的程序）。一旦某个软件存在漏洞且没有发布升级版本，立即将ports 标记为 FORBIDDEN 。理想情况下，在发现安全漏洞时尽快升级ports，以减少易受攻击的 FreeBSD 主机数量（我们希望以安全著称），但有时漏洞披露和受影响软件更新发布之间会有明显的时间差。不要因其他原因而将port 标记为 FORBIDDEN ，只能基于安全性原因标记。
-* IGNORE 保留给因某些其他原因而不得构建的ports。在认为问题是结构性的ports中使用它。构建集群绝对不会构建标记为 IGNORE 的ports。例如，当port时使用 IGNORE ：
+  例如，当一个 Port：
 
-  * 定制安装版本的 FreeBSD 上不起作用
-  * 由于许可限制，可能无法自动获取 distfile
-  * 与当前安装的某些其他port不兼容（例如，port依赖于 www/drupal7，但安装了 www/drupal8）||如果port与当前安装的port发生冲突（例如，如果它们在执行不同功能的相同位置安装文件），请改用 CONFLICTS 。 CONFLICTS 将自行设置 IGNORE 。|
-    | --| ----------------------------------------------------------------------------------------------------------------------------------------------|
+  * 无法编译；
+  * 配置或安装过程失败；
+  * 将文件安装到 **\${PREFIX}** 之外；
+  * 卸载时未能清除所有文件（不过如果留下的是用户已修改的文件，可能是可以接受甚至是期望的）；
+  * 在本应能正常运行的系统上运行失败；
 
-### 13.13.2. 实施说明
+  应使用 `BROKEN`。
 
-不要引用 BROKEN ， IGNORE 和相关变量的值。由于向用户显示信息的方式，每个变量的消息措辞不同：
+* `FORBIDDEN`：用于含有安全漏洞，或对 FreeBSD 系统安全构成严重隐患的 Port（例如：臭名昭著的不安全程序，或提供易被攻击的服务的程序）。一旦发现某个软件存在漏洞且无可用升级版本，应立即将相关 Port 标记为 `FORBIDDEN`。理想情况下，发现安全问题时应尽快升级 Port，以减少 FreeBSD 主机的漏洞数量（我们以安全著称）。除安全问题外，请勿使用 `FORBIDDEN`。
 
-```
+* `IGNORE`：用于因其他原因绝不能构建的 Port。适用于认为问题具有结构性特征的情形。构建集群在任何情况下都不会构建被标记为 `IGNORE` 的 Port。例如，在以下情况下应使用 `IGNORE`：
+
+  * Port 不支持当前安装的 FreeBSD 版本；
+  * distfile 因许可证限制不能自动获取；
+  * 与当前已安装的其他 Port 不兼容（例如：该 Port 依赖 [www/drupal7](https://cgit.freebsd.org/ports/tree/www/drupal7/)，而系统已安装的是 [www/drupal8](https://cgit.freebsd.org/ports/tree/www/drupal8/)）；
+
+  >**注意**
+  >
+  >如果 Port 与当前安装的其他 Port 冲突（例如，它们安装了具有不同功能但同名的文件），[请使用 `CONFLICTS`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#conflicts)。`CONFLICTS` 会自动设置 `IGNORE`。 
+
+
+### 13.13.2. 实现注意事项
+
+不要给 `BROKEN`、`IGNORE` 及相关变量的值加引号。由于这些信息最终会显示给用户，每个变量所使用的消息措辞是不同的：
+
+```makefile
 BROKEN=	fails to link with base -lcrypto
 ```
 
-```
+```makefile
 IGNORE=	unsupported on recent versions
 ```
 
-从 make describe 导致此输出：
+这样，`make describe` 的输出如下所示：
 
-```
+```makefile
 ===>  foobar-0.1 is marked as broken: fails to link with base -lcrypto.
 ```
 
-```
+```makefile
 ===>  foobar-0.1 is unsupported on recent versions.
 ```
 
-## 13.14. 建筑考虑
+## 13.14. 架构相关注意事项
 
-### 13.14.1. 关于架构的一般说明
+### 13.14.1. 架构通用说明
 
-FreeBSD 运行在许多不仅仅是众所周知的基于 x86 的处理架构上。某些ports有特定于其中一个或多个这些架构的约束条件。
+FreeBSD 支持的处理器架构远不止常见的 x86 架构。一些 Port 仅适用于某些特定架构，或者在某些架构下会有问题。
 
-要查看支持的架构列表，请运行：
+要查看支持的架构列表，请执行以下命令：
 
-```
+```makefile
 cd ${SRCDIR}; make targets
 ```
 
-值显示为 TARGET / TARGET_ARCH 。ports只读的 Makevar ARCH 是基于 TARGET_ARCH 的值设定的。Port的 Makefile 应该测试这个 Makevar 的值。
+返回的值为 `TARGET`/`TARGET_ARCH` 形式。只读 make 变量 `ARCH` 的值基于 `TARGET_ARCH` 设置。Port 的 **Makefile** 应当测试该变量的值。
 
-### 将 Port 标记为体系结构中性
+### 13.14.2. 标记为架构无关的 Port
 
-没有任何架构相关文件或要求的 Ports 通过设置 NO_ARCH=yes 进行识别。
+不包含任何依赖特定架构文件或要求的 Port 应设置 `NO_ARCH=yes`。
 
-从这类 ports 构建的软件包，其架构字符串以 :* 结尾（通配符架构），而不是例如 freebsd:13:x86:64 （amd64 架构）。
+这类 Port 构建出的软件包，其架构字符串将以 `:*`（通配架构）结尾，例如不是 `freebsd:13:x86:64`（即 amd64 架构）。
 
-|  | NO_ARCH 旨在表明无需为每个受支持的架构构建软件包。目标是减少构建和分发软件包所需的资源，如网络带宽、镜像空间和分发媒体上的磁盘空间。然而，目前我们的软件包基础设施（例如软件包管理器、镜像和软件包构建器）尚未设置完全从中受益。 |
-| -- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+>**注意**
+>
+>设置 `NO_ARCH` 的目的在于表明无需为所有支持架构单独构建包。这样可以减少构建和分发软件包所消耗的资源，例如网络带宽、镜像服务器和分发介质的磁盘空间。但当前的软件包基础设施（例如软件包管理器、镜像、构建系统）尚未完全利用 `NO_ARCH` 带来的优势。 
 
-### 13.14.3. 将 Port 标记为仅在某些架构上被忽略
+### 13.14.3. 仅在特定架构上标记为不可构建的 Port
 
-* 要将 port 标记为仅在某些架构上被 IGNORE ，有两个其他方便的变量将自动设置 IGNORE ： ONLY_FOR_ARCHS 和 NOT_FOR_ARCHS 。示例：
+* 若希望仅在某些架构上将 Port 标记为 `IGNORE`，可使用 `ONLY_FOR_ARCHS` 和 `NOT_FOR_ARCHS` 这两个便利变量，它们会自动设置 `IGNORE`。示例：
 
-  ```
+  ```makefile
   ONLY_FOR_ARCHS=	i386 amd64
   ```
 
-  ```
+  ```makefile
   NOT_FOR_ARCHS=	ia64 sparc64
   ```
 
-  自定义 IGNORE 消息可使用 ONLY_FOR_ARCHS_REASON 和 NOT_FOR_ARCHS_REASON 进行设置。使用 ONLY_FOR_ARCHS_REASON_ARCH 和 NOT_FOR_ARCHS_REASON_ARCH 可以实现按体系结构的条目。
-* 如果port获取 i386 二进制文件并安装它们，则设置 IA32_BINARY_Port。如果设置了此变量，则 IA32 版本的库必须存在/usr/lib32，并且内核必须支持 IA32 兼容性。如果这两个依赖关系中的一个未满足，则 IGNORE 将被自动设置。
+  可使用 `ONLY_FOR_ARCHS_REASON` 和 `NOT_FOR_ARCHS_REASON` 设置自定义的 `IGNORE` 消息。也可以针对特定架构使用 `ONLY_FOR_ARCHS_REASON_ARCH` 和 `NOT_FOR_ARCHS_REASON_ARCH` 设定说明。
 
-### 13.14.4. 集群特定考虑事项
+* 若 Port 下载并安装的是 i386 的二进制文件，应设置 `IA32_BINARY_PORT`。若设置了该变量，则系统必须存在 **/usr/lib32** 以提供 IA32 库，同时内核必须支持 IA32 兼容性。如果这两个条件之一未满足，则将自动设置 `IGNORE`。
 
-* 有些ports会尝试通过向编译器指定 -march=native 来调整到正在构建的准确机器。这应该避免：要么将其列在关闭默认选项下，要么完全删除它。否则，构建集群生成的默认软件包可能无法在该 ARCH 的每台机器上运行。
+### 13.14.4. 与构建集群相关的注意事项
 
-## 13.15. 使用 DEPRECATED 或 EXPIRATION_DATE 标记一个Port以进行移除
+* 某些 Port 会尝试通过向编译器传递 `-march=native` 参数来针对当前构建机器做出优化。这种做法应避免：要么作为默认关闭的选项列出，要么彻底删除该参数。
+  否则，由构建集群构建的默认软件包可能无法在该架构下的所有机器上运行。
 
-请记住， BROKEN 和 FORBIDDEN 应作为暂时的资源，如果一个port无法正常工作。永久损坏的ports将被完全从树中移除。
+## 13.15. 使用 `DEPRECATED` 和 `EXPIRATION_DATE` 标记待移除的 Port
 
-当有必要时，可以使用 DEPRECATED 和 EXPIRATION_DATE 提醒用户即将port。前者是一个字符串，解释为什么计划移除port；后者是一个符合 ISO 8601 格式（YYYY-MM-DD）的字符串。这两者将展示给用户。
+请记住，`BROKEN` 和 `FORBIDDEN` 应仅作为暂时手段。如果一个 Port 永久不可用，它将会被从 Ports 树中移除。
 
-可以设置 DEPRECATED 而不必有 EXPIRATION_DATE （例如，推荐port的更新版本），但反过来却毫无意义。
+在适当的时候，可以使用 `DEPRECATED` 和 `EXPIRATION_DATE` 提前提醒用户 Port 即将被移除。其中，`DEPRECATED` 是说明被弃用原因的字符串，`EXPIRATION_DATE` 是 ISO 8601 格式的日期字符串（YYYY-MM-DD）。两者都会显示给用户。
 
-|  | 当将port标记为 DEPRECATED 时，如果有任何可用作被废弃替代品的替代ports，在提交消息中提到它们会很方便。 |
-| -- | ------------------------------------------------------------------------------------------------------- |
+可以仅设置 `DEPRECATED` 而不设置 `EXPIRATION_DATE`（例如建议使用新版 Port），但反过来是不允许的。
 
-没有关于给予多少通知的固定政策。 目前的做法似乎是对与安全相关问题给予一个月的通知期，对于构建问题则为两个月。 这也给任何感兴趣的贡献者一些时间来修复问题。
+>**注意**
+>
+>标记 Port 为 `DEPRECATED` 时，若有替代 Port 可用，建议在提交说明中提及替代项。
 
-## 13.16. 避免使用 .error 结构
+并没有明确规定应提前多久通知用户。当前的惯例是：安全相关问题提前一个月通知，构建相关问题提前两个月通知。这也为感兴趣的提交者留出时间修复问题。
 
-Makefile 向用户表明由于某些外部因素（例如，用户已经指定了一组非法的构建选项组合）无法安装 port 的正确方式是将一个非空值设置为 IGNORE 。 这个值将由 make install 格式化并显示给用户。
+## 13.16. 避免使用 `.error` 结构
 
-使用 .error 于此目的是一个常见错误。这样做的问题在于许多与 ports 树相关的自动化工具在这种情况下将失败。最常见的情况是在尝试构建 /usr/ports/INDEX 时发生(请查看运行 make describe )。然而，即使是更琐碎的命令例如 make maintainer 在这种情况下也会失败。这是不可接受的。
+**Makefile** 中如果需要因为某些外部因素（例如用户指定了不合法的构建选项组合）而阻止 Port 安装，正确的做法是给 `IGNORE` 赋一个非空的值。该值会在执行 `make install` 时被格式化并展示给用户。
 
-示例 1. 如何避免使用 .error
+一个常见的错误是为此目的使用 `.error`。这样做的问题在于，许多与 Ports 树交互的自动化工具在遇到这种情况时会失败。最常见的例子是在尝试构建 **/usr/ports/INDEX** 时失败（参见 [运行 `make describe`](https://docs.freebsd.org/en/books/porters-handbook/testing/#make-describe)）。但即使是非常简单的命令，例如 `make maintainer`，也会因此失败。这种行为是不可接受的。
 
-下面两个 Makefile 片段中的第一个将导致 make index 失败，而第二个将不会：
+**示例 1：如何避免使用 `.error`**
 
-```
+下面两个 **Makefile** 片段中，第一个会导致 `make index` 失败，而第二个不会：
+
+```makefile
 .error "option is not supported"
 ```
 
-```
+```makefile
 IGNORE=option is not supported
 ```
 
 ## 13.17. 使用 sysctl
 
-除了在目标中使用外，不推荐使用 sysctl。这是因为像在 make index 中使用时，任何 makevar 命令的评估都必须运行该命令，进一步减慢该过程。
+除非用于目标（targets）中，通常不应在 Makefile 中使用 **sysctl**。这是因为在处理 `makevar`（例如运行 `make index` 时）时会执行该命令，从而进一步拖慢处理速度。
 
-只能通过 SYSCTL 使用 sysctl(8) ，因为它包含完全合格的路径，并且可以被覆盖，如果有特殊需要的话。
+仅应通过 `SYSCTL` 使用 [sysctl(8)](https://man.freebsd.org/cgi/man.cgi?query=sysctl&sektion=8&format=html)，因为它包含完整路径，并且在必要时可以被覆盖。
 
-## 13.18. 重新生成 Distfiles
+## 13.18. 重新打包 distfile
 
-有时软件作者会更改已发布的 distfiles 的内容，而不更改文件的名称。验证更改是否是官方的，并已由作者执行。过去曾经发生过，在下载服务器上悄悄更改了 distfile，意图是造成损害或 comprom 动最终用户的安全性。
+有时软件作者会在不更改文件名的情况下，修改已发布的 distfile 内容。应验证这些更改是官方行为，且确实由作者执行。过去曾有 distfile 在下载服务器上被暗地里篡改，意图造成损害或危及终端用户的安全。
 
-将旧的 distfile 放在一边，下载新的 distfile，解压它们并使用 diff(1) 比较内容。如果没有可疑之处，就更新 distinfo。
+请将旧的 distfile 备份，下载新的文件，解压后使用 [diff(1)](https://man.freebsd.org/cgi/man.cgi?query=diff&sektion=1&format=html) 比较内容。如果确认没有可疑之处，再更新 **distinfo**。
 
-|  | 确保总结 PR 和提交日志中的差异，以便其他人知道没有发生什么不好的事情。 |
-| -- | ------------------------------------------------------------------------ |
+>**重要**
+>
+> 请务必在 PR 和提交日志中简要说明差异，这样其他人可以了解没有发生恶意行为。
 
-联系软件的作者，并与他们确认更改。
 
-## 13.19. 使用 POSIX 标准
+联系软件作者并向他们确认这些更改。
 
-FreeBSD ports 通常期望符合 POSIX。一些软件和构建系统基于特定操作系统或环境做出假设，可能在 port 中使用时会导致问题。
+## 13.19. 遵循 POSIX 标准
 
-如果有其他获取信息的方式，请不要使用 /proc。例如，在 main() 中使用 setprogname(argv[0]) ，然后使用 getprogname(3) 来获取可执行文件名。
+FreeBSD Ports 通常期望软件遵循 POSIX 标准。有些软件和构建系统依赖某些特定操作系统或环境的行为，这会在作为 Port 使用时引发问题。
 
-不要依赖 POSIX 未记录的行为。
+如果有其他方式获取信息，不要使用 **/proc**。例如，可以在 `main()` 中使用 `setprogname(argv[0])`，随后调用 [getprogname(3)](https://man.freebsd.org/cgi/man.cgi?query=getprogname&sektion=3&format=html) 来获取可执行文件名称。
 
-不记录应用程序关键路径中的时间戳，如果应用程序没有时间戳也能正常工作。获取时间戳可能会很慢，这取决于操作系统中时间戳的准确性。如果确实需要时间戳，确定它们必须精确到什么程度，并使用一个文档记录为提供所需精度的 API。
+不要依赖 POSIX 没有文档化的行为。
 
-在 Linux® 上，许多简单的系统调用（例如 gettimeofday(2)，getpid(2)）比其他任何操作系统都快得多，这是由于缓存和 vsyscall 性能优化。在性能关键的应用程序中，不要指望它们的性能低廉。一般来说，尽量避免系统调用，如果可能的话。
+如果应用程序在没有时间戳的情况下也能正常工作，就不要在关键路径中记录时间戳。获取时间戳可能较慢，具体取决于操作系统的时间戳精度。如果确实需要时间戳，应确定所需精度，并使用明确能提供该精度的 API。
 
-不要依赖于 Linux® 特定的套接字行为。特别是，默认的套接字缓冲区大小是不同的（使用 setsockopt(2)调用 SO_SNDBUF 和 SO_RCVBUF ），并且当套接字缓冲区已满时，Linux® 的 send(2) 会阻塞，而 FreeBSD 的则会失败并在 errno 中设置 ENOBUFS 。
+一些简单的系统调用（例如 [gettimeofday(2)](https://man.freebsd.org/cgi/man.cgi?query=gettimeofday&sektion=2&format=html)、[getpid(2)](https://man.freebsd.org/cgi/man.cgi?query=getpid&sektion=2&format=html)）在 Linux® 上因为缓存和 vsyscall 优化而非常快，但在其他操作系统上就没有这些优势。在性能敏感的程序中，不要假设这些调用是廉价的。总的来说，应尽可能避免使用系统调用。
 
-如果需要依赖非标准行为，请将其正确封装到一个通用的 API 中，在配置阶段检查该行为，如果缺失则停止。
+不要依赖 Linux® 特有的 socket 行为。特别是默认的 socket 缓冲区大小不同（应通过调用 [setsockopt(2)](https://man.freebsd.org/cgi/man.cgi?query=setsockopt&sektion=2&format=html) 设置 `SO_SNDBUF` 和 `SO_RCVBUF`），并且在 socket 缓冲区已满时，Linux® 的 [send(2)](https://man.freebsd.org/cgi/man.cgi?query=send&sektion=2&format=html) 会阻塞，而 FreeBSD 会返回失败并设置 errno 为 `ENOBUFS`。
 
-检查 man 手册，查看使用的函数是否是 POSIX 接口（在 man 手册的 "STANDARDS" 部分）。
+如果确实需要依赖非标准行为，请将其正确封装为通用 API，并在配置阶段检测该行为，若不满足则中止。
 
-不要假设 /bin/sh 就是 bash。确保传递给 system(3) 的命令行与 POSIX 兼容。
+请通过查阅 [man 页面](https://man.freebsd.org/cgi/man.cgi) 的 “STANDARDS” 部分来确认所使用的函数是否为 POSIX 接口。
 
-一个常见的 bashism 列表在这里。
+不要假设 **/bin/sh** 是 bash。应确保传递给 [system(3)](https://man.freebsd.org/cgi/man.cgi?query=system&sektion=3&format=html) 的命令行可以在 POSIX 兼容的 shell 下正常执行。
 
-检查头部是否以 POSIX 或 man 页推荐的方式包含。例如，sys/types.h 经常被遗忘，这对 Linux®来说不是那么大的问题，但对 FreeBSD 来说是一个问题。
+常见 bash 主义列表可见于 [此处](https://wiki.ubuntu.com/DashAsBinSh)。
 
-## 13.20. 杂项
+请检查头文件是否按照 POSIX 或 man 页面推荐的方式包含。例如，经常会忘记包含 **sys/types.h**，这在 Linux® 上问题不大，但在 FreeBSD 上就不行。
 
-要始终仔细检查 pkg-descr 和 pkg-plist。如果正在审核一个port并且可以达到更好的措辞，请这样做。
+## 13.20. 其他注意事项
 
-请注意任何法律问题！不要让我们非法分发软件！
+请务必反复检查 **pkg-descr** 和 **pkg-plist**。如果在审查 Port 时发现可以改进其措辞，请进行修正。
+
+请务必注意任何法律问题！不要让我们非法分发软件！
+
+你是否在维护 Ports 时遇到过具体的非 POSIX 行为或仅 Linux 依赖？
+
