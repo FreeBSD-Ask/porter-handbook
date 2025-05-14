@@ -185,7 +185,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 >**重要**
 >
->不应为 Haskell 库创建 Port，详情见 [Haskell Libraries](https://docs.freebsd.org/en/books/porters-handbook/special/#haskell-libs)。 
+>不应为 Haskell 库创建 Port，详情见 [Haskell Libraries](https://docs.freebsd.org/en/books/porters-handbook/special/#haskell-libs)。
 
 
 可能的参数：（无），`hpack`，`nodefault`
@@ -1563,7 +1563,7 @@ PHP_MOD_PRIO=	40
 
 >**重要**
 >
->使用 flavors 时，所有 PHP 扩展、PECL 扩展、PEAR 模块 *必须*具有不同的包名称，因此它们必须在 `PKGNAMEPREFIX` 或 `PKGNAMESUFFIX` 中使用这三个变量之一。 
+>使用 flavors 时，所有 PHP 扩展、PECL 扩展、PEAR 模块 *必须*具有不同的包名称，因此它们必须在 `PKGNAMEPREFIX` 或 `PKGNAMESUFFIX` 中使用这三个变量之一。
 
 ## 17.100. `pkgconfig`
 
@@ -1839,7 +1839,7 @@ USES=		qt-dist:5,base
 
 >**注意**
 >
-> 这些路径*始终*是 `_interp__OLD_CMD` 的一部分：`"/usr/bin/env _interp"` /bin/interp `/usr/bin/interp` `/usr/local/bin/interp`。 
+> 这些路径*始终*是 `_interp__OLD_CMD` 的一部分：`"/usr/bin/env _interp"` /bin/interp `/usr/bin/interp` `/usr/local/bin/interp`。
 
 
 >**技巧**
@@ -1849,13 +1849,13 @@ USES=		qt-dist:5,base
 
 >**重要**
 >
->  shebang 修复在 `patch` 阶段完成。如果在 `build` 阶段创建了错误的 shebang（例如，`configure` 脚本或 `Makefiles`），则必须修补或给定正确的路径（例如，通过 `CONFIGURE_ENV`、`CONFIGURE_ARGS`、`MAKE_ENV` 或 `MAKE_ARGS`）来生成正确的 shebang。
+> shebang 修复在 `patch` 阶段完成。如果在 `build` 阶段创建了错误的 shebang（例如，`configure` 脚本或 `Makefiles`），则必须修补或给定正确的路径（例如，通过 `CONFIGURE_ENV`、`CONFIGURE_ARGS`、`MAKE_ENV` 或 `MAKE_ARGS`）来生成正确的 shebang。
 >
 >支持的解释器的正确路径可以在 `_interp__CMD` 中找到。
 
 >**技巧**
 >
-> 当与 [`USES=python`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-python) 一起使用时，如果仅仅是修复 shebang，但不希望依赖于 Python 本身，可以使用 `USES=python:env`。 
+> 当与 [`USES=python`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-python) 一起使用时，如果仅仅是修复 shebang，但不希望依赖于 Python 本身，可以使用 `USES=python:env`。
 
 **示例 10. 向 `USES=shebangfix` 添加另一个解释器**
 
@@ -1894,7 +1894,7 @@ SHEBANG_REGEX=	./scripts/.*\.(sh|pl|cgi)
 
 >**注意**
 >
->`SHEBANG_REGEX` 是通过运行 `find -E` 来使用的，它使用现代正则表达式，也称为扩展正则表达式。更多信息参见 [re\_format(7)](https://man.freebsd.org/cgi/man.cgi?query=re_format&sektion=7&format=html)。 
+>`SHEBANG_REGEX` 是通过运行 `find -E` 来使用的，它使用现代正则表达式，也称为扩展正则表达式。更多信息参见 [re\_format(7)](https://man.freebsd.org/cgi/man.cgi?query=re_format&sektion=7&format=html)。
 
 **示例 14. `USES=shebangfix` 与 `SHEBANG_GLOB`**
 

@@ -4,13 +4,13 @@
 
 >**注意**
 >
->此处所述的各段和变量在一个普通 Port 中是强制性的。在一个从属 Port 中，许多段和变量可以省略。 
+>此处所述的各段和变量在一个普通 Port 中是强制性的。在一个从属 Port 中，许多段和变量可以省略。
 
 >**重要**
 >
 >每个以下代码块之间必须以一个空行分隔。
 >
->在每个代码块中，仅设置该 Port 所必需的变量。请按照下列顺序定义这些变量。 
+>在每个代码块中，仅设置该 Port 所必需的变量。请按照下列顺序定义这些变量。
 
 ## 15.1. `PORTNAME` 段
 
@@ -36,7 +36,7 @@
 
 >**重要**
 >
->`PORTVERSION` 和 `DISTVERSION` 只能择一而用。 
+>`PORTVERSION` 和 `DISTVERSION` 只能择一而用。
 
 
 ## 15.2. `PATCHFILES` 段
@@ -90,7 +90,7 @@
 >
 > `BROKEN_*` 和 `IGNORE_*` 可以是任意通用变量，例如 `IGNORE_amd64`、`BROKEN_FreeBSD_10` 等。除了依赖于 [`USES`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses) 的变量以外，后者应放在 [`USES` 和 `USE_x`](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-uses) 中。例如，`IGNORE_WITH_PHP` 仅在设置了 [`php`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-php) 时才生效，`BROKEN_SSL` 仅在设置了 [`ssl`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-ssl) 时才生效。
 >
->如果 Port 仅在满足某些条件时才应标记为 `BROKEN`，并且这些条件只能在包含 **bsd.port.options.mk** 或 **bsd.port.pre.mk** 之后才能判断，那么应在 [其余变量段](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-rest) 中设置这些变量。 
+>如果 Port 仅在满足某些条件时才应标记为 `BROKEN`，并且这些条件只能在包含 **bsd.port.options.mk** 或 **bsd.port.pre.mk** 之后才能判断，那么应在 [其余变量段](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-rest) 中设置这些变量。
 
 ## 15.6. 依赖关系段
 
