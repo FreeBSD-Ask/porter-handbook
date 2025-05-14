@@ -21,7 +21,7 @@
 
 >**重要**
 >
->  没有任何 Port *真正* 需要 root 权限。通过使用 [`USES=uidfix`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uidfix) 大多数情况下可以避免。如果 Port 仍然运行像 [chown(8)](https://man.freebsd.org/cgi/man.cgi?query=chown&sektion=8&format=html)、[chgrp(1)](https://man.freebsd.org/cgi/man.cgi?query=chgrp&sektion=1&format=html)，或者通过 [install(1)](https://man.freebsd.org/cgi/man.cgi?query=install&sektion=1&format=html) 强制设置文件的所有者或组，则应使用 [`USES=fakeroot`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-fakeroot) 来伪造这些调用。此时可能需要对 Port 的 **Makefiles** 进行一些补丁。 
+> 没有任何 Port *真正* 需要 root 权限。通过使用 [`USES=uidfix`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uidfix) 大多数情况下可以避免。如果 Port 仍然运行像 [chown(8)](https://man.freebsd.org/cgi/man.cgi?query=chown&sektion=8&format=html)、[chgrp(1)](https://man.freebsd.org/cgi/man.cgi?query=chgrp&sektion=1&format=html)，或者通过 [install(1)](https://man.freebsd.org/cgi/man.cgi?query=install&sektion=1&format=html) 强制设置文件的所有者或组，则应使用 [`USES=fakeroot`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-fakeroot) 来伪造这些调用。此时可能需要对 Port 的 **Makefiles** 进行一些补丁。
 
 
 元 Port（即不安装文件，而是依赖于其他 Port 的 Port）必须避免不必要地将 [mtree(8)](https://man.freebsd.org/cgi/man.cgi?query=mtree&sektion=8&format=html) 提取到阶段目录。因为这是包的基本目录布局，这些空目录会被视为孤立的。为了防止 [mtree(8)](https://man.freebsd.org/cgi/man.cgi?query=mtree&sektion=8&format=html) 提取，可以添加这一行：
@@ -32,7 +32,7 @@ NO_MTREE=	yes
 
 >**技巧**
 >
->  元 Port 应该使用 [`USES=metaport`](https://docs.freebsd.org/en/books/porters-handbook/special/#uses-metaport)。它为不获取、构建或安装任何东西的 Port 设置默认值。
+> 元 Port 应该使用 [`USES=metaport`](https://docs.freebsd.org/en/books/porters-handbook/special/#uses-metaport)。它为不获取、构建或安装任何东西的 Port 设置默认值。
 
 
 Staging 通过在 `pre-install`、`do-install` 和 `post-install` 目标中使用 `STAGEDIR` 前缀来启用（参见本书中的示例）。通常，这包括 `PREFIX`、`ETCDIR`、`DATADIR`、`EXAMPLESDIR`、`DOCSDIR` 等。目录应该作为 `post-install` 目标的一部分创建。尽量避免使用绝对路径。
@@ -115,7 +115,7 @@ lrwxr-xr-x  1 nobody  nobody    181 Aug  3 11:27 foo@ -> ../../../var/cache/foo
 
 >**重要**
 >
-> 在一些非常特殊的情况下，例如仿真器（如 Wine），Port 必须捆绑库，因为这些库属于不同架构，或者它们已被修改以适应软件的需求。在这种情况下，这些库不应该暴露给其他 Port 进行链接。可以在 Port 的 **Makefile** 中添加 `BUNDLE_LIBS=yes`。这将告诉 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 不计算提供的库。在将此添加到 Port 之前，请始终向 Ports 管理团队 <[portmgr@FreeBSD.org](mailto:portmgr@FreeBSD.org)> 询问。 
+> 在一些非常特殊的情况下，例如仿真器（如 Wine），Port 必须捆绑库，因为这些库属于不同架构，或者它们已被修改以适应软件的需求。在这种情况下，这些库不应该暴露给其他 Port 进行链接。可以在 Port 的 **Makefile** 中添加 `BUNDLE_LIBS=yes`。这将告诉 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 不计算提供的库。在将此添加到 Port 之前，请始终向 Ports 管理团队 <[portmgr@FreeBSD.org](mailto:portmgr@FreeBSD.org)> 询问。
 
 
 ## 6.4. 共享库
@@ -211,7 +211,7 @@ IGNORE=	may not be redistributed because of licensing reasons. Please visit some
 
 ## 6.6. 构建机制
 
-### 6.6.1. 并行构建 Port 
+### 6.6.1. 并行构建 Port
 
 FreeBSD 的 Ports 框架支持通过使用多个 `make` 子进程来进行并行构建，这使得 SMP 系统可以利用所有可用的 CPU 功率，从而加快 Port 构建的速度和效果。
 
@@ -484,7 +484,7 @@ byteorder-1.2.2     Unlicense/MIT
 
 >**注意**
 >
->  `make cargo-crates-licenses` 输出的许可证名称是 SPDX 2.1 许可证表达式，可能与 Ports 框架中定义的许可证名称不匹配。需要将它们翻译为 [预定义许可证列表](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license-list) 中的名称。 
+> `make cargo-crates-licenses` 输出的许可证名称是 SPDX 2.1 许可证表达式，可能与 Ports 框架中定义的许可证名称不匹配。需要将它们翻译为 [预定义许可证列表](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#licenses-license-list) 中的名称。
 
 ### 6.6.7. 使用 `meson`
 
@@ -876,7 +876,7 @@ PLIST_SUB+=		NLS="@comment "
 .include <bsd.port.mk>
 ```
 
-接下来需要做的工作是安排使消息目录文件条件地包含在打包列表中。**Makefile** 部分的这个任务已经由惯用法提供。它在 [高级 **pkg-plist** 实践](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-sub) 部分中进行了说明。简而言之，**pkg-plist** 中每个出现的 `%%NLS%%` 将在 NLS 被禁用时替换为 "`@comment `"，或者在 NLS 启用时替换为空字符串。因此，如果 NLS 关闭，以 `%%NLS%%` 为前缀的行将在最终的打包列表中变成注释；否则，前缀将直接被省略。然后，在 **pkg-plist** 中每个消息目录文件路径之前插入 `%%NLS%%`。例如：
+接下来需要做的工作是安排使消息目录文件条件地包含在打包列表中。**Makefile** 部分的这个任务已经由惯用法提供。它在 [高级 **pkg-plist** 实践](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-sub) 部分中进行了说明。简而言之，**pkg-plist** 中每个出现的 `%%NLS%%` 将在 NLS 被禁用时替换为 "`@comment`"，或者在 NLS 启用时替换为空字符串。因此，如果 NLS 关闭，以 `%%NLS%%` 为前缀的行将在最终的打包列表中变成注释；否则，前缀将直接被省略。然后，在 **pkg-plist** 中每个消息目录文件路径之前插入 `%%NLS%%`。例如：
 
 ```sh
 %%NLS%%share/locale/fr/LC_MESSAGES/foobar.mo
@@ -915,7 +915,7 @@ PLIST_SUB+=		NLS="@comment "
 
 >**注意**
 >
-> 不要在依赖声明中使用 `${SITE_PERL}`。这样做假设已经包含了 **perl5.mk**，但并非总是如此。如果 Port 的文件在升级过程中被移动，依赖于该 Port 的其他 Port 可能会有错误的依赖关系。正确声明 Perl 模块依赖关系的方法如下所示。 
+> 不要在依赖声明中使用 `${SITE_PERL}`。这样做假设已经包含了 **perl5.mk**，但并非总是如此。如果 Port 的文件在升级过程中被移动，依赖于该 Port 的其他 Port 可能会有错误的依赖关系。正确声明 Perl 模块依赖关系的方法如下所示。
 
 
 **示例 14. Perl 依赖示例**
@@ -952,7 +952,7 @@ USES=		perl5
 USE_PERL5=	build
 ```
 
-**示例 16. 还需要 Perl 进行补丁处理的 Port** 
+**示例 16. 还需要 Perl 进行补丁处理的 Port**
 
 有时，使用 [sed(1)](https://man.freebsd.org/cgi/man.cgi?query=sed&sektion=1&format=html) 进行补丁处理不足以满足要求。当使用 [perl(1)](https://man.freebsd.org/cgi/man.cgi?query=perl&sektion=1&format=html) 更加简便时，使用：
 
@@ -1015,7 +1015,7 @@ USES=		xorg
 USE_XORG=	x11 xpm
 ```
 
-### 6.10.2. 需要 Motif 的 Port 
+### 6.10.2. 需要 Motif 的 Port
 
 如果 Port 需要 Motif 库，在 **Makefile** 中定义 `USES= motif`。默认的 Motif 实现是 [x11-toolkits/open-motif](https://cgit.freebsd.org/ports/tree/x11-toolkits/open-motif/)。用户可以通过在 **make.conf** 中设置 `WANT_LESSTIF` 来选择 [x11-toolkits/lesstif](https://cgit.freebsd.org/ports/tree/x11-toolkits/lesstif/) 作为替代实现。同样，用户也可以通过设置 `WANT_OPEN_MOTIF_DEVEL` 来选择 [x11-toolkits/open-motif-devel](https://cgit.freebsd.org/ports/tree/x11-toolkits/open-motif-devel/)。
 
@@ -1112,7 +1112,7 @@ GLIB_SCHEMAS=	org.regexxer.gschema.xml
 
 >**注意**
 >
->  `USE_GNOME` 宏没有任何参数时不会向 Port 添加任何依赖项。`USE_GNOME` 不能在 **bsd.port.pre.mk** 之后设置。
+> `USE_GNOME` 宏没有任何参数时不会向 Port 添加任何依赖项。`USE_GNOME` 不能在 **bsd.port.pre.mk** 之后设置。
 
 ### 6.11.3. 变量
 
@@ -1129,7 +1129,7 @@ GLIB_SCHEMAS=foo.gschema.xml
 
 >**注意**
 >
->  不要将 glib 模式文件添加到 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。
+> 不要将 glib 模式文件添加到 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。
 
 `GCONF_SCHEMAS`
 列出所有 gconf 模式文件。该宏会将模式文件添加到 Port 的 **pkg-plist** 中，并在安装和卸载时处理这些文件的注册。
@@ -1142,7 +1142,7 @@ GCONF_SCHEMAS=my_app.schemas my_app2.schemas my_app3.schemas
 
 >**注意**
 >
-> GConf 模式文件应该列在 `GCONF_SCHEMAS` 宏中，而不是 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。 
+> GConf 模式文件应该列在 `GCONF_SCHEMAS` 宏中，而不是 **pkg-plist** 中。如果它们列在 **pkg-plist** 中，则不会被注册，应用程序可能无法正常工作。
 
 
 `INSTALLS_OMF`
@@ -1156,7 +1156,7 @@ INSTALLS_OMF=yes
 
 ## 6.12. GNOME 组件
 
-要获得更多有关 GNOME Port 的帮助，可以参考一些 [现有的 Port ](https://ports.freebsd.org/) 示例。如果需要更多帮助，访问 [FreeBSD GNOME 页面](https://www.freebsd.org/gnome/) 查找联系信息。这些组件分为当前正在使用的 GNOME 组件和旧版组件。如果组件支持参数，它们将列在说明中的括号中。第一个参数为默认值。如果组件默认添加到构建和运行依赖项中，则会显示“Both”。
+要获得更多有关 GNOME Port 的帮助，可以参考一些 [现有的 Port](https://ports.freebsd.org/) 示例。如果需要更多帮助，访问 [FreeBSD GNOME 页面](https://www.freebsd.org/gnome/) 查找联系信息。这些组件分为当前正在使用的 GNOME 组件和旧版组件。如果组件支持参数，它们将列在说明中的括号中。第一个参数为默认值。如果组件默认添加到构建和运行依赖项中，则会显示“Both”。
 
 | 组件                      | 相关程序                            | 说明                                                                                                       |
 | ----------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -1264,9 +1264,9 @@ INSTALLS_OMF=yes
 
 >**注意**
 >
->有关 Qt 本身的一些 Port，请参阅 [`qt-dist`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-qt-dist)。 
+>有关 Qt 本身的一些 Port，请参阅 [`qt-dist`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-qt-dist)。
 
-### 6.13.1. 需要 Qt 的 Port 
+### 6.13.1. 需要 Qt 的 Port
 
 Ports 提供了对 Qt 5 和 Qt 6 的支持，分别通过 `USES+=qt:5` 和 `USES+=qt:6`。将 `USE_QT` 设置为所需的 Qt 组件（库、工具、插件）列表。
 
@@ -1453,6 +1453,7 @@ Qt 应用程序通常是跨平台编写的，很多时候 X11/Unix 并不是它�
   QMAKE_ARGS+=	INCLUDEPATH+=${LOCALBASE}/include \
   		LIBS+=-L${LOCALBASE}/lib
   ```
+
 * *错误的安装路径*。有时一些数据（如图标或 `.desktop` 文件）默认安装到 XDG 兼容应用程序不会扫描的目录中。[editors/texmaker](https://cgit.freebsd.org/ports/tree/editors/texmaker/) 就是一个例子 - 查看该 port 中 **files** 目录下的 **patch-texmaker.pro** 文件，了解如何在 `qmake` 项目文件中直接修复此问题。
 
 ## 6.14. 使用 KDE
@@ -1841,7 +1842,7 @@ USES=	pear
 
 >**技巧**
 >
->PEAR 模块将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。 
+>PEAR 模块将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。
 
 
 >**注意**
@@ -1891,7 +1892,7 @@ SOCKETS_USE=	PHP=sockets
 
 >**技巧**
 >
-> 由于 Horde 模块也是 PEAR 模块，它们将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。 
+> 由于 Horde 模块也是 PEAR 模块，它们将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。
 
 ### 6.18. 使用 Python
 
@@ -2240,7 +2241,7 @@ USES=	lua:52-53
 
 >**注意**
 >
->使用 `XY+` 格式的版本指定应该谨慎，Lua 的 API 在每个版本中都会有所变化，配置工具如 CMake 或 Autoconf 在未来的 Lua 版本上通常无法正常工作，直到它们被更新为支持这些版本。 
+>使用 `XY+` 格式的版本指定应该谨慎，Lua 的 API 在每个版本中都会有所变化，配置工具如 CMake 或 Autoconf 在未来的 Lua 版本上通常无法正常工作，直到它们被更新为支持这些版本。
 
 ### 6.22.3. 配置和编译器标志
 
@@ -2250,7 +2251,7 @@ USES=	lua:52-53
 * 向 `CFLAGS`、`LDFLAGS` 和 `LIBS` 分别添加 `-I${LUA_INCDIR}`、`-L${LUA_LIBDIR}` 和 `-llua-${LUA_VER}`；
 * 修补软件的配置或构建文件，以选择正确的版本。
 
-### 6.22.4. 版本  flavors 
+### 6.22.4. 版本  flavors
 
 一个安装 Lua 模块的 Port（而不是仅仅使用 Lua 的应用程序）应该为每个支持的 Lua 版本构建一个单独的  flavors。这可以通过添加 `module` 参数来完成：
 
@@ -2332,7 +2333,7 @@ USES=		lua
 .include <bsd.port.mk>
 ```
 
-** 32. 简单 Lua 模块的 Makefile**
+**32. 简单 Lua 模块的 Makefile**
 
 ```makefile
 PORTNAME=	sample
@@ -2396,7 +2397,7 @@ Guile 库和相应的解释器有多个版本，它们之间存在冲突（以�
 
 如果这些方法都无法在存在其他版本的情况下使 Port 选择指定的 Guile 版本，最好是修补 Port 以实现此目的。如果不可行，则应指定 `conflicts` 选项，以防止在错误版本被检测到的情况下构建 Port。
 
-### 6.23.4. 版本  flavors 
+### 6.23.4. 版本  flavors
 
 安装 Guile 扩展或库的 Port，或为 Guile 预编译的 Scheme 库，应为每个支持的 Guile 版本构建一个单独的  flavors。通过添加 `flavors` 选项来实现此目的。
 
@@ -2467,14 +2468,14 @@ FreeBSD 操作系统自带了本地的 `iconv`。
 
 这两个自动为使用 [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 或本地 `iconv` 的系统填充正确的变量值：
 
-** 34. 简单的 `iconv` 使用**
+**34. 简单的 `iconv` 使用**
 
 ```makefile
 USES=		iconv
 LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
 ```
 
-** 35. 使用 `iconv` 配置**
+**35. 使用 `iconv` 配置**
 
 ```makefile
 USES=		iconv
@@ -2485,7 +2486,7 @@ CONFIGURE_ARGS+=${ICONV_CONFIGURE_ARG}
 
 有时，程序的 **Makefile** 或配置脚本中会硬编码 `ld` 参数或搜索路径。可以通过以下方法解决此问题：
 
-** 36. 修复硬编码的 `-liconv`**
+**36. 修复硬编码的 `-liconv`**
 
 ```makefile
 USES=		iconv
@@ -2496,7 +2497,7 @@ post-patch:
 
 在某些情况下，可能需要根据是否存在本地 `iconv` 来设置备用值或执行操作。必须在测试 `ICONV_LIB` 的值之前包含 **bsd.port.pre.mk**：
 
-** 37. 检查本地 `iconv` 可用性**
+**37. 检查本地 `iconv` 可用性**
 
 ```makefile
 USES=		iconv
@@ -2531,7 +2532,7 @@ post-patch:
 | thunar  | [x11-fm/thunar](https://cgit.freebsd.org/ports/tree/x11-fm/thunar/)                       |
 | xfconf  | [x11/xfce4-conf](https://cgit.freebsd.org/ports/tree/x11/xfce4-conf/)                     |
 
-** 38. `USES=xfce` 示例**
+**38. `USES=xfce` 示例**
 
 ```makefile
 USES=		xfce
@@ -2711,7 +2712,7 @@ doormand_flags=""
 
 >**警告**
 >
-> Port  *不能* 在安装和卸载时启动和停止其服务。不要滥用 [@preexec 命令、@postexec 命令、@preunexec 命令、@postunexec 命令](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-keywords-base-exec) 中说明的 **plist** 关键字，通过运行修改当前运行系统的命令，包括启动或停止服务。 
+> Port  *不能* 在安装和卸载时启动和停止其服务。不要滥用 [@preexec 命令、@postexec 命令、@preunexec 命令、@postunexec 命令](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-keywords-base-exec) 中说明的 **plist** 关键字，通过运行修改当前运行系统的命令，包括启动或停止服务。
 
 
 ### 6.28.1. 提交前检查清单

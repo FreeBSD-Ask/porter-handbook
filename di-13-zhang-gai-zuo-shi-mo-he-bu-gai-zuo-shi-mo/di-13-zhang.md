@@ -38,7 +38,7 @@
 
 >**重要**
 >
->要么只使用 **bsd.port.mk**，要么使用 **bsd.port.pre.mk**/**bsd.port.post.mk** 配对；请不要混用这两种方式。 
+>要么只使用 **bsd.port.mk**，要么使用 **bsd.port.pre.mk**/**bsd.port.post.mk** 配对；请不要混用这两种方式。
 
 
 **bsd.port.pre.mk** 只定义了一些变量，可以在 **Makefile** 中进行判断使用，而 **bsd.port.post.mk** 定义其余变量。
@@ -56,7 +56,7 @@
 
 >**注意**
 >
-> 如果需要使用 `MASTERDIR`，务必在包含 **bsd.port.pre.mk** 之前定义它。 
+> 如果需要使用 `MASTERDIR`，务必在包含 **bsd.port.pre.mk** 之前定义它。
 
 以下是一些可以在 **bsd.port.pre.mk** 之后添加的示例：
 
@@ -178,7 +178,7 @@ cc -o someprogram source1.o source2.o -L/usr/local/lib -lsomelib
 
 >**注意**
 >
->如果 `make readme` 失败，请确认 Port 未修改 `ECHO_MSG` 的默认值。 
+>如果 `make readme` 失败，请确认 Port 未修改 `ECHO_MSG` 的默认值。
   
 
 ## 13.13. 使用 `BROKEN`、`FORBIDDEN` 或 `IGNORE` 标记不可安装的 Port
@@ -210,7 +210,7 @@ cc -o someprogram source1.o source2.o -L/usr/local/lib -lsomelib
 
   >**注意**
   >
-  >如果 Port 与当前安装的其他 Port 冲突（例如，它们安装了具有不同功能但同名的文件），[请使用 `CONFLICTS`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#conflicts)。`CONFLICTS` 会自动设置 `IGNORE`。 
+  >如果 Port 与当前安装的其他 Port 冲突（例如，它们安装了具有不同功能但同名的文件），[请使用 `CONFLICTS`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#conflicts)。`CONFLICTS` 会自动设置 `IGNORE`。
 
 
 ### 13.13.2. 实现注意事项
@@ -257,7 +257,7 @@ cd ${SRCDIR}; make targets
 
 >**注意**
 >
->设置 `NO_ARCH` 的目的在于表明无需为所有支持架构单独构建包。这样可以减少构建和分发软件包所消耗的资源，例如网络带宽、镜像服务器和分发介质的磁盘空间。但当前的软件包基础设施（例如软件包管理器、镜像、构建系统）尚未完全利用 `NO_ARCH` 带来的优势。 
+>设置 `NO_ARCH` 的目的在于表明无需为所有支持架构单独构建包。这样可以减少构建和分发软件包所消耗的资源，例如网络带宽、镜像服务器和分发介质的磁盘空间。但当前的软件包基础设施（例如软件包管理器、镜像、构建系统）尚未完全利用 `NO_ARCH` 带来的优势。
 
 ### 13.14.3. 仅在特定架构上标记为不可构建的 Port
 
