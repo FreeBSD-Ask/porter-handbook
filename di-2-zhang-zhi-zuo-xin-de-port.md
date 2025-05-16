@@ -2,7 +2,7 @@
 
 想要创建一个新的 Port，或升级现有的 Port？太好了！
 
-接下来是一些为 FreeBSD 创建新 Port 的指导方针。要升级现有的 Port，请阅读本文，然后阅读[升级 Port](https://docs.freebsd.org/en/books/porters-handbook/upgrading/#port-upgrading)。
+接下来是一些为 FreeBSD 创建新 Port 的指导方针。要升级现有的 Port，请阅读本文，然后阅读[升级 Port](di-11-zhang-sheng-ji-port/11.1.-shi-yong-git-zhi-zuo-bu-ding)。
 
 当本文档内容不够详细时，请参考 **/usr/ports/Mk/bsd.port.mk**，该文件包含在所有 Port 的 **Makefile** 中。即使不是每天修改 **Makefile** 的人，也能从中获得很多有用的知识。此外，具体的问题可以发送到 [FreeBSD ports 邮件列表](https://lists.freebsd.org/subscription/freebsd-ports)。
 
