@@ -7,6 +7,7 @@
 ## FreeBSD Port 开发者手册
 
 * [FreeBSD Port 开发者手册](freebsd-kai-fa-zhe-shou-ce.md)
+* [目录](mu-lu.md)
 
 ## 第 1 章 简介
 
@@ -57,7 +58,7 @@
 
 ## 第 6 章 特殊情况
 
-* [第6章 特殊情况](di-6-zhang-te-shu-qing-kuang/di-liu-zhang.md)
+* [第 6 章 特殊情况](di-6-zhang-te-shu-qing-kuang/di-liu-zhang.md)
 
 
 ## 第 7 章 Flavors
