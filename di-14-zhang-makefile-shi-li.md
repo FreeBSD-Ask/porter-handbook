@@ -2,7 +2,7 @@
 
 这里是一个可以用来创建新 Port 的 **Makefile** 示例。确保删除所有多余的注释（即括号中的注释）。
 
-所示的格式是推荐的变量排序方式，部分之间的空行等。这种格式设计的目的是使最重要的信息容易找到。我们推荐使用 [portlint](https://docs.freebsd.org/en/books/porters-handbook/quick-porting/#porting-portlint) 来检查 **Makefile**。
+所示的格式是推荐的变量排序方式，部分之间的空行等。这种格式设计的目的是使最重要的信息容易找到。我们推荐使用 [portlint](di-3-zhang-jian-dan-de-port/3.5.-yong-portlint-lai-jian-cha-port) 来检查 **Makefile**。
 
 
 ```sh
