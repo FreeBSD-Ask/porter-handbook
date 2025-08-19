@@ -1779,7 +1779,7 @@ do-install:
 
 `DATADIR` 的默认值是 **\${PREFIX}/share/\${PORTNAME}**。对于 Java Port，最好将 `DATADIR` 重写为 **\${JAVASHAREDIR}/\${PORTNAME}**。确实，`DATADIR` 会自动添加到 `PLIST_SUB` 中（文档参见 [基于 Make 变量修改 pkg-plist](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-sub)），因此可以在 **pkg-plist** 中直接使用 `%%DATADIR%%`。
 
-至于从源代码构建 Java Port 还是直接从二进制分发安装，目前没有明确的政策。然而，来自 [FreeBSD Java 项目](https://www.freebsd.org/java/) 的成员鼓励移植者在任务简单时从源代码构建他们的 Port。
+至于从源代码构建 Java Port 还是直接从二进制分发安装，目前没有明确的政策。然而，来自 [FreeBSD Java 项目](https://www.freebsd.org/java/) 的成员建议移植者在任务简单时从源代码构建他们的 Port。
 
 本节介绍的所有功能都在 **bsd.java.mk** 中实现。如果 Port 需要更复杂的 Java 支持，请首先查看 [bsd.java.mk Git 日志](https://cgit.freebsd.org/ports/tree/Mk/bsd.java.mk)，因为通常需要一些时间才能记录最新功能。然后，如果缺少的支持对许多其他 Java Port 有益，请随时在 freebsd-java 上讨论。
 
