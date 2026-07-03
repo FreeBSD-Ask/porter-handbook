@@ -190,7 +190,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 可能的参数：（无），`hpack`，`nodefault`
 
-设置使用 Cabal 构建 Haskell 软件时使用的默认值和目标。添加对 Haskell 编译器 Port（[lang/ghc](https://cgit.freebsd.org/ports/tree/lang/ghc/)）的构建依赖。如果 `BUILD_DEPENDS` 变量中已经列出了其他版本的 GHC（例如 [lang/ghc810](https://cgit.freebsd.org/ports/tree/lang/ghc810/)），则使用该版本。如果提供了 `hpack` 参数，则添加对 [devel/hs-hpack](https://cgit.freebsd.org/ports/tree/devel/hs-hpack/) 的构建依赖，并在配置步骤中调用 `hpack` 生成 .cabal 文件。如果提供了 `nodefault` 参数，框架将不会尝试从 Hackage 拉取主分发文件。如果存在 `USE_GITHUB` 或 `USE_GITLAB`，则此参数会隐式添加。
+设置使用 Cabal 构建 Haskell 软件时使用的默认值和目标。添加对 Haskell 编译器 Port（[lang/ghc](https://cgit.freebsd.org/ports/tree/lang/ghc/)）的构建依赖。如果 `BUILD_DEPENDS` 变量中已列出其他版本的 GHC（例如 [lang/ghc810](https://cgit.freebsd.org/ports/tree/lang/ghc810/)），则使用该版本。如果提供了 `hpack` 参数，则添加对 [devel/hs-hpack](https://cgit.freebsd.org/ports/tree/devel/hs-hpack/) 的构建依赖，并在配置步骤中调用 `hpack` 生成 .cabal 文件。如果提供了 `nodefault` 参数，框架将不会尝试从 Hackage 拉取主分发文件。如果存在 `USE_GITHUB` 或 `USE_GITLAB`，则此参数会隐式添加。
 
 框架提供以下变量：
 
