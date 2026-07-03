@@ -1,4 +1,4 @@
-# 第 14 章 一个简单的 port
+# 第 14 章 一个示例 Makefile
 
 这里是一个可以用来创建新 Port 的 **Makefile** 示例。
 
