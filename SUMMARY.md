@@ -65,6 +65,7 @@
 * [7.3.USES=php 和 Flavors](di-7-zhang-flavors/7.3.usesphp-he-flavors.md)
 * [7.4.USES=python 和 Flavors](di-7-zhang-flavors/7.4.usespython-he-flavors.md)
 * [7.5.USES=lua 和 Flavors](di-7-zhang-flavors/7.5.useslua-he-flavors.md)
+* [7.6.USES=guile 和 Flavors](di-7-zhang-flavors/7.6.guile-he-flavors.md)
 
 ## 第 8 章 高级 pkg-plist 实践
 

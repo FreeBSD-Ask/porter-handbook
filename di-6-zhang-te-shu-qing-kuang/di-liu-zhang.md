@@ -1201,7 +1201,7 @@ INSTALLS_OMF=yes
 | `pygobject3`            | devel/py-gobject3               | Python 2，GObject 3.0 绑定                                                                                  |
 | `vte3`                  | x11-toolkits/vte3               | 带有改进的可访问性和国际化支持的终端组件                                                                                     |
 
-## 6.13. GNOME 宏组件
+### 6.12.1. GNOME 宏组件
 
 | 组件              | 说明                                                                |
 | --------------- | ----------------------------------------------------------------- |
@@ -1209,7 +1209,7 @@ INSTALLS_OMF=yes
 | `intlhack`      | 与 intltool 相同，但进行了修补，以确保使用 **share/locale/**。仅在 `intltool` 不足时使用。 |
 | `referencehack` | 该宏用于帮助将 API 或参考文档拆分为自己的 Port。                                        |
 
-## 6.14. GNOME 旧版组件
+### 6.12.2. GNOME 旧版组件
 
 | 组件                   | 相关程序                            | 说明                             |
 | -------------------- | ------------------------------- | ------------------------------ |
@@ -1894,7 +1894,7 @@ SOCKETS_USE=	PHP=sockets
 >
 > 由于 Horde 模块也是 PEAR 模块，它们将使用 [PHP flavors](https://docs.freebsd.org/en/books/porters-handbook/flavors/#flavors-auto-php) 自动进行 flavor 化。
 
-### 6.18. 使用 Python
+## 6.18. 使用 Python
 
 Ports 支持多个 Python 版本的并行安装。Port 必须根据用户可设置的 `PYTHON_VERSION` 使用正确的 `python` 解释器。最重要的是，这意味着将脚本中的 `python` 可执行文件路径替换为 `PYTHON_CMD` 的值。
 
@@ -2513,7 +2513,7 @@ post-patch:
 .include <bsd.port.post.mk>
 ```
 
-### 6.25. 使用 Xfce
+## 6.25. 使用 Xfce
 
 需要 Xfce 库或应用程序的 Port 应设置 `USES=xfce`。
 
@@ -2564,7 +2564,7 @@ USE_XFCE=	libexo libmenu libutil panel
 
 但是，Xfce 组件和 Port 的非 Xfce 依赖项必须显式包含。不要指望某个 Xfce 组件会为主 Port 提供除了它本身之外的子依赖项。
 
-### 6.26. 使用 Budgie
+## 6.26. 使用 Budgie
 
 依赖于 Budgie 桌面的应用程序或库应设置 `USES=budgie` 并将 `USE_BUDGIE` 设置为所需组件的列表。
 
@@ -2590,7 +2590,7 @@ USES=		budgie gettext gnome meson pkgconfig
 USE_BUDGIE=	libbudgie
 ```
 
-### 6.27. 使用数据库
+## 6.27. 使用数据库
 
 使用以下 `USES` 宏之一来添加数据库依赖项，具体参考 [Database `USES` Macros](https://docs.freebsd.org/en/books/porters-handbook/special/#using-databases-uses)。
 

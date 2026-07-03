@@ -514,31 +514,25 @@ Port 可以读取的变量：
 
 更改构建系统的一些默认行为，以允许以用户身份安装。有关 `fakeroot` 的更多信息，请参见 [https://wiki.debian.org/FakeRoot](https://wiki.debian.org/FakeRoot)。
 
-## 17.34. `fam`
-
-可能的参数：（无），`fam`，`gamin`
-
-使用文件修改监视器作为库依赖，可以选择使用 [devel/fam](https://cgit.freebsd.org/ports/tree/devel/fam/) 或 [devel/gamin](https://cgit.freebsd.org/ports/tree/devel/gamin/)。最终用户可以设置 `WITH_FAM_SYSTEM` 来指定其首选项。
-
-## 17.35. `firebird`
+## 17.34. `firebird`
 
 可能的参数：（无），`25`
 
 添加对 Firebird 数据库客户端库的依赖。
 
-## 17.36. `fonts`
+## 17.35. `fonts`
 
 可能的参数：（无），`fc`，`fontsdir`（默认），`none`
 
 添加一个运行时依赖，所需工具用于注册字体。根据不同的参数，添加 `@fc ${FONTSDIR}` 行，`@fontsdir ${FONTSDIR}` 行，或者如果参数是 `none` 则不添加任何行到 plist。`FONTSDIR` 默认为 **\${PREFIX}/share/fonts/\${FONTNAME}**，`FONTNAME` 默认为 `${PORTNAME}`。将 `FONTSDIR` 添加到 `PLIST_SUB` 和 `SUB_LIST`。
 
-## 17.37. `fortran`
+## 17.36. `fortran`
 
 可能的参数：`gcc`（默认）
 
 使用 GNU Fortran 编译器。
 
-## 17.38. `fpc`
+## 17.37. `fpc`
 
 可能的参数：（无），`run`
 
@@ -548,13 +542,13 @@ Port 可以读取的变量：
 
 如果指定了 `run` 参数，则还会添加运行时依赖。
 
-## 17.39. `fuse`
+## 17.38. `fuse`
 
 可能的参数：`2`（默认），`3`
 
 该 Port 将依赖 FUSE 库，并根据 FreeBSD 的版本处理对内核模块的依赖。
 
-## 17.40. `gem`
+## 17.39. `gem`
 
 可能的参数：（无），`noautoplist`
 
@@ -562,31 +556,31 @@ Port 可以读取的变量：
 
 这意味着需要使用 `USES=ruby`。
 
-## 17.41. `gettext`
+## 17.40. `gettext`
 
 可能的参数：（无）
 
 已弃用。将同时包含 `gettext-runtime` 和 `gettext-tools`。
 
-## 17.42. `gettext-runtime`
+## 17.41. `gettext-runtime`
 
 可能的参数：（无），`lib`（默认），`build`，`run`
 
 使用 `devel/gettext-runtime`。默认情况下，未指定参数或使用 `lib` 参数时，会添加对 **libintl.so** 的库依赖。`build` 和 `run` 参数分别表示构建时和运行时依赖 **gettext**。
 
-## 17.43. `gettext-tools`
+## 17.42. `gettext-tools`
 
 可能的参数：（无），`build`（默认），`run`
 
 使用 `devel/gettext-tools`。默认情况下，未指定参数或使用 `build` 参数时，会注册构建时依赖 **msgfmt**。使用 `run` 参数时，注册运行时依赖。
 
-## 17.44. `ghostscript`
+## 17.43. `ghostscript`
 
 可能的参数：`*X*`，`build`，`run`，`nox11`
 
 可以使用特定版本 *X*。可选版本有 `7`，`8`，`9`，以及 `agpl`（默认）。`nox11` 表示需要使用 `-nox11` 版本的 Port。`build` 和 `run` 分别会添加构建时和运行时的 Ghostscript 依赖。默认情况下，两者都会添加。
 
-## 17.45. `gl`
+## 17.44. `gl`
 
 可能的参数：（无）
 
@@ -608,13 +602,13 @@ Port 可以读取的变量：
 
 `opengl`：添加对 `graphics/libglvnd` 的 **libOpenGL.so** 库的依赖。
 
-## 17.46. `gmake`
+## 17.45. `gmake`
 
 可能的参数：（无）
 
 使用 [devel/gmake](https://cgit.freebsd.org/ports/tree/devel/gmake/) 作为构建时依赖，并设置环境以使用 `gmake` 作为构建的默认 `make`。
 
-## 17.47. `gnome`
+## 17.46. `gnome`
 
 可能的参数：（无）
 
@@ -711,7 +705,7 @@ USE_GNOME=	gnomemenus3:build intlhack
 
 有关更多信息，请参阅 [Using GNOME](https://docs.freebsd.org/en/books/porters-handbook/special/#using-gnome)。
 
-## 17.48. `go`
+## 17.47. `go`
 
 >**重要**
 >
@@ -742,25 +736,25 @@ USE_GNOME=	gnomemenus3:build intlhack
 
 有关使用示例，请参阅 [Building Go Applications](https://docs.freebsd.org/en/books/porters-handbook/special/#using-go)。
 
-## 17.49. `gperf`
+## 17.48. `gperf`
 
 可能的参数：（无）
 
 如果 `gperf` 不在基本系统中，添加对 [devel/gperf](https://cgit.freebsd.org/ports/tree/devel/gperf/) 的构建时依赖。
 
-## 17.50. `grantlee`
+## 17.49. `grantlee`
 
 可能的参数：`5`，`selfbuild`
 
 处理对 Grantlee 的依赖。指定 `5` 以依赖基于 Qt5 的版本，[devel/grantlee5](https://cgit.freebsd.org/ports/tree/devel/grantlee5/)。`selfbuild` 用于 [devel/grantlee5](https://cgit.freebsd.org/ports/tree/devel/grantlee5/) 来获取其版本号。
 
-## 17.51. `groff`
+## 17.50. `groff`
 
 可能的参数：`build`，`run`，`both`
 
 如果基本系统中没有 `groff`，则注册对 [textproc/groff](https://cgit.freebsd.org/ports/tree/textproc/groff/) 的依赖。
 
-## 17.52. `gssapi`
+## 17.51. `gssapi`
 
 可能的参数：（无），`base`（默认），`heimdal`，`mit`，`flags`，`bootstrap`
 
@@ -797,7 +791,7 @@ GSSAPI_MIT_CONFIGURE_ON=	--with-gssapi=${GSSAPIBASEDIR} ${GSSAPI_CONFIGURE_ARGS}
 GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 ```
 
-## 17.53. `gstreamer`
+## 17.52. `gstreamer`
 
 可能的参数：（无）
 
@@ -899,7 +893,7 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 * `ximagesrc`
 * `zbar`
 
-## 17.54. `guile`
+## 17.53. `guile`
 
 可能的参数：（无），`X.Y`，`flavors`，`build`，`run`，`alias`，`conflicts`
 
@@ -911,23 +905,29 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 
 更多信息请参见 [使用 Guile](https://docs.freebsd.org/en/books/porters-handbook/special/#using-guile)。
 
-## 17.55. `horde`
+## 17.54. `horde`
 
 可能的参数：（无）
 
 添加对 [devel/pear-channel-horde](https://cgit.freebsd.org/ports/tree/devel/pear-channel-horde/) 的构建时和运行时依赖。如果需要，可以使用 `USE_HORDE_BUILD` 和 `USE_HORDE_RUN` 添加其他 Horde 依赖项。更多信息请参见 [Horde 模块](https://docs.freebsd.org/en/books/porters-handbook/special/#php-horde)。
 
-## 17.56. `iconv`
+## 17.55. `iconv`
 
 可能的参数：（无），`lib`，`build`，`patch`，`translit`，`wchar_t`
 
 使用 `iconv` 函数，来自 Port  [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 的构建时和运行时依赖，或者来自基本系统的 `iconv`。默认情况下，如果没有指定参数或指定了 `lib` 参数，则表示使用 `iconv` 作为构建时和运行时依赖。`build` 表示仅作为构建时依赖，`patch` 表示仅作为补丁时依赖。如果 Port 使用 `WCHAR_T` 或 `//TRANSLIT` iconv 扩展，请添加相关参数以确保使用正确的 iconv。更多信息请参见 [使用 `iconv`](https://docs.freebsd.org/en/books/porters-handbook/special/#using-iconv)。
 
-## 17.57. `imake`
+## 17.56. `imake`
 
 可能的参数：（无），`env`，`notall`，`noman`
 
 将 [devel/imake](https://cgit.freebsd.org/ports/tree/devel/imake/) 添加为构建时依赖，并在 `configure` 阶段运行 `xmkmf -a`。如果指定了 `env` 参数，则不会设置 `configure` 目标。如果 `-a` 标志对 Port 有问题，请添加 `notall` 参数。如果 `xmkmf` 无法生成 `install.man` 目标，则添加 `noman` 参数。
+
+## 17.57. `inotify`
+
+可能的参数：（无）
+
+为 port 添加 `inotify` 支持。
 
 ## 17.58. `java`
 
@@ -1952,13 +1952,19 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 >BROKEN_SSL_REASON_libressl=	需要 OpenSSL 中才有的特性
 >```
 
-## 17.119. `tar`
+## 17.119. `sudo`
+
+可能的参数：（无）
+
+添加对 [security/sudo](https://cgit.freebsd.org/ports/tree/security/sudo/) 的运行时依赖。
+
+## 17.120. `tar`
 
 可能的参数：（无），`Z`，`bz2`，`bzip2`，`lzma`，`tbz`，`tbz2`，`tgz`，`txz`，`xz`，`zst`，`zstd`
 
 将 `EXTRACT_SUFX` 设置为 `.tar`，`.tar.Z`，`.tar.bz2`，`.tar.bz2`，`.tar.lzma`，`.tbz`，`.tbz2`，`.tgz`，`.txz`，`.tar.xz`，`.tar.zst` 或 `.tar.zstd`。
 
-## 17.120. `tcl`
+## 17.121. `tcl`
 
 可能的参数：*version*，`wrapper`，`build`，`run`，`tea`
 
@@ -1975,13 +1981,13 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 * `TK_LIBDIR`：Tk 库的路径
 * `TK_INCLUDEDIR`：Tk C 头文件的路径
 
-## 17.121. `terminfo`
+## 17.122. `terminfo`
 
 可能的参数：（无）
 
 将 [`@terminfo`](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-keywords-terminfo) 添加到 **plist**。当该 Port 安装 **\*.terminfo** 文件到 **\${PREFIX}/share/misc** 时使用。
 
-## 17.122. `tex`
+## 17.123. `tex`
 
 可能的参数：（无）
 
@@ -2023,13 +2029,13 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 * `updmap`
 * `fmtutil`
 
-## 17.123. `tk`
+## 17.124. `tk`
 
 与 `tcl` 的参数相同
 
 当同时使用 Tcl 和 Tk 时的小包装器。返回的变量与使用 Tcl 时相同。
 
-## 17.124. `trigger`
+## 17.125. `trigger`
 
 可能的参数：（无）
 
@@ -2041,13 +2047,13 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 触发器以 UCL 格式指定，通常放置在 Port 的 **files/** 目录中。
 
-## 17.125. `uidfix`
+## 17.126. `uidfix`
 
 可能的参数：（无）
 
 更改构建系统的一些默认行为（主要是变量），以允许以普通用户身份安装该 Port。在使用 [`USES=fakeroot`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-fakeroot) 或补丁之前，请先尝试此方法。
 
-## 17.126. `uniquefiles`
+## 17.127. `uniquefiles`
 
 可能的参数：（无），`dirs`
 
@@ -2058,19 +2064,19 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 * `UNIQUE_SUFFIX`：用于文件的后缀。默认值：`${PKGNAMESUFFIX}`。
 * `UNIQUE_SUFFIX_FILES`：需要添加后缀的文件列表。默认值：空。
 
-## 17.127. `vala`
+## 17.128. `vala`
 
 可能的参数：`build`，`lib`，`no_depend`
 
 添加对 [lang/vala](https://cgit.freebsd.org/ports/tree/lang/vala/) 的构建或库依赖。`no_depend` 参数保留给 [lang/vala](https://cgit.freebsd.org/ports/tree/lang/vala/) 本身。
 
-## 17.128. `varnish`
+## 17.129. `varnish`
 
 可能的参数：`4`（默认），`6`，`7`
 
 处理 Varnish Cache 的依赖关系。添加对 [www/varnish\*](https://cgit.freebsd.org/ports/tree/www/varnish*/) 的依赖。
 
-## 17.129. `waf`
+## 17.130. `waf`
 
 可能的参数：（无）
 
@@ -2088,7 +2094,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 `INSTALL_TARGET`：`Install` 目标。默认值：`install`。
 
-## 17.130. `webplugin`
+## 17.131. `webplugin`
 
 可能的参数：（无），`ARGS`
 
@@ -2106,7 +2112,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 * `WEBPLUGIN_DIR`：安装插件文件的目录，默认值 **PREFIX/lib/browser\_plugins/WEBPLUGIN\_NAME**。如果 Port 安装插件文件到默认目录以外的地方，请设置此项，以避免损坏的符号链接。
 * `WEBPLUGIN_NAME`：安装插件文件的最终目录，默认值 `PKGBASE`。
 
-## 17.131. `xfce`
+## 17.132. `xfce`
 
 可能的参数：（无），`gtk2`
 
@@ -2114,7 +2120,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 `gtk2` 参数指定该 Port 需要 GTK2 支持。它添加了一些核心组件提供的额外功能，例如 [x11/libxfce4menu](https://cgit.freebsd.org/ports/tree/x11/libxfce4menu/) 和 [x11-wm/xfce4-panel](https://cgit.freebsd.org/ports/tree/x11-wm/xfce4-panel/)。
 
-## 17.132. `xorg`
+## 17.133. `xorg`
 
 可能的参数：（无）
 
@@ -2171,7 +2177,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 | `xxf86dga`    | X DGA 扩展            |
 | `xxf86vm`     | X Vidmode 扩展        |
 
-## 17.133. `xorg-cat`
+## 17.134. `xorg-cat`
 
 可能的参数：`app`，`data`，`doc`，`driver`，`font`，`lib`，`proto`，`util`，`xserver` 和（无）或单独的 `autotools`（默认），`meson`
 
@@ -2181,7 +2187,21 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 第二个参数是要使用的构建系统。默认是 autotools，但也支持 meson。
 
-## 17.134. `zip`
+## 17.135. `zig`
+
+可能的参数：（无）
+
+为构建基于 [lang/zig](https://cgit.freebsd.org/ports/tree/lang/zig/) 的 port 提供支持。
+
+该框架向 port 公开以下变量：
+
+`ZIG_TUPLE` 构建 port 所需的 zig 依赖列表。每条条目是一个三元组，包含名称、URL 和预期找到依赖项的目录。这些三元组可以通过运行以下命令生成：
+
+```sh
+% make make-zig-tuple
+```
+
+## 17.136. `zip`
 
 可能的参数：（无），`infozip`
 
