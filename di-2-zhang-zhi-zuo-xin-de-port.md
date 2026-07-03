@@ -10,5 +10,4 @@
 >
 >本文档仅提到了一小部分可以被覆盖的变量（`VAR`）。大部分（如果不是全部的话）已在 **/usr/ports/Mk/bsd.port.mk** 开头处说明；其余的可能也应当加以说明。请注意，该文件使用了非标准的制表符设置：Emacs 和 Vim 会在加载该文件时识别该设置。加载文件后，通过输入 `:set tabstop=4` 可以将 [vi(1)](https://man.freebsd.org/cgi/man.cgi?query=vi&sektion=1&format=html) 和 [ex(1)](https://man.freebsd.org/cgi/man.cgi?query=ex&sektion=1&format=html) 都设置为正确的值。
 
-
 想找一些简单的入门项目？查看 [请求的 Port 列表](https://wiki.freebsd.org/WantedPorts)，看看你是否能着手处理其中一个（或多个）。

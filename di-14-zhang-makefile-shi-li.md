@@ -2,7 +2,7 @@
 
 这里是一个可以用来创建新 Port 的 **Makefile** 示例。
 
-所示的格式是推荐的变量排序方式，部分之间的空行等。这种格式设计的目的是使最重要的信息容易找到。关于 lint、格式化和检查 **Makefile** 的工具的更多信息，请参阅测试章节。
+所示格式是在变量排序、节间空行等方面的推荐格式。这种格式旨在让最重要的信息易于查找。关于 lint、格式化和检查 **Makefile** 的工具的更多信息，请参阅测试章节。
 
 ```sh
 [描述 Port 本身和主站的部分 - PORTNAME 和 PORTVERSION 或 DISTVERSION* 变量总是放在第一位，接着是 CATEGORIES，然后是 MASTER_SITES，后面可以跟 MASTER_SITE_SUBDIR。如果需要，PKGNAMEPREFIX 和 PKGNAMESUFFIX 会排在后面。然后是 DISTNAME，EXTRACT_SUFX 和/或 DISTFILES，然后根据需要是 EXTRACT_ONLY。]
@@ -23,7 +23,7 @@ PATCHFILES=	xdvi-18.patch1.gz xdvi-18.patch2.gz
 [如果分发的补丁不是相对于 WRKSRC 制作的，可能需要调整此项]
 PATCH_DIST_STRIP=	-p1
 
-[维护者；*必需的*！这是自愿处理 Port 更新、构建中断和用户可以向其提出问题与错误报告的人。为了尽可能保持 Ports Collection 的高质量，我们不接受新 Port 被分配给 "ports@FreeBSD.org"。]
+[维护者；*必需的*！这是自愿处理 Port 更新和构建中断，并接收用户问题与错误报告的人。为了尽可能保持 Ports Collection 的高质量，我们不接受将新 Port 分配给 "ports@FreeBSD.org"。]
 MAINTAINER=	asami@FreeBSD.org
 COMMENT=	DVI Previewer for the X Window System
 WWW=		http://xdvi.sourceforge.net/

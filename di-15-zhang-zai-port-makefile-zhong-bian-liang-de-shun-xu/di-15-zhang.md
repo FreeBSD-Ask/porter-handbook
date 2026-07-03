@@ -25,7 +25,7 @@
 * [`PORTEPOCH`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-portepoch)
 * [`CATEGORIES`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-categories)
 * [`MASTER_SITES`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-master_sites)
-* [`MASTER_SITE_SUBDIR`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-master_sites-shorthand)（已弃用）
+* [`MASTER_SITE_SUBDIR`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-master_sites-shorthand)（弃用）
 * [`PKGNAMEPREFIX`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#porting-pkgnameprefix-suffix)
 * [`PKGNAMESUFFIX`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#porting-pkgnameprefix-suffix)
 * [`DISTNAME`](https://docs.freebsd.org/en/books/porters-handbook/makefiles/#makefile-distname)

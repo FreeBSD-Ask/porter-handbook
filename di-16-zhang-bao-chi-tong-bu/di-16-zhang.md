@@ -4,15 +4,15 @@ FreeBSD Ports 不断变化。以下是一些保持更新的方式。
 
 ## 16.1. FreshPorts
 
-订阅 [FreshPorts](https://www.freshports.org/) 是了解已提交更新的最简单方式之一。可以监控多个 Port。强烈建议维护者订阅，因为他们不仅会收到自己更改的通知，还会收到其他 FreeBSD 提交者的更改通知。（这些通常是跟上底层 Ports 框架变化所必需的——尽管从提交这些更改的人那里提前得到通知是最礼貌的做法，但有时会被忽视或不切实际。此外，在某些情况下，所做的更改是非常小的。我们期望大家在这些情况下使用最佳判断。）
+订阅 [FreshPorts](https://www.freshports.org/) 是了解已提交更新的最简单方式之一。可以监控多个 Port。强烈建议维护者订阅，因为他们不仅会收到自己更改的通知，还会收到其他 FreeBSD 提交者的更改通知。（这些通常是跟上底层 Ports 框架变化所必需的——尽管从提交这些更改的人那里提前得到通知是最礼貌的做法，但有时会被忽视或不切实际。此外，在某些情况下，所做的更改是非常小的。我们期望大家在这些情况下做出最佳判断。）
 
-要使用 FreshPorts，需要一个账户。使用 `@FreeBSD.org` 注册邮箱的人会在网页的右侧看到选择加入的链接。如果已有 FreshPorts 账户但没有使用 `@FreeBSD.org` 邮箱地址，可以将邮箱改为 `@FreeBSD.org`，然后订阅，再改回去。
+要使用 FreshPorts，需要一个账户。注册邮箱为 `@FreeBSD.org` 的人会在网页的右侧看到选择加入的链接。如果已有 FreshPorts 账户但没有使用 `@FreeBSD.org` 邮箱地址，可以将邮箱改为 `@FreeBSD.org`，然后订阅，再改回去。
 
 FreshPorts 还具有一个健全性测试功能，会自动测试每次提交到 FreeBSD Ports 树的更改。如果订阅了此服务，提交者将收到 FreshPorts 在对提交进行健全性测试时发现的任何错误通知。
 
 ## 16.2. 源代码库的 Web 界面
 
-可以通过 Web 界面浏览源代码库中的文件。影响整个 Port 系统的更改现在已记录在 [CHANGES](https://cgit.freebsd.org/ports/tree/CHANGES) 文件中。影响单个 Port 的更改记录在 [UPDATING](https://cgit.freebsd.org/ports/tree/UPDATING) 文件中。然而，解决任何问题的权威答案无疑是阅读 [bsd.port.mk](https://cgit.freebsd.org/ports/tree/Mk/bsd.port.mk) 和相关文件的源代码。
+可以通过 Web 界面浏览源代码库中的文件。影响整个 Port 系统的更改现在记录在 [CHANGES](https://cgit.freebsd.org/ports/tree/CHANGES) 文件中。影响单个 Port 的更改现在记录在 [UPDATING](https://cgit.freebsd.org/ports/tree/UPDATING) 文件中。然而，解决任何问题的权威答案无疑是阅读 [bsd.port.mk](https://cgit.freebsd.org/ports/tree/Mk/bsd.port.mk) 和相关文件的源代码。
 
 ## 16.3. FreeBSD Ports 邮件列表
 
