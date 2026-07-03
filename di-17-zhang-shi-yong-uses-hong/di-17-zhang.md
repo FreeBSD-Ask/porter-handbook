@@ -166,7 +166,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 >**重要**
 >
->[databases/db48](https://cgit.freebsd.org/ports/tree/databases/db48/) 已弃用并且不再支持。任何 Port 都不得使用它。
+>[databases/db48](https://cgit.freebsd.org/ports/tree/databases/db48/) 弃用并且不再受支持。任何 Port 都不得使用它。
 
 
 ## 17.11. `bison`
