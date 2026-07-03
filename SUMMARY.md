@@ -82,7 +82,7 @@
 * [9.2.pkg-install、pkg-pre-install 和 pkg-post-install（安装二进制包时执行的脚本文件）](di-9-zhang-pkg/9.2.-pkginstall-an-zhuang-er-jin-zhi-bao-shi-zhi-hang-de-jiao-ben-wen-jian.md)
 * [9.3.pkg-deinstall、pkg-pre-deinstall 和 pkg-post-deinstall（卸载时执行的脚本文件）](di-9-zhang-pkg/9.3.pkgdeinstall-xie-zai-shi-zhi-hang-de-jiao-ben-wen-jian.md)
 * [9.4.修改 pkg-\* 文件的名字](di-9-zhang-pkg/9.4.-xiu-gai-pkg-wen-jian-de-ming-zi.md)
-* [9.5.使用 SUB\_FILES 和 SUB\_LIST](di-9-zhang-pkg/9.5.-shi-yong-subfiles-he-sublist.md)
+* [9.5.使用 SUB_FILES 和 SUB_LIST](di-9-zhang-pkg/9.5.-shi-yong-subfiles-he-sublist.md)
 
 ## 第 10 章 测试 port
 
@@ -126,8 +126,8 @@
 
 * [第 17 章 使用 USES 宏](di-17-zhang-shi-yong-uses-hong/di-17-zhang.md)
 
-## 第 18 章 \_\_FreeBSD\_version 的值
+## 第 18 章 `__FreeBSD_version` 的值
 
-* [第 18 章 \_\_FreeBSD\_version 的值](di-18-zhang-freebsdversion-de-zhi/18.md)
+* [第 18 章 `__FreeBSD_version` 的值](di-18-zhang-freebsdversion-de-zhi/18.md)
 
 
