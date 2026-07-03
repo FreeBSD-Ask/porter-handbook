@@ -1,6 +1,6 @@
 # 2.1.制作新的 port
 
-想要创建一个新的 Port，或升级现有的 Port？太好了！
+想要创建新 Port，或升级现有的 Port？太好了！
 
 接下来是一些为 FreeBSD 创建新 Port 的指导方针。要升级现有的 Port，请阅读本文，然后阅读[升级 Port](https://docs.freebsd.org/en/books/porters-handbook/upgrading/#port-upgrading)。
 

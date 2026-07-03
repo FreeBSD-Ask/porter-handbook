@@ -20,7 +20,7 @@ EXTRACT_SUFX=	.tar.Z
 [分发的补丁部分 -- 可以为空]
 PATCH_SITES=	ftp://ftp.sra.co.jp/pub/X11/japanese/
 PATCHFILES=	xdvi-18.patch1.gz xdvi-18.patch2.gz
-[如果分发的补丁不是相对于 ${WRKSRC} 制作的，可能需要调整此项]
+[如果分发的补丁不是相对于 WRKSRC 制作的，可能需要调整此项]
 PATCH_DIST_STRIP=	-p1
 
 [维护者；*必需的*！这是自愿处理 Port 更新、构建中断和用户可以向其提出问题与错误报告的人。为了尽可能保持 Ports Collection 的高质量，我们不接受新 Port 被分配给 "ports@FreeBSD.org"。]
@@ -39,9 +39,9 @@ RUN_DEPENDS=	gs:print/ghostscript
 USES=		gmake
 
 [此部分用于其他不属于上述任何类别的标准 bsd.port.mk 变量]
-[如果在配置、构建、安装过程中会询问问题...]
+[如果在配置、构建、安装过程中会询问问题]
 IS_INTERACTIVE=	yes
-[如果解压到与 ${DISTNAME} 不同的目录...]
+[如果解压到与 DISTNAME 不同的目录]
 WRKSRC=		${WRKDIR}/xdvi-new
 [如果需要运行由 GNU autoconf 生成的 "configure" 脚本]
 GNU_CONFIGURE=	yes
@@ -58,7 +58,7 @@ FOO_CONFIGURE_ENABLE=	foo
 [用于下面规则中的非标准变量]
 MY_FAVORITE_RESPONSE=	"yeah, right"
 
-[特殊规则，按 ports 框架调用的顺序排列]
+[特殊规则，按 Ports 框架调用的顺序排列]
 pre-fetch:
 	i go fetch something, yeah
 

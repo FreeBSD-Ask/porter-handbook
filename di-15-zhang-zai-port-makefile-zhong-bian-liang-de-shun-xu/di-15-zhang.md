@@ -86,9 +86,9 @@
 * [`NOT_FOR_ARCHS`](https://docs.freebsd.org/en/books/porters-handbook/porting-dads/#dads-noinstall)
 * [`NOT_FOR_ARCHS_REASON*`](https://docs.freebsd.org/en/books/porters-handbook/porting-dads/#dads-noinstall)
 
->**重要**
+>**注意**
 >
-> `BROKEN_*` 和 `IGNORE_*` 可以是任意通用变量，例如 `IGNORE_amd64`、`BROKEN_FreeBSD_10` 等。依赖 [`USES`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses) 的变量除外，这些变量应放在 [`USES` 和 `USE_x`](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-uses) 段中。例如，`IGNORE_WITH_PHP` 仅在设置了 [`php`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-php) 时才生效，`BROKEN_SSL` 仅在设置了 [`ssl`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-ssl) 时才生效。
+>`BROKEN_*` 和 `IGNORE_*` 可以是任意通用变量，例如 `IGNORE_amd64`、`BROKEN_FreeBSD_10` 等。依赖 [`USES`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses) 的变量除外，这些变量应放在 [`USES` 和 `USE_x`](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-uses) 段中。例如，`IGNORE_WITH_PHP` 仅在设置了 [`php`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-php) 时才生效，`BROKEN_SSL` 仅在设置了 [`ssl`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-ssl) 时才生效。
 >
 >如果 Port 仅在满足某些条件时才应标记为 `BROKEN`，并且这些条件只能在包含 **bsd.port.options.mk** 或 **bsd.port.pre.mk** 之后才能判断，那么应在 [其余变量段](https://docs.freebsd.org/en/books/porters-handbook/order/#porting-order-rest) 中设置这些变量。
 
