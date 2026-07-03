@@ -1840,13 +1840,13 @@ USES=		qt-dist:5,base
 
 `SHEBANG_LANG`：支持的解释器列表。
 
-`_interp__CMD`：在 FreeBSD 上的命令解释器路径。默认值是 `${LOCALBASE}/bin/<interp>`。
+`_interp__CMD`：在 FreeBSD 上的命令解释器路径。默认值是 **\${LOCALBASE}/bin/_interp_**。
 
 `_interp__OLD_CMD`：错误的解释器调用列表。这些通常是过时的路径，或在 FreeBSD 上不正确的路径，它们将被 `_interp__CMD` 中的正确路径所替换。
 
 >**注意**
 >
->这些路径*始终*是 `_interp__OLD_CMD` 的一部分：`"/usr/bin/env _interp"` /bin/interp `/usr/bin/interp` `/usr/local/bin/interp`。
+>这些路径*始终*是 `_interp__OLD_CMD` 的一部分：`"/usr/bin/env _interp_"`、**/bin/_interp_**、**/usr/bin/_interp_**、**/usr/local/bin/_interp_**。
 
 
 >**技巧**
@@ -1874,7 +1874,7 @@ SHEBANG_LANG=	lua
 
 **示例 11. 在向 `USES=shebangfix` 添加解释器时指定所有路径**
 
-如果未定义，并且 `_interpOLD_CMD` 和 `_interp`\*`CMD` 没有默认值，则 Ksh 条目可以定义如下：
+如果未定义，并且 `_interp__OLD_CMD` 和 `_interp__CMD` 没有默认值，则 Ksh 条目可以定义如下：
 
 ```makefile
 SHEBANG_LANG=	ksh
@@ -1882,7 +1882,7 @@ ksh_OLD_CMD=	"/usr/bin/env ksh" /bin/ksh /usr/bin/ksh
 ksh_CMD=	${LOCALBASE}/bin/ksh
 ```
 
-**示例 12. 添加一个解释器的奇怪位置**
+**示例 12. 添加解释器的奇怪位置**
 
 有些软件使用解释器的奇怪位置。例如，应用程序可能期望 Python 位于 **/opt/bin/python2.7**。可以在 Port **Makefile** 中声明需要替换的奇怪路径：
 
