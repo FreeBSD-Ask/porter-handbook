@@ -214,7 +214,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 `FOO_DATADIR_VARS`：其他 Haskell 包的列表，其数据文件应由名为 `FOO` 的可执行文件访问。该可执行文件应是 `${CABAL_WRAPPER_SCRIPTS}` 的一部分。列出的 Haskell 包不应有版本后缀。
 
-`CABAL_PROJECT`：某些 Haskell 项目可能已经有一个 `cabal.project` 文件，该文件也由 Ports 框架生成。如果是这种情况，请使用此变量指定如何处理原始的 `cabal.project`。将此变量设置为 `remove` 将导致原始文件在提取阶段被删除。将此变量设置为 `append` 将：
+`CABAL_PROJECT`：某些 Haskell 项目可能已存在 `cabal.project` 文件，该文件也由 Ports 框架生成。如果是这种情况，请使用此变量指定如何处理原始的 `cabal.project`。将此变量设置为 `remove` 将导致原始文件在提取阶段被删除。将此变量设置为 `append` 将：
 
 1. 在提取阶段将原始文件移动到 `cabal.project.${PORTNAME}`。
 2. 在补丁阶段将原始的 `cabal.project.${PORTNAME}` 和生成的 `cabal.project` 合并成一个文件。
@@ -562,7 +562,7 @@ Port 可以读取的变量：
 
 可能的参数：（无）
 
-已弃用。将同时包含 `gettext-runtime` 和 `gettext-tools`。
+弃用。同时包含 `gettext-runtime` 和 `gettext-tools`。
 
 ## 17.41. `gettext-runtime`
 
