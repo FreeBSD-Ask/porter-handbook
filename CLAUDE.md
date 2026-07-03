@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 仓库概览
 
-这是 FreeBSD 官方手册（FreeBSD Handbook）的中文翻译项目。基于 GitBook 格式，发布在 <https://handbook.bsdcn.org>。
+这是 FreeBSD Port 开发者手册（FreeBSD Porter's Handbook）的中文翻译项目。基于 GitBook 格式，发布在 <https://handbook.bsdcn.org>。
 
 源内容为 Markdown 文件，由 GitBook 平台自动构建和部署，无需本地构建步骤。
 
-**翻译基准：** 以 FreeBSD 最新 RELEASE 版本为准，翻译源为 <https://docs.freebsd.org/en/books/handbook/book/>。
+**翻译基准：** 以 FreeBSD 最新 RELEASE 版本为准，翻译源为 <https://docs.freebsd.org/en/books/porters-handbook/>。
 
 ## 内容架构
 
@@ -17,18 +17,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **`SUMMARY.md`** — 全书唯一数据源，定义完整目录结构和导航树。GitBook 用它来生成侧边栏。 **第一行 `# Table of contents` 绝对不能变更** ，否则 GitBook 同步失效。
 - **`mu-lu.md`** — 由 `mulu.yml` CI 工作流从 `SUMMARY.md` 自动复制生成，**不要手动编辑** 。
 - **`yi-zhe-shuo-ming.md`** — 术语翻译对照表，所有术语翻译以此为准。
-- **`CHANGELOG.md`** — 编辑日志，记录翻译进度和同步上游的 commit。
+- **`bian-ji-ri-zhi.md`** — 编辑日志，记录翻译进度和同步上游的 commit。
 
 ### 目录结构
 
 - 章节目录遵循 `di-X-zhang-<主题>/` 命名模式（拼音 slug）
 - 每节为独立 `.md` 文件，如 `di-1-zhang-jian-jie/1.1.-gai-shu.md`
-- 前言在 `qian-yan/`，附录在 `fu-lu-X/`
-- 分部介绍页如 `di-yi-bu-fen-kuai-su-kai-shi.md`
-- `.gitbook/assets/` — GitBook 静态资源（logo 等）
-- 全书共 35 章（Ch1-Ch35），中文章号与英文原版 1:1 对应；Ch18 为「OCI 容器」，于 2026-06 由英文原版补译
-- 章节结构对比脚本位于 `script/compare_structure_v2.py`，可检测中英文版本子章节级差异
-- `en/` — 英文 AsciiDoc 原版归档（40 个子目录，每个含 `_index.adoc`），用于翻译对照参考；不要修改或翻译其中的内容
+- 全书共 18 章（Ch1-Ch18），中文章号与英文原版 1:1 对应
+- 章节结构对比可通过比较 `en/` 文件夹 adoc 与中文 SUMMARY.md 实现
+- `en/` — 英文 AsciiDoc 原版归档（18 个子目录，每个含 `_index.adoc`），用于翻译对照参考；不要修改或翻译其中的内容
 
 ### 标题管理（关键约束）
 
@@ -93,7 +90,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 对已翻译章节进行质量审校时，参考以下步骤：
 
-1. **获取原文**：通过 `WebFetch` 抓取对应章节的英文原版页面（`https://docs.freebsd.org/en/books/handbook/<chapter-slug>/`），获取完整的英文文本。但是，如果存在 en 文件夹，以 en 文件夹对应目录为基准。
+1. **获取原文**：通过 `WebFetch` 抓取对应章节的英文原版页面（`https://docs.freebsd.org/en/books/porters-handbook/<chapter-slug>/`），获取完整的英文文本。但是，如果存在 en 文件夹，以 en 文件夹对应目录为基准。
 
 2. **逐句对照**：将中文翻译与英文原文逐句比对，重点检查以下问题类别：
 
@@ -123,7 +120,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - 禁止篡改代码块（包括 shell 命令、配置文件内容、ini 段等），仅修改正文翻译
    - 禁止篡改用户名、邮箱、URL、IP 地址等技术参数
    - 禁止篡改软件版本号
-   - 以英文原版 `docs.freebsd.org/en/books/handbook/` 为唯一权威源；禁止以中文版已有翻译作为修改依据，避免错误沿袭
+   - 以英文原版 `docs.freebsd.org/en/books/porters-handbook/` 为唯一权威源；禁止以中文版已有翻译作为修改依据，避免错误沿袭
 
 5. **逐句校对递归工作流**（核心约束）：
    - **逐行逐句子**遍历内容，检查逻辑一致性，联网复核后修改
@@ -136,11 +133,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 章节结构管理工作流
 
-当中英文版本章节结构出现差异（如新增章节、删除章节、子节层级错误）时，按本工作流处理。完整执行记录见 `script/章节结构对比最终分析报告.md`。
+当中英文版本章节结构出现差异（如新增章节、删除章节、子节层级错误）时，按本工作流处理。完整执行记录见 `script/` 目录下相关文档。
 
 ### 1. 检测差异
 
-运行 `script/compare_structure_v2.py` 检测中英文版本子章节级差异（H2 节 / H3 子节 / H4 子子节）。脚本自动处理中文 gitbook 标题层级偏移（中文每节为独立 `.md` 文件，标题比英文 adoc 浅一级，需 `shift=+1`）和文件名按节号自然排序。
+比较 `en/` 文件夹 adoc 与中文 SUMMARY.md 检测中英文版本子章节级差异（H2 节 / H3 子节 / H4 子子节）。注意中文 gitbook 标题层级偏移（中文每节为独立 `.md` 文件，标题比英文 adoc 浅一级）和文件名按节号自然排序。
 
 ### 2. 章节编号 1:1 对应原则
 
@@ -175,7 +172,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### 7. 验证
 
-重新运行 `script/compare_structure_v2.py`，确认总差异数为 0。各章节 H2/H3/H4 数量与英文原版完全一致。
+重新比较 `en/` 文件夹 adoc 与中文 SUMMARY.md，确认总差异数为 0。各章节 H2/H3/H4 数量与英文原版完全一致。
 
 ### 8. 子节层级修复
 
