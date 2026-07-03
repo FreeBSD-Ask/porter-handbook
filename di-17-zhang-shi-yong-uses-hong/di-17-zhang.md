@@ -1969,7 +1969,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 可能的参数：（无），`Z`，`bz2`，`bzip2`，`lzma`，`tbz`，`tbz2`，`tgz`，`txz`，`xz`，`zst`，`zstd`
 
-将 `EXTRACT_SUFX` 设置为 `.tar`，`.tar.Z`，`.tar.bz2`，`.tar.bz2`，`.tar.lzma`，`.tbz`，`.tbz2`，`.tgz`，`.txz`，`.tar.xz`，`.tar.zst` 或 `.tar.zstd`。
+将 `EXTRACT_SUFX` 分别设置为 `.tar`，`.tar.Z`，`.tar.bz2`，`.tar.bz2`，`.tar.lzma`，`.tbz`，`.tbz2`，`.tgz`，`.txz`，`.tar.xz`，`.tar.zst` 或 `.tar.zstd`。
 
 ## 17.121. `tcl`
 
@@ -2046,7 +2046,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 可能的参数：（无）
 
-提供对需要由 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 执行触发器的 Ports 的支持。触发器在事务结束时执行，如果条件满足。
+提供对需要由 [pkg(8)](https://man.freebsd.org/cgi/man.cgi?query=pkg&sektion=8&format=html) 执行触发器的 Ports 的支持。如果条件满足，触发器将在事务结束时执行。
 
 可以通过 Ports 设置以下变量：
 
@@ -2116,7 +2116,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 以下变量可以调整：
 
 * `WEBPLUGIN_FILES`：没有默认值，必须手动设置。要安装的插件文件。
-* `WEBPLUGIN_DIR`：安装插件文件的目录，默认值 **PREFIX/lib/browser\_plugins/WEBPLUGIN\_NAME**。如果 Port 安装插件文件到默认目录以外的地方，请设置此项，以避免损坏的符号链接。
+* `WEBPLUGIN_DIR`：安装插件文件的目录，默认值 **PREFIX/lib/browser_plugins/WEBPLUGIN_NAME**。如果 Port 安装插件文件到默认目录以外的地方，请设置此项，以避免损坏的符号链接。
 * `WEBPLUGIN_NAME`：安装插件文件的最终目录，默认值 `PKGBASE`。
 
 ## 17.132. `xfce`
@@ -2202,7 +2202,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 该框架向 Port 公开以下变量：
 
-`ZIG_TUPLE`：构建 Port 所需的 zig 依赖列表。每条条目是一个三元组，包含名称、URL 和预期找到依赖项的目录。这些三元组可以通过运行以下命令生成：
+`ZIG_TUPLE`：构建 Port 所需的 zig 依赖列表。每个条目是一个三元组，包含名称、URL 和预期找到依赖项的目录。这些三元组可以通过运行以下命令生成：
 
 ```sh
 % make make-zig-tuple

@@ -10,7 +10,7 @@
 
 ## 13.3. `WRKDIRPREFIX`
 
-确保 Port 遵守 `WRKDIRPREFIX`。大多数 Ports 不需要关心这一点。尤其是在引用其他 Port 的 `WRKDIR` 时，应注意正确的位置是 **\${WRKDIRPREFIX}\${PORTSDIR}/subdir/name/work**，而不是 **\${PORTSDIR}/subdir/name/work** 或 **\${.CURDIR}/../../subdir/name/work** 或类似路径。
+确保 Port 遵守 `WRKDIRPREFIX`。大多数 Ports 不需要关心这一点。尤其是在引用其他 Port 的 `WRKDIR` 时，应注意正确的位置是 **${WRKDIRPREFIX}${PORTSDIR}/subdir/name/work**，而不是 **${PORTSDIR}/subdir/name/work** 或 **${.CURDIR}/../../subdir/name/work** 或类似路径。
 
 ## 13.4. 区分操作系统及其版本
 
@@ -30,7 +30,7 @@
 #endif
 ```
 
-`__FreeBSD_version` 的完整值列表可参考 [\_\_FreeBSD\_version 值](https://docs.freebsd.org/en/books/porters-handbook/versions/#versions)。
+`__FreeBSD_version` 的完整值列表可参考 [`__FreeBSD_version` 值](https://docs.freebsd.org/en/books/porters-handbook/versions/#versions)。
 
 ## 13.5. 在 bsd.port.mk 之后写内容
 
@@ -50,7 +50,7 @@
 | `OPSYS`     | 操作系统类型，`uname -s` 返回的结果（例如，`FreeBSD`）                                                                          |
 | `OSREL`     | 操作系统的发布版本（例如，`2.1.5` 或 `2.2.7`）                                                                                |
 | `OSVERSION` | 操作系统的数字版本；与 [`__FreeBSD_version`](https://docs.freebsd.org/en/books/porters-handbook/versions/#versions) 相同    |
-| `LOCALBASE` | “本地”目录的根目录（例如，`/usr/local`）                                                                                    |
+| `LOCALBASE` | “本地”目录的根目录（例如，**/usr/local**）                                                                                    |
 | `PREFIX`    | Port 安装的位置（详见 [关于 `PREFIX` 的更多信息](https://docs.freebsd.org/en/books/porters-handbook/testing/#porting-prefix)） |
 
 >**注意**
@@ -192,7 +192,7 @@ cc -o someprogram source1.o source2.o -L/usr/local/lib -lsomelib
 
   * 无法编译；
   * 配置或安装过程失败；
-  * 将文件安装到 **\${PREFIX}** 之外；
+  * 将文件安装到 **${PREFIX}** 之外；
   * 卸载时未能清除所有文件（不过如果留下的是用户已修改的文件，可能是可以接受甚至是理想的）；
   * 在本应能正常运行的系统上运行失败；
 
