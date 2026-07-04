@@ -10,24 +10,24 @@
 
 * [1.1.简介](di-1-zhang-jian-jie.md)
 
-## 第 2 章 制作新的 port
+## 第 2 章 制作新的 Port
 
-* [2.1.制作新的 port](di-2-zhang-zhi-zuo-xin-de-port.md)
+* [2.1.制作新的 Port](di-2-zhang-zhi-zuo-xin-de-port.md)
 
-## 第 3 章 简单的 port
+## 第 3 章 简单的 Port
 
 * [3.1.编写 Makefile](di-3-zhang-jian-dan-de-port/3.1.-bian-xie-makefile.md)
 * [3.2.编写描述文件](di-3-zhang-jian-dan-de-port/3.2.-bian-xie-miao-shu-wen-jian.md)
 * [3.3.创建校验和文件](di-3-zhang-jian-dan-de-port/3.3.-chuang-jian-xiao-yan-he-wen-jian.md)
-* [3.4.测试 port](di-3-zhang-jian-dan-de-port/3.4.-ce-shi-port.md)
-* [3.5.用 portlint 来检查 port](di-3-zhang-jian-dan-de-port/3.5.-yong-portlint-lai-jian-cha-port.md)
-* [3.6.提交新的 port](di-3-zhang-jian-dan-de-port/3.6.-ti-jiao-xin-de-port.md)
+* [3.4.测试 Port](di-3-zhang-jian-dan-de-port/3.4.-ce-shi-port.md)
+* [3.5.用 portlint 来检查 Port](di-3-zhang-jian-dan-de-port/3.5.-yong-portlint-lai-jian-cha-port.md)
+* [3.6.提交新的 Port](di-3-zhang-jian-dan-de-port/3.6.-ti-jiao-xin-de-port.md)
 
 ## 第 4 章 复杂的 Port
 
 * [4.1 Port 工作原理](di-4-zhang-fu-za-de-port/4.1.-ta-shi-zen-mo-yun-zuo-de.md)
 * [4.2.获取源代码](di-4-zhang-fu-za-de-port/4.2.-huo-qu-yuan-dai-ma.md)
-* [4.3.修改 port](di-4-zhang-fu-za-de-port/4.3.-xiu-gai-port.md)
+* [4.3.修改 Port](di-4-zhang-fu-za-de-port/4.3.-xiu-gai-port.md)
 * [4.4.打补丁](di-4-zhang-fu-za-de-port/4.4.-da-bu-ding.md)
 * [4.5.配置](di-4-zhang-fu-za-de-port/4.5.-pei-zhi.md)
 * [4.6.处理用户输入](di-4-zhang-fu-za-de-port/4.6.-chu-li-yong-hu-shu-ru.md)
@@ -44,7 +44,7 @@
 * [5.8.许可证](di-5-zhang-pei-zhi-makefile/5.8.-xu-ke-zheng.md)
 * [5.9.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.9.portscout.md)
 * [5.10.依赖](di-5-zhang-pei-zhi-makefile/5.10.-yi-lai.md)
-* [5.11.从属 port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.11.-cong-shu-port-he-masterdir.md)
+* [5.11.从属 Port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.11.-cong-shu-port-he-masterdir.md)
 * [5.12.man 手册](di-5-zhang-pei-zhi-makefile/5.12.man-shou-ce.md)
 * [5.13.info 文件](di-5-zhang-pei-zhi-makefile/5.13.info-wen-jian.md)
 * [5.14.Makefile 参数](di-5-zhang-pei-zhi-makefile/5.14.makefile-can-shu.md)
@@ -65,6 +65,7 @@
 * [7.3.USES=php 和 Flavors](di-7-zhang-flavors/7.3.usesphp-he-flavors.md)
 * [7.4.USES=python 和 Flavors](di-7-zhang-flavors/7.4.usespython-he-flavors.md)
 * [7.5.USES=lua 和 Flavors](di-7-zhang-flavors/7.5.useslua-he-flavors.md)
+* [7.6.USES=guile 和 Flavors](di-7-zhang-flavors/7.6.guile-he-flavors.md)
 
 ## 第 8 章 高级 pkg-plist 实践
 
@@ -81,7 +82,7 @@
 * [9.2.pkg-install、pkg-pre-install 和 pkg-post-install（安装二进制包时执行的脚本文件）](di-9-zhang-pkg/9.2.-pkginstall-an-zhuang-er-jin-zhi-bao-shi-zhi-hang-de-jiao-ben-wen-jian.md)
 * [9.3.pkg-deinstall、pkg-pre-deinstall 和 pkg-post-deinstall（卸载时执行的脚本文件）](di-9-zhang-pkg/9.3.pkgdeinstall-xie-zai-shi-zhi-hang-de-jiao-ben-wen-jian.md)
 * [9.4.修改 pkg-\* 文件的名字](di-9-zhang-pkg/9.4.-xiu-gai-pkg-wen-jian-de-ming-zi.md)
-* [9.5.使用 SUB\_FILES 和 SUB\_LIST](di-9-zhang-pkg/9.5.-shi-yong-subfiles-he-sublist.md)
+* [9.5.使用 SUB_FILES 和 SUB_LIST](di-9-zhang-pkg/9.5.-shi-yong-subfiles-he-sublist.md)
 
 ## 第 10 章 测试 port
 
@@ -109,9 +110,9 @@
 
 * [第 13 章 该做什么和不该做什么](di-13-zhang-gai-zuo-shi-mo-he-bu-gai-zuo-shi-mo/di-13-zhang.md)
 
-## 第14章 一个简单的 port
+## 第 14 章 一个示例 Makefile
 
-* [第 14 章 一个简单的 port](di-14-zhang-makefile-shi-li.md)
+* [第 14 章 一个示例 Makefile](di-14-zhang-makefile-shi-li.md)
 
 ## 第 15 章 在 Port Makefile 中变量的顺序
 
@@ -125,8 +126,8 @@
 
 * [第 17 章 使用 USES 宏](di-17-zhang-shi-yong-uses-hong/di-17-zhang.md)
 
-## 第 18 章 \_\_FreeBSD\_version 的值
+## 第 18 章 `__FreeBSD_version` 的值
 
-* [第 18 章 \_\_FreeBSD\_version 的值](di-18-zhang-freebsdversion-de-zhi/18.md)
+* [第 18 章 `__FreeBSD_version` 的值](di-18-zhang-freebsdversion-de-zhi/18.md)
 
 

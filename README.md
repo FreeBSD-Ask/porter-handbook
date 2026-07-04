@@ -1,10 +1,7 @@
 # FreeBSD Port 开发者手册翻译项目
 
->**警告**
->
->除已校对部分外，本项目目前翻译错漏百出，不适合用于生产。
->
->本项目目前处于低维护状态，主要维护者因精力所限仅处理 PR。欢迎社区通过 PR 贡献力量。
+本项目已经经过了充分地校对和审阅。最后同步：93d98e91f6bfaacd7fae40dd398efe47d44f085b
 
+本项目采用 2 条款 BSD 许可证分发。
 
 原文地址：[FreeBSD Porter's Handbook](https://docs.freebsd.org/en/books/porters-handbook/)

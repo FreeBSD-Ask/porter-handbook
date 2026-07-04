@@ -2,6 +2,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,node,yarn,vue,vuejs
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,node,yarn,vue,vuejs
 
+### 归档链接
+
+archive_log*
+archive_cache.json
 ### Linux ###
 *~
 
@@ -221,3 +225,13 @@ $RECYCLE.BIN/
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,node,yarn,vue,vuejs
+/.trae
+*.ps1
+*.gz
+*.bat
+*.spec
+/scripts
+*.txt
+*.adoc
+/en
+/script
