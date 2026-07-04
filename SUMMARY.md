@@ -44,7 +44,7 @@
 * [5.8.许可证](di-5-zhang-pei-zhi-makefile/5.8.-xu-ke-zheng.md)
 * [5.9.PORTSCOUT](di-5-zhang-pei-zhi-makefile/5.9.portscout.md)
 * [5.10.依赖](di-5-zhang-pei-zhi-makefile/5.10.-yi-lai.md)
-* [5.11.从属 port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.11.-cong-shu-port-he-masterdir.md)
+* [5.11.从属 Port 和 MASTERDIR](di-5-zhang-pei-zhi-makefile/5.11.-cong-shu-port-he-masterdir.md)
 * [5.12.man 手册](di-5-zhang-pei-zhi-makefile/5.12.man-shou-ce.md)
 * [5.13.info 文件](di-5-zhang-pei-zhi-makefile/5.13.info-wen-jian.md)
 * [5.14.Makefile 参数](di-5-zhang-pei-zhi-makefile/5.14.makefile-can-shu.md)

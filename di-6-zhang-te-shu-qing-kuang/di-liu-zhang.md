@@ -21,7 +21,7 @@
 
 **bsd.port.mk** 要求 Port 使用 "阶段目录"。这意味着 Port 必须将文件安装到一个单独的目录，而不是直接安装到常规的目标目录（例如，`PREFIX`）。然后从这个阶段目录构建包。在许多情况下，这不需要 root 权限，从而使得可以作为非特权用户构建包。通过 staging，Port 被构建并安装到阶段目录 `STAGEDIR` 中。然后从该目录创建包，并安装到系统中。Automake 工具称这一概念为 `DESTDIR`，但在 FreeBSD 中，`DESTDIR` 有不同的含义（见 [`PREFIX` 和 `DESTDIR`](https://docs.freebsd.org/en/books/porters-handbook/testing/#porting-prefix)）。
 
->**重要**
+>**注意**
 >
 > 没有任何 Port *真正* 需要 root 权限。通过使用 [`USES=uidfix`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-uidfix) 大多数情况下可以避免。如果 Port 仍然运行像 [chown(8)](https://man.freebsd.org/cgi/man.cgi?query=chown&sektion=8&format=html)、[chgrp(1)](https://man.freebsd.org/cgi/man.cgi?query=chgrp&sektion=1&format=html)，或者通过 [install(1)](https://man.freebsd.org/cgi/man.cgi?query=install&sektion=1&format=html) 强制设置文件的所有者或组，则应使用 [`USES=fakeroot`](https://docs.freebsd.org/en/books/porters-handbook/uses/#uses-fakeroot) 来伪造这些调用。此时可能需要对 Port 的 **Makefiles** 进行一些补丁。
 

@@ -78,7 +78,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 `ANSIBLE_DOC_CMD`：ansible-doc 程序的路径。
 
-`ANSIBLE_RUN_DEPENDS`：与 Ansible 相关的 RUN\_DEPENDS。
+`ANSIBLE_RUN_DEPENDS`：与 Ansible 相关的 `RUN_DEPENDS`。
 
 `ANSIBLE_DATADIR`：Ansible 模块和插件所在的目录结构的根路径。
 
@@ -122,11 +122,11 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 `APACHE_VERSION`：所选 Apache 服务器的主版本号和次版本号，例如 2.4。
 
-`APACHEETCDIR`：Apache 配置目录的位置。默认值：**\${LOCALBASE}/etc/apache24**。
+`APACHEETCDIR`：Apache 配置目录的位置。默认值：**${LOCALBASE}/etc/apache24**。
 
-`APACHEINCLUDEDIR`：Apache 包含文件的位置。默认值：**\${LOCALBASE}/include/apache24**。
+`APACHEINCLUDEDIR`：Apache 包含文件的位置。默认值：**${LOCALBASE}/include/apache24**。
 
-`APACHEMODDIR`：Apache 模块的位置。默认值：**\${LOCALBASE}/libxexec/apache24**。
+`APACHEMODDIR`：Apache 模块的位置。默认值：**${LOCALBASE}/libxexec/apache24**。
 
 `APACHE_DEFAULT`：默认的 Apache 版本。
 
@@ -134,7 +134,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 可能的参数：（无），`build`
 
-运行 `autoreconf`。它封装了 `aclocal`、`autoconf`、`autoheader`、`automake`、`autopoint` 和 `libtoolize` 命令。每个命令都应用于 **\${AUTORECONF\_WRKSRC}/configure.ac** 或其旧名称 **\${AUTORECONF\_WRKSRC}/configure.in**。如果 **configure.ac** 使用 `AC_CONFIG_SUBDIRS` 定义了子目录并有自己的 **configure.ac**，则 `autoreconf` 将递归更新这些子目录。`:build` 参数仅添加对这些工具的构建时依赖项，但不运行 `autoreconf`。如果 `WRKSRC` 中不包含 **configure.ac** 的路径，可以通过设置 `AUTORECONF_WRKSRC` 来指定路径。
+运行 `autoreconf`。它封装了 `aclocal`、`autoconf`、`autoheader`、`automake`、`autopoint` 和 `libtoolize` 命令。每个命令都应用于 **${AUTORECONF_WRKSRC}/configure.ac** 或其旧名称 **${AUTORECONF_WRKSRC}/configure.in**。如果 **configure.ac** 使用 `AC_CONFIG_SUBDIRS` 定义了子目录并有自己的 **configure.ac**，则 `autoreconf` 将递归更新这些子目录。`:build` 参数仅添加对这些工具的构建时依赖项，但不运行 `autoreconf`。如果 `WRKSRC` 中不包含 **configure.ac** 的路径，可以通过设置 `AUTORECONF_WRKSRC` 来指定路径。
 
 ## 17.8. `azurepy`
 
@@ -231,7 +231,7 @@ USES=	pgsql:9.3+ cpe python:2.7,build
 
 可能的参数：（无）
 
-防止 Port 安装 **charset.alias**。该文件必须仅由 [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 安装。如果 **charset.alias** 不是由 **\${WRKSRC}/Makefile.in** 安装的，可以通过设置 `CHARSETFIX_MAKEFILEIN` 来指定相对于 `WRKSRC` 的路径。
+防止 Port 安装 **charset.alias**。该文件必须仅由 [converters/libiconv](https://cgit.freebsd.org/ports/tree/converters/libiconv/) 安装。如果 **charset.alias** 不是由 **${WRKSRC}/Makefile.in** 安装的，可以通过设置 `CHARSETFIX_MAKEFILEIN` 来指定相对于 `WRKSRC` 的路径。
 
 ## 17.16. `cl`
 
@@ -420,7 +420,7 @@ ELF_FEATURES=	featurelist:path/to/file1 \
 
 `ELIXIR_APP_ROOT`：此 Elixir 应用程序的根目录。
 
-`ELIXIR_HIDDEN`：要从代码路径中隐藏的应用程序；通常是 \${PORTNAME}。
+`ELIXIR_HIDDEN`：要从代码路径中隐藏的应用程序；通常是 `${PORTNAME}`。
 
 `ELIXIR_LOCALE`：构建期间 Elixir 使用的 UTF-8 本地化（任何 UTF-8 本地化都可以）。
 
@@ -442,7 +442,7 @@ ELF_FEATURES=	featurelist:path/to/file1 \
 
 `MIX_ENV_NAME`：Mix 构建环境的名称，通常为 "prod"。
 
-`MIX_BUILD_NAME`：输出的构建名称，位于 \_build/ 中，通常是 `${MIX_ENV_NAME}`。
+`MIX_BUILD_NAME`：输出的构建名称，位于 **_build/** 中，通常是 `${MIX_ENV_NAME}`。
 
 `MIX_TARGET`：Mix 目标的名称，通常为 "compile"。
 
@@ -526,7 +526,7 @@ Port 可以读取的变量：
 
 可能的参数：（无），`fc`，`fontsdir`（默认），`none`
 
-添加一个运行时依赖，所需工具用于注册字体。根据不同的参数，添加 `@fc ${FONTSDIR}` 行，`@fontsdir ${FONTSDIR}` 行，或者如果参数是 `none` 则不添加任何行到 plist。`FONTSDIR` 默认为 **\${PREFIX}/share/fonts/\${FONTNAME}**，`FONTNAME` 默认为 `${PORTNAME}`。将 `FONTSDIR` 添加到 `PLIST_SUB` 和 `SUB_LIST`。
+添加一个运行时依赖，所需工具用于注册字体。根据不同的参数，添加 `@fc ${FONTSDIR}` 行，`@fontsdir ${FONTSDIR}` 行，或者如果参数是 `none` 则不添加任何行到 plist。`FONTSDIR` 默认为 **${PREFIX}/share/fonts/${FONTNAME}**，`FONTNAME` 默认为 `${PORTNAME}`。将 `FONTSDIR` 添加到 `PLIST_SUB` 和 `SUB_LIST`。
 
 ## 17.36. `fortran`
 
@@ -596,7 +596,7 @@ Port 可以读取的变量：
 
 `glesv2`：添加对 `graphics/libglvnd` 的 **libGLESv2.so** 库的依赖。
 
-`glew`：添加对 `graphics/glew` 的 **libGLEW\.so** 库的依赖。
+`glew`：添加对 `graphics/glew` 的 **libGLEW.so** 库的依赖。
 
 `glu`：添加对 `graphics/libGLU` 的 **libGLU.so** 库的依赖。
 
@@ -992,7 +992,7 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 
 `RMID`：RMI 守护进程程序的路径。
 
-`JAVA_CLASSES`：包含 JDK 类文件的归档路径。在大多数 JDK 中，这是 **\${JAVA\_HOME}/jre/lib/rt.jar**。
+`JAVA_CLASSES`：包含 JDK 类文件的归档路径。在大多数 JDK 中，这是 **${JAVA_HOME}/jre/lib/rt.jar**。
 
 `JAVASHAREDIR`：所有共享 Java 资源的基本目录。
 
@@ -1038,7 +1038,7 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 * 如果在 `SRC_BASE` 中找不到内核源代码，则设置 `IGNORE`。
 * 默认情况下，将 `KMODDIR` 定义为 **/boot/modules**，并将其添加到 `PLIST_SUB` 和 `MAKE_ENV` 中，安装时创建该目录。如果将 `KMODDIR` 设置为 **/boot/kernel**，则会重写为 **/boot/modules**。这样可以防止在升级内核时破坏包，因为 **/boot/kernel** 会在此过程中重命名为 **/boot/kernel.old**。
 * 在安装和卸载时处理内核模块的交叉引用，使用 [`@kld`](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-keywords-kld)。
-* 如果提供了 `debug` 参数，则 Port 可以将调试版本的模块安装到 **KERN\_DEBUGDIR**/**KMODDIR** 中。默认情况下，`KERN_DEBUGDIR` 从 `DEBUGDIR` 复制并设置为 **/usr/lib/debug**。框架将负责创建和删除所需的目录。
+* 如果提供了 `debug` 参数，则 Port 可以将调试版本的模块安装到 **KERN_DEBUGDIR**/**KMODDIR** 中。默认情况下，`KERN_DEBUGDIR` 从 `DEBUGDIR` 复制并设置为 **/usr/lib/debug**。框架将负责创建和删除所需的目录。
 
 ## 17.62. `kodi`
 
@@ -1068,7 +1068,7 @@ GSSAPI_NONE_CONFIGURE_ON=	--without-gssapi
 
 `LAZARUS_PROJECT_FILES`：lpi 文件列表。不能为空。默认值：空
 
-`LAZARUS_DIR`：lazarus 安装目录的路径，默认值：**\${LOCALBASE}/share/lazarus-\${LAZARUS\_VER}**
+`LAZARUS_DIR`：lazarus 安装目录的路径，默认值：**${LOCALBASE}/share/lazarus-${LAZARUS_VER}**
 
 `LAZBUILD_ARGS`：lazbuild 额外参数。大多数情况下可以是 `-d`。更多信息请参见 [lazbuild(1)](https://man.freebsd.org/cgi/man.cgi?query=lazbuild&sektion=1&format=html)。默认值：空
 
@@ -1369,19 +1369,19 @@ Ports 框架提供以下变量，Port 可以读取：
 
 `MPI_CFLAGS`：编译器标志，用于构建使用 `MPI` 的程序。
 
-`MPICC`：`mpicc` 可执行文件的位置。默认：**\${MPI\_HOME}/bin/mpicc**。
+`MPICC`：`mpicc` 可执行文件的位置。默认：**${MPI_HOME}/bin/mpicc**。
 
-`MPICXX`：`mpicxx` 可执行文件的位置。默认：**\${MPI\_HOME}/bin/mpicxx**。
+`MPICXX`：`mpicxx` 可执行文件的位置。默认：**${MPI_HOME}/bin/mpicxx**。
 
-`MPIF90`：`mpif90` 可执行文件的位置。默认：**\${MPI\_HOME}/bin/mpif90**。
+`MPIF90`：`mpif90` 可执行文件的位置。默认：**${MPI_HOME}/bin/mpif90**。
 
 `MPIFC`：与上述相同。
 
 `MPI_HOME`：`MPI` 的安装目录。对于 `MPICH` 默认值为 `${LOCALBASE}`。
 
-`MPIEXEC`：`mpiexec` 可执行文件的位置。默认：**\${MPI\_HOME}/bin/mpiexec**。
+`MPIEXEC`：`mpiexec` 可执行文件的位置。默认：**${MPI_HOME}/bin/mpiexec**。
 
-`MPIRUN`：`mpirun` 可执行文件的位置。默认：**\${MPI\_HOME}/bin/mpirun**。
+`MPIRUN`：`mpirun` 可执行文件的位置。默认：**${MPI_HOME}/bin/mpirun**。
 
 ## 17.87. `ncurses`
 
@@ -1840,7 +1840,7 @@ USES=		qt-dist:5,base
 
 `SHEBANG_LANG`：支持的解释器列表。
 
-`_interp__CMD`：在 FreeBSD 上的命令解释器路径。默认值是 **\${LOCALBASE}/bin/_interp_**。
+`_interp__CMD`：在 FreeBSD 上的命令解释器路径。默认值是 **${LOCALBASE}/bin/_interp_**。
 
 `_interp__OLD_CMD`：错误的解释器调用列表。这些通常是过时的路径，或在 FreeBSD 上不正确的路径，它们将被 `_interp__CMD` 中的正确路径所替换。
 
@@ -1901,7 +1901,7 @@ SHEBANG_REGEX=	./scripts/.*\.(sh|pl|cgi)
 
 >**注意**
 >
->`SHEBANG_REGEX` 是通过运行 `find -E` 来使用的，它使用现代正则表达式，也称为扩展正则表达式。更多信息参见 [re\_format(7)](https://man.freebsd.org/cgi/man.cgi?query=re_format&sektion=7&format=html)。
+>`SHEBANG_REGEX` 是通过运行 `find -E` 来使用的，它使用现代正则表达式，也称为扩展正则表达式。更多信息参见 [re_format(7)](https://man.freebsd.org/cgi/man.cgi?query=re_format&sektion=7&format=html)。
 
 **示例 14. `USES=shebangfix` 与 `SHEBANG_GLOB`**
 
@@ -1992,7 +1992,7 @@ SHEBANG_FILES=	scripts/foobar.pl scripts/*.sh
 
 可能的参数：（无）
 
-将 [`@terminfo`](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-keywords-terminfo) 添加到 **plist**。当该 Port 安装 **\*.terminfo** 文件到 **\${PREFIX}/share/misc** 时使用。
+将 [`@terminfo`](https://docs.freebsd.org/en/books/porters-handbook/plist/#plist-keywords-terminfo) 添加到 **plist**。当该 Port 安装 **\*.terminfo** 文件到 **${PREFIX}/share/misc** 时使用。
 
 ## 17.123. `tex`
 
