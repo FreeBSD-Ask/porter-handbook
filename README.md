@@ -1,4 +1,4 @@
-# FreeBSD Port 开发者手册翻译项目
+# FreeBSD Port 开发者手册
 
 本项目已经经过了充分地校对和审阅。最后同步：93d98e91f6bfaacd7fae40dd398efe47d44f085b
 
