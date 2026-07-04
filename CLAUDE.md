@@ -2,6 +2,16 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 版本管理
+
+当前仓库：
+
+https://github.com/freebsd/freebsd-doc
+
+当前 git 版本：
+
+93d98e91f6bfaacd7fae40dd398efe47d44f085b
+
 ## 仓库概览
 
 这是 FreeBSD Port 开发者手册（FreeBSD Porter's Handbook）的中文翻译项目。基于 GitBook 格式，发布在 <https://handbook.bsdcn.org>。
